@@ -1,12 +1,12 @@
-from setuptools import setup
+from setuptools import find_packages, setup
 
 with open('README.md') as f:
     long_description = f.read()
 
 setup(
     name='staffology',
-    version='0.1.0',
-    packages=['staffology'],
+    version='0.1.1',
+    packages=find_packages(),
     url='https://github.com/ihorizonUK/staffology',
     description="Staffology openapi client with authentication patch",
     long_description=long_description,
