@@ -1,6 +1,7 @@
 from typing import Any, Dict, Optional, Union
 
 import httpx
+from staffology.propagate_exceptions import raise_staffology_exception
 
 from ...client import Client
 from ...models.cis_sub_contractor_summary_list_report_response import (
@@ -43,7 +44,7 @@ def _parse_response(
         )
 
         return response_200
-    return None
+    return raise_staffology_exception(response)
 
 
 def _build_response(

@@ -1,6 +1,7 @@
 from typing import Any, Dict, List, Optional
 
 import httpx
+from staffology.propagate_exceptions import raise_staffology_exception
 
 from ...client import Client
 from ...models.string_string_key_value_pair import StringStringKeyValuePair
@@ -48,7 +49,7 @@ def _parse_response(
             response_200.append(response_200_item)
 
         return response_200
-    return None
+    return raise_staffology_exception(response)
 
 
 def _build_response(

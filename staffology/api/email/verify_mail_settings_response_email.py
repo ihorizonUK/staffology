@@ -1,6 +1,7 @@
 from typing import Any, Dict, Optional, Union, cast
 
 import httpx
+from staffology.propagate_exceptions import raise_staffology_exception
 
 from ...client import Client
 from ...types import UNSET, Response, Unset
@@ -41,7 +42,7 @@ def _parse_response(*, response: httpx.Response) -> Optional[bool]:
     if response.status_code == 200:
         response_200 = cast(bool, response.json())
         return response_200
-    return None
+    return raise_staffology_exception(response)
 
 
 def _build_response(*, response: httpx.Response) -> Response[bool]:

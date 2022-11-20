@@ -2,6 +2,7 @@ import datetime
 from typing import Any, Dict, List, Union
 
 import httpx
+from staffology.propagate_exceptions import raise_staffology_exception
 
 from ...client import Client
 from ...types import UNSET, Response, Unset

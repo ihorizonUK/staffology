@@ -1,6 +1,7 @@
 from typing import Any, Dict, Optional
 
 import httpx
+from staffology.propagate_exceptions import raise_staffology_exception
 
 from ...client import Client
 from ...models.direct_debit_mandate import DirectDebitMandate
@@ -30,7 +31,7 @@ def _parse_response(*, response: httpx.Response) -> Optional[DirectDebitMandate]
         response_200 = DirectDebitMandate.from_dict(response.json())
 
         return response_200
-    return None
+    return raise_staffology_exception(response)
 
 
 def _build_response(*, response: httpx.Response) -> Response[DirectDebitMandate]:

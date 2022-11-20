@@ -2,6 +2,7 @@ import datetime
 from typing import Any, Dict, Optional, Union
 
 import httpx
+from staffology.propagate_exceptions import raise_staffology_exception
 
 from ...client import Client
 from ...models.leave_pay_type import LeavePayType
@@ -69,7 +70,7 @@ def _parse_response(*, response: httpx.Response) -> Optional[LinkedPiw]:
         response_200 = LinkedPiw.from_dict(response.json())
 
         return response_200
-    return None
+    return raise_staffology_exception(response)
 
 
 def _build_response(*, response: httpx.Response) -> Response[LinkedPiw]:
