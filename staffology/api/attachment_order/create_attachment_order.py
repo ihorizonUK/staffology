@@ -1,6 +1,7 @@
 from typing import Any, Dict
 
 import httpx
+from staffology.propagate_exceptions import raise_staffology_exception
 
 from ...client import Client
 from ...models.attachment_order import AttachmentOrder

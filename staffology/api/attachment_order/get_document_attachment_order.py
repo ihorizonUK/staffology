@@ -2,6 +2,7 @@ from io import BytesIO
 from typing import Any, Dict, Optional, Union, cast
 
 import httpx
+from staffology.propagate_exceptions import raise_staffology_exception
 
 from ...client import Client
 from ...types import File, Response
@@ -43,7 +44,7 @@ def _parse_response(*, response: httpx.Response) -> Optional[Union[Any, File]]:
     if response.status_code == 404:
         response_404 = cast(Any, None)
         return response_404
-    return None
+    return raise_staffology_exception(response)
 
 
 def _build_response(*, response: httpx.Response) -> Response[Union[Any, File]]:

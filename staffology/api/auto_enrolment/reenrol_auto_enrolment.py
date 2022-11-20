@@ -2,6 +2,7 @@ import datetime
 from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
+from staffology.propagate_exceptions import raise_staffology_exception
 
 from ...client import Client
 from ...models.item import Item
@@ -58,7 +59,7 @@ def _parse_response(*, response: httpx.Response) -> Optional[Union[Any, List[Ite
     if response.status_code == 404:
         response_404 = cast(Any, None)
         return response_404
-    return None
+    return raise_staffology_exception(response)
 
 
 def _build_response(*, response: httpx.Response) -> Response[Union[Any, List[Item]]]:

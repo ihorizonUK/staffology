@@ -1,6 +1,7 @@
 from typing import Any, Dict, List, Optional
 
 import httpx
+from staffology.propagate_exceptions import raise_staffology_exception
 
 from ...client import Client
 from ...models.external_data_company import ExternalDataCompany
@@ -40,7 +41,7 @@ def _parse_response(*, response: httpx.Response) -> Optional[List[ExternalDataCo
             response_200.append(response_200_item)
 
         return response_200
-    return None
+    return raise_staffology_exception(response)
 
 
 def _build_response(*, response: httpx.Response) -> Response[List[ExternalDataCompany]]:

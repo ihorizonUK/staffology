@@ -1,6 +1,7 @@
 from typing import Any, Dict, Optional, Union
 
 import httpx
+from staffology.propagate_exceptions import raise_staffology_exception
 
 from ...client import Client
 from ...models.p11_detailed_report_response import P11DetailedReportResponse
@@ -43,7 +44,7 @@ def _parse_response(*, response: httpx.Response) -> Optional[P11DetailedReportRe
         response_200 = P11DetailedReportResponse.from_dict(response.json())
 
         return response_200
-    return None
+    return raise_staffology_exception(response)
 
 
 def _build_response(*, response: httpx.Response) -> Response[P11DetailedReportResponse]:

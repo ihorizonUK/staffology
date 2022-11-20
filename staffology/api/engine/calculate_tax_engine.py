@@ -2,6 +2,7 @@ import datetime
 from typing import Any, Dict, Optional, Union, cast
 
 import httpx
+from staffology.propagate_exceptions import raise_staffology_exception
 
 from ...client import Client
 from ...models.pay_periods import PayPeriods
@@ -81,7 +82,7 @@ def _parse_response(*, response: httpx.Response) -> Optional[float]:
     if response.status_code == 200:
         response_200 = cast(float, response.json())
         return response_200
-    return None
+    return raise_staffology_exception(response)
 
 
 def _build_response(*, response: httpx.Response) -> Response[float]:

@@ -1,6 +1,7 @@
 from typing import Any, Dict, List, Union
 
 import httpx
+from staffology.propagate_exceptions import raise_staffology_exception
 
 from ...client import Client
 from ...models.pay_options_import import PayOptionsImport

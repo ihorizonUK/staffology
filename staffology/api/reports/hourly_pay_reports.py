@@ -1,6 +1,7 @@
 from typing import Any, Dict, Optional, Union
 
 import httpx
+from staffology.propagate_exceptions import raise_staffology_exception
 
 from ...client import Client
 from ...models.hourly_pay_report_report_response import HourlyPayReportReportResponse
@@ -56,7 +57,7 @@ def _parse_response(
         response_200 = HourlyPayReportReportResponse.from_dict(response.json())
 
         return response_200
-    return None
+    return raise_staffology_exception(response)
 
 
 def _build_response(
