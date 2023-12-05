@@ -11,7 +11,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="DpsNotice")
 
-
 @attr.s(auto_attribs=True)
 class DpsNotice:
     """
@@ -55,6 +54,7 @@ class DpsNotice:
     employee: Union[Unset, Item] = UNSET
     id: Union[Unset, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         issue_date: Union[Unset, str] = UNSET
         if not isinstance(self.issue_date, Unset):
@@ -94,7 +94,8 @@ class DpsNotice:
         id = self.id
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if issue_date is not UNSET:
             field_dict["issueDate"] = issue_date
         if effective_date is not UNSET:
@@ -134,22 +135,30 @@ class DpsNotice:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _issue_date = d.pop("issueDate", UNSET)
         issue_date: Union[Unset, datetime.date]
-        if isinstance(_issue_date, Unset):
+        if isinstance(_issue_date,  Unset):
             issue_date = UNSET
         else:
             issue_date = isoparse(_issue_date).date()
 
+
+
+
         _effective_date = d.pop("effectiveDate", UNSET)
         effective_date: Union[Unset, datetime.date]
-        if isinstance(_effective_date, Unset):
+        if isinstance(_effective_date,  Unset):
             effective_date = UNSET
         else:
             effective_date = isoparse(_effective_date).date()
+
+
+
 
         tax_year = d.pop("taxYear", UNSET)
 
@@ -157,10 +166,13 @@ class DpsNotice:
 
         _type = d.pop("type", UNSET)
         type: Union[Unset, DpsDataType]
-        if isinstance(_type, Unset):
+        if isinstance(_type,  Unset):
             type = UNSET
         else:
             type = DpsDataType(_type)
+
+
+
 
         form_type = d.pop("formType", UNSET)
 
@@ -182,26 +194,35 @@ class DpsNotice:
 
         _plan_type = d.pop("planType", UNSET)
         plan_type: Union[Unset, StudentLoan]
-        if isinstance(_plan_type, Unset):
+        if isinstance(_plan_type,  Unset):
             plan_type = UNSET
         else:
             plan_type = StudentLoan(_plan_type)
+
+
+
 
         _applied_on = d.pop("appliedOn", UNSET)
         applied_on: Union[Unset, None, datetime.date]
         if _applied_on is None:
             applied_on = None
-        elif isinstance(_applied_on, Unset):
+        elif isinstance(_applied_on,  Unset):
             applied_on = UNSET
         else:
             applied_on = isoparse(_applied_on).date()
 
+
+
+
         _employee = d.pop("employee", UNSET)
         employee: Union[Unset, Item]
-        if isinstance(_employee, Unset):
+        if isinstance(_employee,  Unset):
             employee = UNSET
         else:
             employee = Item.from_dict(_employee)
+
+
+
 
         id = d.pop("id", UNSET)
 
@@ -227,3 +248,4 @@ class DpsNotice:
         )
 
         return dps_notice
+

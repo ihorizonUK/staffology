@@ -6,7 +6,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="FpsEmployeeFigsToDate")
 
-
 @attr.s(auto_attribs=True)
 class FpsEmployeeFigsToDate:
     """
@@ -31,6 +30,8 @@ class FpsEmployeeFigsToDate:
         take_home_pay (Union[Unset, None, str]):
         adjustments (Union[Unset, None, str]):
         maps_miles (Union[Unset, None, str]):
+        foreign_tax_amount (Union[Unset, None, str]):
+        foreign_tax_amount_reclaimed (Union[Unset, None, str]):
         pensionable_earnings (Union[Unset, None, str]):
         pensionable_pay (Union[Unset, None, str]):
         employer_pension_contribution (Union[Unset, None, str]):
@@ -40,6 +41,7 @@ class FpsEmployeeFigsToDate:
         tax_on_payment_after_leaving (Union[Unset, None, str]):
         taxable_pay_previous_employment (Union[Unset, None, str]):
         total_tax_previous_employment (Union[Unset, None, str]):
+        non_tax_or_nic_pmt (Union[Unset, None, str]):
     """
 
     taxable_pay: Union[Unset, None, str] = UNSET
@@ -62,6 +64,8 @@ class FpsEmployeeFigsToDate:
     take_home_pay: Union[Unset, None, str] = UNSET
     adjustments: Union[Unset, None, str] = UNSET
     maps_miles: Union[Unset, None, str] = UNSET
+    foreign_tax_amount: Union[Unset, None, str] = UNSET
+    foreign_tax_amount_reclaimed: Union[Unset, None, str] = UNSET
     pensionable_earnings: Union[Unset, None, str] = UNSET
     pensionable_pay: Union[Unset, None, str] = UNSET
     employer_pension_contribution: Union[Unset, None, str] = UNSET
@@ -71,6 +75,8 @@ class FpsEmployeeFigsToDate:
     tax_on_payment_after_leaving: Union[Unset, None, str] = UNSET
     taxable_pay_previous_employment: Union[Unset, None, str] = UNSET
     total_tax_previous_employment: Union[Unset, None, str] = UNSET
+    non_tax_or_nic_pmt: Union[Unset, None, str] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         taxable_pay = self.taxable_pay
@@ -93,6 +99,8 @@ class FpsEmployeeFigsToDate:
         take_home_pay = self.take_home_pay
         adjustments = self.adjustments
         maps_miles = self.maps_miles
+        foreign_tax_amount = self.foreign_tax_amount
+        foreign_tax_amount_reclaimed = self.foreign_tax_amount_reclaimed
         pensionable_earnings = self.pensionable_earnings
         pensionable_pay = self.pensionable_pay
         employer_pension_contribution = self.employer_pension_contribution
@@ -102,9 +110,11 @@ class FpsEmployeeFigsToDate:
         tax_on_payment_after_leaving = self.tax_on_payment_after_leaving
         taxable_pay_previous_employment = self.taxable_pay_previous_employment
         total_tax_previous_employment = self.total_tax_previous_employment
+        non_tax_or_nic_pmt = self.non_tax_or_nic_pmt
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if taxable_pay is not UNSET:
             field_dict["taxablePay"] = taxable_pay
         if total_tax is not UNSET:
@@ -145,6 +155,10 @@ class FpsEmployeeFigsToDate:
             field_dict["adjustments"] = adjustments
         if maps_miles is not UNSET:
             field_dict["mapsMiles"] = maps_miles
+        if foreign_tax_amount is not UNSET:
+            field_dict["foreignTaxAmount"] = foreign_tax_amount
+        if foreign_tax_amount_reclaimed is not UNSET:
+            field_dict["foreignTaxAmountReclaimed"] = foreign_tax_amount_reclaimed
         if pensionable_earnings is not UNSET:
             field_dict["pensionableEarnings"] = pensionable_earnings
         if pensionable_pay is not UNSET:
@@ -154,9 +168,7 @@ class FpsEmployeeFigsToDate:
         if employee_pension_contribution is not UNSET:
             field_dict["employeePensionContribution"] = employee_pension_contribution
         if employee_pension_contribution_avc is not UNSET:
-            field_dict[
-                "employeePensionContributionAvc"
-            ] = employee_pension_contribution_avc
+            field_dict["employeePensionContributionAvc"] = employee_pension_contribution_avc
         if payment_after_leaving is not UNSET:
             field_dict["paymentAfterLeaving"] = payment_after_leaving
         if tax_on_payment_after_leaving is not UNSET:
@@ -165,8 +177,12 @@ class FpsEmployeeFigsToDate:
             field_dict["taxablePayPreviousEmployment"] = taxable_pay_previous_employment
         if total_tax_previous_employment is not UNSET:
             field_dict["totalTaxPreviousEmployment"] = total_tax_previous_employment
+        if non_tax_or_nic_pmt is not UNSET:
+            field_dict["nonTaxOrNICPmt"] = non_tax_or_nic_pmt
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -211,6 +227,10 @@ class FpsEmployeeFigsToDate:
 
         maps_miles = d.pop("mapsMiles", UNSET)
 
+        foreign_tax_amount = d.pop("foreignTaxAmount", UNSET)
+
+        foreign_tax_amount_reclaimed = d.pop("foreignTaxAmountReclaimed", UNSET)
+
         pensionable_earnings = d.pop("pensionableEarnings", UNSET)
 
         pensionable_pay = d.pop("pensionablePay", UNSET)
@@ -219,9 +239,7 @@ class FpsEmployeeFigsToDate:
 
         employee_pension_contribution = d.pop("employeePensionContribution", UNSET)
 
-        employee_pension_contribution_avc = d.pop(
-            "employeePensionContributionAvc", UNSET
-        )
+        employee_pension_contribution_avc = d.pop("employeePensionContributionAvc", UNSET)
 
         payment_after_leaving = d.pop("paymentAfterLeaving", UNSET)
 
@@ -230,6 +248,8 @@ class FpsEmployeeFigsToDate:
         taxable_pay_previous_employment = d.pop("taxablePayPreviousEmployment", UNSET)
 
         total_tax_previous_employment = d.pop("totalTaxPreviousEmployment", UNSET)
+
+        non_tax_or_nic_pmt = d.pop("nonTaxOrNICPmt", UNSET)
 
         fps_employee_figs_to_date = cls(
             taxable_pay=taxable_pay,
@@ -252,6 +272,8 @@ class FpsEmployeeFigsToDate:
             take_home_pay=take_home_pay,
             adjustments=adjustments,
             maps_miles=maps_miles,
+            foreign_tax_amount=foreign_tax_amount,
+            foreign_tax_amount_reclaimed=foreign_tax_amount_reclaimed,
             pensionable_earnings=pensionable_earnings,
             pensionable_pay=pensionable_pay,
             employer_pension_contribution=employer_pension_contribution,
@@ -261,6 +283,8 @@ class FpsEmployeeFigsToDate:
             tax_on_payment_after_leaving=tax_on_payment_after_leaving,
             taxable_pay_previous_employment=taxable_pay_previous_employment,
             total_tax_previous_employment=total_tax_previous_employment,
+            non_tax_or_nic_pmt=non_tax_or_nic_pmt,
         )
 
         return fps_employee_figs_to_date
+

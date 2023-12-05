@@ -21,9 +21,7 @@ def _get_kwargs(
     page_num: Union[Unset, None, int] = UNSET,
     page_size: Union[Unset, None, int] = UNSET,
 ) -> Dict[str, Any]:
-    url = "{}/employers/{employerId}/audit".format(
-        client.base_url, employerId=employer_id
-    )
+    url = "{}/employers/{employerId}/audit".format(client.base_url, employerId=employer_id)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
@@ -102,8 +100,7 @@ def sync_detailed(
 
     Args:
         employer_id (str):
-        entity (Union[Unset, None, EntityType]): [readonly] Specifies the entity for which audit
-            logs need to retrieved
+        entity (Union[Unset, None, EntityType]):
         entity_id (Union[Unset, None, str]):
         from_date (Union[Unset, None, datetime.datetime]):
         to_date (Union[Unset, None, datetime.datetime]):
@@ -148,8 +145,7 @@ def sync(
 
     Args:
         employer_id (str):
-        entity (Union[Unset, None, EntityType]): [readonly] Specifies the entity for which audit
-            logs need to retrieved
+        entity (Union[Unset, None, EntityType]):
         entity_id (Union[Unset, None, str]):
         from_date (Union[Unset, None, datetime.datetime]):
         to_date (Union[Unset, None, datetime.datetime]):
@@ -187,8 +183,7 @@ async def asyncio_detailed(
 
     Args:
         employer_id (str):
-        entity (Union[Unset, None, EntityType]): [readonly] Specifies the entity for which audit
-            logs need to retrieved
+        entity (Union[Unset, None, EntityType]):
         entity_id (Union[Unset, None, str]):
         from_date (Union[Unset, None, datetime.datetime]):
         to_date (Union[Unset, None, datetime.datetime]):
@@ -231,8 +226,7 @@ async def asyncio(
 
     Args:
         employer_id (str):
-        entity (Union[Unset, None, EntityType]): [readonly] Specifies the entity for which audit
-            logs need to retrieved
+        entity (Union[Unset, None, EntityType]):
         entity_id (Union[Unset, None, str]):
         from_date (Union[Unset, None, datetime.datetime]):
         to_date (Union[Unset, None, datetime.datetime]):

@@ -6,7 +6,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="FieldModification")
 
-
 @attr.s(auto_attribs=True)
 class FieldModification:
     """
@@ -22,6 +21,7 @@ class FieldModification:
     old_value: Union[Unset, None, str] = UNSET
     new_value: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         field_name = self.field_name
         is_significant = self.is_significant
@@ -29,7 +29,8 @@ class FieldModification:
         new_value = self.new_value
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if field_name is not UNSET:
             field_dict["fieldName"] = field_name
         if is_significant is not UNSET:
@@ -40,6 +41,8 @@ class FieldModification:
             field_dict["newValue"] = new_value
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -60,3 +63,4 @@ class FieldModification:
         )
 
         return field_modification
+

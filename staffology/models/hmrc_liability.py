@@ -12,7 +12,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="HmrcLiability")
 
-
 @attr.s(auto_attribs=True)
 class HmrcLiability:
     """
@@ -86,6 +85,7 @@ class HmrcLiability:
         total_paid (Union[Unset, float]): [readonly] The total value of all payments in this period
         payments (Union[Unset, None, List[HmrcPayment]]):
         fps_list (Union[Unset, None, List[Item]]):
+        allow_linked_eps (Union[Unset, bool]): If true this will allow you to submit a combined Employer Payment Summary
         id (Union[Unset, str]): [readonly] The unique id of the object
     """
 
@@ -131,7 +131,9 @@ class HmrcLiability:
     total_paid: Union[Unset, float] = UNSET
     payments: Union[Unset, None, List[HmrcPayment]] = UNSET
     fps_list: Union[Unset, None, List[Item]] = UNSET
+    allow_linked_eps: Union[Unset, bool] = UNSET
     id: Union[Unset, str] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         title = self.title
@@ -156,6 +158,9 @@ class HmrcLiability:
                     pay_runs_item = pay_runs_item_data.to_dict()
 
                     pay_runs.append(pay_runs_item)
+
+
+
 
         tax = self.tax
         cis_deductions = self.cis_deductions
@@ -183,13 +188,9 @@ class HmrcLiability:
         liability_arising_in_period = self.liability_arising_in_period
         due_in_previous_periods = self.due_in_previous_periods
         paid_in_previous_periods = self.paid_in_previous_periods
-        employment_allowance_claim_in_previous_periods = (
-            self.employment_allowance_claim_in_previous_periods
-        )
+        employment_allowance_claim_in_previous_periods = self.employment_allowance_claim_in_previous_periods
         received_from_hmrc_to_refund_tax = self.received_from_hmrc_to_refund_tax
-        received_from_hmrc_to_pay_statutory_pay = (
-            self.received_from_hmrc_to_pay_statutory_pay
-        )
+        received_from_hmrc_to_pay_statutory_pay = self.received_from_hmrc_to_pay_statutory_pay
         cis_deductions_suffered = self.cis_deductions_suffered
         adjustment = self.adjustment
         net_liability_for_period = self.net_liability_for_period
@@ -205,6 +206,9 @@ class HmrcLiability:
 
                     payments.append(payments_item)
 
+
+
+
         fps_list: Union[Unset, None, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.fps_list, Unset):
             if self.fps_list is None:
@@ -216,10 +220,15 @@ class HmrcLiability:
 
                     fps_list.append(fps_list_item)
 
+
+
+
+        allow_linked_eps = self.allow_linked_eps
         id = self.id
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if title is not UNSET:
             field_dict["title"] = title
         if tax_year is not UNSET:
@@ -269,9 +278,7 @@ class HmrcLiability:
         if spbp_nic is not UNSET:
             field_dict["spbpNic"] = spbp_nic
         if eligible_for_employment_allowance is not UNSET:
-            field_dict[
-                "eligibleForEmploymentAllowance"
-            ] = eligible_for_employment_allowance
+            field_dict["eligibleForEmploymentAllowance"] = eligible_for_employment_allowance
         if employment_allowance_claim is not UNSET:
             field_dict["employmentAllowanceClaim"] = employment_allowance_claim
         if employment_allowance_claim_auto is not UNSET:
@@ -289,15 +296,11 @@ class HmrcLiability:
         if paid_in_previous_periods is not UNSET:
             field_dict["paidInPreviousPeriods"] = paid_in_previous_periods
         if employment_allowance_claim_in_previous_periods is not UNSET:
-            field_dict[
-                "employmentAllowanceClaimInPreviousPeriods"
-            ] = employment_allowance_claim_in_previous_periods
+            field_dict["employmentAllowanceClaimInPreviousPeriods"] = employment_allowance_claim_in_previous_periods
         if received_from_hmrc_to_refund_tax is not UNSET:
             field_dict["receivedFromHMRCToRefundTax"] = received_from_hmrc_to_refund_tax
         if received_from_hmrc_to_pay_statutory_pay is not UNSET:
-            field_dict[
-                "receivedFromHMRCToPayStatutoryPay"
-            ] = received_from_hmrc_to_pay_statutory_pay
+            field_dict["receivedFromHMRCToPayStatutoryPay"] = received_from_hmrc_to_pay_statutory_pay
         if cis_deductions_suffered is not UNSET:
             field_dict["cisDeductionsSuffered"] = cis_deductions_suffered
         if adjustment is not UNSET:
@@ -310,10 +313,14 @@ class HmrcLiability:
             field_dict["payments"] = payments
         if fps_list is not UNSET:
             field_dict["fpsList"] = fps_list
+        if allow_linked_eps is not UNSET:
+            field_dict["allowLinkedEps"] = allow_linked_eps
         if id is not UNSET:
             field_dict["id"] = id
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -322,17 +329,23 @@ class HmrcLiability:
 
         _tax_year = d.pop("taxYear", UNSET)
         tax_year: Union[Unset, TaxYear]
-        if isinstance(_tax_year, Unset):
+        if isinstance(_tax_year,  Unset):
             tax_year = UNSET
         else:
             tax_year = TaxYear(_tax_year)
 
+
+
+
         _period_ending = d.pop("periodEnding", UNSET)
         period_ending: Union[Unset, datetime.date]
-        if isinstance(_period_ending, Unset):
+        if isinstance(_period_ending,  Unset):
             period_ending = UNSET
         else:
             period_ending = isoparse(_period_ending).date()
+
+
+
 
         period_complete = d.pop("periodComplete", UNSET)
 
@@ -342,10 +355,13 @@ class HmrcLiability:
 
         pay_runs = []
         _pay_runs = d.pop("payRuns", UNSET)
-        for pay_runs_item_data in _pay_runs or []:
+        for pay_runs_item_data in (_pay_runs or []):
             pay_runs_item = PayRun.from_dict(pay_runs_item_data)
 
+
+
             pay_runs.append(pay_runs_item)
+
 
         tax = d.pop("tax", UNSET)
 
@@ -381,9 +397,7 @@ class HmrcLiability:
 
         spbp_nic = d.pop("spbpNic", UNSET)
 
-        eligible_for_employment_allowance = d.pop(
-            "eligibleForEmploymentAllowance", UNSET
-        )
+        eligible_for_employment_allowance = d.pop("eligibleForEmploymentAllowance", UNSET)
 
         employment_allowance_claim = d.pop("employmentAllowanceClaim", UNSET)
 
@@ -401,15 +415,11 @@ class HmrcLiability:
 
         paid_in_previous_periods = d.pop("paidInPreviousPeriods", UNSET)
 
-        employment_allowance_claim_in_previous_periods = d.pop(
-            "employmentAllowanceClaimInPreviousPeriods", UNSET
-        )
+        employment_allowance_claim_in_previous_periods = d.pop("employmentAllowanceClaimInPreviousPeriods", UNSET)
 
         received_from_hmrc_to_refund_tax = d.pop("receivedFromHMRCToRefundTax", UNSET)
 
-        received_from_hmrc_to_pay_statutory_pay = d.pop(
-            "receivedFromHMRCToPayStatutoryPay", UNSET
-        )
+        received_from_hmrc_to_pay_statutory_pay = d.pop("receivedFromHMRCToPayStatutoryPay", UNSET)
 
         cis_deductions_suffered = d.pop("cisDeductionsSuffered", UNSET)
 
@@ -421,17 +431,25 @@ class HmrcLiability:
 
         payments = []
         _payments = d.pop("payments", UNSET)
-        for payments_item_data in _payments or []:
+        for payments_item_data in (_payments or []):
             payments_item = HmrcPayment.from_dict(payments_item_data)
+
+
 
             payments.append(payments_item)
 
+
         fps_list = []
         _fps_list = d.pop("fpsList", UNSET)
-        for fps_list_item_data in _fps_list or []:
+        for fps_list_item_data in (_fps_list or []):
             fps_list_item = Item.from_dict(fps_list_item_data)
 
+
+
             fps_list.append(fps_list_item)
+
+
+        allow_linked_eps = d.pop("allowLinkedEps", UNSET)
 
         id = d.pop("id", UNSET)
 
@@ -478,7 +496,9 @@ class HmrcLiability:
             total_paid=total_paid,
             payments=payments,
             fps_list=fps_list,
+            allow_linked_eps=allow_linked_eps,
             id=id,
         )
 
         return hmrc_liability
+

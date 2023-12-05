@@ -19,9 +19,7 @@ def _get_kwargs(
     dept_code: Union[Unset, None, str] = UNSET,
     pension_scheme_id: Union[Unset, None, str] = UNSET,
 ) -> Dict[str, Any]:
-    url = "{}/employers/{employerId}/employees".format(
-        client.base_url, employerId=employer_id
-    )
+    url = "{}/employers/{employerId}/employees".format(client.base_url, employerId=employer_id)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
@@ -91,8 +89,7 @@ def sync_detailed(
         employer_id (str):
         page_num (Union[Unset, None, int]):
         page_size (Union[Unset, None, int]):
-        status (Union[Unset, None, EmployeeStatus]): [readonly] Indicates whether the Employee is
-            currently employed or not
+        status (Union[Unset, None, EmployeeStatus]):
         dept_code (Union[Unset, None, str]):
         pension_scheme_id (Union[Unset, None, str]):
 
@@ -134,8 +131,7 @@ def sync(
         employer_id (str):
         page_num (Union[Unset, None, int]):
         page_size (Union[Unset, None, int]):
-        status (Union[Unset, None, EmployeeStatus]): [readonly] Indicates whether the Employee is
-            currently employed or not
+        status (Union[Unset, None, EmployeeStatus]):
         dept_code (Union[Unset, None, str]):
         pension_scheme_id (Union[Unset, None, str]):
 
@@ -170,8 +166,7 @@ async def asyncio_detailed(
         employer_id (str):
         page_num (Union[Unset, None, int]):
         page_size (Union[Unset, None, int]):
-        status (Union[Unset, None, EmployeeStatus]): [readonly] Indicates whether the Employee is
-            currently employed or not
+        status (Union[Unset, None, EmployeeStatus]):
         dept_code (Union[Unset, None, str]):
         pension_scheme_id (Union[Unset, None, str]):
 
@@ -211,8 +206,7 @@ async def asyncio(
         employer_id (str):
         page_num (Union[Unset, None, int]):
         page_size (Union[Unset, None, int]):
-        status (Union[Unset, None, EmployeeStatus]): [readonly] Indicates whether the Employee is
-            currently employed or not
+        status (Union[Unset, None, EmployeeStatus]):
         dept_code (Union[Unset, None, str]):
         pension_scheme_id (Union[Unset, None, str]):
 

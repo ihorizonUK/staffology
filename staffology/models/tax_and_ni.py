@@ -9,7 +9,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="TaxAndNi")
 
-
 @attr.s(auto_attribs=True)
 class TaxAndNi:
     """
@@ -27,6 +26,8 @@ class TaxAndNi:
         week_1_month_1 (Union[Unset, bool]): Determines whether PAYE should be calculated on a Week1/Month1 basis
             instead of on a cumulative basis.
             This is automatically set to false for any existing Employees when you start a new Tax Year.
+        foreign_tax_credit (Union[Unset, bool]): If set to True you are enabling the possibility to enter an amount on
+            payslip so you can reduce UK Tax liabilities.
     """
 
     ni_table: str
@@ -39,6 +40,8 @@ class TaxAndNi:
     student_loan_end_date: Union[Unset, None, datetime.date] = UNSET
     tax_code: Union[Unset, None, str] = UNSET
     week_1_month_1: Union[Unset, bool] = UNSET
+    foreign_tax_credit: Union[Unset, bool] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         ni_table = self.ni_table
@@ -46,19 +49,11 @@ class TaxAndNi:
         postgrad_loan = self.postgrad_loan
         postgraduate_loan_start_date: Union[Unset, None, str] = UNSET
         if not isinstance(self.postgraduate_loan_start_date, Unset):
-            postgraduate_loan_start_date = (
-                self.postgraduate_loan_start_date.isoformat()
-                if self.postgraduate_loan_start_date
-                else None
-            )
+            postgraduate_loan_start_date = self.postgraduate_loan_start_date.isoformat() if self.postgraduate_loan_start_date else None
 
         postgraduate_loan_end_date: Union[Unset, None, str] = UNSET
         if not isinstance(self.postgraduate_loan_end_date, Unset):
-            postgraduate_loan_end_date = (
-                self.postgraduate_loan_end_date.isoformat()
-                if self.postgraduate_loan_end_date
-                else None
-            )
+            postgraduate_loan_end_date = self.postgraduate_loan_end_date.isoformat() if self.postgraduate_loan_end_date else None
 
         student_loan: Union[Unset, str] = UNSET
         if not isinstance(self.student_loan, Unset):
@@ -66,29 +61,20 @@ class TaxAndNi:
 
         student_loan_start_date: Union[Unset, None, str] = UNSET
         if not isinstance(self.student_loan_start_date, Unset):
-            student_loan_start_date = (
-                self.student_loan_start_date.isoformat()
-                if self.student_loan_start_date
-                else None
-            )
+            student_loan_start_date = self.student_loan_start_date.isoformat() if self.student_loan_start_date else None
 
         student_loan_end_date: Union[Unset, None, str] = UNSET
         if not isinstance(self.student_loan_end_date, Unset):
-            student_loan_end_date = (
-                self.student_loan_end_date.isoformat()
-                if self.student_loan_end_date
-                else None
-            )
+            student_loan_end_date = self.student_loan_end_date.isoformat() if self.student_loan_end_date else None
 
         tax_code = self.tax_code
         week_1_month_1 = self.week_1_month_1
+        foreign_tax_credit = self.foreign_tax_credit
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update(
-            {
-                "niTable": ni_table,
-            }
-        )
+        field_dict.update({
+            "niTable": ni_table,
+        })
         if secondary_class_1_not_payable is not UNSET:
             field_dict["secondaryClass1NotPayable"] = secondary_class_1_not_payable
         if postgrad_loan is not UNSET:
@@ -107,8 +93,12 @@ class TaxAndNi:
             field_dict["taxCode"] = tax_code
         if week_1_month_1 is not UNSET:
             field_dict["week1Month1"] = week_1_month_1
+        if foreign_tax_credit is not UNSET:
+            field_dict["foreignTaxCredit"] = foreign_tax_credit
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -123,50 +113,65 @@ class TaxAndNi:
         postgraduate_loan_start_date: Union[Unset, None, datetime.date]
         if _postgraduate_loan_start_date is None:
             postgraduate_loan_start_date = None
-        elif isinstance(_postgraduate_loan_start_date, Unset):
+        elif isinstance(_postgraduate_loan_start_date,  Unset):
             postgraduate_loan_start_date = UNSET
         else:
-            postgraduate_loan_start_date = isoparse(
-                _postgraduate_loan_start_date
-            ).date()
+            postgraduate_loan_start_date = isoparse(_postgraduate_loan_start_date).date()
+
+
+
 
         _postgraduate_loan_end_date = d.pop("postgraduateLoanEndDate", UNSET)
         postgraduate_loan_end_date: Union[Unset, None, datetime.date]
         if _postgraduate_loan_end_date is None:
             postgraduate_loan_end_date = None
-        elif isinstance(_postgraduate_loan_end_date, Unset):
+        elif isinstance(_postgraduate_loan_end_date,  Unset):
             postgraduate_loan_end_date = UNSET
         else:
             postgraduate_loan_end_date = isoparse(_postgraduate_loan_end_date).date()
 
+
+
+
         _student_loan = d.pop("studentLoan", UNSET)
         student_loan: Union[Unset, StudentLoan]
-        if isinstance(_student_loan, Unset):
+        if isinstance(_student_loan,  Unset):
             student_loan = UNSET
         else:
             student_loan = StudentLoan(_student_loan)
+
+
+
 
         _student_loan_start_date = d.pop("studentLoanStartDate", UNSET)
         student_loan_start_date: Union[Unset, None, datetime.date]
         if _student_loan_start_date is None:
             student_loan_start_date = None
-        elif isinstance(_student_loan_start_date, Unset):
+        elif isinstance(_student_loan_start_date,  Unset):
             student_loan_start_date = UNSET
         else:
             student_loan_start_date = isoparse(_student_loan_start_date).date()
+
+
+
 
         _student_loan_end_date = d.pop("studentLoanEndDate", UNSET)
         student_loan_end_date: Union[Unset, None, datetime.date]
         if _student_loan_end_date is None:
             student_loan_end_date = None
-        elif isinstance(_student_loan_end_date, Unset):
+        elif isinstance(_student_loan_end_date,  Unset):
             student_loan_end_date = UNSET
         else:
             student_loan_end_date = isoparse(_student_loan_end_date).date()
 
+
+
+
         tax_code = d.pop("taxCode", UNSET)
 
         week_1_month_1 = d.pop("week1Month1", UNSET)
+
+        foreign_tax_credit = d.pop("foreignTaxCredit", UNSET)
 
         tax_and_ni = cls(
             ni_table=ni_table,
@@ -179,6 +184,8 @@ class TaxAndNi:
             student_loan_end_date=student_loan_end_date,
             tax_code=tax_code,
             week_1_month_1=week_1_month_1,
+            foreign_tax_credit=foreign_tax_credit,
         )
 
         return tax_and_ni
+

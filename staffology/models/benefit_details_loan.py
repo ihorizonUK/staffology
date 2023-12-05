@@ -8,7 +8,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="BenefitDetailsLoan")
 
-
 @attr.s(auto_attribs=True)
 class BenefitDetailsLoan:
     """
@@ -38,6 +37,7 @@ class BenefitDetailsLoan:
     monthly_value: Union[Unset, float] = UNSET
     official_interest: Union[Unset, float] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         number_of_joint_borrowers = self.number_of_joint_borrowers
         loan_made: Union[Unset, None, str] = UNSET
@@ -46,9 +46,7 @@ class BenefitDetailsLoan:
 
         loan_discharged: Union[Unset, None, str] = UNSET
         if not isinstance(self.loan_discharged, Unset):
-            loan_discharged = (
-                self.loan_discharged.isoformat() if self.loan_discharged else None
-            )
+            loan_discharged = self.loan_discharged.isoformat() if self.loan_discharged else None
 
         starting_balance = self.starting_balance
         closing_balance = self.closing_balance
@@ -60,7 +58,8 @@ class BenefitDetailsLoan:
         official_interest = self.official_interest
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if number_of_joint_borrowers is not UNSET:
             field_dict["numberOfJointBorrowers"] = number_of_joint_borrowers
         if loan_made is not UNSET:
@@ -86,6 +85,8 @@ class BenefitDetailsLoan:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
@@ -95,19 +96,25 @@ class BenefitDetailsLoan:
         loan_made: Union[Unset, None, datetime.date]
         if _loan_made is None:
             loan_made = None
-        elif isinstance(_loan_made, Unset):
+        elif isinstance(_loan_made,  Unset):
             loan_made = UNSET
         else:
             loan_made = isoparse(_loan_made).date()
+
+
+
 
         _loan_discharged = d.pop("loanDischarged", UNSET)
         loan_discharged: Union[Unset, None, datetime.date]
         if _loan_discharged is None:
             loan_discharged = None
-        elif isinstance(_loan_discharged, Unset):
+        elif isinstance(_loan_discharged,  Unset):
             loan_discharged = UNSET
         else:
             loan_discharged = isoparse(_loan_discharged).date()
+
+
+
 
         starting_balance = d.pop("startingBalance", UNSET)
 
@@ -140,3 +147,4 @@ class BenefitDetailsLoan:
         )
 
         return benefit_details_loan
+

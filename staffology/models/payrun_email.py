@@ -7,7 +7,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="PayrunEmail")
 
-
 @attr.s(auto_attribs=True)
 class PayrunEmail:
     """PayrunEmails are sent automatically when a payrun has been finalised
@@ -70,6 +69,7 @@ class PayrunEmail:
     custom_body_is_html: Union[Unset, bool] = UNSET
     child_id: Union[Unset, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         name = self.name
         recipient_address = self.recipient_address
@@ -97,12 +97,10 @@ class PayrunEmail:
         child_id = self.child_id
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update(
-            {
-                "name": name,
-                "recipientAddress": recipient_address,
-            }
-        )
+        field_dict.update({
+            "name": name,
+            "recipientAddress": recipient_address,
+        })
         if is_active is not UNSET:
             field_dict["isActive"] = is_active
         if template_type is not UNSET:
@@ -144,6 +142,8 @@ class PayrunEmail:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
@@ -155,10 +155,13 @@ class PayrunEmail:
 
         _template_type = d.pop("templateType", UNSET)
         template_type: Union[Unset, EmployerTemplateType]
-        if isinstance(_template_type, Unset):
+        if isinstance(_template_type,  Unset):
             template_type = UNSET
         else:
             template_type = EmployerTemplateType(_template_type)
+
+
+
 
         pdf_password = d.pop("pdfPassword", UNSET)
 
@@ -219,3 +222,4 @@ class PayrunEmail:
         )
 
         return payrun_email
+

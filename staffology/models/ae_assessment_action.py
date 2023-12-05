@@ -9,7 +9,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="AeAssessmentAction")
 
-
 @attr.s(auto_attribs=True)
 class AeAssessmentAction:
     """
@@ -35,6 +34,7 @@ class AeAssessmentAction:
     worker_group_id: Union[Unset, str] = UNSET
     letter_not_yet_sent: Union[Unset, bool] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         action: Union[Unset, str] = UNSET
         if not isinstance(self.action, Unset):
@@ -55,7 +55,8 @@ class AeAssessmentAction:
         letter_not_yet_sent = self.letter_not_yet_sent
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if action is not UNSET:
             field_dict["action"] = action
         if employee_state is not UNSET:
@@ -75,22 +76,30 @@ class AeAssessmentAction:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _action = d.pop("action", UNSET)
         action: Union[Unset, AeAction]
-        if isinstance(_action, Unset):
+        if isinstance(_action,  Unset):
             action = UNSET
         else:
             action = AeAction(_action)
 
+
+
+
         _employee_state = d.pop("employeeState", UNSET)
         employee_state: Union[Unset, AeEmployeeState]
-        if isinstance(_employee_state, Unset):
+        if isinstance(_employee_state,  Unset):
             employee_state = UNSET
         else:
             employee_state = AeEmployeeState(_employee_state)
+
+
+
 
         action_completed = d.pop("actionCompleted", UNSET)
 
@@ -98,10 +107,13 @@ class AeAssessmentAction:
 
         _required_letter = d.pop("requiredLetter", UNSET)
         required_letter: Union[Unset, AeStatutoryLetter]
-        if isinstance(_required_letter, Unset):
+        if isinstance(_required_letter,  Unset):
             required_letter = UNSET
         else:
             required_letter = AeStatutoryLetter(_required_letter)
+
+
+
 
         pension_scheme_id = d.pop("pensionSchemeId", UNSET)
 
@@ -121,3 +133,4 @@ class AeAssessmentAction:
         )
 
         return ae_assessment_action
+

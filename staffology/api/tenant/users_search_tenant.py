@@ -13,19 +13,32 @@ def _get_kwargs(
     *,
     client: Client,
     q: Union[Unset, None, str] = UNSET,
+
 ) -> Dict[str, Any]:
-    url = "{}/tenants/{id}/users/search".format(client.base_url, id=id)
+    url = "{}/tenants/{id}/users/search".format(
+        client.base_url,id=id)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
 
+    
+
+    
+
     params: Dict[str, Any] = {}
     params["q"] = q
 
+
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
+
+    
+
+    
+
     return {
-        "method": "get",
+	    "method": "get",
         "url": url,
         "headers": headers,
         "cookies": cookies,
@@ -38,8 +51,10 @@ def _parse_response(*, response: httpx.Response) -> Optional[List[Item]]:
     if response.status_code == 200:
         response_200 = []
         _response_200 = response.json()
-        for response_200_item_data in _response_200:
+        for response_200_item_data in (_response_200):
             response_200_item = Item.from_dict(response_200_item_data)
+
+
 
             response_200.append(response_200_item)
 
@@ -61,6 +76,7 @@ def sync_detailed(
     *,
     client: Client,
     q: Union[Unset, None, str] = UNSET,
+
 ) -> Response[List[Item]]:
     """Search Users
 
@@ -74,10 +90,12 @@ def sync_detailed(
         Response[List[Item]]
     """
 
+
     kwargs = _get_kwargs(
         id=id,
-        client=client,
-        q=q,
+client=client,
+q=q,
+
     )
 
     response = httpx.request(
@@ -87,12 +105,12 @@ def sync_detailed(
 
     return _build_response(response=response)
 
-
 def sync(
     id: str,
     *,
     client: Client,
     q: Union[Unset, None, str] = UNSET,
+
 ) -> Optional[List[Item]]:
     """Search Users
 
@@ -106,18 +124,20 @@ def sync(
         Response[List[Item]]
     """
 
+
     return sync_detailed(
         id=id,
-        client=client,
-        q=q,
-    ).parsed
+client=client,
+q=q,
 
+    ).parsed
 
 async def asyncio_detailed(
     id: str,
     *,
     client: Client,
     q: Union[Unset, None, str] = UNSET,
+
 ) -> Response[List[Item]]:
     """Search Users
 
@@ -131,23 +151,27 @@ async def asyncio_detailed(
         Response[List[Item]]
     """
 
+
     kwargs = _get_kwargs(
         id=id,
-        client=client,
-        q=q,
+client=client,
+q=q,
+
     )
 
     async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+        response = await _client.request(
+            **kwargs
+        )
 
     return _build_response(response=response)
-
 
 async def asyncio(
     id: str,
     *,
     client: Client,
     q: Union[Unset, None, str] = UNSET,
+
 ) -> Optional[List[Item]]:
     """Search Users
 
@@ -161,10 +185,11 @@ async def asyncio(
         Response[List[Item]]
     """
 
-    return (
-        await asyncio_detailed(
-            id=id,
-            client=client,
-            q=q,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        id=id,
+client=client,
+q=q,
+
+    )).parsed
+

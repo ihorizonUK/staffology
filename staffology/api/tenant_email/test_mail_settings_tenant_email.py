@@ -13,19 +13,32 @@ def _get_kwargs(
     *,
     client: Client,
     email: Union[Unset, None, str] = UNSET,
+
 ) -> Dict[str, Any]:
-    url = "{}/tenants/{id}/email/settings/test".format(client.base_url, id=id)
+    url = "{}/tenants/{id}/email/settings/test".format(
+        client.base_url,id=id)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
 
+    
+
+    
+
     params: Dict[str, Any] = {}
     params["email"] = email
 
+
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
+
+    
+
+    
+
     return {
-        "method": "post",
+	    "method": "post",
         "url": url,
         "headers": headers,
         "cookies": cookies,
@@ -37,6 +50,8 @@ def _get_kwargs(
 def _parse_response(*, response: httpx.Response) -> Optional[EmployerEmail]:
     if response.status_code == 201:
         response_201 = EmployerEmail.from_dict(response.json())
+
+
 
         return response_201
     return raise_staffology_exception(response)
@@ -56,6 +71,7 @@ def sync_detailed(
     *,
     client: Client,
     email: Union[Unset, None, str] = UNSET,
+
 ) -> Response[EmployerEmail]:
     """Send test email
 
@@ -69,10 +85,12 @@ def sync_detailed(
         Response[EmployerEmail]
     """
 
+
     kwargs = _get_kwargs(
         id=id,
-        client=client,
-        email=email,
+client=client,
+email=email,
+
     )
 
     response = httpx.request(
@@ -82,12 +100,12 @@ def sync_detailed(
 
     return _build_response(response=response)
 
-
 def sync(
     id: str,
     *,
     client: Client,
     email: Union[Unset, None, str] = UNSET,
+
 ) -> Optional[EmployerEmail]:
     """Send test email
 
@@ -101,18 +119,20 @@ def sync(
         Response[EmployerEmail]
     """
 
+
     return sync_detailed(
         id=id,
-        client=client,
-        email=email,
-    ).parsed
+client=client,
+email=email,
 
+    ).parsed
 
 async def asyncio_detailed(
     id: str,
     *,
     client: Client,
     email: Union[Unset, None, str] = UNSET,
+
 ) -> Response[EmployerEmail]:
     """Send test email
 
@@ -126,23 +146,27 @@ async def asyncio_detailed(
         Response[EmployerEmail]
     """
 
+
     kwargs = _get_kwargs(
         id=id,
-        client=client,
-        email=email,
+client=client,
+email=email,
+
     )
 
     async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+        response = await _client.request(
+            **kwargs
+        )
 
     return _build_response(response=response)
-
 
 async def asyncio(
     id: str,
     *,
     client: Client,
     email: Union[Unset, None, str] = UNSET,
+
 ) -> Optional[EmployerEmail]:
     """Send test email
 
@@ -156,10 +180,11 @@ async def asyncio(
         Response[EmployerEmail]
     """
 
-    return (
-        await asyncio_detailed(
-            id=id,
-            client=client,
-            email=email,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        id=id,
+client=client,
+email=email,
+
+    )).parsed
+

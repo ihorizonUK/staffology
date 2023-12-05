@@ -6,7 +6,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="NominalCodeMapping")
 
-
 @attr.s(auto_attribs=True)
 class NominalCodeMapping:
     """
@@ -26,6 +25,7 @@ class NominalCodeMapping:
     pay_code: Union[Unset, None, str] = UNSET
     id: Union[Unset, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         nominal_code = self.nominal_code
         nominal_name = self.nominal_name
@@ -34,7 +34,8 @@ class NominalCodeMapping:
         id = self.id
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if nominal_code is not UNSET:
             field_dict["nominalCode"] = nominal_code
         if nominal_name is not UNSET:
@@ -47,6 +48,8 @@ class NominalCodeMapping:
             field_dict["id"] = id
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -70,3 +73,4 @@ class NominalCodeMapping:
         )
 
         return nominal_code_mapping
+

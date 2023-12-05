@@ -10,23 +10,36 @@ from ...types import Response
 def _get_kwargs(
     employer_id: str,
     employee_id: str,
+    id: str,
     *,
     client: Client,
+
 ) -> Dict[str, Any]:
-    url = "{}/employers/{employerId}/employees/{employeeId}/pension".format(
-        client.base_url, employerId=employer_id, employeeId=employee_id
-    )
+    url = "{}/employers/{employerId}/employees/{employeeId}/pension/{id}".format(
+        client.base_url,employerId=employer_id,employeeId=employee_id,id=id)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
 
+    
+
+    
+
+    
+
+    
+
+    
+
     return {
-        "method": "delete",
+	    "method": "delete",
         "url": url,
         "headers": headers,
         "cookies": cookies,
         "timeout": client.get_timeout(),
     }
+
+
 
 
 def _build_response(*, response: httpx.Response) -> Response[Any]:
@@ -41,28 +54,31 @@ def _build_response(*, response: httpx.Response) -> Response[Any]:
 def sync_detailed(
     employer_id: str,
     employee_id: str,
+    id: str,
     *,
     client: Client,
+
 ) -> Response[Any]:
     """Remove Pension
 
-     Removes the Pension for an Employee.
-    For Non-AE Pensions, this is the same as an Update with an empty JSON object.
-    For AE Pensions this will remove the employee from the pension and delete any associated
-    AeAssessments
+     Removes a  Pension for an Employee.
 
     Args:
         employer_id (str):
         employee_id (str):
+        id (str):
 
     Returns:
         Response[Any]
     """
 
+
     kwargs = _get_kwargs(
         employer_id=employer_id,
-        employee_id=employee_id,
-        client=client,
+employee_id=employee_id,
+id=id,
+client=client,
+
     )
 
     response = httpx.request(
@@ -76,31 +92,38 @@ def sync_detailed(
 async def asyncio_detailed(
     employer_id: str,
     employee_id: str,
+    id: str,
     *,
     client: Client,
+
 ) -> Response[Any]:
     """Remove Pension
 
-     Removes the Pension for an Employee.
-    For Non-AE Pensions, this is the same as an Update with an empty JSON object.
-    For AE Pensions this will remove the employee from the pension and delete any associated
-    AeAssessments
+     Removes a  Pension for an Employee.
 
     Args:
         employer_id (str):
         employee_id (str):
+        id (str):
 
     Returns:
         Response[Any]
     """
 
+
     kwargs = _get_kwargs(
         employer_id=employer_id,
-        employee_id=employee_id,
-        client=client,
+employee_id=employee_id,
+id=id,
+client=client,
+
     )
 
     async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+        response = await _client.request(
+            **kwargs
+        )
 
     return _build_response(response=response)
+
+

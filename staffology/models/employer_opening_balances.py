@@ -6,7 +6,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="EmployerOpeningBalances")
 
-
 @attr.s(auto_attribs=True)
 class EmployerOpeningBalances:
     """
@@ -24,6 +23,7 @@ class EmployerOpeningBalances:
             year to date
         cis_deductions_suffered (Union[Unset, float]): Value of CIS deductions suffered year to date
         apprenticeship_levy (Union[Unset, float]): Value of Apprenticeship levy paid year to date
+        employment_allowance (Union[Unset, float]): Value of Employment Allowance claimed year to date
     """
 
     smp_recovered: Union[Unset, float] = UNSET
@@ -38,6 +38,8 @@ class EmployerOpeningBalances:
     nic_compensation_on_spbp: Union[Unset, float] = UNSET
     cis_deductions_suffered: Union[Unset, float] = UNSET
     apprenticeship_levy: Union[Unset, float] = UNSET
+    employment_allowance: Union[Unset, float] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         smp_recovered = self.smp_recovered
@@ -52,9 +54,11 @@ class EmployerOpeningBalances:
         nic_compensation_on_spbp = self.nic_compensation_on_spbp
         cis_deductions_suffered = self.cis_deductions_suffered
         apprenticeship_levy = self.apprenticeship_levy
+        employment_allowance = self.employment_allowance
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if smp_recovered is not UNSET:
             field_dict["smpRecovered"] = smp_recovered
         if spp_recovered is not UNSET:
@@ -79,8 +83,12 @@ class EmployerOpeningBalances:
             field_dict["cisDeductionsSuffered"] = cis_deductions_suffered
         if apprenticeship_levy is not UNSET:
             field_dict["apprenticeshipLevy"] = apprenticeship_levy
+        if employment_allowance is not UNSET:
+            field_dict["employmentAllowance"] = employment_allowance
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -109,6 +117,8 @@ class EmployerOpeningBalances:
 
         apprenticeship_levy = d.pop("apprenticeshipLevy", UNSET)
 
+        employment_allowance = d.pop("employmentAllowance", UNSET)
+
         employer_opening_balances = cls(
             smp_recovered=smp_recovered,
             spp_recovered=spp_recovered,
@@ -122,6 +132,8 @@ class EmployerOpeningBalances:
             nic_compensation_on_spbp=nic_compensation_on_spbp,
             cis_deductions_suffered=cis_deductions_suffered,
             apprenticeship_levy=apprenticeship_levy,
+            employment_allowance=employment_allowance,
         )
 
         return employer_opening_balances
+

@@ -19,27 +19,35 @@ def _get_kwargs(
     client: Client,
     period_number: Union[Unset, None, int] = UNSET,
     include_events: Union[Unset, None, bool] = False,
+
 ) -> Dict[str, Any]:
     url = "{}/employers/{employerId}/schedules/{taxYear}/{payPeriod}/{ordinal}/periods".format(
-        client.base_url,
-        employerId=employer_id,
-        taxYear=tax_year,
-        payPeriod=pay_period,
-        ordinal=ordinal,
-    )
+        client.base_url,employerId=employer_id,taxYear=tax_year,payPeriod=pay_period,ordinal=ordinal)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
 
+    
+
+    
+
     params: Dict[str, Any] = {}
     params["periodNumber"] = period_number
 
+
     params["includeEvents"] = include_events
+
+
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
+
+    
+
+    
+
     return {
-        "method": "get",
+	    "method": "get",
         "url": url,
         "headers": headers,
         "cookies": cookies,
@@ -48,14 +56,14 @@ def _get_kwargs(
     }
 
 
-def _parse_response(
-    *, response: httpx.Response
-) -> Optional[Union[Any, List[PaySchedulePeriod]]]:
+def _parse_response(*, response: httpx.Response) -> Optional[Union[Any, List[PaySchedulePeriod]]]:
     if response.status_code == 200:
         response_200 = []
         _response_200 = response.json()
-        for response_200_item_data in _response_200:
+        for response_200_item_data in (_response_200):
             response_200_item = PaySchedulePeriod.from_dict(response_200_item_data)
+
+
 
             response_200.append(response_200_item)
 
@@ -66,9 +74,7 @@ def _parse_response(
     return raise_staffology_exception(response)
 
 
-def _build_response(
-    *, response: httpx.Response
-) -> Response[Union[Any, List[PaySchedulePeriod]]]:
+def _build_response(*, response: httpx.Response) -> Response[Union[Any, List[PaySchedulePeriod]]]:
     return Response(
         status_code=response.status_code,
         content=response.content,
@@ -86,6 +92,7 @@ def sync_detailed(
     client: Client,
     period_number: Union[Unset, None, int] = UNSET,
     include_events: Union[Unset, None, bool] = False,
+
 ) -> Response[Union[Any, List[PaySchedulePeriod]]]:
     """Get PaySchedulePeriods
 
@@ -103,14 +110,16 @@ def sync_detailed(
         Response[Union[Any, List[PaySchedulePeriod]]]
     """
 
+
     kwargs = _get_kwargs(
         employer_id=employer_id,
-        tax_year=tax_year,
-        pay_period=pay_period,
-        ordinal=ordinal,
-        client=client,
-        period_number=period_number,
-        include_events=include_events,
+tax_year=tax_year,
+pay_period=pay_period,
+ordinal=ordinal,
+client=client,
+period_number=period_number,
+include_events=include_events,
+
     )
 
     response = httpx.request(
@@ -119,7 +128,6 @@ def sync_detailed(
     )
 
     return _build_response(response=response)
-
 
 def sync(
     employer_id: str,
@@ -130,6 +138,7 @@ def sync(
     client: Client,
     period_number: Union[Unset, None, int] = UNSET,
     include_events: Union[Unset, None, bool] = False,
+
 ) -> Optional[Union[Any, List[PaySchedulePeriod]]]:
     """Get PaySchedulePeriods
 
@@ -147,16 +156,17 @@ def sync(
         Response[Union[Any, List[PaySchedulePeriod]]]
     """
 
+
     return sync_detailed(
         employer_id=employer_id,
-        tax_year=tax_year,
-        pay_period=pay_period,
-        ordinal=ordinal,
-        client=client,
-        period_number=period_number,
-        include_events=include_events,
-    ).parsed
+tax_year=tax_year,
+pay_period=pay_period,
+ordinal=ordinal,
+client=client,
+period_number=period_number,
+include_events=include_events,
 
+    ).parsed
 
 async def asyncio_detailed(
     employer_id: str,
@@ -167,6 +177,7 @@ async def asyncio_detailed(
     client: Client,
     period_number: Union[Unset, None, int] = UNSET,
     include_events: Union[Unset, None, bool] = False,
+
 ) -> Response[Union[Any, List[PaySchedulePeriod]]]:
     """Get PaySchedulePeriods
 
@@ -184,21 +195,24 @@ async def asyncio_detailed(
         Response[Union[Any, List[PaySchedulePeriod]]]
     """
 
+
     kwargs = _get_kwargs(
         employer_id=employer_id,
-        tax_year=tax_year,
-        pay_period=pay_period,
-        ordinal=ordinal,
-        client=client,
-        period_number=period_number,
-        include_events=include_events,
+tax_year=tax_year,
+pay_period=pay_period,
+ordinal=ordinal,
+client=client,
+period_number=period_number,
+include_events=include_events,
+
     )
 
     async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+        response = await _client.request(
+            **kwargs
+        )
 
     return _build_response(response=response)
-
 
 async def asyncio(
     employer_id: str,
@@ -209,6 +223,7 @@ async def asyncio(
     client: Client,
     period_number: Union[Unset, None, int] = UNSET,
     include_events: Union[Unset, None, bool] = False,
+
 ) -> Optional[Union[Any, List[PaySchedulePeriod]]]:
     """Get PaySchedulePeriods
 
@@ -226,14 +241,15 @@ async def asyncio(
         Response[Union[Any, List[PaySchedulePeriod]]]
     """
 
-    return (
-        await asyncio_detailed(
-            employer_id=employer_id,
-            tax_year=tax_year,
-            pay_period=pay_period,
-            ordinal=ordinal,
-            client=client,
-            period_number=period_number,
-            include_events=include_events,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        employer_id=employer_id,
+tax_year=tax_year,
+pay_period=pay_period,
+ordinal=ordinal,
+client=client,
+period_number=period_number,
+include_events=include_events,
+
+    )).parsed
+

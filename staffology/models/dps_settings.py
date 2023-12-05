@@ -8,7 +8,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="DpsSettings")
 
-
 @attr.s(auto_attribs=True)
 class DpsSettings:
     """This model is used to set an employers settings for HMRCs Data Provisioning Service
@@ -29,6 +28,7 @@ class DpsSettings:
     last_checked: Union[Unset, None, datetime.date] = UNSET
     error: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         enabled = self.enabled
         retrieve_from: Union[Unset, str] = UNSET
@@ -43,7 +43,8 @@ class DpsSettings:
         error = self.error
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if enabled is not UNSET:
             field_dict["enabled"] = enabled
         if retrieve_from is not UNSET:
@@ -57,6 +58,8 @@ class DpsSettings:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
@@ -64,10 +67,13 @@ class DpsSettings:
 
         _retrieve_from = d.pop("retrieveFrom", UNSET)
         retrieve_from: Union[Unset, datetime.date]
-        if isinstance(_retrieve_from, Unset):
+        if isinstance(_retrieve_from,  Unset):
             retrieve_from = UNSET
         else:
             retrieve_from = isoparse(_retrieve_from).date()
+
+
+
 
         auto_apply = d.pop("autoApply", UNSET)
 
@@ -75,10 +81,13 @@ class DpsSettings:
         last_checked: Union[Unset, None, datetime.date]
         if _last_checked is None:
             last_checked = None
-        elif isinstance(_last_checked, Unset):
+        elif isinstance(_last_checked,  Unset):
             last_checked = UNSET
         else:
             last_checked = isoparse(_last_checked).date()
+
+
+
 
         error = d.pop("error", UNSET)
 
@@ -91,3 +100,4 @@ class DpsSettings:
         )
 
         return dps_settings
+

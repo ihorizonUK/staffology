@@ -6,7 +6,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="EmpRefs")
 
-
 @attr.s(auto_attribs=True)
 class EmpRefs:
     """
@@ -26,6 +25,7 @@ class EmpRefs:
     cotax_ref: Union[Unset, None, str] = UNSET
     sautr: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         office_no = self.office_no
         paye_ref = self.paye_ref
@@ -35,7 +35,8 @@ class EmpRefs:
         sautr = self.sautr
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if office_no is not UNSET:
             field_dict["officeNo"] = office_no
         if paye_ref is not UNSET:
@@ -50,6 +51,8 @@ class EmpRefs:
             field_dict["sautr"] = sautr
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -76,3 +79,4 @@ class EmpRefs:
         )
 
         return emp_refs
+

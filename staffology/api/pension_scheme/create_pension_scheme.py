@@ -13,18 +13,28 @@ def _get_kwargs(
     *,
     client: Client,
     json_body: PensionScheme,
+
 ) -> Dict[str, Any]:
     url = "{}/employers/{employerId}/pensionschemes".format(
-        client.base_url, employerId=employer_id
-    )
+        client.base_url,employerId=employer_id)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
 
+    
+
+    
+
+    
+
     json_json_body = json_body.to_dict()
 
+
+
+    
+
     return {
-        "method": "post",
+	    "method": "post",
         "url": url,
         "headers": headers,
         "cookies": cookies,
@@ -40,7 +50,12 @@ def _parse_response(*, response: httpx.Response) -> Optional[Union[Any, PensionS
     if response.status_code == 201:
         response_201 = PensionScheme.from_dict(response.json())
 
+
+
         return response_201
+    if response.status_code == 404:
+        response_404 = cast(Any, None)
+        return response_404
     return raise_staffology_exception(response)
 
 
@@ -58,6 +73,7 @@ def sync_detailed(
     *,
     client: Client,
     json_body: PensionScheme,
+
 ) -> Response[Union[Any, PensionScheme]]:
     """Create a PensionScheme
 
@@ -69,10 +85,12 @@ def sync_detailed(
         Response[Union[Any, PensionScheme]]
     """
 
+
     kwargs = _get_kwargs(
         employer_id=employer_id,
-        client=client,
-        json_body=json_body,
+client=client,
+json_body=json_body,
+
     )
 
     response = httpx.request(
@@ -82,12 +100,12 @@ def sync_detailed(
 
     return _build_response(response=response)
 
-
 def sync(
     employer_id: str,
     *,
     client: Client,
     json_body: PensionScheme,
+
 ) -> Optional[Union[Any, PensionScheme]]:
     """Create a PensionScheme
 
@@ -99,18 +117,20 @@ def sync(
         Response[Union[Any, PensionScheme]]
     """
 
+
     return sync_detailed(
         employer_id=employer_id,
-        client=client,
-        json_body=json_body,
-    ).parsed
+client=client,
+json_body=json_body,
 
+    ).parsed
 
 async def asyncio_detailed(
     employer_id: str,
     *,
     client: Client,
     json_body: PensionScheme,
+
 ) -> Response[Union[Any, PensionScheme]]:
     """Create a PensionScheme
 
@@ -122,23 +142,27 @@ async def asyncio_detailed(
         Response[Union[Any, PensionScheme]]
     """
 
+
     kwargs = _get_kwargs(
         employer_id=employer_id,
-        client=client,
-        json_body=json_body,
+client=client,
+json_body=json_body,
+
     )
 
     async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+        response = await _client.request(
+            **kwargs
+        )
 
     return _build_response(response=response)
-
 
 async def asyncio(
     employer_id: str,
     *,
     client: Client,
     json_body: PensionScheme,
+
 ) -> Optional[Union[Any, PensionScheme]]:
     """Create a PensionScheme
 
@@ -150,10 +174,11 @@ async def asyncio(
         Response[Union[Any, PensionScheme]]
     """
 
-    return (
-        await asyncio_detailed(
-            employer_id=employer_id,
-            client=client,
-            json_body=json_body,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        employer_id=employer_id,
+client=client,
+json_body=json_body,
+
+    )).parsed
+

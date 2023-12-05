@@ -5,9 +5,7 @@ from staffology.propagate_exceptions import raise_staffology_exception
 
 from ...client import Client
 from ...models.pay_periods import PayPeriods
-from ...models.pay_run_summary_line_i_enumerable_report_response import (
-    PayRunSummaryLineIEnumerableReportResponse,
-)
+from ...models.pay_run_summary_line_i_enumerable_report_response import PayRunSummaryLineIEnumerableReportResponse
 from ...models.tax_year import TaxYear
 from ...types import UNSET, Response, Unset
 
@@ -24,15 +22,10 @@ def _get_kwargs(
     dept_code: Union[Unset, None, str] = UNSET,
     include_qty: Union[Unset, None, bool] = False,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Dict[str, Any]:
-    url = (
-        "{}/employers/{employerId}/reports/{taxYear}/{payPeriod}/payrunsummary".format(
-            client.base_url,
-            employerId=employer_id,
-            taxYear=tax_year,
-            payPeriod=pay_period,
-        )
-    )
+    url = "{}/employers/{employerId}/reports/{taxYear}/{payPeriod}/payrunsummary".format(
+        client.base_url,employerId=employer_id,taxYear=tax_year,payPeriod=pay_period)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
@@ -40,21 +33,36 @@ def _get_kwargs(
     if not isinstance(accept, Unset):
         headers["accept"] = accept
 
+
+
+    
+
     params: Dict[str, Any] = {}
     params["fromPeriod"] = from_period
 
+
     params["toPeriod"] = to_period
+
 
     params["ordinal"] = ordinal
 
+
     params["deptCode"] = dept_code
+
 
     params["includeQty"] = include_qty
 
+
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
+
+    
+
+    
+
     return {
-        "method": "get",
+	    "method": "get",
         "url": url,
         "headers": headers,
         "cookies": cookies,
@@ -63,21 +71,17 @@ def _get_kwargs(
     }
 
 
-def _parse_response(
-    *, response: httpx.Response
-) -> Optional[PayRunSummaryLineIEnumerableReportResponse]:
+def _parse_response(*, response: httpx.Response) -> Optional[PayRunSummaryLineIEnumerableReportResponse]:
     if response.status_code == 200:
-        response_200 = PayRunSummaryLineIEnumerableReportResponse.from_dict(
-            response.json()
-        )
+        response_200 = PayRunSummaryLineIEnumerableReportResponse.from_dict(response.json())
+
+
 
         return response_200
     return raise_staffology_exception(response)
 
 
-def _build_response(
-    *, response: httpx.Response
-) -> Response[PayRunSummaryLineIEnumerableReportResponse]:
+def _build_response(*, response: httpx.Response) -> Response[PayRunSummaryLineIEnumerableReportResponse]:
     return Response(
         status_code=response.status_code,
         content=response.content,
@@ -98,6 +102,7 @@ def sync_detailed(
     dept_code: Union[Unset, None, str] = UNSET,
     include_qty: Union[Unset, None, bool] = False,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Response[PayRunSummaryLineIEnumerableReportResponse]:
     """PayRunSummary
 
@@ -119,17 +124,19 @@ def sync_detailed(
         Response[PayRunSummaryLineIEnumerableReportResponse]
     """
 
+
     kwargs = _get_kwargs(
         employer_id=employer_id,
-        tax_year=tax_year,
-        pay_period=pay_period,
-        client=client,
-        from_period=from_period,
-        to_period=to_period,
-        ordinal=ordinal,
-        dept_code=dept_code,
-        include_qty=include_qty,
-        accept=accept,
+tax_year=tax_year,
+pay_period=pay_period,
+client=client,
+from_period=from_period,
+to_period=to_period,
+ordinal=ordinal,
+dept_code=dept_code,
+include_qty=include_qty,
+accept=accept,
+
     )
 
     response = httpx.request(
@@ -138,7 +145,6 @@ def sync_detailed(
     )
 
     return _build_response(response=response)
-
 
 def sync(
     employer_id: str,
@@ -152,6 +158,7 @@ def sync(
     dept_code: Union[Unset, None, str] = UNSET,
     include_qty: Union[Unset, None, bool] = False,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Optional[PayRunSummaryLineIEnumerableReportResponse]:
     """PayRunSummary
 
@@ -173,19 +180,20 @@ def sync(
         Response[PayRunSummaryLineIEnumerableReportResponse]
     """
 
+
     return sync_detailed(
         employer_id=employer_id,
-        tax_year=tax_year,
-        pay_period=pay_period,
-        client=client,
-        from_period=from_period,
-        to_period=to_period,
-        ordinal=ordinal,
-        dept_code=dept_code,
-        include_qty=include_qty,
-        accept=accept,
-    ).parsed
+tax_year=tax_year,
+pay_period=pay_period,
+client=client,
+from_period=from_period,
+to_period=to_period,
+ordinal=ordinal,
+dept_code=dept_code,
+include_qty=include_qty,
+accept=accept,
 
+    ).parsed
 
 async def asyncio_detailed(
     employer_id: str,
@@ -199,6 +207,7 @@ async def asyncio_detailed(
     dept_code: Union[Unset, None, str] = UNSET,
     include_qty: Union[Unset, None, bool] = False,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Response[PayRunSummaryLineIEnumerableReportResponse]:
     """PayRunSummary
 
@@ -220,24 +229,27 @@ async def asyncio_detailed(
         Response[PayRunSummaryLineIEnumerableReportResponse]
     """
 
+
     kwargs = _get_kwargs(
         employer_id=employer_id,
-        tax_year=tax_year,
-        pay_period=pay_period,
-        client=client,
-        from_period=from_period,
-        to_period=to_period,
-        ordinal=ordinal,
-        dept_code=dept_code,
-        include_qty=include_qty,
-        accept=accept,
+tax_year=tax_year,
+pay_period=pay_period,
+client=client,
+from_period=from_period,
+to_period=to_period,
+ordinal=ordinal,
+dept_code=dept_code,
+include_qty=include_qty,
+accept=accept,
+
     )
 
     async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+        response = await _client.request(
+            **kwargs
+        )
 
     return _build_response(response=response)
-
 
 async def asyncio(
     employer_id: str,
@@ -251,6 +263,7 @@ async def asyncio(
     dept_code: Union[Unset, None, str] = UNSET,
     include_qty: Union[Unset, None, bool] = False,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Optional[PayRunSummaryLineIEnumerableReportResponse]:
     """PayRunSummary
 
@@ -272,17 +285,18 @@ async def asyncio(
         Response[PayRunSummaryLineIEnumerableReportResponse]
     """
 
-    return (
-        await asyncio_detailed(
-            employer_id=employer_id,
-            tax_year=tax_year,
-            pay_period=pay_period,
-            client=client,
-            from_period=from_period,
-            to_period=to_period,
-            ordinal=ordinal,
-            dept_code=dept_code,
-            include_qty=include_qty,
-            accept=accept,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        employer_id=employer_id,
+tax_year=tax_year,
+pay_period=pay_period,
+client=client,
+from_period=from_period,
+to_period=to_period,
+ordinal=ordinal,
+dept_code=dept_code,
+include_qty=include_qty,
+accept=accept,
+
+    )).parsed
+

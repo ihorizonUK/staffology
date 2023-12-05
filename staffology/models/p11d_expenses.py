@@ -7,7 +7,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="P11DExpenses")
 
-
 @attr.s(auto_attribs=True)
 class P11DExpenses:
     """
@@ -26,6 +25,7 @@ class P11DExpenses:
     non_qual_rel: Union[Unset, P11DSingleItem] = UNSET
     other: Union[Unset, P11DSingleItem] = UNSET
     type_letter: Union[Unset, None, str] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         trav_and_sub: Union[Unset, Dict[str, Any]] = UNSET
@@ -51,7 +51,8 @@ class P11DExpenses:
         type_letter = self.type_letter
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if trav_and_sub is not UNSET:
             field_dict["travAndSub"] = trav_and_sub
         if ent is not UNSET:
@@ -67,43 +68,60 @@ class P11DExpenses:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _trav_and_sub = d.pop("travAndSub", UNSET)
         trav_and_sub: Union[Unset, P11DSingleItem]
-        if isinstance(_trav_and_sub, Unset):
+        if isinstance(_trav_and_sub,  Unset):
             trav_and_sub = UNSET
         else:
             trav_and_sub = P11DSingleItem.from_dict(_trav_and_sub)
 
+
+
+
         _ent = d.pop("ent", UNSET)
         ent: Union[Unset, P11DSingleItem]
-        if isinstance(_ent, Unset):
+        if isinstance(_ent,  Unset):
             ent = UNSET
         else:
             ent = P11DSingleItem.from_dict(_ent)
 
+
+
+
         _home_tel = d.pop("homeTel", UNSET)
         home_tel: Union[Unset, P11DSingleItem]
-        if isinstance(_home_tel, Unset):
+        if isinstance(_home_tel,  Unset):
             home_tel = UNSET
         else:
             home_tel = P11DSingleItem.from_dict(_home_tel)
 
+
+
+
         _non_qual_rel = d.pop("nonQualRel", UNSET)
         non_qual_rel: Union[Unset, P11DSingleItem]
-        if isinstance(_non_qual_rel, Unset):
+        if isinstance(_non_qual_rel,  Unset):
             non_qual_rel = UNSET
         else:
             non_qual_rel = P11DSingleItem.from_dict(_non_qual_rel)
 
+
+
+
         _other = d.pop("other", UNSET)
         other: Union[Unset, P11DSingleItem]
-        if isinstance(_other, Unset):
+        if isinstance(_other,  Unset):
             other = UNSET
         else:
             other = P11DSingleItem.from_dict(_other)
+
+
+
 
         type_letter = d.pop("typeLetter", UNSET)
 
@@ -117,3 +135,4 @@ class P11DExpenses:
         )
 
         return p11d_expenses
+

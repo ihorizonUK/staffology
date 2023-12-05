@@ -7,6 +7,11 @@ class PaymentDateType(str, Enum):
     LASTWEEKDAY = "LastWeekday"
     LASTXXXDAY = "LastXxxday"
     SAMEDATEWORKINGDAY = "SameDateWorkingDay"
+    SECONDXXXDAY = "SecondXxxday"
+    THIRDXXXDAY = "ThirdXxxday"
+    FOURTHXXXDAY = "FourthXxxday"
+    SECONDTOLASTXXXDAY = "SecondToLastXxxday"
+    THIRDTOLASTXXXDAY = "ThirdToLastXxxday"
 
     def __str__(self) -> str:
         return str(self.value)

@@ -12,20 +12,19 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="ExternalEmployeeMapping")
 
-
 @attr.s(auto_attribs=True)
 class ExternalEmployeeMapping:
     """Used to represent details of an employee from an ExternalDataProvider, along with mapping information to an employee
-    in the payroll system
+in the payroll system
 
-        Attributes:
-            external_id (Union[Unset, None, str]): [readonly] The id for the employee in the external system
-            provider_id (Union[Unset, ExternalDataProviderId]):
-            status (Union[Unset, ExternalEmployeeMappingStatus]):
-            employee (Union[Unset, Item]):
-            external_employee (Union[Unset, Employee]):
-            last_sync_date (Union[Unset, None, datetime.date]): [readonly] The date and time this mapping was last
-                synchronised
+    Attributes:
+        external_id (Union[Unset, None, str]): [readonly] The id for the employee in the external system
+        provider_id (Union[Unset, ExternalDataProviderId]):
+        status (Union[Unset, ExternalEmployeeMappingStatus]):
+        employee (Union[Unset, Item]):
+        external_employee (Union[Unset, Employee]):
+        last_sync_date (Union[Unset, None, datetime.date]): [readonly] The date and time this mapping was last
+            synchronised
     """
 
     external_id: Union[Unset, None, str] = UNSET
@@ -34,6 +33,7 @@ class ExternalEmployeeMapping:
     employee: Union[Unset, Item] = UNSET
     external_employee: Union[Unset, Employee] = UNSET
     last_sync_date: Union[Unset, None, datetime.date] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         external_id = self.external_id
@@ -55,12 +55,12 @@ class ExternalEmployeeMapping:
 
         last_sync_date: Union[Unset, None, str] = UNSET
         if not isinstance(self.last_sync_date, Unset):
-            last_sync_date = (
-                self.last_sync_date.isoformat() if self.last_sync_date else None
-            )
+            last_sync_date = self.last_sync_date.isoformat() if self.last_sync_date else None
+
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if external_id is not UNSET:
             field_dict["externalId"] = external_id
         if provider_id is not UNSET:
@@ -76,6 +76,8 @@ class ExternalEmployeeMapping:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
@@ -83,40 +85,55 @@ class ExternalEmployeeMapping:
 
         _provider_id = d.pop("providerId", UNSET)
         provider_id: Union[Unset, ExternalDataProviderId]
-        if isinstance(_provider_id, Unset):
+        if isinstance(_provider_id,  Unset):
             provider_id = UNSET
         else:
             provider_id = ExternalDataProviderId(_provider_id)
 
+
+
+
         _status = d.pop("status", UNSET)
         status: Union[Unset, ExternalEmployeeMappingStatus]
-        if isinstance(_status, Unset):
+        if isinstance(_status,  Unset):
             status = UNSET
         else:
             status = ExternalEmployeeMappingStatus(_status)
 
+
+
+
         _employee = d.pop("employee", UNSET)
         employee: Union[Unset, Item]
-        if isinstance(_employee, Unset):
+        if isinstance(_employee,  Unset):
             employee = UNSET
         else:
             employee = Item.from_dict(_employee)
 
+
+
+
         _external_employee = d.pop("externalEmployee", UNSET)
         external_employee: Union[Unset, Employee]
-        if isinstance(_external_employee, Unset):
+        if isinstance(_external_employee,  Unset):
             external_employee = UNSET
         else:
             external_employee = Employee.from_dict(_external_employee)
+
+
+
 
         _last_sync_date = d.pop("lastSyncDate", UNSET)
         last_sync_date: Union[Unset, None, datetime.date]
         if _last_sync_date is None:
             last_sync_date = None
-        elif isinstance(_last_sync_date, Unset):
+        elif isinstance(_last_sync_date,  Unset):
             last_sync_date = UNSET
         else:
             last_sync_date = isoparse(_last_sync_date).date()
+
+
+
 
         external_employee_mapping = cls(
             external_id=external_id,
@@ -128,3 +145,4 @@ class ExternalEmployeeMapping:
         )
 
         return external_employee_mapping
+

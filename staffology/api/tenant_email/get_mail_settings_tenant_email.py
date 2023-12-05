@@ -12,14 +12,26 @@ def _get_kwargs(
     id: str,
     *,
     client: Client,
+
 ) -> Dict[str, Any]:
-    url = "{}/tenants/{id}/email/settings".format(client.base_url, id=id)
+    url = "{}/tenants/{id}/email/settings".format(
+        client.base_url,id=id)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
 
+    
+
+    
+
+    
+
+    
+
+    
+
     return {
-        "method": "get",
+	    "method": "get",
         "url": url,
         "headers": headers,
         "cookies": cookies,
@@ -30,6 +42,8 @@ def _get_kwargs(
 def _parse_response(*, response: httpx.Response) -> Optional[MailSettings]:
     if response.status_code == 200:
         response_200 = MailSettings.from_dict(response.json())
+
+
 
         return response_200
     return raise_staffology_exception(response)
@@ -48,6 +62,7 @@ def sync_detailed(
     id: str,
     *,
     client: Client,
+
 ) -> Response[MailSettings]:
     """Get MailSettings
 
@@ -60,9 +75,11 @@ def sync_detailed(
         Response[MailSettings]
     """
 
+
     kwargs = _get_kwargs(
         id=id,
-        client=client,
+client=client,
+
     )
 
     response = httpx.request(
@@ -72,11 +89,11 @@ def sync_detailed(
 
     return _build_response(response=response)
 
-
 def sync(
     id: str,
     *,
     client: Client,
+
 ) -> Optional[MailSettings]:
     """Get MailSettings
 
@@ -89,16 +106,18 @@ def sync(
         Response[MailSettings]
     """
 
+
     return sync_detailed(
         id=id,
-        client=client,
-    ).parsed
+client=client,
 
+    ).parsed
 
 async def asyncio_detailed(
     id: str,
     *,
     client: Client,
+
 ) -> Response[MailSettings]:
     """Get MailSettings
 
@@ -111,21 +130,25 @@ async def asyncio_detailed(
         Response[MailSettings]
     """
 
+
     kwargs = _get_kwargs(
         id=id,
-        client=client,
+client=client,
+
     )
 
     async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+        response = await _client.request(
+            **kwargs
+        )
 
     return _build_response(response=response)
-
 
 async def asyncio(
     id: str,
     *,
     client: Client,
+
 ) -> Optional[MailSettings]:
     """Get MailSettings
 
@@ -138,9 +161,10 @@ async def asyncio(
         Response[MailSettings]
     """
 
-    return (
-        await asyncio_detailed(
-            id=id,
-            client=client,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        id=id,
+client=client,
+
+    )).parsed
+

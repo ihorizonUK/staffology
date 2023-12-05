@@ -1,6 +1,7 @@
 import httpx
 
 
+
 class StaffologyApiException(Exception):
     def __init__(self, *a, **kw):
         self.response = kw.pop("response")

@@ -57,6 +57,20 @@ class PayrollValueType(str, Enum):
     DEDUCTIONS = "Deductions"
     ADDITIONS = "Additions"
     PENSIONABLEEARNINGS = "PensionableEarnings"
+    TOTALGROSS = "TotalGross"
+    FLEXIDD_SERIOUSILLHEALTH = "FlexiDd_SeriousIllHealth"
+    FLEXIDD_SERIOUSILLHEALTH_NONTAX = "FlexiDd_SeriousIllHealth_NonTax"
+    FOREIGNTAXCREDIT = "ForeignTaxCredit"
+    FOREIGNTAXRECLAIMED = "ForeignTaxReclaimed"
+    AVERAGEHOLIDAYPAY = "AverageHolidayPay"
+    P45GROSS = "P45Gross"
+    P45TAX = "P45Tax"
 
     def __str__(self) -> str:
         return str(self.value)
+
+    @classmethod
+    def _missing_(cls, value):
+        #  Staffology API sometimes sends the index value inside an enum instead of the value of the enum itself
+        value_from_index = list(dict(cls.__members__).values())[int(value)]
+        return cls(value_from_index)

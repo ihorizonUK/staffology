@@ -13,7 +13,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="FurloughReport")
 
-
 @attr.s(auto_attribs=True)
 class FurloughReport:
     """
@@ -55,6 +54,7 @@ class FurloughReport:
         end_date (Union[Unset, datetime.date]):
         report (Union[Unset, Report]):
         tax_year (Union[Unset, TaxYear]):
+        is_draft (Union[Unset, bool]):
     """
 
     max_claim_per_employee: Union[Unset, float] = UNSET
@@ -70,15 +70,9 @@ class FurloughReport:
     number_of_employees_being_furloughed: Union[Unset, int] = UNSET
     total_claim_amount: Union[Unset, float] = UNSET
     total_gross_pay: Union[Unset, float] = UNSET
-    amount_claimed_for_gross_pay_to_employees_on_furlough_for_the_period: Union[
-        Unset, float
-    ] = UNSET
-    amount_claimed_for_employer_ni_cs_contributions_for_furloughed_employees: Union[
-        Unset, float
-    ] = UNSET
-    amount_claimed_for_employers_auto_enrolment_pension_costs_for_furloughed_employees: Union[
-        Unset, float
-    ] = UNSET
+    amount_claimed_for_gross_pay_to_employees_on_furlough_for_the_period: Union[Unset, float] = UNSET
+    amount_claimed_for_employer_ni_cs_contributions_for_furloughed_employees: Union[Unset, float] = UNSET
+    amount_claimed_for_employers_auto_enrolment_pension_costs_for_furloughed_employees: Union[Unset, float] = UNSET
     lines: Union[Unset, None, List[FurloughReportLine]] = UNSET
     bank_account_number: Union[Unset, None, str] = UNSET
     bank_sort_code: Union[Unset, None, str] = UNSET
@@ -100,12 +94,12 @@ class FurloughReport:
     end_date: Union[Unset, datetime.date] = UNSET
     report: Union[Unset, Report] = UNSET
     tax_year: Union[Unset, TaxYear] = UNSET
+    is_draft: Union[Unset, bool] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         max_claim_per_employee = self.max_claim_per_employee
-        percentage_of_ni_and_pension_to_claim = (
-            self.percentage_of_ni_and_pension_to_claim
-        )
+        percentage_of_ni_and_pension_to_claim = self.percentage_of_ni_and_pension_to_claim
         govt_contrib_rate = self.govt_contrib_rate
         company_name = self.company_name
         employer_reference = self.employer_reference
@@ -123,15 +117,9 @@ class FurloughReport:
         number_of_employees_being_furloughed = self.number_of_employees_being_furloughed
         total_claim_amount = self.total_claim_amount
         total_gross_pay = self.total_gross_pay
-        amount_claimed_for_gross_pay_to_employees_on_furlough_for_the_period = (
-            self.amount_claimed_for_gross_pay_to_employees_on_furlough_for_the_period
-        )
-        amount_claimed_for_employer_ni_cs_contributions_for_furloughed_employees = (
-            self.amount_claimed_for_employer_ni_cs_contributions_for_furloughed_employees
-        )
-        amount_claimed_for_employers_auto_enrolment_pension_costs_for_furloughed_employees = (
-            self.amount_claimed_for_employers_auto_enrolment_pension_costs_for_furloughed_employees
-        )
+        amount_claimed_for_gross_pay_to_employees_on_furlough_for_the_period = self.amount_claimed_for_gross_pay_to_employees_on_furlough_for_the_period
+        amount_claimed_for_employer_ni_cs_contributions_for_furloughed_employees = self.amount_claimed_for_employer_ni_cs_contributions_for_furloughed_employees
+        amount_claimed_for_employers_auto_enrolment_pension_costs_for_furloughed_employees = self.amount_claimed_for_employers_auto_enrolment_pension_costs_for_furloughed_employees
         lines: Union[Unset, None, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.lines, Unset):
             if self.lines is None:
@@ -142,6 +130,9 @@ class FurloughReport:
                     lines_item = lines_item_data.to_dict()
 
                     lines.append(lines_item)
+
+
+
 
         bank_account_number = self.bank_account_number
         bank_sort_code = self.bank_sort_code
@@ -181,14 +172,15 @@ class FurloughReport:
         if not isinstance(self.tax_year, Unset):
             tax_year = self.tax_year.value
 
+        is_draft = self.is_draft
+
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if max_claim_per_employee is not UNSET:
             field_dict["maxClaimPerEmployee"] = max_claim_per_employee
         if percentage_of_ni_and_pension_to_claim is not UNSET:
-            field_dict[
-                "percentageOfNIAndPensionToClaim"
-            ] = percentage_of_ni_and_pension_to_claim
+            field_dict["percentageOfNIAndPensionToClaim"] = percentage_of_ni_and_pension_to_claim
         if govt_contrib_rate is not UNSET:
             field_dict["govtContribRate"] = govt_contrib_rate
         if company_name is not UNSET:
@@ -206,34 +198,17 @@ class FurloughReport:
         if claim_period_end_date is not UNSET:
             field_dict["claimPeriodEndDate"] = claim_period_end_date
         if number_of_employees_being_furloughed is not UNSET:
-            field_dict[
-                "numberOfEmployeesBeingFurloughed"
-            ] = number_of_employees_being_furloughed
+            field_dict["numberOfEmployeesBeingFurloughed"] = number_of_employees_being_furloughed
         if total_claim_amount is not UNSET:
             field_dict["totalClaimAmount"] = total_claim_amount
         if total_gross_pay is not UNSET:
             field_dict["totalGrossPay"] = total_gross_pay
-        if (
-            amount_claimed_for_gross_pay_to_employees_on_furlough_for_the_period
-            is not UNSET
-        ):
-            field_dict[
-                "amountClaimedForGrossPayToEmployeesOnFurloughForThePeriod"
-            ] = amount_claimed_for_gross_pay_to_employees_on_furlough_for_the_period
-        if (
-            amount_claimed_for_employer_ni_cs_contributions_for_furloughed_employees
-            is not UNSET
-        ):
-            field_dict[
-                "amountClaimedForEmployerNICsContributionsForFurloughedEmployees"
-            ] = amount_claimed_for_employer_ni_cs_contributions_for_furloughed_employees
-        if (
-            amount_claimed_for_employers_auto_enrolment_pension_costs_for_furloughed_employees
-            is not UNSET
-        ):
-            field_dict[
-                "amountClaimedForEmployersAutoEnrolmentPensionCostsForFurloughedEmployees"
-            ] = amount_claimed_for_employers_auto_enrolment_pension_costs_for_furloughed_employees
+        if amount_claimed_for_gross_pay_to_employees_on_furlough_for_the_period is not UNSET:
+            field_dict["amountClaimedForGrossPayToEmployeesOnFurloughForThePeriod"] = amount_claimed_for_gross_pay_to_employees_on_furlough_for_the_period
+        if amount_claimed_for_employer_ni_cs_contributions_for_furloughed_employees is not UNSET:
+            field_dict["amountClaimedForEmployerNICsContributionsForFurloughedEmployees"] = amount_claimed_for_employer_ni_cs_contributions_for_furloughed_employees
+        if amount_claimed_for_employers_auto_enrolment_pension_costs_for_furloughed_employees is not UNSET:
+            field_dict["amountClaimedForEmployersAutoEnrolmentPensionCostsForFurloughedEmployees"] = amount_claimed_for_employers_auto_enrolment_pension_costs_for_furloughed_employees
         if lines is not UNSET:
             field_dict["lines"] = lines
         if bank_account_number is not UNSET:
@@ -276,17 +251,19 @@ class FurloughReport:
             field_dict["report"] = report
         if tax_year is not UNSET:
             field_dict["taxYear"] = tax_year
+        if is_draft is not UNSET:
+            field_dict["isDraft"] = is_draft
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         max_claim_per_employee = d.pop("maxClaimPerEmployee", UNSET)
 
-        percentage_of_ni_and_pension_to_claim = d.pop(
-            "percentageOfNIAndPensionToClaim", UNSET
-        )
+        percentage_of_ni_and_pension_to_claim = d.pop("percentageOfNIAndPensionToClaim", UNSET)
 
         govt_contrib_rate = d.pop("govtContribRate", UNSET)
 
@@ -302,47 +279,45 @@ class FurloughReport:
 
         _claim_period_start_date = d.pop("claimPeriodStartDate", UNSET)
         claim_period_start_date: Union[Unset, datetime.date]
-        if isinstance(_claim_period_start_date, Unset):
+        if isinstance(_claim_period_start_date,  Unset):
             claim_period_start_date = UNSET
         else:
             claim_period_start_date = isoparse(_claim_period_start_date).date()
 
+
+
+
         _claim_period_end_date = d.pop("claimPeriodEndDate", UNSET)
         claim_period_end_date: Union[Unset, datetime.date]
-        if isinstance(_claim_period_end_date, Unset):
+        if isinstance(_claim_period_end_date,  Unset):
             claim_period_end_date = UNSET
         else:
             claim_period_end_date = isoparse(_claim_period_end_date).date()
 
-        number_of_employees_being_furloughed = d.pop(
-            "numberOfEmployeesBeingFurloughed", UNSET
-        )
+
+
+
+        number_of_employees_being_furloughed = d.pop("numberOfEmployeesBeingFurloughed", UNSET)
 
         total_claim_amount = d.pop("totalClaimAmount", UNSET)
 
         total_gross_pay = d.pop("totalGrossPay", UNSET)
 
-        amount_claimed_for_gross_pay_to_employees_on_furlough_for_the_period = d.pop(
-            "amountClaimedForGrossPayToEmployeesOnFurloughForThePeriod", UNSET
-        )
+        amount_claimed_for_gross_pay_to_employees_on_furlough_for_the_period = d.pop("amountClaimedForGrossPayToEmployeesOnFurloughForThePeriod", UNSET)
 
-        amount_claimed_for_employer_ni_cs_contributions_for_furloughed_employees = (
-            d.pop(
-                "amountClaimedForEmployerNICsContributionsForFurloughedEmployees", UNSET
-            )
-        )
+        amount_claimed_for_employer_ni_cs_contributions_for_furloughed_employees = d.pop("amountClaimedForEmployerNICsContributionsForFurloughedEmployees", UNSET)
 
-        amount_claimed_for_employers_auto_enrolment_pension_costs_for_furloughed_employees = d.pop(
-            "amountClaimedForEmployersAutoEnrolmentPensionCostsForFurloughedEmployees",
-            UNSET,
-        )
+        amount_claimed_for_employers_auto_enrolment_pension_costs_for_furloughed_employees = d.pop("amountClaimedForEmployersAutoEnrolmentPensionCostsForFurloughedEmployees", UNSET)
 
         lines = []
         _lines = d.pop("lines", UNSET)
-        for lines_item_data in _lines or []:
+        for lines_item_data in (_lines or []):
             lines_item = FurloughReportLine.from_dict(lines_item_data)
 
+
+
             lines.append(lines_item)
+
 
         bank_account_number = d.pop("bankAccountNumber", UNSET)
 
@@ -364,17 +339,23 @@ class FurloughReport:
 
         _employer = d.pop("employer", UNSET)
         employer: Union[Unset, Item]
-        if isinstance(_employer, Unset):
+        if isinstance(_employer,  Unset):
             employer = UNSET
         else:
             employer = Item.from_dict(_employer)
 
+
+
+
         _pay_period = d.pop("payPeriod", UNSET)
         pay_period: Union[Unset, PayPeriods]
-        if isinstance(_pay_period, Unset):
+        if isinstance(_pay_period,  Unset):
             pay_period = UNSET
         else:
             pay_period = PayPeriods(_pay_period)
+
+
+
 
         ordinal = d.pop("ordinal", UNSET)
 
@@ -388,31 +369,45 @@ class FurloughReport:
 
         _start_date = d.pop("startDate", UNSET)
         start_date: Union[Unset, datetime.date]
-        if isinstance(_start_date, Unset):
+        if isinstance(_start_date,  Unset):
             start_date = UNSET
         else:
             start_date = isoparse(_start_date).date()
 
+
+
+
         _end_date = d.pop("endDate", UNSET)
         end_date: Union[Unset, datetime.date]
-        if isinstance(_end_date, Unset):
+        if isinstance(_end_date,  Unset):
             end_date = UNSET
         else:
             end_date = isoparse(_end_date).date()
 
+
+
+
         _report = d.pop("report", UNSET)
         report: Union[Unset, Report]
-        if isinstance(_report, Unset):
+        if isinstance(_report,  Unset):
             report = UNSET
         else:
             report = Report(_report)
 
+
+
+
         _tax_year = d.pop("taxYear", UNSET)
         tax_year: Union[Unset, TaxYear]
-        if isinstance(_tax_year, Unset):
+        if isinstance(_tax_year,  Unset):
             tax_year = UNSET
         else:
             tax_year = TaxYear(_tax_year)
+
+
+
+
+        is_draft = d.pop("isDraft", UNSET)
 
         furlough_report = cls(
             max_claim_per_employee=max_claim_per_employee,
@@ -452,6 +447,8 @@ class FurloughReport:
             end_date=end_date,
             report=report,
             tax_year=tax_year,
+            is_draft=is_draft,
         )
 
         return furlough_report
+

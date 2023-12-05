@@ -6,7 +6,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="FpsEmployeeTaxCode")
 
-
 @attr.s(auto_attribs=True)
 class FpsEmployeeTaxCode:
     """
@@ -20,13 +19,15 @@ class FpsEmployeeTaxCode:
     tax_regime: Union[Unset, None, str] = UNSET
     tax_code: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         basis_non_cumulative = self.basis_non_cumulative
         tax_regime = self.tax_regime
         tax_code = self.tax_code
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if basis_non_cumulative is not UNSET:
             field_dict["basisNonCumulative"] = basis_non_cumulative
         if tax_regime is not UNSET:
@@ -35,6 +36,8 @@ class FpsEmployeeTaxCode:
             field_dict["taxCode"] = tax_code
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -52,3 +55,4 @@ class FpsEmployeeTaxCode:
         )
 
         return fps_employee_tax_code
+

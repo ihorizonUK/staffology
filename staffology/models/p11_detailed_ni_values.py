@@ -6,7 +6,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="P11DetailedNiValues")
 
-
 @attr.s(auto_attribs=True)
 class P11DetailedNiValues:
     """Forms the NI Summary table in the P11 Detailed report.
@@ -33,6 +32,7 @@ class P11DetailedNiValues:
     employer_nics: Union[Unset, float] = UNSET
     employee_and_employer_nics: Union[Unset, float] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         table = self.table
         earnings_at_lel = self.earnings_at_lel
@@ -45,7 +45,8 @@ class P11DetailedNiValues:
         employee_and_employer_nics = self.employee_and_employer_nics
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if table is not UNSET:
             field_dict["table"] = table
         if earnings_at_lel is not UNSET:
@@ -66,6 +67,8 @@ class P11DetailedNiValues:
             field_dict["employeeAndEmployerNics"] = employee_and_employer_nics
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -101,3 +104,4 @@ class P11DetailedNiValues:
         )
 
         return p11_detailed_ni_values
+

@@ -1,4 +1,4 @@
-from typing import Any, Dict, Type, TypeVar, Union
+from typing import Any, Dict, List, Type, TypeVar, Union
 
 import attr
 
@@ -10,13 +10,13 @@ from ..models.benefit_details_loan import BenefitDetailsLoan
 from ..models.benefit_details_non_class_1a_type import BenefitDetailsNonClass1AType
 from ..models.benefit_details_payment_type import BenefitDetailsPaymentType
 from ..models.benefit_details_use_of_asset_type import BenefitDetailsUseOfAssetType
+from ..models.benefit_payrolled import BenefitPayrolled
 from ..models.benefit_type import BenefitType
 from ..models.item import Item
 from ..models.tax_year import TaxYear
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="Benefit")
-
 
 @attr.s(auto_attribs=True)
 class Benefit:
@@ -26,6 +26,7 @@ class Benefit:
         tax_year (Union[Unset, TaxYear]):
         type (Union[Unset, BenefitType]):
         declaration_type (Union[Unset, BenefitDeclarationType]):
+        benefit_payrolled (Union[Unset, None, List[BenefitPayrolled]]):
         description (Union[Unset, None, str]): A description of this benefit
         value (Union[Unset, float]):
         employee_contribution (Union[Unset, float]):
@@ -39,6 +40,9 @@ class Benefit:
         cash_equivalent_fuel (Union[Unset, float]): Only relevant to Benefits with Type Vans
         loan (Union[Unset, BenefitDetailsLoan]):
         car (Union[Unset, BenefitDetailsCar]):
+        opening_balance (Union[Unset, float]): The amount of benefit paid YTD when setting up a benefit
+        paid (Union[Unset, float]): [readonly]
+        bik_outstanding (Union[Unset, float]): [readonly]
         employee (Union[Unset, Item]):
         id (Union[Unset, str]): [readonly] The unique id of the object
     """
@@ -46,6 +50,7 @@ class Benefit:
     tax_year: Union[Unset, TaxYear] = UNSET
     type: Union[Unset, BenefitType] = UNSET
     declaration_type: Union[Unset, BenefitDeclarationType] = UNSET
+    benefit_payrolled: Union[Unset, None, List[BenefitPayrolled]] = UNSET
     description: Union[Unset, None, str] = UNSET
     value: Union[Unset, float] = UNSET
     employee_contribution: Union[Unset, float] = UNSET
@@ -59,8 +64,12 @@ class Benefit:
     cash_equivalent_fuel: Union[Unset, float] = UNSET
     loan: Union[Unset, BenefitDetailsLoan] = UNSET
     car: Union[Unset, BenefitDetailsCar] = UNSET
+    opening_balance: Union[Unset, float] = UNSET
+    paid: Union[Unset, float] = UNSET
+    bik_outstanding: Union[Unset, float] = UNSET
     employee: Union[Unset, Item] = UNSET
     id: Union[Unset, str] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         tax_year: Union[Unset, str] = UNSET
@@ -74,6 +83,20 @@ class Benefit:
         declaration_type: Union[Unset, str] = UNSET
         if not isinstance(self.declaration_type, Unset):
             declaration_type = self.declaration_type.value
+
+        benefit_payrolled: Union[Unset, None, List[Dict[str, Any]]] = UNSET
+        if not isinstance(self.benefit_payrolled, Unset):
+            if self.benefit_payrolled is None:
+                benefit_payrolled = None
+            else:
+                benefit_payrolled = []
+                for benefit_payrolled_item_data in self.benefit_payrolled:
+                    benefit_payrolled_item = benefit_payrolled_item_data.to_dict()
+
+                    benefit_payrolled.append(benefit_payrolled_item)
+
+
+
 
         description = self.description
         value = self.value
@@ -109,6 +132,9 @@ class Benefit:
         if not isinstance(self.car, Unset):
             car = self.car.to_dict()
 
+        opening_balance = self.opening_balance
+        paid = self.paid
+        bik_outstanding = self.bik_outstanding
         employee: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.employee, Unset):
             employee = self.employee.to_dict()
@@ -116,13 +142,16 @@ class Benefit:
         id = self.id
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if tax_year is not UNSET:
             field_dict["taxYear"] = tax_year
         if type is not UNSET:
             field_dict["type"] = type
         if declaration_type is not UNSET:
             field_dict["declarationType"] = declaration_type
+        if benefit_payrolled is not UNSET:
+            field_dict["benefitPayrolled"] = benefit_payrolled
         if description is not UNSET:
             field_dict["description"] = description
         if value is not UNSET:
@@ -149,6 +178,12 @@ class Benefit:
             field_dict["loan"] = loan
         if car is not UNSET:
             field_dict["car"] = car
+        if opening_balance is not UNSET:
+            field_dict["openingBalance"] = opening_balance
+        if paid is not UNSET:
+            field_dict["paid"] = paid
+        if bik_outstanding is not UNSET:
+            field_dict["bikOutstanding"] = bik_outstanding
         if employee is not UNSET:
             field_dict["employee"] = employee
         if id is not UNSET:
@@ -156,29 +191,50 @@ class Benefit:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _tax_year = d.pop("taxYear", UNSET)
         tax_year: Union[Unset, TaxYear]
-        if isinstance(_tax_year, Unset):
+        if isinstance(_tax_year,  Unset):
             tax_year = UNSET
         else:
             tax_year = TaxYear(_tax_year)
 
+
+
+
         _type = d.pop("type", UNSET)
         type: Union[Unset, BenefitType]
-        if isinstance(_type, Unset):
+        if isinstance(_type,  Unset):
             type = UNSET
         else:
             type = BenefitType(_type)
 
+
+
+
         _declaration_type = d.pop("declarationType", UNSET)
         declaration_type: Union[Unset, BenefitDeclarationType]
-        if isinstance(_declaration_type, Unset):
+        if isinstance(_declaration_type,  Unset):
             declaration_type = UNSET
         else:
             declaration_type = BenefitDeclarationType(_declaration_type)
+
+
+
+
+        benefit_payrolled = []
+        _benefit_payrolled = d.pop("benefitPayrolled", UNSET)
+        for benefit_payrolled_item_data in (_benefit_payrolled or []):
+            benefit_payrolled_item = BenefitPayrolled.from_dict(benefit_payrolled_item_data)
+
+
+
+            benefit_payrolled.append(benefit_payrolled_item)
+
 
         description = d.pop("description", UNSET)
 
@@ -190,38 +246,53 @@ class Benefit:
 
         _asset_type = d.pop("assetType", UNSET)
         asset_type: Union[Unset, BenefitDetailsAssetType]
-        if isinstance(_asset_type, Unset):
+        if isinstance(_asset_type,  Unset):
             asset_type = UNSET
         else:
             asset_type = BenefitDetailsAssetType(_asset_type)
 
+
+
+
         _use_of_asset_type = d.pop("useOfAssetType", UNSET)
         use_of_asset_type: Union[Unset, BenefitDetailsUseOfAssetType]
-        if isinstance(_use_of_asset_type, Unset):
+        if isinstance(_use_of_asset_type,  Unset):
             use_of_asset_type = UNSET
         else:
             use_of_asset_type = BenefitDetailsUseOfAssetType(_use_of_asset_type)
 
+
+
+
         _class_1a_type = d.pop("class1AType", UNSET)
         class_1a_type: Union[Unset, BenefitDetailsClass1AType]
-        if isinstance(_class_1a_type, Unset):
+        if isinstance(_class_1a_type,  Unset):
             class_1a_type = UNSET
         else:
             class_1a_type = BenefitDetailsClass1AType(_class_1a_type)
 
+
+
+
         _non_class_1a_type = d.pop("nonClass1AType", UNSET)
         non_class_1a_type: Union[Unset, BenefitDetailsNonClass1AType]
-        if isinstance(_non_class_1a_type, Unset):
+        if isinstance(_non_class_1a_type,  Unset):
             non_class_1a_type = UNSET
         else:
             non_class_1a_type = BenefitDetailsNonClass1AType(_non_class_1a_type)
 
+
+
+
         _payment_type = d.pop("paymentType", UNSET)
         payment_type: Union[Unset, BenefitDetailsPaymentType]
-        if isinstance(_payment_type, Unset):
+        if isinstance(_payment_type,  Unset):
             payment_type = UNSET
         else:
             payment_type = BenefitDetailsPaymentType(_payment_type)
+
+
+
 
         trading_organisation = d.pop("tradingOrganisation", UNSET)
 
@@ -229,24 +300,39 @@ class Benefit:
 
         _loan = d.pop("loan", UNSET)
         loan: Union[Unset, BenefitDetailsLoan]
-        if isinstance(_loan, Unset):
+        if isinstance(_loan,  Unset):
             loan = UNSET
         else:
             loan = BenefitDetailsLoan.from_dict(_loan)
 
+
+
+
         _car = d.pop("car", UNSET)
         car: Union[Unset, BenefitDetailsCar]
-        if isinstance(_car, Unset):
+        if isinstance(_car,  Unset):
             car = UNSET
         else:
             car = BenefitDetailsCar.from_dict(_car)
 
+
+
+
+        opening_balance = d.pop("openingBalance", UNSET)
+
+        paid = d.pop("paid", UNSET)
+
+        bik_outstanding = d.pop("bikOutstanding", UNSET)
+
         _employee = d.pop("employee", UNSET)
         employee: Union[Unset, Item]
-        if isinstance(_employee, Unset):
+        if isinstance(_employee,  Unset):
             employee = UNSET
         else:
             employee = Item.from_dict(_employee)
+
+
+
 
         id = d.pop("id", UNSET)
 
@@ -254,6 +340,7 @@ class Benefit:
             tax_year=tax_year,
             type=type,
             declaration_type=declaration_type,
+            benefit_payrolled=benefit_payrolled,
             description=description,
             value=value,
             employee_contribution=employee_contribution,
@@ -267,8 +354,12 @@ class Benefit:
             cash_equivalent_fuel=cash_equivalent_fuel,
             loan=loan,
             car=car,
+            opening_balance=opening_balance,
+            paid=paid,
+            bik_outstanding=bik_outstanding,
             employee=employee,
             id=id,
         )
 
         return benefit
+

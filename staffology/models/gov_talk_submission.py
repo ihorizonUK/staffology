@@ -10,7 +10,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GovTalkSubmission")
 
-
 @attr.s(auto_attribs=True)
 class GovTalkSubmission:
     """
@@ -44,6 +43,7 @@ class GovTalkSubmission:
     submitted_at: Union[Unset, None, datetime.datetime] = UNSET
     id: Union[Unset, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         raw_response = self.raw_response
         message_class = self.message_class
@@ -72,6 +72,9 @@ class GovTalkSubmission:
 
                     errors.append(errors_item)
 
+
+
+
         submitted_at: Union[Unset, None, str] = UNSET
         if not isinstance(self.submitted_at, Unset):
             submitted_at = self.submitted_at.isoformat() if self.submitted_at else None
@@ -79,7 +82,8 @@ class GovTalkSubmission:
         id = self.id
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if raw_response is not UNSET:
             field_dict["rawResponse"] = raw_response
         if message_class is not UNSET:
@@ -109,6 +113,8 @@ class GovTalkSubmission:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
@@ -122,10 +128,13 @@ class GovTalkSubmission:
         last_poll: Union[Unset, None, datetime.datetime]
         if _last_poll is None:
             last_poll = None
-        elif isinstance(_last_poll, Unset):
+        elif isinstance(_last_poll,  Unset):
             last_poll = UNSET
         else:
             last_poll = isoparse(_last_poll)
+
+
+
 
         correlation_id = d.pop("correlationId", UNSET)
 
@@ -133,10 +142,13 @@ class GovTalkSubmission:
 
         _status = d.pop("status", UNSET)
         status: Union[Unset, SubmissionStatus]
-        if isinstance(_status, Unset):
+        if isinstance(_status,  Unset):
             status = UNSET
         else:
             status = SubmissionStatus(_status)
+
+
+
 
         message = d.pop("message", UNSET)
 
@@ -146,19 +158,25 @@ class GovTalkSubmission:
 
         errors = []
         _errors = d.pop("errors", UNSET)
-        for errors_item_data in _errors or []:
+        for errors_item_data in (_errors or []):
             errors_item = GovTalkError.from_dict(errors_item_data)
 
+
+
             errors.append(errors_item)
+
 
         _submitted_at = d.pop("submittedAt", UNSET)
         submitted_at: Union[Unset, None, datetime.datetime]
         if _submitted_at is None:
             submitted_at = None
-        elif isinstance(_submitted_at, Unset):
+        elif isinstance(_submitted_at,  Unset):
             submitted_at = UNSET
         else:
             submitted_at = isoparse(_submitted_at)
+
+
+
 
         id = d.pop("id", UNSET)
 
@@ -179,3 +197,4 @@ class GovTalkSubmission:
         )
 
         return gov_talk_submission
+

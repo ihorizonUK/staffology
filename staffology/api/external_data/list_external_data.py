@@ -1,4 +1,4 @@
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Union, cast
 
 import httpx
 from staffology.propagate_exceptions import raise_staffology_exception
@@ -13,9 +13,7 @@ def _get_kwargs(
     *,
     client: Client,
 ) -> Dict[str, Any]:
-    url = "{}/employers/{employerId}/external-data".format(
-        client.base_url, employerId=employer_id
-    )
+    url = "{}/employers/{employerId}/external-data".format(client.base_url, employerId=employer_id)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
@@ -29,9 +27,10 @@ def _get_kwargs(
     }
 
 
-def _parse_response(
-    *, response: httpx.Response
-) -> Optional[List[ExternalDataProvider]]:
+def _parse_response(*, response: httpx.Response) -> Optional[Union[Any, List[ExternalDataProvider]]]:
+    if response.status_code == 404:
+        response_404 = cast(Any, None)
+        return response_404
     if response.status_code == 200:
         response_200 = []
         _response_200 = response.json()
@@ -44,9 +43,7 @@ def _parse_response(
     return raise_staffology_exception(response)
 
 
-def _build_response(
-    *, response: httpx.Response
-) -> Response[List[ExternalDataProvider]]:
+def _build_response(*, response: httpx.Response) -> Response[Union[Any, List[ExternalDataProvider]]]:
     return Response(
         status_code=response.status_code,
         content=response.content,
@@ -59,7 +56,7 @@ def sync_detailed(
     employer_id: str,
     *,
     client: Client,
-) -> Response[List[ExternalDataProvider]]:
+) -> Response[Union[Any, List[ExternalDataProvider]]]:
     """List Providers
 
      Returns a list of External Data Providers and indicates which the Employer has successfully
@@ -69,7 +66,7 @@ def sync_detailed(
         employer_id (str):
 
     Returns:
-        Response[List[ExternalDataProvider]]
+        Response[Union[Any, List[ExternalDataProvider]]]
     """
 
     kwargs = _get_kwargs(
@@ -89,7 +86,7 @@ def sync(
     employer_id: str,
     *,
     client: Client,
-) -> Optional[List[ExternalDataProvider]]:
+) -> Optional[Union[Any, List[ExternalDataProvider]]]:
     """List Providers
 
      Returns a list of External Data Providers and indicates which the Employer has successfully
@@ -99,7 +96,7 @@ def sync(
         employer_id (str):
 
     Returns:
-        Response[List[ExternalDataProvider]]
+        Response[Union[Any, List[ExternalDataProvider]]]
     """
 
     return sync_detailed(
@@ -112,7 +109,7 @@ async def asyncio_detailed(
     employer_id: str,
     *,
     client: Client,
-) -> Response[List[ExternalDataProvider]]:
+) -> Response[Union[Any, List[ExternalDataProvider]]]:
     """List Providers
 
      Returns a list of External Data Providers and indicates which the Employer has successfully
@@ -122,7 +119,7 @@ async def asyncio_detailed(
         employer_id (str):
 
     Returns:
-        Response[List[ExternalDataProvider]]
+        Response[Union[Any, List[ExternalDataProvider]]]
     """
 
     kwargs = _get_kwargs(
@@ -140,7 +137,7 @@ async def asyncio(
     employer_id: str,
     *,
     client: Client,
-) -> Optional[List[ExternalDataProvider]]:
+) -> Optional[Union[Any, List[ExternalDataProvider]]]:
     """List Providers
 
      Returns a list of External Data Providers and indicates which the Employer has successfully
@@ -150,7 +147,7 @@ async def asyncio(
         employer_id (str):
 
     Returns:
-        Response[List[ExternalDataProvider]]
+        Response[Union[Any, List[ExternalDataProvider]]]
     """
 
     return (

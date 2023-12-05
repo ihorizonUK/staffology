@@ -10,7 +10,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="AutoEnrolmentSettings")
 
-
 @attr.s(auto_attribs=True)
 class AutoEnrolmentSettings:
     """
@@ -47,6 +46,7 @@ class AutoEnrolmentSettings:
     include_non_pensioned_employees_in_submission: Union[Unset, bool] = UNSET
     id: Union[Unset, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         staging_date: Union[Unset, str] = UNSET
         if not isinstance(self.staging_date, Unset):
@@ -54,19 +54,11 @@ class AutoEnrolmentSettings:
 
         cyclical_reenrolment_date: Union[Unset, None, str] = UNSET
         if not isinstance(self.cyclical_reenrolment_date, Unset):
-            cyclical_reenrolment_date = (
-                self.cyclical_reenrolment_date.isoformat()
-                if self.cyclical_reenrolment_date
-                else None
-            )
+            cyclical_reenrolment_date = self.cyclical_reenrolment_date.isoformat() if self.cyclical_reenrolment_date else None
 
         previous_cyclical_reenrolment_date: Union[Unset, None, str] = UNSET
         if not isinstance(self.previous_cyclical_reenrolment_date, Unset):
-            previous_cyclical_reenrolment_date = (
-                self.previous_cyclical_reenrolment_date.isoformat()
-                if self.previous_cyclical_reenrolment_date
-                else None
-            )
+            previous_cyclical_reenrolment_date = self.previous_cyclical_reenrolment_date.isoformat() if self.previous_cyclical_reenrolment_date else None
 
         default_pension: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.default_pension, Unset):
@@ -80,21 +72,18 @@ class AutoEnrolmentSettings:
         if not isinstance(self.defer_enrolment_by_period_type, Unset):
             defer_enrolment_by_period_type = self.defer_enrolment_by_period_type.value
 
-        include_non_pensioned_employees_in_submission = (
-            self.include_non_pensioned_employees_in_submission
-        )
+        include_non_pensioned_employees_in_submission = self.include_non_pensioned_employees_in_submission
         id = self.id
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if staging_date is not UNSET:
             field_dict["stagingDate"] = staging_date
         if cyclical_reenrolment_date is not UNSET:
             field_dict["cyclicalReenrolmentDate"] = cyclical_reenrolment_date
         if previous_cyclical_reenrolment_date is not UNSET:
-            field_dict[
-                "previousCyclicalReenrolmentDate"
-            ] = previous_cyclical_reenrolment_date
+            field_dict["previousCyclicalReenrolmentDate"] = previous_cyclical_reenrolment_date
         if default_pension is not UNSET:
             field_dict["defaultPension"] = default_pension
         if pension_same_as_default is not UNSET:
@@ -108,52 +97,60 @@ class AutoEnrolmentSettings:
         if defer_enrolment_by_period_type is not UNSET:
             field_dict["deferEnrolmentByPeriodType"] = defer_enrolment_by_period_type
         if include_non_pensioned_employees_in_submission is not UNSET:
-            field_dict[
-                "includeNonPensionedEmployeesInSubmission"
-            ] = include_non_pensioned_employees_in_submission
+            field_dict["includeNonPensionedEmployeesInSubmission"] = include_non_pensioned_employees_in_submission
         if id is not UNSET:
             field_dict["id"] = id
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _staging_date = d.pop("stagingDate", UNSET)
         staging_date: Union[Unset, datetime.date]
-        if isinstance(_staging_date, Unset):
+        if isinstance(_staging_date,  Unset):
             staging_date = UNSET
         else:
             staging_date = isoparse(_staging_date).date()
+
+
+
 
         _cyclical_reenrolment_date = d.pop("cyclicalReenrolmentDate", UNSET)
         cyclical_reenrolment_date: Union[Unset, None, datetime.date]
         if _cyclical_reenrolment_date is None:
             cyclical_reenrolment_date = None
-        elif isinstance(_cyclical_reenrolment_date, Unset):
+        elif isinstance(_cyclical_reenrolment_date,  Unset):
             cyclical_reenrolment_date = UNSET
         else:
             cyclical_reenrolment_date = isoparse(_cyclical_reenrolment_date).date()
 
-        _previous_cyclical_reenrolment_date = d.pop(
-            "previousCyclicalReenrolmentDate", UNSET
-        )
+
+
+
+        _previous_cyclical_reenrolment_date = d.pop("previousCyclicalReenrolmentDate", UNSET)
         previous_cyclical_reenrolment_date: Union[Unset, None, datetime.date]
         if _previous_cyclical_reenrolment_date is None:
             previous_cyclical_reenrolment_date = None
-        elif isinstance(_previous_cyclical_reenrolment_date, Unset):
+        elif isinstance(_previous_cyclical_reenrolment_date,  Unset):
             previous_cyclical_reenrolment_date = UNSET
         else:
-            previous_cyclical_reenrolment_date = isoparse(
-                _previous_cyclical_reenrolment_date
-            ).date()
+            previous_cyclical_reenrolment_date = isoparse(_previous_cyclical_reenrolment_date).date()
+
+
+
 
         _default_pension = d.pop("defaultPension", UNSET)
         default_pension: Union[Unset, PensionSelection]
-        if isinstance(_default_pension, Unset):
+        if isinstance(_default_pension,  Unset):
             default_pension = UNSET
         else:
             default_pension = PensionSelection.from_dict(_default_pension)
+
+
+
 
         pension_same_as_default = d.pop("pensionSameAsDefault", UNSET)
 
@@ -165,16 +162,15 @@ class AutoEnrolmentSettings:
 
         _defer_enrolment_by_period_type = d.pop("deferEnrolmentByPeriodType", UNSET)
         defer_enrolment_by_period_type: Union[Unset, DeferalPeriodType]
-        if isinstance(_defer_enrolment_by_period_type, Unset):
+        if isinstance(_defer_enrolment_by_period_type,  Unset):
             defer_enrolment_by_period_type = UNSET
         else:
-            defer_enrolment_by_period_type = DeferalPeriodType(
-                _defer_enrolment_by_period_type
-            )
+            defer_enrolment_by_period_type = DeferalPeriodType(_defer_enrolment_by_period_type)
 
-        include_non_pensioned_employees_in_submission = d.pop(
-            "includeNonPensionedEmployeesInSubmission", UNSET
-        )
+
+
+
+        include_non_pensioned_employees_in_submission = d.pop("includeNonPensionedEmployeesInSubmission", UNSET)
 
         id = d.pop("id", UNSET)
 
@@ -193,3 +189,4 @@ class AutoEnrolmentSettings:
         )
 
         return auto_enrolment_settings
+

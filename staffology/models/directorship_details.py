@@ -8,7 +8,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="DirectorshipDetails")
 
-
 @attr.s(auto_attribs=True)
 class DirectorshipDetails:
     """
@@ -24,6 +23,7 @@ class DirectorshipDetails:
     leave_date: Union[Unset, None, datetime.date] = UNSET
     ni_alternative_method: Union[Unset, bool] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         is_director = self.is_director
         start_date: Union[Unset, None, str] = UNSET
@@ -37,7 +37,8 @@ class DirectorshipDetails:
         ni_alternative_method = self.ni_alternative_method
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if is_director is not UNSET:
             field_dict["isDirector"] = is_director
         if start_date is not UNSET:
@@ -49,6 +50,8 @@ class DirectorshipDetails:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
@@ -58,19 +61,25 @@ class DirectorshipDetails:
         start_date: Union[Unset, None, datetime.date]
         if _start_date is None:
             start_date = None
-        elif isinstance(_start_date, Unset):
+        elif isinstance(_start_date,  Unset):
             start_date = UNSET
         else:
             start_date = isoparse(_start_date).date()
+
+
+
 
         _leave_date = d.pop("leaveDate", UNSET)
         leave_date: Union[Unset, None, datetime.date]
         if _leave_date is None:
             leave_date = None
-        elif isinstance(_leave_date, Unset):
+        elif isinstance(_leave_date,  Unset):
             leave_date = UNSET
         else:
             leave_date = isoparse(_leave_date).date()
+
+
+
 
         ni_alternative_method = d.pop("niAlternativeMethod", UNSET)
 
@@ -82,3 +91,4 @@ class DirectorshipDetails:
         )
 
         return directorship_details
+

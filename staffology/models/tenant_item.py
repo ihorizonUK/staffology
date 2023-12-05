@@ -6,23 +6,23 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="TenantItem")
 
-
 @attr.s(auto_attribs=True)
 class TenantItem:
     """Represents a Tenant that the user account can administrate.
-    Unless you are an admin for a White Label account you'll have no interest in this model.
+Unless you are an admin for a White Label account you'll have no interest in this model.
 
-        Attributes:
-            id (Union[Unset, str]):
-            name (Union[Unset, None, str]):
-            metadata (Union[Unset, Any]):
-            url (Union[Unset, None, str]):
+    Attributes:
+        id (Union[Unset, str]):
+        name (Union[Unset, None, str]):
+        metadata (Union[Unset, Any]):
+        url (Union[Unset, None, str]):
     """
 
     id: Union[Unset, str] = UNSET
     name: Union[Unset, None, str] = UNSET
     metadata: Union[Unset, Any] = UNSET
     url: Union[Unset, None, str] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         id = self.id
@@ -31,7 +31,8 @@ class TenantItem:
         url = self.url
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if name is not UNSET:
@@ -42,6 +43,8 @@ class TenantItem:
             field_dict["url"] = url
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -62,3 +65,4 @@ class TenantItem:
         )
 
         return tenant_item
+

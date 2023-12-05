@@ -19,27 +19,34 @@ def _get_kwargs(
     client: Client,
     json_body: ProcessingNote,
     ordinal: Union[Unset, None, int] = 1,
+
 ) -> Dict[str, Any]:
     url = "{}/employers/{employerId}/payrun/{taxYear}/{payPeriod}/{periodNumber}/processingnotes".format(
-        client.base_url,
-        employerId=employer_id,
-        taxYear=tax_year,
-        payPeriod=pay_period,
-        periodNumber=period_number,
-    )
+        client.base_url,employerId=employer_id,taxYear=tax_year,payPeriod=pay_period,periodNumber=period_number)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
 
+    
+
+    
+
     params: Dict[str, Any] = {}
     params["ordinal"] = ordinal
 
+
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     json_json_body = json_body.to_dict()
 
+
+
+    
+
     return {
-        "method": "post",
+	    "method": "post",
         "url": url,
         "headers": headers,
         "cookies": cookies,
@@ -49,11 +56,11 @@ def _get_kwargs(
     }
 
 
-def _parse_response(
-    *, response: httpx.Response
-) -> Optional[Union[Any, ProcessingNote]]:
+def _parse_response(*, response: httpx.Response) -> Optional[Union[Any, ProcessingNote]]:
     if response.status_code == 201:
         response_201 = ProcessingNote.from_dict(response.json())
+
+
 
         return response_201
     if response.status_code == 400:
@@ -65,9 +72,7 @@ def _parse_response(
     return raise_staffology_exception(response)
 
 
-def _build_response(
-    *, response: httpx.Response
-) -> Response[Union[Any, ProcessingNote]]:
+def _build_response(*, response: httpx.Response) -> Response[Union[Any, ProcessingNote]]:
     return Response(
         status_code=response.status_code,
         content=response.content,
@@ -85,6 +90,7 @@ def sync_detailed(
     client: Client,
     json_body: ProcessingNote,
     ordinal: Union[Unset, None, int] = 1,
+
 ) -> Response[Union[Any, ProcessingNote]]:
     """Create ProcessingNote
 
@@ -103,14 +109,16 @@ def sync_detailed(
         Response[Union[Any, ProcessingNote]]
     """
 
+
     kwargs = _get_kwargs(
         employer_id=employer_id,
-        tax_year=tax_year,
-        pay_period=pay_period,
-        period_number=period_number,
-        client=client,
-        json_body=json_body,
-        ordinal=ordinal,
+tax_year=tax_year,
+pay_period=pay_period,
+period_number=period_number,
+client=client,
+json_body=json_body,
+ordinal=ordinal,
+
     )
 
     response = httpx.request(
@@ -119,7 +127,6 @@ def sync_detailed(
     )
 
     return _build_response(response=response)
-
 
 def sync(
     employer_id: str,
@@ -130,6 +137,7 @@ def sync(
     client: Client,
     json_body: ProcessingNote,
     ordinal: Union[Unset, None, int] = 1,
+
 ) -> Optional[Union[Any, ProcessingNote]]:
     """Create ProcessingNote
 
@@ -148,16 +156,17 @@ def sync(
         Response[Union[Any, ProcessingNote]]
     """
 
+
     return sync_detailed(
         employer_id=employer_id,
-        tax_year=tax_year,
-        pay_period=pay_period,
-        period_number=period_number,
-        client=client,
-        json_body=json_body,
-        ordinal=ordinal,
-    ).parsed
+tax_year=tax_year,
+pay_period=pay_period,
+period_number=period_number,
+client=client,
+json_body=json_body,
+ordinal=ordinal,
 
+    ).parsed
 
 async def asyncio_detailed(
     employer_id: str,
@@ -168,6 +177,7 @@ async def asyncio_detailed(
     client: Client,
     json_body: ProcessingNote,
     ordinal: Union[Unset, None, int] = 1,
+
 ) -> Response[Union[Any, ProcessingNote]]:
     """Create ProcessingNote
 
@@ -186,21 +196,24 @@ async def asyncio_detailed(
         Response[Union[Any, ProcessingNote]]
     """
 
+
     kwargs = _get_kwargs(
         employer_id=employer_id,
-        tax_year=tax_year,
-        pay_period=pay_period,
-        period_number=period_number,
-        client=client,
-        json_body=json_body,
-        ordinal=ordinal,
+tax_year=tax_year,
+pay_period=pay_period,
+period_number=period_number,
+client=client,
+json_body=json_body,
+ordinal=ordinal,
+
     )
 
     async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+        response = await _client.request(
+            **kwargs
+        )
 
     return _build_response(response=response)
-
 
 async def asyncio(
     employer_id: str,
@@ -211,6 +224,7 @@ async def asyncio(
     client: Client,
     json_body: ProcessingNote,
     ordinal: Union[Unset, None, int] = 1,
+
 ) -> Optional[Union[Any, ProcessingNote]]:
     """Create ProcessingNote
 
@@ -229,14 +243,15 @@ async def asyncio(
         Response[Union[Any, ProcessingNote]]
     """
 
-    return (
-        await asyncio_detailed(
-            employer_id=employer_id,
-            tax_year=tax_year,
-            pay_period=pay_period,
-            period_number=period_number,
-            client=client,
-            json_body=json_body,
-            ordinal=ordinal,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        employer_id=employer_id,
+tax_year=tax_year,
+pay_period=pay_period,
+period_number=period_number,
+client=client,
+json_body=json_body,
+ordinal=ordinal,
+
+    )).parsed
+

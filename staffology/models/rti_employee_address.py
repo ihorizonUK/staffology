@@ -6,7 +6,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="RtiEmployeeAddress")
 
-
 @attr.s(auto_attribs=True)
 class RtiEmployeeAddress:
     """
@@ -26,6 +25,7 @@ class RtiEmployeeAddress:
     country: Union[Unset, None, str] = UNSET
     foreign_country: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         line: Union[Unset, None, List[str]] = UNSET
         if not isinstance(self.line, Unset):
@@ -34,6 +34,9 @@ class RtiEmployeeAddress:
             else:
                 line = self.line
 
+
+
+
         postcode = self.postcode
         post_code = self.post_code
         uk_postcode = self.uk_postcode
@@ -41,7 +44,8 @@ class RtiEmployeeAddress:
         foreign_country = self.foreign_country
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if line is not UNSET:
             field_dict["line"] = line
         if postcode is not UNSET:
@@ -57,10 +61,13 @@ class RtiEmployeeAddress:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         line = cast(List[str], d.pop("line", UNSET))
+
 
         postcode = d.pop("postcode", UNSET)
 
@@ -82,3 +89,4 @@ class RtiEmployeeAddress:
         )
 
         return rti_employee_address
+

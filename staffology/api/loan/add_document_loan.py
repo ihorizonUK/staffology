@@ -16,10 +16,8 @@ def _get_kwargs(
     client: Client,
     multipart_data: AddDocumentLoanMultipartData,
 ) -> Dict[str, Any]:
-    url = (
-        "{}/employers/{employerId}/employees/{employeeId}/loans/{id}/documents".format(
-            client.base_url, employerId=employer_id, employeeId=employee_id, id=id
-        )
+    url = "{}/employers/{employerId}/employees/{employeeId}/loans/{id}/documents".format(
+        client.base_url, employerId=employer_id, employeeId=employee_id, id=id
     )
 
     headers: Dict[str, str] = client.get_headers()

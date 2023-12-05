@@ -15,16 +15,26 @@ def _get_kwargs(
     bill_id: str,
     *,
     client: Client,
+
 ) -> Dict[str, Any]:
     url = "{}/tenants/{id}/bills/{year}/{month}/{billId}".format(
-        client.base_url, id=id, year=year, month=month, billId=bill_id
-    )
+        client.base_url,id=id,year=year,month=month,billId=bill_id)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
 
+    
+
+    
+
+    
+
+    
+
+    
+
     return {
-        "method": "get",
+	    "method": "get",
         "url": url,
         "headers": headers,
         "cookies": cookies,
@@ -35,6 +45,8 @@ def _get_kwargs(
 def _parse_response(*, response: httpx.Response) -> Optional[UsageBill]:
     if response.status_code == 200:
         response_200 = UsageBill.from_dict(response.json())
+
+
 
         return response_200
     return raise_staffology_exception(response)
@@ -56,6 +68,7 @@ def sync_detailed(
     bill_id: str,
     *,
     client: Client,
+
 ) -> Response[UsageBill]:
     """Get Bill
 
@@ -71,12 +84,14 @@ def sync_detailed(
         Response[UsageBill]
     """
 
+
     kwargs = _get_kwargs(
         id=id,
-        year=year,
-        month=month,
-        bill_id=bill_id,
-        client=client,
+year=year,
+month=month,
+bill_id=bill_id,
+client=client,
+
     )
 
     response = httpx.request(
@@ -86,7 +101,6 @@ def sync_detailed(
 
     return _build_response(response=response)
 
-
 def sync(
     id: str,
     year: int,
@@ -94,6 +108,7 @@ def sync(
     bill_id: str,
     *,
     client: Client,
+
 ) -> Optional[UsageBill]:
     """Get Bill
 
@@ -109,14 +124,15 @@ def sync(
         Response[UsageBill]
     """
 
+
     return sync_detailed(
         id=id,
-        year=year,
-        month=month,
-        bill_id=bill_id,
-        client=client,
-    ).parsed
+year=year,
+month=month,
+bill_id=bill_id,
+client=client,
 
+    ).parsed
 
 async def asyncio_detailed(
     id: str,
@@ -125,6 +141,7 @@ async def asyncio_detailed(
     bill_id: str,
     *,
     client: Client,
+
 ) -> Response[UsageBill]:
     """Get Bill
 
@@ -140,19 +157,22 @@ async def asyncio_detailed(
         Response[UsageBill]
     """
 
+
     kwargs = _get_kwargs(
         id=id,
-        year=year,
-        month=month,
-        bill_id=bill_id,
-        client=client,
+year=year,
+month=month,
+bill_id=bill_id,
+client=client,
+
     )
 
     async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+        response = await _client.request(
+            **kwargs
+        )
 
     return _build_response(response=response)
-
 
 async def asyncio(
     id: str,
@@ -161,6 +181,7 @@ async def asyncio(
     bill_id: str,
     *,
     client: Client,
+
 ) -> Optional[UsageBill]:
     """Get Bill
 
@@ -176,12 +197,13 @@ async def asyncio(
         Response[UsageBill]
     """
 
-    return (
-        await asyncio_detailed(
-            id=id,
-            year=year,
-            month=month,
-            bill_id=bill_id,
-            client=client,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        id=id,
+year=year,
+month=month,
+bill_id=bill_id,
+client=client,
+
+    )).parsed
+

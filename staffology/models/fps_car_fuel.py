@@ -6,7 +6,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="FpsCarFuel")
 
-
 @attr.s(auto_attribs=True)
 class FpsCarFuel:
     """
@@ -20,13 +19,15 @@ class FpsCarFuel:
     cash_equiv: Union[Unset, None, str] = UNSET
     withdrawn: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         provided = self.provided
         cash_equiv = self.cash_equiv
         withdrawn = self.withdrawn
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if provided is not UNSET:
             field_dict["provided"] = provided
         if cash_equiv is not UNSET:
@@ -35,6 +36,8 @@ class FpsCarFuel:
             field_dict["withdrawn"] = withdrawn
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -52,3 +55,4 @@ class FpsCarFuel:
         )
 
         return fps_car_fuel
+

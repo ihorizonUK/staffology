@@ -6,7 +6,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="PaymentsCsvMappingColumn")
 
-
 @attr.s(auto_attribs=True)
 class PaymentsCsvMappingColumn:
     """
@@ -17,6 +16,7 @@ class PaymentsCsvMappingColumn:
             screen refernece only
         col_index (Union[Unset, int]):
         is_multiplier (Union[Unset, bool]):
+        is_net_to_gross (Union[Unset, bool]):
         rate_col_index (Union[Unset, None, int]): If the mapping IsMultiplier, then this optionally specifies another
             column from which to get the value
         should_serialize_rate_col_index (Union[Unset, bool]):
@@ -27,8 +27,10 @@ class PaymentsCsvMappingColumn:
     is_reference_only: Union[Unset, bool] = UNSET
     col_index: Union[Unset, int] = UNSET
     is_multiplier: Union[Unset, bool] = UNSET
+    is_net_to_gross: Union[Unset, bool] = UNSET
     rate_col_index: Union[Unset, None, int] = UNSET
     should_serialize_rate_col_index: Union[Unset, bool] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         title = self.title
@@ -36,15 +38,14 @@ class PaymentsCsvMappingColumn:
         is_reference_only = self.is_reference_only
         col_index = self.col_index
         is_multiplier = self.is_multiplier
+        is_net_to_gross = self.is_net_to_gross
         rate_col_index = self.rate_col_index
         should_serialize_rate_col_index = self.should_serialize_rate_col_index
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update(
-            {
-                "title": title,
-            }
-        )
+        field_dict.update({
+            "title": title,
+        })
         if code is not UNSET:
             field_dict["code"] = code
         if is_reference_only is not UNSET:
@@ -53,12 +54,16 @@ class PaymentsCsvMappingColumn:
             field_dict["colIndex"] = col_index
         if is_multiplier is not UNSET:
             field_dict["isMultiplier"] = is_multiplier
+        if is_net_to_gross is not UNSET:
+            field_dict["isNetToGross"] = is_net_to_gross
         if rate_col_index is not UNSET:
             field_dict["rateColIndex"] = rate_col_index
         if should_serialize_rate_col_index is not UNSET:
             field_dict["shouldSerializeRateColIndex"] = should_serialize_rate_col_index
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -73,6 +78,8 @@ class PaymentsCsvMappingColumn:
 
         is_multiplier = d.pop("isMultiplier", UNSET)
 
+        is_net_to_gross = d.pop("isNetToGross", UNSET)
+
         rate_col_index = d.pop("rateColIndex", UNSET)
 
         should_serialize_rate_col_index = d.pop("shouldSerializeRateColIndex", UNSET)
@@ -83,8 +90,10 @@ class PaymentsCsvMappingColumn:
             is_reference_only=is_reference_only,
             col_index=col_index,
             is_multiplier=is_multiplier,
+            is_net_to_gross=is_net_to_gross,
             rate_col_index=rate_col_index,
             should_serialize_rate_col_index=should_serialize_rate_col_index,
         )
 
         return payments_csv_mapping_column
+

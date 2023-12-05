@@ -8,7 +8,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="RightToWorkReportLine")
 
-
 @attr.s(auto_attribs=True)
 class RightToWorkReportLine:
     """
@@ -24,6 +23,7 @@ class RightToWorkReportLine:
     department: Union[Unset, None, str] = UNSET
     right_to_work: Union[Unset, RightToWork] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         employee: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.employee, Unset):
@@ -35,8 +35,10 @@ class RightToWorkReportLine:
         if not isinstance(self.right_to_work, Unset):
             right_to_work = self.right_to_work.to_dict()
 
+
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if employee is not UNSET:
             field_dict["employee"] = employee
         if payroll_code is not UNSET:
@@ -48,15 +50,20 @@ class RightToWorkReportLine:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _employee = d.pop("employee", UNSET)
         employee: Union[Unset, Item]
-        if isinstance(_employee, Unset):
+        if isinstance(_employee,  Unset):
             employee = UNSET
         else:
             employee = Item.from_dict(_employee)
+
+
+
 
         payroll_code = d.pop("payrollCode", UNSET)
 
@@ -64,10 +71,13 @@ class RightToWorkReportLine:
 
         _right_to_work = d.pop("rightToWork", UNSET)
         right_to_work: Union[Unset, RightToWork]
-        if isinstance(_right_to_work, Unset):
+        if isinstance(_right_to_work,  Unset):
             right_to_work = UNSET
         else:
             right_to_work = RightToWork.from_dict(_right_to_work)
+
+
+
 
         right_to_work_report_line = cls(
             employee=employee,
@@ -77,3 +87,4 @@ class RightToWorkReportLine:
         )
 
         return right_to_work_report_line
+

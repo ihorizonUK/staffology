@@ -10,7 +10,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="VarianceReport")
 
-
 @attr.s(auto_attribs=True)
 class VarianceReport:
     """
@@ -26,6 +25,7 @@ class VarianceReport:
         has_variances (Union[Unset, bool]):
         report (Union[Unset, Report]):
         tax_year (Union[Unset, TaxYear]):
+        is_draft (Union[Unset, bool]):
     """
 
     show_difference_as_percentage: Union[Unset, bool] = UNSET
@@ -39,6 +39,8 @@ class VarianceReport:
     has_variances: Union[Unset, bool] = UNSET
     report: Union[Unset, Report] = UNSET
     tax_year: Union[Unset, TaxYear] = UNSET
+    is_draft: Union[Unset, bool] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         show_difference_as_percentage = self.show_difference_as_percentage
@@ -62,6 +64,9 @@ class VarianceReport:
 
                     joiners.append(joiners_item)
 
+
+
+
         leavers: Union[Unset, None, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.leavers, Unset):
             if self.leavers is None:
@@ -72,6 +77,9 @@ class VarianceReport:
                     leavers_item = leavers_item_data.to_dict()
 
                     leavers.append(leavers_item)
+
+
+
 
         has_departments = self.has_departments
         common_lines: Union[Unset, None, List[Dict[str, Any]]] = UNSET
@@ -85,6 +93,9 @@ class VarianceReport:
 
                     common_lines.append(common_lines_item)
 
+
+
+
         has_variances = self.has_variances
         report: Union[Unset, str] = UNSET
         if not isinstance(self.report, Unset):
@@ -94,8 +105,11 @@ class VarianceReport:
         if not isinstance(self.tax_year, Unset):
             tax_year = self.tax_year.value
 
+        is_draft = self.is_draft
+
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if show_difference_as_percentage is not UNSET:
             field_dict["showDifferenceAsPercentage"] = show_difference_as_percentage
         if minimum_change_percentage is not UNSET:
@@ -118,8 +132,12 @@ class VarianceReport:
             field_dict["report"] = report
         if tax_year is not UNSET:
             field_dict["taxYear"] = tax_year
+        if is_draft is not UNSET:
+            field_dict["isDraft"] = is_draft
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -130,56 +148,79 @@ class VarianceReport:
 
         _primary = d.pop("primary", UNSET)
         primary: Union[Unset, GrossToNetReport]
-        if isinstance(_primary, Unset):
+        if isinstance(_primary,  Unset):
             primary = UNSET
         else:
             primary = GrossToNetReport.from_dict(_primary)
 
+
+
+
         _secondary = d.pop("secondary", UNSET)
         secondary: Union[Unset, GrossToNetReport]
-        if isinstance(_secondary, Unset):
+        if isinstance(_secondary,  Unset):
             secondary = UNSET
         else:
             secondary = GrossToNetReport.from_dict(_secondary)
 
+
+
+
         joiners = []
         _joiners = d.pop("joiners", UNSET)
-        for joiners_item_data in _joiners or []:
+        for joiners_item_data in (_joiners or []):
             joiners_item = GrossToNetReportLine.from_dict(joiners_item_data)
+
+
 
             joiners.append(joiners_item)
 
+
         leavers = []
         _leavers = d.pop("leavers", UNSET)
-        for leavers_item_data in _leavers or []:
+        for leavers_item_data in (_leavers or []):
             leavers_item = GrossToNetReportLine.from_dict(leavers_item_data)
 
+
+
             leavers.append(leavers_item)
+
 
         has_departments = d.pop("hasDepartments", UNSET)
 
         common_lines = []
         _common_lines = d.pop("commonLines", UNSET)
-        for common_lines_item_data in _common_lines or []:
+        for common_lines_item_data in (_common_lines or []):
             common_lines_item = GrossToNetReportLine.from_dict(common_lines_item_data)
 
+
+
             common_lines.append(common_lines_item)
+
 
         has_variances = d.pop("hasVariances", UNSET)
 
         _report = d.pop("report", UNSET)
         report: Union[Unset, Report]
-        if isinstance(_report, Unset):
+        if isinstance(_report,  Unset):
             report = UNSET
         else:
             report = Report(_report)
 
+
+
+
         _tax_year = d.pop("taxYear", UNSET)
         tax_year: Union[Unset, TaxYear]
-        if isinstance(_tax_year, Unset):
+        if isinstance(_tax_year,  Unset):
             tax_year = UNSET
         else:
             tax_year = TaxYear(_tax_year)
+
+
+
+
+        is_draft = d.pop("isDraft", UNSET)
 
         variance_report = cls(
             show_difference_as_percentage=show_difference_as_percentage,
@@ -193,6 +234,8 @@ class VarianceReport:
             has_variances=has_variances,
             report=report,
             tax_year=tax_year,
+            is_draft=is_draft,
         )
 
         return variance_report
+

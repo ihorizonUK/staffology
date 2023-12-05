@@ -2,63 +2,60 @@ from typing import Any, Dict, Type, TypeVar, Union
 
 import attr
 
+from ..models.flexible_drawdown import FlexibleDrawdown
 from ..models.pay_code_calculation_type import PayCodeCalculationType
 from ..models.pay_code_multiplier_type import PayCodeMultiplierType
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="PayCode")
 
-
 @attr.s(auto_attribs=True)
 class PayCode:
     """Each PayLine has a Code. The Code will match the Code property of a PayCode.
-    The PayCode that is used determines how the amount is treated with regards to tax, NI and pensions
+The PayCode that is used determines how the amount is treated with regards to tax, NI and pensions
 
-        Attributes:
-            title (str):
-            code (str):
-            default_value (Union[Unset, None, float]): If a non-zero value is provided then when this code is selected in
-                our UI the value will be automatically filled.
-            is_deduction (Union[Unset, bool]): If set to true then a PayLine using this code will be treated as a deduction
-                as opposed to an addition.
-            is_niable (Union[Unset, bool]): Determines whether or not the value of PayLines using this code should be taken
-                into consideration when calculating National Insurance Contributions.
-            is_taxable (Union[Unset, bool]): Determines whether or not the value of PayLines using this code should be taken
-                into consideration when calculating the PAYE liability.
-            is_pensionable (Union[Unset, bool]): Determines whether or not the value of PayLines using this code should be
-                taken into consideration when calculating the total pensionable pay.
-            is_attachable (Union[Unset, bool]): Determines whether or not the value of PayLines using this code should be
-                taken into consideration when calculating the attachable pay for AttachmentOrders.
-            is_real_time_class_1_a_niable (Union[Unset, bool]): Determines whether or not the value of PayLines using this
-                code are subject to real time Class 1A NIC.
-            is_not_contributing_to_holiday_pay (Union[Unset, bool]): If true then any payments made using this code will not
-                contribute towards holiday pay calculations.
-            is_qualifying_earnings_for_ae (Union[Unset, None, bool]): If true then any payments made using this code will be
-                used as the basis for calculating QualifyingEarnings for AutoEnrolment assessments.
-                If it is set to null then when it's next retrieved it'll have the same value as PensionablePay
-            is_not_tierable (Union[Unset, bool]): If true then any payments made using this code will not be included when
-                calculating the tier an employee should be on for a Tiered Pension.
-            is_tcp_tcls (Union[Unset, bool]): If true then any payments made using this code will be reported as
-                a Trivial Commutation Payment (A - TCLS)
-            is_tcp_pp (Union[Unset, bool]): If true then any payments made using this code will be reported as
-                a Trivial Commutation Payment (B - Personal Pension)
-            is_tcp_op (Union[Unset, bool]): If true then any payments made using this code will be reported as
-                a Trivial Commutation Payment (C - Occupational Pension)
-            is_flexi_dd_death_benefit (Union[Unset, bool]): If true then any payments made using this code will be reported
-                as
-                a Flexible Drawdown of Death Benefit
-            is_flexi_dd_pension (Union[Unset, bool]): If true then any payments made using this code will be reported as
-                a Flexible Drawdown flexibly accessing a pension
-            calculation_type (Union[Unset, PayCodeCalculationType]):
-            multiplier_type (Union[Unset, PayCodeMultiplierType]):
-            daily_rate_multiplier (Union[Unset, float]): If the MultiplierType is MultipleOfDailyRate then this sets the
-                multiple to be used, ie 1.5
-            hourly_rate_multiplier (Union[Unset, float]): If the MultiplierType is MultipleOfHourlyRate then this sets the
-                multiple to be used, ie 1.5
-            is_system_code (Union[Unset, bool]): [readonly] System Codes cannot be deleted or edited
-            is_control_code (Union[Unset, bool]): [readonly] Control Codes cannot be deleted or edited nor can PayLines be
-                assigned to them.
-            payee (Union[Unset, None, str]): The Id of the Payee, if any, that deductions are to be paid to.
+    Attributes:
+        title (str):
+        code (str):
+        default_value (Union[Unset, None, float]): If a non-zero value is provided then when this code is selected in
+            our UI the value will be automatically filled.
+        is_deduction (Union[Unset, bool]): If set to true then a PayLine using this code will be treated as a deduction
+            as opposed to an addition.
+        is_niable (Union[Unset, bool]): Determines whether or not the value of PayLines using this code should be taken
+            into consideration when calculating National Insurance Contributions.
+        is_taxable (Union[Unset, bool]): Determines whether or not the value of PayLines using this code should be taken
+            into consideration when calculating the PAYE liability.
+        is_pensionable (Union[Unset, bool]): Determines whether or not the value of PayLines using this code should be
+            taken into consideration when calculating the total pensionable pay.
+        is_attachable (Union[Unset, bool]): Determines whether or not the value of PayLines using this code should be
+            taken into consideration when calculating the attachable pay for AttachmentOrders.
+        is_real_time_class_1_a_niable (Union[Unset, bool]): Determines whether or not the value of PayLines using this
+            code are subject to real time Class 1A NIC.
+        is_not_contributing_to_holiday_pay (Union[Unset, bool]): If true then any payments made using this code will not
+            contribute towards holiday pay calculations.
+        is_qualifying_earnings_for_ae (Union[Unset, None, bool]): If true then any payments made using this code will be
+            used as the basis for calculating QualifyingEarnings for AutoEnrolment assessments.
+            If it is set to null then when it's next retrieved it'll have the same value as PensionablePay
+        is_not_tierable (Union[Unset, bool]): If true then any payments made using this code will not be included when
+            calculating the tier an employee should be on for a Tiered Pension.
+        is_tcp_tcls (Union[Unset, bool]): If true then any payments made using this code will be reported as
+            a Trivial Commutation Payment (A - TCLS)
+        is_tcp_pp (Union[Unset, bool]): If true then any payments made using this code will be reported as
+            a Trivial Commutation Payment (B - Personal Pension)
+        is_tcp_op (Union[Unset, bool]): If true then any payments made using this code will be reported as
+            a Trivial Commutation Payment (C - Occupational Pension)
+        flexible_drawdown (Union[Unset, FlexibleDrawdown]):
+        is_auto_adjust (Union[Unset, bool]): Specifies when a pay code should be auto adjusted for leave adjustments
+        calculation_type (Union[Unset, PayCodeCalculationType]):
+        multiplier_type (Union[Unset, PayCodeMultiplierType]):
+        daily_rate_multiplier (Union[Unset, float]): If the MultiplierType is MultipleOfDailyRate then this sets the
+            multiple to be used, ie 1.5
+        hourly_rate_multiplier (Union[Unset, float]): If the MultiplierType is MultipleOfHourlyRate then this sets the
+            multiple to be used, ie 1.5
+        is_system_code (Union[Unset, bool]): [readonly] System Codes cannot be deleted or edited
+        is_control_code (Union[Unset, bool]): [readonly] Control Codes cannot be deleted or edited nor can PayLines be
+            assigned to them.
+        payee (Union[Unset, None, str]): The Id of the Payee, if any, that deductions are to be paid to.
     """
 
     title: str
@@ -76,8 +73,8 @@ class PayCode:
     is_tcp_tcls: Union[Unset, bool] = UNSET
     is_tcp_pp: Union[Unset, bool] = UNSET
     is_tcp_op: Union[Unset, bool] = UNSET
-    is_flexi_dd_death_benefit: Union[Unset, bool] = UNSET
-    is_flexi_dd_pension: Union[Unset, bool] = UNSET
+    flexible_drawdown: Union[Unset, FlexibleDrawdown] = UNSET
+    is_auto_adjust: Union[Unset, bool] = UNSET
     calculation_type: Union[Unset, PayCodeCalculationType] = UNSET
     multiplier_type: Union[Unset, PayCodeMultiplierType] = UNSET
     daily_rate_multiplier: Union[Unset, float] = UNSET
@@ -85,6 +82,7 @@ class PayCode:
     is_system_code: Union[Unset, bool] = UNSET
     is_control_code: Union[Unset, bool] = UNSET
     payee: Union[Unset, None, str] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         title = self.title
@@ -102,8 +100,11 @@ class PayCode:
         is_tcp_tcls = self.is_tcp_tcls
         is_tcp_pp = self.is_tcp_pp
         is_tcp_op = self.is_tcp_op
-        is_flexi_dd_death_benefit = self.is_flexi_dd_death_benefit
-        is_flexi_dd_pension = self.is_flexi_dd_pension
+        flexible_drawdown: Union[Unset, str] = UNSET
+        if not isinstance(self.flexible_drawdown, Unset):
+            flexible_drawdown = self.flexible_drawdown.value
+
+        is_auto_adjust = self.is_auto_adjust
         calculation_type: Union[Unset, str] = UNSET
         if not isinstance(self.calculation_type, Unset):
             calculation_type = self.calculation_type.value
@@ -119,12 +120,10 @@ class PayCode:
         payee = self.payee
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update(
-            {
-                "title": title,
-                "code": code,
-            }
-        )
+        field_dict.update({
+            "title": title,
+            "code": code,
+        })
         if default_value is not UNSET:
             field_dict["defaultValue"] = default_value
         if is_deduction is not UNSET:
@@ -140,9 +139,7 @@ class PayCode:
         if is_real_time_class_1_a_niable is not UNSET:
             field_dict["isRealTimeClass1aNiable"] = is_real_time_class_1_a_niable
         if is_not_contributing_to_holiday_pay is not UNSET:
-            field_dict[
-                "isNotContributingToHolidayPay"
-            ] = is_not_contributing_to_holiday_pay
+            field_dict["isNotContributingToHolidayPay"] = is_not_contributing_to_holiday_pay
         if is_qualifying_earnings_for_ae is not UNSET:
             field_dict["isQualifyingEarningsForAe"] = is_qualifying_earnings_for_ae
         if is_not_tierable is not UNSET:
@@ -153,10 +150,10 @@ class PayCode:
             field_dict["isTcp_Pp"] = is_tcp_pp
         if is_tcp_op is not UNSET:
             field_dict["isTcp_Op"] = is_tcp_op
-        if is_flexi_dd_death_benefit is not UNSET:
-            field_dict["isFlexiDd_DeathBenefit"] = is_flexi_dd_death_benefit
-        if is_flexi_dd_pension is not UNSET:
-            field_dict["isFlexiDd_Pension"] = is_flexi_dd_pension
+        if flexible_drawdown is not UNSET:
+            field_dict["flexibleDrawdown"] = flexible_drawdown
+        if is_auto_adjust is not UNSET:
+            field_dict["isAutoAdjust"] = is_auto_adjust
         if calculation_type is not UNSET:
             field_dict["calculationType"] = calculation_type
         if multiplier_type is not UNSET:
@@ -173,6 +170,8 @@ class PayCode:
             field_dict["payee"] = payee
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -195,9 +194,7 @@ class PayCode:
 
         is_real_time_class_1_a_niable = d.pop("isRealTimeClass1aNiable", UNSET)
 
-        is_not_contributing_to_holiday_pay = d.pop(
-            "isNotContributingToHolidayPay", UNSET
-        )
+        is_not_contributing_to_holiday_pay = d.pop("isNotContributingToHolidayPay", UNSET)
 
         is_qualifying_earnings_for_ae = d.pop("isQualifyingEarningsForAe", UNSET)
 
@@ -209,23 +206,37 @@ class PayCode:
 
         is_tcp_op = d.pop("isTcp_Op", UNSET)
 
-        is_flexi_dd_death_benefit = d.pop("isFlexiDd_DeathBenefit", UNSET)
+        _flexible_drawdown = d.pop("flexibleDrawdown", UNSET)
+        flexible_drawdown: Union[Unset, FlexibleDrawdown]
+        if isinstance(_flexible_drawdown,  Unset):
+            flexible_drawdown = UNSET
+        else:
+            flexible_drawdown = FlexibleDrawdown(_flexible_drawdown)
 
-        is_flexi_dd_pension = d.pop("isFlexiDd_Pension", UNSET)
+
+
+
+        is_auto_adjust = d.pop("isAutoAdjust", UNSET)
 
         _calculation_type = d.pop("calculationType", UNSET)
         calculation_type: Union[Unset, PayCodeCalculationType]
-        if isinstance(_calculation_type, Unset):
+        if isinstance(_calculation_type,  Unset):
             calculation_type = UNSET
         else:
             calculation_type = PayCodeCalculationType(_calculation_type)
 
+
+
+
         _multiplier_type = d.pop("multiplierType", UNSET)
         multiplier_type: Union[Unset, PayCodeMultiplierType]
-        if isinstance(_multiplier_type, Unset):
+        if isinstance(_multiplier_type,  Unset):
             multiplier_type = UNSET
         else:
             multiplier_type = PayCodeMultiplierType(_multiplier_type)
+
+
+
 
         daily_rate_multiplier = d.pop("dailyRateMultiplier", UNSET)
 
@@ -253,8 +264,8 @@ class PayCode:
             is_tcp_tcls=is_tcp_tcls,
             is_tcp_pp=is_tcp_pp,
             is_tcp_op=is_tcp_op,
-            is_flexi_dd_death_benefit=is_flexi_dd_death_benefit,
-            is_flexi_dd_pension=is_flexi_dd_pension,
+            flexible_drawdown=flexible_drawdown,
+            is_auto_adjust=is_auto_adjust,
             calculation_type=calculation_type,
             multiplier_type=multiplier_type,
             daily_rate_multiplier=daily_rate_multiplier,
@@ -265,3 +276,4 @@ class PayCode:
         )
 
         return pay_code
+

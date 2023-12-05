@@ -9,6 +9,7 @@ class AuthScheme(str, Enum):
     HMAC = "Hmac"
     OAUTH2CC = "OAuth2Cc"
     OAUTH2PASSWORD = "OAuth2Password"
+    DEFERTOTHIRDPARTY = "DeferToThirdParty"
 
     def __str__(self) -> str:
         return str(self.value)

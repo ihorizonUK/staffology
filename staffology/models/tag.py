@@ -6,7 +6,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="Tag")
 
-
 @attr.s(auto_attribs=True)
 class Tag:
     """
@@ -20,22 +19,23 @@ class Tag:
     title: str
     color: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         code = self.code
         title = self.title
         color = self.color
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update(
-            {
-                "code": code,
-                "title": title,
-            }
-        )
+        field_dict.update({
+            "code": code,
+            "title": title,
+        })
         if color is not UNSET:
             field_dict["color"] = color
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -53,3 +53,4 @@ class Tag:
         )
 
         return tag
+

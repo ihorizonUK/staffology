@@ -77,7 +77,7 @@ def sync_detailed(
     pay_basis: Union[Unset, None, PayBasis] = UNSET,
     pay_amount: Union[Unset, None, float] = UNSET,
 ) -> Response[float]:
-    """Calculate Base Hourly Rate
+    """Calculate Base Hourly Rate (deprecated)
 
     Args:
         employer_id (str):
@@ -116,7 +116,7 @@ def sync(
     pay_basis: Union[Unset, None, PayBasis] = UNSET,
     pay_amount: Union[Unset, None, float] = UNSET,
 ) -> Optional[float]:
-    """Calculate Base Hourly Rate
+    """Calculate Base Hourly Rate (deprecated)
 
     Args:
         employer_id (str):
@@ -148,7 +148,7 @@ async def asyncio_detailed(
     pay_basis: Union[Unset, None, PayBasis] = UNSET,
     pay_amount: Union[Unset, None, float] = UNSET,
 ) -> Response[float]:
-    """Calculate Base Hourly Rate
+    """Calculate Base Hourly Rate (deprecated)
 
     Args:
         employer_id (str):
@@ -185,7 +185,7 @@ async def asyncio(
     pay_basis: Union[Unset, None, PayBasis] = UNSET,
     pay_amount: Union[Unset, None, float] = UNSET,
 ) -> Optional[float]:
-    """Calculate Base Hourly Rate
+    """Calculate Base Hourly Rate (deprecated)
 
     Args:
         employer_id (str):

@@ -6,7 +6,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="PapdisEmployeeContactPostalAddress")
 
-
 @attr.s(auto_attribs=True)
 class PapdisEmployeeContactPostalAddress:
     """
@@ -26,6 +25,7 @@ class PapdisEmployeeContactPostalAddress:
     postcode: Union[Unset, None, str] = UNSET
     country: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         address1 = self.address1
         address2 = self.address2
@@ -35,7 +35,8 @@ class PapdisEmployeeContactPostalAddress:
         country = self.country
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if address1 is not UNSET:
             field_dict["address1"] = address1
         if address2 is not UNSET:
@@ -50,6 +51,8 @@ class PapdisEmployeeContactPostalAddress:
             field_dict["country"] = country
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -76,3 +79,4 @@ class PapdisEmployeeContactPostalAddress:
         )
 
         return papdis_employee_contact_postal_address
+

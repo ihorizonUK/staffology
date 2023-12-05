@@ -15,10 +15,10 @@ def _get_kwargs(
     client: Client,
     employer_id: Union[Unset, None, str] = UNSET,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Dict[str, Any]:
     url = "{}/aeo/{employeeId}/{id}".format(
-        client.base_url, employeeId=employee_id, id=id
-    )
+        client.base_url,employeeId=employee_id,id=id)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
@@ -26,13 +26,24 @@ def _get_kwargs(
     if not isinstance(accept, Unset):
         headers["accept"] = accept
 
+
+
+    
+
     params: Dict[str, Any] = {}
     params["employerId"] = employer_id
 
+
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
+
+    
+
+    
+
     return {
-        "method": "get",
+	    "method": "get",
         "url": url,
         "headers": headers,
         "cookies": cookies,
@@ -41,19 +52,17 @@ def _get_kwargs(
     }
 
 
-def _parse_response(
-    *, response: httpx.Response
-) -> Optional[AttachmentOrderReportResponse]:
+def _parse_response(*, response: httpx.Response) -> Optional[AttachmentOrderReportResponse]:
     if response.status_code == 200:
         response_200 = AttachmentOrderReportResponse.from_dict(response.json())
+
+
 
         return response_200
     return raise_staffology_exception(response)
 
 
-def _build_response(
-    *, response: httpx.Response
-) -> Response[AttachmentOrderReportResponse]:
+def _build_response(*, response: httpx.Response) -> Response[AttachmentOrderReportResponse]:
     return Response(
         status_code=response.status_code,
         content=response.content,
@@ -69,6 +78,7 @@ def sync_detailed(
     client: Client,
     employer_id: Union[Unset, None, str] = UNSET,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Response[AttachmentOrderReportResponse]:
     """AEO Statement
 
@@ -84,12 +94,14 @@ def sync_detailed(
         Response[AttachmentOrderReportResponse]
     """
 
+
     kwargs = _get_kwargs(
         employee_id=employee_id,
-        id=id,
-        client=client,
-        employer_id=employer_id,
-        accept=accept,
+id=id,
+client=client,
+employer_id=employer_id,
+accept=accept,
+
     )
 
     response = httpx.request(
@@ -99,7 +111,6 @@ def sync_detailed(
 
     return _build_response(response=response)
 
-
 def sync(
     employee_id: str,
     id: str,
@@ -107,6 +118,7 @@ def sync(
     client: Client,
     employer_id: Union[Unset, None, str] = UNSET,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Optional[AttachmentOrderReportResponse]:
     """AEO Statement
 
@@ -122,14 +134,15 @@ def sync(
         Response[AttachmentOrderReportResponse]
     """
 
+
     return sync_detailed(
         employee_id=employee_id,
-        id=id,
-        client=client,
-        employer_id=employer_id,
-        accept=accept,
-    ).parsed
+id=id,
+client=client,
+employer_id=employer_id,
+accept=accept,
 
+    ).parsed
 
 async def asyncio_detailed(
     employee_id: str,
@@ -138,6 +151,7 @@ async def asyncio_detailed(
     client: Client,
     employer_id: Union[Unset, None, str] = UNSET,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Response[AttachmentOrderReportResponse]:
     """AEO Statement
 
@@ -153,19 +167,22 @@ async def asyncio_detailed(
         Response[AttachmentOrderReportResponse]
     """
 
+
     kwargs = _get_kwargs(
         employee_id=employee_id,
-        id=id,
-        client=client,
-        employer_id=employer_id,
-        accept=accept,
+id=id,
+client=client,
+employer_id=employer_id,
+accept=accept,
+
     )
 
     async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+        response = await _client.request(
+            **kwargs
+        )
 
     return _build_response(response=response)
-
 
 async def asyncio(
     employee_id: str,
@@ -174,6 +191,7 @@ async def asyncio(
     client: Client,
     employer_id: Union[Unset, None, str] = UNSET,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Optional[AttachmentOrderReportResponse]:
     """AEO Statement
 
@@ -189,12 +207,13 @@ async def asyncio(
         Response[AttachmentOrderReportResponse]
     """
 
-    return (
-        await asyncio_detailed(
-            employee_id=employee_id,
-            id=id,
-            client=client,
-            employer_id=employer_id,
-            accept=accept,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        employee_id=employee_id,
+id=id,
+client=client,
+employer_id=employer_id,
+accept=accept,
+
+    )).parsed
+

@@ -9,7 +9,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="PaySchedulePeriodEvent")
 
-
 @attr.s(auto_attribs=True)
 class PaySchedulePeriodEvent:
     """An Event within a PaySchedulePeriod. The event could be scheduled x days before PaymentDate.
@@ -29,6 +28,7 @@ class PaySchedulePeriodEvent:
     is_over_due: Union[Unset, bool] = UNSET
     id: Union[Unset, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         pay_period_event_type: Union[Unset, str] = UNSET
         if not isinstance(self.pay_period_event_type, Unset):
@@ -40,15 +40,14 @@ class PaySchedulePeriodEvent:
 
         actual_event_date: Union[Unset, None, str] = UNSET
         if not isinstance(self.actual_event_date, Unset):
-            actual_event_date = (
-                self.actual_event_date.isoformat() if self.actual_event_date else None
-            )
+            actual_event_date = self.actual_event_date.isoformat() if self.actual_event_date else None
 
         is_over_due = self.is_over_due
         id = self.id
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if pay_period_event_type is not UNSET:
             field_dict["payPeriodEventType"] = pay_period_event_type
         if event_date is not UNSET:
@@ -62,31 +61,42 @@ class PaySchedulePeriodEvent:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _pay_period_event_type = d.pop("payPeriodEventType", UNSET)
         pay_period_event_type: Union[Unset, PayPeriodEventType]
-        if isinstance(_pay_period_event_type, Unset):
+        if isinstance(_pay_period_event_type,  Unset):
             pay_period_event_type = UNSET
         else:
             pay_period_event_type = PayPeriodEventType(_pay_period_event_type)
 
+
+
+
         _event_date = d.pop("eventDate", UNSET)
         event_date: Union[Unset, datetime.date]
-        if isinstance(_event_date, Unset):
+        if isinstance(_event_date,  Unset):
             event_date = UNSET
         else:
             event_date = isoparse(_event_date).date()
+
+
+
 
         _actual_event_date = d.pop("actualEventDate", UNSET)
         actual_event_date: Union[Unset, None, datetime.date]
         if _actual_event_date is None:
             actual_event_date = None
-        elif isinstance(_actual_event_date, Unset):
+        elif isinstance(_actual_event_date,  Unset):
             actual_event_date = UNSET
         else:
             actual_event_date = isoparse(_actual_event_date).date()
+
+
+
 
         is_over_due = d.pop("isOverDue", UNSET)
 
@@ -101,3 +111,4 @@ class PaySchedulePeriodEvent:
         )
 
         return pay_schedule_period_event
+

@@ -21,6 +21,10 @@ class EntityType(str, Enum):
     SETTINGS = "Settings"
     PAYRUN = "PayRun"
     LOAN = "Loan"
+    DEPARTMENT = "Department"
+    EMPLOYEROPENINGBALANCES = "EmployerOpeningBalances"
+    EMPLOYERGROUPMEMBERSHIP = "EmployerGroupMembership"
+    DEPARTMENTMEMBERSHIP = "DepartmentMembership"
 
     def __str__(self) -> str:
         return str(self.value)

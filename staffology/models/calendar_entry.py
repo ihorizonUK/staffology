@@ -9,7 +9,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="CalendarEntry")
 
-
 @attr.s(auto_attribs=True)
 class CalendarEntry:
     """
@@ -25,6 +24,7 @@ class CalendarEntry:
     end: Union[Unset, datetime.date] = UNSET
     type: Union[Unset, CalendarEntryType] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         title = self.title
         start: Union[Unset, str] = UNSET
@@ -39,8 +39,10 @@ class CalendarEntry:
         if not isinstance(self.type, Unset):
             type = self.type.value
 
+
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if title is not UNSET:
             field_dict["title"] = title
         if start is not UNSET:
@@ -52,6 +54,8 @@ class CalendarEntry:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
@@ -59,24 +63,33 @@ class CalendarEntry:
 
         _start = d.pop("start", UNSET)
         start: Union[Unset, datetime.date]
-        if isinstance(_start, Unset):
+        if isinstance(_start,  Unset):
             start = UNSET
         else:
             start = isoparse(_start).date()
 
+
+
+
         _end = d.pop("end", UNSET)
         end: Union[Unset, datetime.date]
-        if isinstance(_end, Unset):
+        if isinstance(_end,  Unset):
             end = UNSET
         else:
             end = isoparse(_end).date()
 
+
+
+
         _type = d.pop("type", UNSET)
         type: Union[Unset, CalendarEntryType]
-        if isinstance(_type, Unset):
+        if isinstance(_type,  Unset):
             type = UNSET
         else:
             type = CalendarEntryType(_type)
+
+
+
 
         calendar_entry = cls(
             title=title,
@@ -86,3 +99,4 @@ class CalendarEntry:
         )
 
         return calendar_entry
+

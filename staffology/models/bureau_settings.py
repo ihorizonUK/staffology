@@ -6,7 +6,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="BureauSettings")
 
-
 @attr.s(auto_attribs=True)
 class BureauSettings:
     """Represents the BureauSettings for an Employer.
@@ -33,6 +32,7 @@ class BureauSettings:
     show_contact_card: Union[Unset, bool] = UNSET
     id: Union[Unset, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         enable_approvals = self.enable_approvals
         processor_user_id = self.processor_user_id
@@ -43,7 +43,8 @@ class BureauSettings:
         id = self.id
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if enable_approvals is not UNSET:
             field_dict["enableApprovals"] = enable_approvals
         if processor_user_id is not UNSET:
@@ -60,6 +61,8 @@ class BureauSettings:
             field_dict["id"] = id
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -89,3 +92,4 @@ class BureauSettings:
         )
 
         return bureau_settings
+

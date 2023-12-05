@@ -7,7 +7,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="PayslipLine")
 
-
 @attr.s(auto_attribs=True)
 class PayslipLine:
     """
@@ -30,7 +29,13 @@ class PayslipLine:
             property may be set to true so that the amount of the addition to be considered a take home pay target.
         target_net_to_gross_value (Union[Unset, None, float]): The orginal net fixed addition amount that is considered
             to be a take home pay target.
+        leave_id (Union[Unset, None, str]):
+        role_id (Union[Unset, None, str]): The employee role which is associated with this payslip line.
+            If set to null, the payslip line is not related with a role.
+        is_auto_calculated_back_pay_line (Union[Unset, bool]):
+        is_automatic_back_pay (Union[Unset, bool]):
         has_secondary_description (Union[Unset, bool]):
+        contributes_to_basic_pay (Union[Unset, bool]):
     """
 
     type: Union[Unset, PayslipLineType] = UNSET
@@ -46,7 +51,13 @@ class PayslipLine:
     formatted_value: Union[Unset, None, str] = UNSET
     is_net_to_gross: Union[Unset, bool] = UNSET
     target_net_to_gross_value: Union[Unset, None, float] = UNSET
+    leave_id: Union[Unset, None, str] = UNSET
+    role_id: Union[Unset, None, str] = UNSET
+    is_auto_calculated_back_pay_line: Union[Unset, bool] = UNSET
+    is_automatic_back_pay: Union[Unset, bool] = UNSET
     has_secondary_description: Union[Unset, bool] = UNSET
+    contributes_to_basic_pay: Union[Unset, bool] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET
@@ -65,10 +76,16 @@ class PayslipLine:
         formatted_value = self.formatted_value
         is_net_to_gross = self.is_net_to_gross
         target_net_to_gross_value = self.target_net_to_gross_value
+        leave_id = self.leave_id
+        role_id = self.role_id
+        is_auto_calculated_back_pay_line = self.is_auto_calculated_back_pay_line
+        is_automatic_back_pay = self.is_automatic_back_pay
         has_secondary_description = self.has_secondary_description
+        contributes_to_basic_pay = self.contributes_to_basic_pay
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if type is not UNSET:
             field_dict["type"] = type
         if code is not UNSET:
@@ -95,20 +112,35 @@ class PayslipLine:
             field_dict["isNetToGross"] = is_net_to_gross
         if target_net_to_gross_value is not UNSET:
             field_dict["targetNetToGrossValue"] = target_net_to_gross_value
+        if leave_id is not UNSET:
+            field_dict["leaveId"] = leave_id
+        if role_id is not UNSET:
+            field_dict["roleId"] = role_id
+        if is_auto_calculated_back_pay_line is not UNSET:
+            field_dict["isAutoCalculatedBackPayLine"] = is_auto_calculated_back_pay_line
+        if is_automatic_back_pay is not UNSET:
+            field_dict["isAutomaticBackPay"] = is_automatic_back_pay
         if has_secondary_description is not UNSET:
             field_dict["hasSecondaryDescription"] = has_secondary_description
+        if contributes_to_basic_pay is not UNSET:
+            field_dict["contributesToBasicPay"] = contributes_to_basic_pay
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _type = d.pop("type", UNSET)
         type: Union[Unset, PayslipLineType]
-        if isinstance(_type, Unset):
+        if isinstance(_type,  Unset):
             type = UNSET
         else:
             type = PayslipLineType(_type)
+
+
+
 
         code = d.pop("code", UNSET)
 
@@ -134,7 +166,17 @@ class PayslipLine:
 
         target_net_to_gross_value = d.pop("targetNetToGrossValue", UNSET)
 
+        leave_id = d.pop("leaveId", UNSET)
+
+        role_id = d.pop("roleId", UNSET)
+
+        is_auto_calculated_back_pay_line = d.pop("isAutoCalculatedBackPayLine", UNSET)
+
+        is_automatic_back_pay = d.pop("isAutomaticBackPay", UNSET)
+
         has_secondary_description = d.pop("hasSecondaryDescription", UNSET)
+
+        contributes_to_basic_pay = d.pop("contributesToBasicPay", UNSET)
 
         payslip_line = cls(
             type=type,
@@ -150,7 +192,13 @@ class PayslipLine:
             formatted_value=formatted_value,
             is_net_to_gross=is_net_to_gross,
             target_net_to_gross_value=target_net_to_gross_value,
+            leave_id=leave_id,
+            role_id=role_id,
+            is_auto_calculated_back_pay_line=is_auto_calculated_back_pay_line,
+            is_automatic_back_pay=is_automatic_back_pay,
             has_secondary_description=has_secondary_description,
+            contributes_to_basic_pay=contributes_to_basic_pay,
         )
 
         return payslip_line
+

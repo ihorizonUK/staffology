@@ -14,16 +14,26 @@ def _get_kwargs(
     document_id: str,
     *,
     client: Client,
+
 ) -> Dict[str, Any]:
     url = "{}/employers/{employerId}/payrun/{id}/documents/{documentId}".format(
-        client.base_url, employerId=employer_id, id=id, documentId=document_id
-    )
+        client.base_url,employerId=employer_id,id=id,documentId=document_id)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
 
+    
+
+    
+
+    
+
+    
+
+    
+
     return {
-        "method": "get",
+	    "method": "get",
         "url": url,
         "headers": headers,
         "cookies": cookies,
@@ -33,7 +43,11 @@ def _get_kwargs(
 
 def _parse_response(*, response: httpx.Response) -> Optional[Union[Any, File]]:
     if response.status_code == 200:
-        response_200 = File(payload=BytesIO(response.json()))
+        response_200 = File(
+             payload = BytesIO(response.json())
+        )
+
+
 
         return response_200
     if response.status_code == 404:
@@ -57,6 +71,7 @@ def sync_detailed(
     document_id: str,
     *,
     client: Client,
+
 ) -> Response[Union[Any, File]]:
     """Get ProcessingNote Document
 
@@ -71,11 +86,13 @@ def sync_detailed(
         Response[Union[Any, File]]
     """
 
+
     kwargs = _get_kwargs(
         employer_id=employer_id,
-        id=id,
-        document_id=document_id,
-        client=client,
+id=id,
+document_id=document_id,
+client=client,
+
     )
 
     response = httpx.request(
@@ -85,13 +102,13 @@ def sync_detailed(
 
     return _build_response(response=response)
 
-
 def sync(
     employer_id: str,
     id: str,
     document_id: str,
     *,
     client: Client,
+
 ) -> Optional[Union[Any, File]]:
     """Get ProcessingNote Document
 
@@ -106,13 +123,14 @@ def sync(
         Response[Union[Any, File]]
     """
 
+
     return sync_detailed(
         employer_id=employer_id,
-        id=id,
-        document_id=document_id,
-        client=client,
-    ).parsed
+id=id,
+document_id=document_id,
+client=client,
 
+    ).parsed
 
 async def asyncio_detailed(
     employer_id: str,
@@ -120,6 +138,7 @@ async def asyncio_detailed(
     document_id: str,
     *,
     client: Client,
+
 ) -> Response[Union[Any, File]]:
     """Get ProcessingNote Document
 
@@ -134,18 +153,21 @@ async def asyncio_detailed(
         Response[Union[Any, File]]
     """
 
+
     kwargs = _get_kwargs(
         employer_id=employer_id,
-        id=id,
-        document_id=document_id,
-        client=client,
+id=id,
+document_id=document_id,
+client=client,
+
     )
 
     async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+        response = await _client.request(
+            **kwargs
+        )
 
     return _build_response(response=response)
-
 
 async def asyncio(
     employer_id: str,
@@ -153,6 +175,7 @@ async def asyncio(
     document_id: str,
     *,
     client: Client,
+
 ) -> Optional[Union[Any, File]]:
     """Get ProcessingNote Document
 
@@ -167,11 +190,12 @@ async def asyncio(
         Response[Union[Any, File]]
     """
 
-    return (
-        await asyncio_detailed(
-            employer_id=employer_id,
-            id=id,
-            document_id=document_id,
-            client=client,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        employer_id=employer_id,
+id=id,
+document_id=document_id,
+client=client,
+
+    )).parsed
+

@@ -6,7 +6,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="DepartmentMembership")
 
-
 @attr.s(auto_attribs=True)
 class DepartmentMembership:
     """Used to represent an Employees membership of a Department
@@ -28,6 +27,7 @@ class DepartmentMembership:
     primary: Union[Unset, bool] = UNSET
     weighting: Union[Unset, float] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         code = self.code
         color = self.color
@@ -36,11 +36,9 @@ class DepartmentMembership:
         weighting = self.weighting
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update(
-            {
-                "code": code,
-            }
-        )
+        field_dict.update({
+            "code": code,
+        })
         if color is not UNSET:
             field_dict["color"] = color
         if title is not UNSET:
@@ -51,6 +49,8 @@ class DepartmentMembership:
             field_dict["weighting"] = weighting
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -74,3 +74,4 @@ class DepartmentMembership:
         )
 
         return department_membership
+

@@ -4,7 +4,8 @@ import httpx
 from staffology.propagate_exceptions import raise_staffology_exception
 
 from ...client import Client
-from ...models.employee import Employee
+from ...models.contract_create_employee_request import ContractCreateEmployeeRequest
+from ...models.contract_employee_response import ContractEmployeeResponse
 from ...types import Response
 
 
@@ -12,11 +13,9 @@ def _get_kwargs(
     employer_id: str,
     *,
     client: Client,
-    json_body: Employee,
+    json_body: ContractCreateEmployeeRequest,
 ) -> Dict[str, Any]:
-    url = "{}/employers/{employerId}/employees".format(
-        client.base_url, employerId=employer_id
-    )
+    url = "{}/employers/{employerId}/employees".format(client.base_url, employerId=employer_id)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
@@ -33,9 +32,9 @@ def _get_kwargs(
     }
 
 
-def _parse_response(*, response: httpx.Response) -> Optional[Union[Any, Employee]]:
+def _parse_response(*, response: httpx.Response) -> Optional[Union[Any, ContractEmployeeResponse]]:
     if response.status_code == 201:
-        response_201 = Employee.from_dict(response.json())
+        response_201 = ContractEmployeeResponse.from_dict(response.json())
 
         return response_201
     if response.status_code == 400:
@@ -50,7 +49,7 @@ def _parse_response(*, response: httpx.Response) -> Optional[Union[Any, Employee
     return raise_staffology_exception(response)
 
 
-def _build_response(*, response: httpx.Response) -> Response[Union[Any, Employee]]:
+def _build_response(*, response: httpx.Response) -> Response[Union[Any, ContractEmployeeResponse]]:
     return Response(
         status_code=response.status_code,
         content=response.content,
@@ -63,8 +62,8 @@ def sync_detailed(
     employer_id: str,
     *,
     client: Client,
-    json_body: Employee,
-) -> Response[Union[Any, Employee]]:
+    json_body: ContractCreateEmployeeRequest,
+) -> Response[Union[Any, ContractEmployeeResponse]]:
     """Create a new Employee
 
      Creates an Employee for the Employer specified.
@@ -72,10 +71,10 @@ def sync_detailed(
 
     Args:
         employer_id (str):
-        json_body (Employee):
+        json_body (ContractCreateEmployeeRequest):
 
     Returns:
-        Response[Union[Any, Employee]]
+        Response[Union[Any, ContractEmployeeResponse]]
     """
 
     kwargs = _get_kwargs(
@@ -96,8 +95,8 @@ def sync(
     employer_id: str,
     *,
     client: Client,
-    json_body: Employee,
-) -> Optional[Union[Any, Employee]]:
+    json_body: ContractCreateEmployeeRequest,
+) -> Optional[Union[Any, ContractEmployeeResponse]]:
     """Create a new Employee
 
      Creates an Employee for the Employer specified.
@@ -105,10 +104,10 @@ def sync(
 
     Args:
         employer_id (str):
-        json_body (Employee):
+        json_body (ContractCreateEmployeeRequest):
 
     Returns:
-        Response[Union[Any, Employee]]
+        Response[Union[Any, ContractEmployeeResponse]]
     """
 
     return sync_detailed(
@@ -122,8 +121,8 @@ async def asyncio_detailed(
     employer_id: str,
     *,
     client: Client,
-    json_body: Employee,
-) -> Response[Union[Any, Employee]]:
+    json_body: ContractCreateEmployeeRequest,
+) -> Response[Union[Any, ContractEmployeeResponse]]:
     """Create a new Employee
 
      Creates an Employee for the Employer specified.
@@ -131,10 +130,10 @@ async def asyncio_detailed(
 
     Args:
         employer_id (str):
-        json_body (Employee):
+        json_body (ContractCreateEmployeeRequest):
 
     Returns:
-        Response[Union[Any, Employee]]
+        Response[Union[Any, ContractEmployeeResponse]]
     """
 
     kwargs = _get_kwargs(
@@ -153,8 +152,8 @@ async def asyncio(
     employer_id: str,
     *,
     client: Client,
-    json_body: Employee,
-) -> Optional[Union[Any, Employee]]:
+    json_body: ContractCreateEmployeeRequest,
+) -> Optional[Union[Any, ContractEmployeeResponse]]:
     """Create a new Employee
 
      Creates an Employee for the Employer specified.
@@ -162,10 +161,10 @@ async def asyncio(
 
     Args:
         employer_id (str):
-        json_body (Employee):
+        json_body (ContractCreateEmployeeRequest):
 
     Returns:
-        Response[Union[Any, Employee]]
+        Response[Union[Any, ContractEmployeeResponse]]
     """
 
     return (

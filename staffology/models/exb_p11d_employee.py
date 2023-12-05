@@ -7,7 +7,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="ExbP11DEmployee")
 
-
 @attr.s(auto_attribs=True)
 class ExbP11DEmployee:
     """
@@ -29,6 +28,7 @@ class ExbP11DEmployee:
     birth_date: Union[Unset, None, str] = UNSET
     gender: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         employee_unique_id = self.employee_unique_id
         dir_ind = self.dir_ind
@@ -42,7 +42,8 @@ class ExbP11DEmployee:
         gender = self.gender
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if employee_unique_id is not UNSET:
             field_dict["employeeUniqueId"] = employee_unique_id
         if dir_ind is not UNSET:
@@ -60,6 +61,8 @@ class ExbP11DEmployee:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
@@ -69,10 +72,13 @@ class ExbP11DEmployee:
 
         _name = d.pop("name", UNSET)
         name: Union[Unset, RtiEmployeeName]
-        if isinstance(_name, Unset):
+        if isinstance(_name,  Unset):
             name = UNSET
         else:
             name = RtiEmployeeName.from_dict(_name)
+
+
+
 
         wks_no = d.pop("wksNo", UNSET)
 
@@ -93,3 +99,4 @@ class ExbP11DEmployee:
         )
 
         return exb_p11d_employee
+

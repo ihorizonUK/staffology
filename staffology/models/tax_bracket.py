@@ -6,7 +6,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="TaxBracket")
 
-
 @attr.s(auto_attribs=True)
 class TaxBracket:
     """
@@ -20,13 +19,15 @@ class TaxBracket:
     to: Union[Unset, float] = UNSET
     multiplier: Union[Unset, float] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         from_ = self.from_
         to = self.to
         multiplier = self.multiplier
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if from_ is not UNSET:
             field_dict["from"] = from_
         if to is not UNSET:
@@ -35,6 +36,8 @@ class TaxBracket:
             field_dict["multiplier"] = multiplier
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -52,3 +55,4 @@ class TaxBracket:
         )
 
         return tax_bracket
+

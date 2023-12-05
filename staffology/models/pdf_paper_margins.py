@@ -6,7 +6,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="PdfPaperMargins")
 
-
 @attr.s(auto_attribs=True)
 class PdfPaperMargins:
     """
@@ -22,6 +21,7 @@ class PdfPaperMargins:
     bottom: Union[Unset, float] = UNSET
     left: Union[Unset, float] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         top = self.top
         right = self.right
@@ -29,7 +29,8 @@ class PdfPaperMargins:
         left = self.left
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if top is not UNSET:
             field_dict["top"] = top
         if right is not UNSET:
@@ -40,6 +41,8 @@ class PdfPaperMargins:
             field_dict["left"] = left
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -60,3 +63,4 @@ class PdfPaperMargins:
         )
 
         return pdf_paper_margins
+

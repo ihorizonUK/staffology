@@ -7,7 +7,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="P11DOther")
 
-
 @attr.s(auto_attribs=True)
 class P11DOther:
     """
@@ -23,6 +22,7 @@ class P11DOther:
     tax_paid: Union[Unset, None, str] = UNSET
     type_letter: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         class_1a: Union[Unset, None, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.class_1a, Unset):
@@ -35,6 +35,9 @@ class P11DOther:
 
                     class_1a.append(class_1a_item)
 
+
+
+
         non_class_1a: Union[Unset, None, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.non_class_1a, Unset):
             if self.non_class_1a is None:
@@ -46,11 +49,15 @@ class P11DOther:
 
                     non_class_1a.append(non_class_1a_item)
 
+
+
+
         tax_paid = self.tax_paid
         type_letter = self.type_letter
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if class_1a is not UNSET:
             field_dict["class1A"] = class_1a
         if non_class_1a is not UNSET:
@@ -62,22 +69,30 @@ class P11DOther:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         class_1a = []
         _class_1a = d.pop("class1A", UNSET)
-        for class_1a_item_data in _class_1a or []:
+        for class_1a_item_data in (_class_1a or []):
             class_1a_item = P11DDescOther.from_dict(class_1a_item_data)
+
+
 
             class_1a.append(class_1a_item)
 
+
         non_class_1a = []
         _non_class_1a = d.pop("nonClass1A", UNSET)
-        for non_class_1a_item_data in _non_class_1a or []:
+        for non_class_1a_item_data in (_non_class_1a or []):
             non_class_1a_item = P11DDescOther.from_dict(non_class_1a_item_data)
 
+
+
             non_class_1a.append(non_class_1a_item)
+
 
         tax_paid = d.pop("taxPaid", UNSET)
 
@@ -91,3 +106,4 @@ class P11DOther:
         )
 
         return p11d_other
+

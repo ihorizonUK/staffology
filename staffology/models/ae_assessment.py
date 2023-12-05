@@ -15,27 +15,26 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="AeAssessment")
 
-
 @attr.s(auto_attribs=True)
 class AeAssessment:
     """As part of AutoEnrolment we assess your Employees to see if they need to be auto-enroled in a Pension.
-    This model shows the result of an assessment.
+This model shows the result of an assessment.
 
-        Attributes:
-            assessment_date (Union[Unset, datetime.datetime]):
-            employee_state (Union[Unset, AeEmployeeState]):
-            age (Union[Unset, int]): [readonly] The age of the Employee at the time of the assessment
-            uk_worker (Union[Unset, AeUKWorker]):
-            pay_period (Union[Unset, PayPeriods]):
-            ordinal (Union[Unset, int]): [readonly] The PaySchedule ordinal for the Employee at the time of the assessment
-            earnings_in_period (Union[Unset, float]): [readonly]
-            qualifying_earnings_in_period (Union[Unset, float]): [readonly]
-            ae_exclusion_code (Union[Unset, AeExclusionCode]):
-            status (Union[Unset, AeStatus]):
-            reason (Union[Unset, None, str]): [readonly] The reason for determining the Status given.
-            action (Union[Unset, AeAssessmentAction]):
-            employee (Union[Unset, Item]):
-            id (Union[Unset, str]): [readonly] The unique id of the object
+    Attributes:
+        assessment_date (Union[Unset, datetime.datetime]):
+        employee_state (Union[Unset, AeEmployeeState]):
+        age (Union[Unset, int]): [readonly] The age of the Employee at the time of the assessment
+        uk_worker (Union[Unset, AeUKWorker]):
+        pay_period (Union[Unset, PayPeriods]):
+        ordinal (Union[Unset, int]): [readonly] The PaySchedule ordinal for the Employee at the time of the assessment
+        earnings_in_period (Union[Unset, float]): [readonly]
+        qualifying_earnings_in_period (Union[Unset, float]): [readonly]
+        ae_exclusion_code (Union[Unset, AeExclusionCode]):
+        status (Union[Unset, AeStatus]):
+        reason (Union[Unset, None, str]): [readonly] The reason for determining the Status given.
+        action (Union[Unset, AeAssessmentAction]):
+        employee (Union[Unset, Item]):
+        id (Union[Unset, str]): [readonly] The unique id of the object
     """
 
     assessment_date: Union[Unset, datetime.datetime] = UNSET
@@ -52,6 +51,7 @@ class AeAssessment:
     action: Union[Unset, AeAssessmentAction] = UNSET
     employee: Union[Unset, Item] = UNSET
     id: Union[Unset, str] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         assessment_date: Union[Unset, str] = UNSET
@@ -94,7 +94,8 @@ class AeAssessment:
         id = self.id
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if assessment_date is not UNSET:
             field_dict["assessmentDate"] = assessment_date
         if employee_state is not UNSET:
@@ -126,38 +127,52 @@ class AeAssessment:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _assessment_date = d.pop("assessmentDate", UNSET)
         assessment_date: Union[Unset, datetime.datetime]
-        if isinstance(_assessment_date, Unset):
+        if isinstance(_assessment_date,  Unset):
             assessment_date = UNSET
         else:
             assessment_date = isoparse(_assessment_date)
 
+
+
+
         _employee_state = d.pop("employeeState", UNSET)
         employee_state: Union[Unset, AeEmployeeState]
-        if isinstance(_employee_state, Unset):
+        if isinstance(_employee_state,  Unset):
             employee_state = UNSET
         else:
             employee_state = AeEmployeeState(_employee_state)
+
+
+
 
         age = d.pop("age", UNSET)
 
         _uk_worker = d.pop("ukWorker", UNSET)
         uk_worker: Union[Unset, AeUKWorker]
-        if isinstance(_uk_worker, Unset):
+        if isinstance(_uk_worker,  Unset):
             uk_worker = UNSET
         else:
             uk_worker = AeUKWorker(_uk_worker)
 
+
+
+
         _pay_period = d.pop("payPeriod", UNSET)
         pay_period: Union[Unset, PayPeriods]
-        if isinstance(_pay_period, Unset):
+        if isinstance(_pay_period,  Unset):
             pay_period = UNSET
         else:
             pay_period = PayPeriods(_pay_period)
+
+
+
 
         ordinal = d.pop("ordinal", UNSET)
 
@@ -167,33 +182,45 @@ class AeAssessment:
 
         _ae_exclusion_code = d.pop("aeExclusionCode", UNSET)
         ae_exclusion_code: Union[Unset, AeExclusionCode]
-        if isinstance(_ae_exclusion_code, Unset):
+        if isinstance(_ae_exclusion_code,  Unset):
             ae_exclusion_code = UNSET
         else:
             ae_exclusion_code = AeExclusionCode(_ae_exclusion_code)
 
+
+
+
         _status = d.pop("status", UNSET)
         status: Union[Unset, AeStatus]
-        if isinstance(_status, Unset):
+        if isinstance(_status,  Unset):
             status = UNSET
         else:
             status = AeStatus(_status)
+
+
+
 
         reason = d.pop("reason", UNSET)
 
         _action = d.pop("action", UNSET)
         action: Union[Unset, AeAssessmentAction]
-        if isinstance(_action, Unset):
+        if isinstance(_action,  Unset):
             action = UNSET
         else:
             action = AeAssessmentAction.from_dict(_action)
 
+
+
+
         _employee = d.pop("employee", UNSET)
         employee: Union[Unset, Item]
-        if isinstance(_employee, Unset):
+        if isinstance(_employee,  Unset):
             employee = UNSET
         else:
             employee = Item.from_dict(_employee)
+
+
+
 
         id = d.pop("id", UNSET)
 
@@ -215,3 +242,4 @@ class AeAssessment:
         )
 
         return ae_assessment
+

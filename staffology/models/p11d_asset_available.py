@@ -6,7 +6,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="P11DAssetAvailable")
 
-
 @attr.s(auto_attribs=True)
 class P11DAssetAvailable:
     """
@@ -28,6 +27,7 @@ class P11DAssetAvailable:
     made_good: Union[Unset, None, str] = UNSET
     cash_equiv_or_relevant_amt: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         desc = self.desc
         other = self.other
@@ -38,7 +38,8 @@ class P11DAssetAvailable:
         cash_equiv_or_relevant_amt = self.cash_equiv_or_relevant_amt
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if desc is not UNSET:
             field_dict["desc"] = desc
         if other is not UNSET:
@@ -55,6 +56,8 @@ class P11DAssetAvailable:
             field_dict["cashEquivOrRelevantAmt"] = cash_equiv_or_relevant_amt
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -84,3 +87,4 @@ class P11DAssetAvailable:
         )
 
         return p11d_asset_available
+

@@ -13,27 +13,40 @@ def _get_kwargs(
     *,
     client: Client,
     enabled: Union[Unset, None, bool] = UNSET,
+
 ) -> Dict[str, Any]:
     url = "{}/tenants/{id}/users/{userId}/employercreation".format(
-        client.base_url, id=id, userId=user_id
-    )
+        client.base_url,id=id,userId=user_id)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
 
+    
+
+    
+
     params: Dict[str, Any] = {}
     params["enabled"] = enabled
 
+
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
+
+    
+
+    
+
     return {
-        "method": "put",
+	    "method": "put",
         "url": url,
         "headers": headers,
         "cookies": cookies,
         "timeout": client.get_timeout(),
         "params": params,
     }
+
+
 
 
 def _build_response(*, response: httpx.Response) -> Response[Any]:
@@ -51,6 +64,7 @@ def sync_detailed(
     *,
     client: Client,
     enabled: Union[Unset, None, bool] = UNSET,
+
 ) -> Response[Any]:
     """Enable Employer Creation
 
@@ -65,11 +79,13 @@ def sync_detailed(
         Response[Any]
     """
 
+
     kwargs = _get_kwargs(
         id=id,
-        user_id=user_id,
-        client=client,
-        enabled=enabled,
+user_id=user_id,
+client=client,
+enabled=enabled,
+
     )
 
     response = httpx.request(
@@ -86,6 +102,7 @@ async def asyncio_detailed(
     *,
     client: Client,
     enabled: Union[Unset, None, bool] = UNSET,
+
 ) -> Response[Any]:
     """Enable Employer Creation
 
@@ -100,14 +117,20 @@ async def asyncio_detailed(
         Response[Any]
     """
 
+
     kwargs = _get_kwargs(
         id=id,
-        user_id=user_id,
-        client=client,
-        enabled=enabled,
+user_id=user_id,
+client=client,
+enabled=enabled,
+
     )
 
     async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+        response = await _client.request(
+            **kwargs
+        )
 
     return _build_response(response=response)
+
+

@@ -6,24 +6,24 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="TieredPensionRate")
 
-
 @attr.s(auto_attribs=True)
 class TieredPensionRate:
     """Part of the TaxYearConfig that our engine uses to calculate tiered pension contributions.
-    It is used internally when our engine performs calculations.
-    You do not need to do anything with this model, it's provided purely for informational purposes.
+It is used internally when our engine performs calculations.
+You do not need to do anything with this model, it's provided purely for informational purposes.
 
-        Attributes:
-            name (Union[Unset, None, str]):
-            description (Union[Unset, None, str]):
-            range_start (Union[Unset, float]):
-            rate (Union[Unset, float]):
+    Attributes:
+        name (Union[Unset, None, str]):
+        description (Union[Unset, None, str]):
+        range_start (Union[Unset, float]):
+        rate (Union[Unset, float]):
     """
 
     name: Union[Unset, None, str] = UNSET
     description: Union[Unset, None, str] = UNSET
     range_start: Union[Unset, float] = UNSET
     rate: Union[Unset, float] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         name = self.name
@@ -32,7 +32,8 @@ class TieredPensionRate:
         rate = self.rate
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if name is not UNSET:
             field_dict["name"] = name
         if description is not UNSET:
@@ -43,6 +44,8 @@ class TieredPensionRate:
             field_dict["rate"] = rate
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -63,3 +66,4 @@ class TieredPensionRate:
         )
 
         return tiered_pension_rate
+

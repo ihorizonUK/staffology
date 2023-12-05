@@ -7,7 +7,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="P11DCar")
 
-
 @attr.s(auto_attribs=True)
 class P11DCar:
     """
@@ -47,6 +46,7 @@ class P11DCar:
     cash_equiv_or_relevant_amt: Union[Unset, None, str] = UNSET
     fuel_cash_equiv_or_relevant_amt: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         make = self.make
         registered = self.registered
@@ -69,7 +69,8 @@ class P11DCar:
         fuel_cash_equiv_or_relevant_amt = self.fuel_cash_equiv_or_relevant_amt
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if make is not UNSET:
             field_dict["make"] = make
         if registered is not UNSET:
@@ -105,6 +106,8 @@ class P11DCar:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
@@ -136,10 +139,13 @@ class P11DCar:
 
         _fuel_withdrawn = d.pop("fuelWithdrawn", UNSET)
         fuel_withdrawn: Union[Unset, P11DCarFreeFuelWithdrawn]
-        if isinstance(_fuel_withdrawn, Unset):
+        if isinstance(_fuel_withdrawn,  Unset):
             fuel_withdrawn = UNSET
         else:
             fuel_withdrawn = P11DCarFreeFuelWithdrawn.from_dict(_fuel_withdrawn)
+
+
+
 
         cash_equiv_or_relevant_amt = d.pop("cashEquivOrRelevantAmt", UNSET)
 
@@ -165,3 +171,4 @@ class P11DCar:
         )
 
         return p11d_car
+

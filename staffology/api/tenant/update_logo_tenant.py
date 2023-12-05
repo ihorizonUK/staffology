@@ -14,16 +14,29 @@ def _get_kwargs(
     *,
     client: Client,
     multipart_data: UpdateLogoTenantMultipartData,
+
 ) -> Dict[str, Any]:
-    url = "{}/tenants/{id}/logo".format(client.base_url, id=id)
+    url = "{}/tenants/{id}/logo".format(
+        client.base_url,id=id)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
 
+    
+
+    
+
+    
+
+    
+
     multipart_multipart_data = multipart_data.to_multipart()
 
+
+
+
     return {
-        "method": "put",
+	    "method": "put",
         "url": url,
         "headers": headers,
         "cookies": cookies,
@@ -35,6 +48,8 @@ def _get_kwargs(
 def _parse_response(*, response: httpx.Response) -> Optional[Tenant]:
     if response.status_code == 200:
         response_200 = Tenant.from_dict(response.json())
+
+
 
         return response_200
     return raise_staffology_exception(response)
@@ -54,6 +69,7 @@ def sync_detailed(
     *,
     client: Client,
     multipart_data: UpdateLogoTenantMultipartData,
+
 ) -> Response[Tenant]:
     """Upload Logo
 
@@ -68,10 +84,12 @@ def sync_detailed(
         Response[Tenant]
     """
 
+
     kwargs = _get_kwargs(
         id=id,
-        client=client,
-        multipart_data=multipart_data,
+client=client,
+multipart_data=multipart_data,
+
     )
 
     response = httpx.request(
@@ -81,12 +99,12 @@ def sync_detailed(
 
     return _build_response(response=response)
 
-
 def sync(
     id: str,
     *,
     client: Client,
     multipart_data: UpdateLogoTenantMultipartData,
+
 ) -> Optional[Tenant]:
     """Upload Logo
 
@@ -101,18 +119,20 @@ def sync(
         Response[Tenant]
     """
 
+
     return sync_detailed(
         id=id,
-        client=client,
-        multipart_data=multipart_data,
-    ).parsed
+client=client,
+multipart_data=multipart_data,
 
+    ).parsed
 
 async def asyncio_detailed(
     id: str,
     *,
     client: Client,
     multipart_data: UpdateLogoTenantMultipartData,
+
 ) -> Response[Tenant]:
     """Upload Logo
 
@@ -127,23 +147,27 @@ async def asyncio_detailed(
         Response[Tenant]
     """
 
+
     kwargs = _get_kwargs(
         id=id,
-        client=client,
-        multipart_data=multipart_data,
+client=client,
+multipart_data=multipart_data,
+
     )
 
     async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+        response = await _client.request(
+            **kwargs
+        )
 
     return _build_response(response=response)
-
 
 async def asyncio(
     id: str,
     *,
     client: Client,
     multipart_data: UpdateLogoTenantMultipartData,
+
 ) -> Optional[Tenant]:
     """Upload Logo
 
@@ -158,10 +182,11 @@ async def asyncio(
         Response[Tenant]
     """
 
-    return (
-        await asyncio_detailed(
-            id=id,
-            client=client,
-            multipart_data=multipart_data,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        id=id,
+client=client,
+multipart_data=multipart_data,
+
+    )).parsed
+

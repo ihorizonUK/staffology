@@ -8,7 +8,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="Webhook")
 
-
 @attr.s(auto_attribs=True)
 class Webhook:
     """
@@ -28,6 +27,7 @@ class Webhook:
     last_payload: Union[Unset, WebhookPayload] = UNSET
     id: Union[Unset, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         url = self.url
         webhook_event: Union[Unset, str] = UNSET
@@ -43,11 +43,9 @@ class Webhook:
         id = self.id
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update(
-            {
-                "url": url,
-            }
-        )
+        field_dict.update({
+            "url": url,
+        })
         if webhook_event is not UNSET:
             field_dict["webhookEvent"] = webhook_event
         if active is not UNSET:
@@ -61,6 +59,8 @@ class Webhook:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
@@ -68,10 +68,13 @@ class Webhook:
 
         _webhook_event = d.pop("webhookEvent", UNSET)
         webhook_event: Union[Unset, WebhookEvent]
-        if isinstance(_webhook_event, Unset):
+        if isinstance(_webhook_event,  Unset):
             webhook_event = UNSET
         else:
             webhook_event = WebhookEvent(_webhook_event)
+
+
+
 
         active = d.pop("active", UNSET)
 
@@ -79,10 +82,13 @@ class Webhook:
 
         _last_payload = d.pop("lastPayload", UNSET)
         last_payload: Union[Unset, WebhookPayload]
-        if isinstance(_last_payload, Unset):
+        if isinstance(_last_payload,  Unset):
             last_payload = UNSET
         else:
             last_payload = WebhookPayload.from_dict(_last_payload)
+
+
+
 
         id = d.pop("id", UNSET)
 
@@ -96,3 +102,4 @@ class Webhook:
         )
 
         return webhook
+

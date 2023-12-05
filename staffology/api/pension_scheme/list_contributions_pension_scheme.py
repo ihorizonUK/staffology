@@ -15,18 +15,26 @@ def _get_kwargs(
     tax_year: TaxYear,
     *,
     client: Client,
+
 ) -> Dict[str, Any]:
-    url = (
-        "{}/employers/{employerId}/pensionschemes/{id}/contributions/{taxYear}".format(
-            client.base_url, employerId=employer_id, id=id, taxYear=tax_year
-        )
-    )
+    url = "{}/employers/{employerId}/pensionschemes/{id}/contributions/{taxYear}".format(
+        client.base_url,employerId=employer_id,id=id,taxYear=tax_year)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
 
+    
+
+    
+
+    
+
+    
+
+    
+
     return {
-        "method": "get",
+	    "method": "get",
         "url": url,
         "headers": headers,
         "cookies": cookies,
@@ -38,8 +46,10 @@ def _parse_response(*, response: httpx.Response) -> Optional[List[Item]]:
     if response.status_code == 200:
         response_200 = []
         _response_200 = response.json()
-        for response_200_item_data in _response_200:
+        for response_200_item_data in (_response_200):
             response_200_item = Item.from_dict(response_200_item_data)
+
+
 
             response_200.append(response_200_item)
 
@@ -62,6 +72,7 @@ def sync_detailed(
     tax_year: TaxYear,
     *,
     client: Client,
+
 ) -> Response[List[Item]]:
     """List Contributions
 
@@ -79,11 +90,13 @@ def sync_detailed(
         Response[List[Item]]
     """
 
+
     kwargs = _get_kwargs(
         employer_id=employer_id,
-        id=id,
-        tax_year=tax_year,
-        client=client,
+id=id,
+tax_year=tax_year,
+client=client,
+
     )
 
     response = httpx.request(
@@ -93,13 +106,13 @@ def sync_detailed(
 
     return _build_response(response=response)
 
-
 def sync(
     employer_id: str,
     id: str,
     tax_year: TaxYear,
     *,
     client: Client,
+
 ) -> Optional[List[Item]]:
     """List Contributions
 
@@ -117,13 +130,14 @@ def sync(
         Response[List[Item]]
     """
 
+
     return sync_detailed(
         employer_id=employer_id,
-        id=id,
-        tax_year=tax_year,
-        client=client,
-    ).parsed
+id=id,
+tax_year=tax_year,
+client=client,
 
+    ).parsed
 
 async def asyncio_detailed(
     employer_id: str,
@@ -131,6 +145,7 @@ async def asyncio_detailed(
     tax_year: TaxYear,
     *,
     client: Client,
+
 ) -> Response[List[Item]]:
     """List Contributions
 
@@ -148,18 +163,21 @@ async def asyncio_detailed(
         Response[List[Item]]
     """
 
+
     kwargs = _get_kwargs(
         employer_id=employer_id,
-        id=id,
-        tax_year=tax_year,
-        client=client,
+id=id,
+tax_year=tax_year,
+client=client,
+
     )
 
     async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+        response = await _client.request(
+            **kwargs
+        )
 
     return _build_response(response=response)
-
 
 async def asyncio(
     employer_id: str,
@@ -167,6 +185,7 @@ async def asyncio(
     tax_year: TaxYear,
     *,
     client: Client,
+
 ) -> Optional[List[Item]]:
     """List Contributions
 
@@ -184,11 +203,12 @@ async def asyncio(
         Response[List[Item]]
     """
 
-    return (
-        await asyncio_detailed(
-            employer_id=employer_id,
-            id=id,
-            tax_year=tax_year,
-            client=client,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        employer_id=employer_id,
+id=id,
+tax_year=tax_year,
+client=client,
+
+    )).parsed
+

@@ -6,7 +6,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="RecoverableAmounts")
 
-
 @attr.s(auto_attribs=True)
 class RecoverableAmounts:
     """
@@ -16,7 +15,7 @@ class RecoverableAmounts:
         spp_recovered (Union[Unset, float]): Value of Statutory Paternity Pay recovered year to date
         sap_recovered (Union[Unset, float]): Value of Statutory Adoption Pay recovered year to date
         sh_pp_recovered (Union[Unset, float]): Value of Shared Parental Pay recovered year to date
-        spbp_recovered (Union[Unset, float]): Value of Statutory Parental Bereavment Pay recovered year to date
+        spbp_recovered (Union[Unset, float]): Value of Statutory Parental Bereavement Pay recovered year to date
         nic_compensation_on_smp (Union[Unset, float]): Value of NIC compensation on SMP year to date
         nic_compensation_on_spp (Union[Unset, float]): Value of NIC compensation on Statutory Paternity Pay year to date
         nic_compensation_on_sap (Union[Unset, float]): Value of NIC compensation on Statutory Adoption Pay year to date
@@ -41,6 +40,7 @@ class RecoverableAmounts:
     cis_deductions_suffered: Union[Unset, float] = UNSET
     total: Union[Unset, float] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         tax_month = self.tax_month
         smp_recovered = self.smp_recovered
@@ -57,7 +57,8 @@ class RecoverableAmounts:
         total = self.total
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if tax_month is not UNSET:
             field_dict["taxMonth"] = tax_month
         if smp_recovered is not UNSET:
@@ -86,6 +87,8 @@ class RecoverableAmounts:
             field_dict["total"] = total
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -133,3 +136,4 @@ class RecoverableAmounts:
         )
 
         return recoverable_amounts
+

@@ -10,7 +10,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="CisVerificationDetails")
 
-
 @attr.s(auto_attribs=True)
 class CisVerificationDetails:
     """
@@ -33,6 +32,7 @@ class CisVerificationDetails:
     verification_request: Union[Unset, None, str] = UNSET
     verification_response: Union[Unset, CisSubContractor] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         manually_entered = self.manually_entered
         match_instead_of_verify = self.match_instead_of_verify
@@ -50,8 +50,10 @@ class CisVerificationDetails:
         if not isinstance(self.verification_response, Unset):
             verification_response = self.verification_response.to_dict()
 
+
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if manually_entered is not UNSET:
             field_dict["manuallyEntered"] = manually_entered
         if match_instead_of_verify is not UNSET:
@@ -69,6 +71,8 @@ class CisVerificationDetails:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
@@ -82,26 +86,35 @@ class CisVerificationDetails:
         date: Union[Unset, None, datetime.date]
         if _date is None:
             date = None
-        elif isinstance(_date, Unset):
+        elif isinstance(_date,  Unset):
             date = UNSET
         else:
             date = isoparse(_date).date()
 
+
+
+
         _tax_status = d.pop("taxStatus", UNSET)
         tax_status: Union[Unset, CISTaxStatus]
-        if isinstance(_tax_status, Unset):
+        if isinstance(_tax_status,  Unset):
             tax_status = UNSET
         else:
             tax_status = CISTaxStatus(_tax_status)
+
+
+
 
         verification_request = d.pop("verificationRequest", UNSET)
 
         _verification_response = d.pop("verificationResponse", UNSET)
         verification_response: Union[Unset, CisSubContractor]
-        if isinstance(_verification_response, Unset):
+        if isinstance(_verification_response,  Unset):
             verification_response = UNSET
         else:
             verification_response = CisSubContractor.from_dict(_verification_response)
+
+
+
 
         cis_verification_details = cls(
             manually_entered=manually_entered,
@@ -114,3 +127,4 @@ class CisVerificationDetails:
         )
 
         return cis_verification_details
+

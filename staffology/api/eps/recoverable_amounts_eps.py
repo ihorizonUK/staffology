@@ -58,7 +58,11 @@ def sync_detailed(
 ) -> Response[RecoverableAmounts]:
     """Recoverable Amounts
 
-     Get all recoverable amounts (SMP, etc) for a given tax year, up to the given tax month
+     Get all recoverable amounts (SMP, etc) for a given tax year, up to the given tax month, and if the
+    'Linked EPS'
+    is enabled by the employer, recoverable amounts as well as the recoverable amounts for any employers
+    with 'Linked EPS' enabled and with the same PAYE scheme
+    is returned as a sum.
 
     Args:
         employer_id (str):
@@ -93,7 +97,11 @@ def sync(
 ) -> Optional[RecoverableAmounts]:
     """Recoverable Amounts
 
-     Get all recoverable amounts (SMP, etc) for a given tax year, up to the given tax month
+     Get all recoverable amounts (SMP, etc) for a given tax year, up to the given tax month, and if the
+    'Linked EPS'
+    is enabled by the employer, recoverable amounts as well as the recoverable amounts for any employers
+    with 'Linked EPS' enabled and with the same PAYE scheme
+    is returned as a sum.
 
     Args:
         employer_id (str):
@@ -121,7 +129,11 @@ async def asyncio_detailed(
 ) -> Response[RecoverableAmounts]:
     """Recoverable Amounts
 
-     Get all recoverable amounts (SMP, etc) for a given tax year, up to the given tax month
+     Get all recoverable amounts (SMP, etc) for a given tax year, up to the given tax month, and if the
+    'Linked EPS'
+    is enabled by the employer, recoverable amounts as well as the recoverable amounts for any employers
+    with 'Linked EPS' enabled and with the same PAYE scheme
+    is returned as a sum.
 
     Args:
         employer_id (str):
@@ -154,7 +166,11 @@ async def asyncio(
 ) -> Optional[RecoverableAmounts]:
     """Recoverable Amounts
 
-     Get all recoverable amounts (SMP, etc) for a given tax year, up to the given tax month
+     Get all recoverable amounts (SMP, etc) for a given tax year, up to the given tax month, and if the
+    'Linked EPS'
+    is enabled by the employer, recoverable amounts as well as the recoverable amounts for any employers
+    with 'Linked EPS' enabled and with the same PAYE scheme
+    is returned as a sum.
 
     Args:
         employer_id (str):

@@ -8,7 +8,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="HolidayReportLine")
 
-
 @attr.s(auto_attribs=True)
 class HolidayReportLine:
     """
@@ -26,6 +25,7 @@ class HolidayReportLine:
     day_rate: Union[Unset, None, float] = UNSET
     leave_settings: Union[Unset, LeaveSettings] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         employee: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.employee, Unset):
@@ -38,8 +38,10 @@ class HolidayReportLine:
         if not isinstance(self.leave_settings, Unset):
             leave_settings = self.leave_settings.to_dict()
 
+
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if employee is not UNSET:
             field_dict["employee"] = employee
         if payroll_code is not UNSET:
@@ -53,15 +55,20 @@ class HolidayReportLine:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _employee = d.pop("employee", UNSET)
         employee: Union[Unset, Item]
-        if isinstance(_employee, Unset):
+        if isinstance(_employee,  Unset):
             employee = UNSET
         else:
             employee = Item.from_dict(_employee)
+
+
+
 
         payroll_code = d.pop("payrollCode", UNSET)
 
@@ -71,10 +78,13 @@ class HolidayReportLine:
 
         _leave_settings = d.pop("leaveSettings", UNSET)
         leave_settings: Union[Unset, LeaveSettings]
-        if isinstance(_leave_settings, Unset):
+        if isinstance(_leave_settings,  Unset):
             leave_settings = UNSET
         else:
             leave_settings = LeaveSettings.from_dict(_leave_settings)
+
+
+
 
         holiday_report_line = cls(
             employee=employee,
@@ -85,3 +95,4 @@ class HolidayReportLine:
         )
 
         return holiday_report_line
+

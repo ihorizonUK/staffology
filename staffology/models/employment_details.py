@@ -16,15 +16,14 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="EmploymentDetails")
 
-
 @attr.s(auto_attribs=True)
 class EmploymentDetails:
     """
     Attributes:
         payroll_code (str): The Employees Payroll Code. Must be unique within the Employer.
-        cis_sub_contractor (Union[Unset, bool]): Set to True if this Employee is a CIS Subcontractor. The
-            <code>Cis</code> property contains further information
-        job_title (Union[Unset, None, str]): Job Title of Primary post of the Employee
+        cis_sub_contractor (Union[Unset, bool]): Set to True if this Employee is a CIS Subcontractor. The ```Cis```
+            property contains further information
+        job_title (Union[Unset, None, str]): Job Title of Primary role of the Employee
         on_hold (Union[Unset, bool]): Set to true to temporarily exclude the employee from payruns
         on_furlough (Union[Unset, bool]): Set to true if the employee is on furlough.
         furlough_start (Union[Unset, None, datetime.date]): Furlough Start Date.
@@ -48,9 +47,13 @@ class EmploymentDetails:
         cis (Union[Unset, CisDetails]): If an Employee is marked as a CIS Subcontractor then this model provides further
             details specifically related to the CIS details of the Employee.
         department (Union[Unset, Department]):
-        posts (Union[Unset, None, List[Item]]): List of Posts held by Employee
+        roles (Union[Unset, None, List[Item]]): List of Roles held by Employee
         is_working_in_free_port (Union[Unset, bool]): Flag indicating the employee is employed in a Freeport
         veteran_details (Union[Unset, VeteranDetails]): Employment details for veterans
+        continuous_employment_date (Union[Unset, None, datetime.date]): [readonly] Continuous employment date for the
+            occupational scheme.
+        include_seconded_info_on_starter (Union[Unset, bool]): [readonly] If true then include seconded information on
+            starter of FPS
     """
 
     payroll_code: str
@@ -75,9 +78,12 @@ class EmploymentDetails:
     leaver_details: Union[Unset, LeaverDetails] = UNSET
     cis: Union[Unset, CisDetails] = UNSET
     department: Union[Unset, Department] = UNSET
-    posts: Union[Unset, None, List[Item]] = UNSET
+    roles: Union[Unset, None, List[Item]] = UNSET
     is_working_in_free_port: Union[Unset, bool] = UNSET
     veteran_details: Union[Unset, VeteranDetails] = UNSET
+    continuous_employment_date: Union[Unset, None, datetime.date] = UNSET
+    include_seconded_info_on_starter: Union[Unset, bool] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         payroll_code = self.payroll_code
@@ -87,9 +93,7 @@ class EmploymentDetails:
         on_furlough = self.on_furlough
         furlough_start: Union[Unset, None, str] = UNSET
         if not isinstance(self.furlough_start, Unset):
-            furlough_start = (
-                self.furlough_start.isoformat() if self.furlough_start else None
-            )
+            furlough_start = self.furlough_start.isoformat() if self.furlough_start else None
 
         furlough_end: Union[Unset, None, str] = UNSET
         if not isinstance(self.furlough_end, Unset):
@@ -106,19 +110,11 @@ class EmploymentDetails:
         is_apprentice = self.is_apprentice
         apprenticeship_start_date: Union[Unset, None, str] = UNSET
         if not isinstance(self.apprenticeship_start_date, Unset):
-            apprenticeship_start_date = (
-                self.apprenticeship_start_date.isoformat()
-                if self.apprenticeship_start_date
-                else None
-            )
+            apprenticeship_start_date = self.apprenticeship_start_date.isoformat() if self.apprenticeship_start_date else None
 
         apprenticeship_end_date: Union[Unset, None, str] = UNSET
         if not isinstance(self.apprenticeship_end_date, Unset):
-            apprenticeship_end_date = (
-                self.apprenticeship_end_date.isoformat()
-                if self.apprenticeship_end_date
-                else None
-            )
+            apprenticeship_end_date = self.apprenticeship_end_date.isoformat() if self.apprenticeship_end_date else None
 
         working_pattern = self.working_pattern
         force_previous_payroll_code = self.force_previous_payroll_code
@@ -142,28 +138,35 @@ class EmploymentDetails:
         if not isinstance(self.department, Unset):
             department = self.department.to_dict()
 
-        posts: Union[Unset, None, List[Dict[str, Any]]] = UNSET
-        if not isinstance(self.posts, Unset):
-            if self.posts is None:
-                posts = None
+        roles: Union[Unset, None, List[Dict[str, Any]]] = UNSET
+        if not isinstance(self.roles, Unset):
+            if self.roles is None:
+                roles = None
             else:
-                posts = []
-                for posts_item_data in self.posts:
-                    posts_item = posts_item_data.to_dict()
+                roles = []
+                for roles_item_data in self.roles:
+                    roles_item = roles_item_data.to_dict()
 
-                    posts.append(posts_item)
+                    roles.append(roles_item)
+
+
+
 
         is_working_in_free_port = self.is_working_in_free_port
         veteran_details: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.veteran_details, Unset):
             veteran_details = self.veteran_details.to_dict()
 
+        continuous_employment_date: Union[Unset, None, str] = UNSET
+        if not isinstance(self.continuous_employment_date, Unset):
+            continuous_employment_date = self.continuous_employment_date.isoformat() if self.continuous_employment_date else None
+
+        include_seconded_info_on_starter = self.include_seconded_info_on_starter
+
         field_dict: Dict[str, Any] = {}
-        field_dict.update(
-            {
-                "payrollCode": payroll_code,
-            }
-        )
+        field_dict.update({
+            "payrollCode": payroll_code,
+        })
         if cis_sub_contractor is not UNSET:
             field_dict["cisSubContractor"] = cis_sub_contractor
         if job_title is not UNSET:
@@ -179,9 +182,7 @@ class EmploymentDetails:
         if furlough_calculation_basis is not UNSET:
             field_dict["furloughCalculationBasis"] = furlough_calculation_basis
         if furlough_calculation_basis_amount is not UNSET:
-            field_dict[
-                "furloughCalculationBasisAmount"
-            ] = furlough_calculation_basis_amount
+            field_dict["furloughCalculationBasisAmount"] = furlough_calculation_basis_amount
         if partial_furlough is not UNSET:
             field_dict["partialFurlough"] = partial_furlough
         if furlough_hours_normally_worked is not UNSET:
@@ -208,14 +209,20 @@ class EmploymentDetails:
             field_dict["cis"] = cis
         if department is not UNSET:
             field_dict["department"] = department
-        if posts is not UNSET:
-            field_dict["posts"] = posts
+        if roles is not UNSET:
+            field_dict["roles"] = roles
         if is_working_in_free_port is not UNSET:
             field_dict["isWorkingInFreePort"] = is_working_in_free_port
         if veteran_details is not UNSET:
             field_dict["veteranDetails"] = veteran_details
+        if continuous_employment_date is not UNSET:
+            field_dict["continuousEmploymentDate"] = continuous_employment_date
+        if include_seconded_info_on_starter is not UNSET:
+            field_dict["includeSecondedInfoOnStarter"] = include_seconded_info_on_starter
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -234,32 +241,37 @@ class EmploymentDetails:
         furlough_start: Union[Unset, None, datetime.date]
         if _furlough_start is None:
             furlough_start = None
-        elif isinstance(_furlough_start, Unset):
+        elif isinstance(_furlough_start,  Unset):
             furlough_start = UNSET
         else:
             furlough_start = isoparse(_furlough_start).date()
+
+
+
 
         _furlough_end = d.pop("furloughEnd", UNSET)
         furlough_end: Union[Unset, None, datetime.date]
         if _furlough_end is None:
             furlough_end = None
-        elif isinstance(_furlough_end, Unset):
+        elif isinstance(_furlough_end,  Unset):
             furlough_end = UNSET
         else:
             furlough_end = isoparse(_furlough_end).date()
 
+
+
+
         _furlough_calculation_basis = d.pop("furloughCalculationBasis", UNSET)
         furlough_calculation_basis: Union[Unset, FurloughCalculationBasis]
-        if isinstance(_furlough_calculation_basis, Unset):
+        if isinstance(_furlough_calculation_basis,  Unset):
             furlough_calculation_basis = UNSET
         else:
-            furlough_calculation_basis = FurloughCalculationBasis(
-                _furlough_calculation_basis
-            )
+            furlough_calculation_basis = FurloughCalculationBasis(_furlough_calculation_basis)
 
-        furlough_calculation_basis_amount = d.pop(
-            "furloughCalculationBasisAmount", UNSET
-        )
+
+
+
+        furlough_calculation_basis_amount = d.pop("furloughCalculationBasisAmount", UNSET)
 
         partial_furlough = d.pop("partialFurlough", UNSET)
 
@@ -273,19 +285,25 @@ class EmploymentDetails:
         apprenticeship_start_date: Union[Unset, None, datetime.date]
         if _apprenticeship_start_date is None:
             apprenticeship_start_date = None
-        elif isinstance(_apprenticeship_start_date, Unset):
+        elif isinstance(_apprenticeship_start_date,  Unset):
             apprenticeship_start_date = UNSET
         else:
             apprenticeship_start_date = isoparse(_apprenticeship_start_date).date()
+
+
+
 
         _apprenticeship_end_date = d.pop("apprenticeshipEndDate", UNSET)
         apprenticeship_end_date: Union[Unset, None, datetime.date]
         if _apprenticeship_end_date is None:
             apprenticeship_end_date = None
-        elif isinstance(_apprenticeship_end_date, Unset):
+        elif isinstance(_apprenticeship_end_date,  Unset):
             apprenticeship_end_date = UNSET
         else:
             apprenticeship_end_date = isoparse(_apprenticeship_end_date).date()
+
+
+
 
         working_pattern = d.pop("workingPattern", UNSET)
 
@@ -293,54 +311,89 @@ class EmploymentDetails:
 
         _starter_details = d.pop("starterDetails", UNSET)
         starter_details: Union[Unset, StarterDetails]
-        if isinstance(_starter_details, Unset):
+        if isinstance(_starter_details,  Unset):
             starter_details = UNSET
         else:
             starter_details = StarterDetails.from_dict(_starter_details)
 
+
+
+
         _directorship_details = d.pop("directorshipDetails", UNSET)
         directorship_details: Union[Unset, DirectorshipDetails]
-        if isinstance(_directorship_details, Unset):
+        if isinstance(_directorship_details,  Unset):
             directorship_details = UNSET
         else:
             directorship_details = DirectorshipDetails.from_dict(_directorship_details)
 
+
+
+
         _leaver_details = d.pop("leaverDetails", UNSET)
         leaver_details: Union[Unset, LeaverDetails]
-        if isinstance(_leaver_details, Unset):
+        if isinstance(_leaver_details,  Unset):
             leaver_details = UNSET
         else:
             leaver_details = LeaverDetails.from_dict(_leaver_details)
 
+
+
+
         _cis = d.pop("cis", UNSET)
         cis: Union[Unset, CisDetails]
-        if isinstance(_cis, Unset):
+        if isinstance(_cis,  Unset):
             cis = UNSET
         else:
             cis = CisDetails.from_dict(_cis)
 
+
+
+
         _department = d.pop("department", UNSET)
         department: Union[Unset, Department]
-        if isinstance(_department, Unset):
+        if isinstance(_department,  Unset):
             department = UNSET
         else:
             department = Department.from_dict(_department)
 
-        posts = []
-        _posts = d.pop("posts", UNSET)
-        for posts_item_data in _posts or []:
-            posts_item = Item.from_dict(posts_item_data)
 
-            posts.append(posts_item)
+
+
+        roles = []
+        _roles = d.pop("roles", UNSET)
+        for roles_item_data in (_roles or []):
+            roles_item = Item.from_dict(roles_item_data)
+
+
+
+            roles.append(roles_item)
+
 
         is_working_in_free_port = d.pop("isWorkingInFreePort", UNSET)
 
         _veteran_details = d.pop("veteranDetails", UNSET)
         veteran_details: Union[Unset, VeteranDetails]
-        if isinstance(_veteran_details, Unset):
+        if isinstance(_veteran_details,  Unset):
             veteran_details = UNSET
         else:
             veteran_details = VeteranDetails.from_dict(_veteran_details)
+
+
+
+
+        _continuous_employment_date = d.pop("continuousEmploymentDate", UNSET)
+        continuous_employment_date: Union[Unset, None, datetime.date]
+        if _continuous_employment_date is None:
+            continuous_employment_date = None
+        elif isinstance(_continuous_employment_date,  Unset):
+            continuous_employment_date = UNSET
+        else:
+            continuous_employment_date = isoparse(_continuous_employment_date).date()
+
+
+
+
+        include_seconded_info_on_starter = d.pop("includeSecondedInfoOnStarter", UNSET)
 
         employment_details = cls(
             payroll_code=payroll_code,
@@ -365,9 +418,12 @@ class EmploymentDetails:
             leaver_details=leaver_details,
             cis=cis,
             department=department,
-            posts=posts,
+            roles=roles,
             is_working_in_free_port=is_working_in_free_port,
             veteran_details=veteran_details,
+            continuous_employment_date=continuous_employment_date,
+            include_seconded_info_on_starter=include_seconded_info_on_starter,
         )
 
         return employment_details
+

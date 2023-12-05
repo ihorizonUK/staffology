@@ -7,7 +7,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="FullSummaryOfPayReportLine")
 
-
 @attr.s(auto_attribs=True)
 class FullSummaryOfPayReportLine:
     """
@@ -26,6 +25,7 @@ class FullSummaryOfPayReportLine:
     qty: Union[Unset, None, float] = UNSET
     head_count: Union[Unset, int] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         pay_code: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.pay_code, Unset):
@@ -37,7 +37,8 @@ class FullSummaryOfPayReportLine:
         head_count = self.head_count
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if pay_code is not UNSET:
             field_dict["payCode"] = pay_code
         if value is not UNSET:
@@ -51,15 +52,20 @@ class FullSummaryOfPayReportLine:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _pay_code = d.pop("payCode", UNSET)
         pay_code: Union[Unset, PayCode]
-        if isinstance(_pay_code, Unset):
+        if isinstance(_pay_code,  Unset):
             pay_code = UNSET
         else:
             pay_code = PayCode.from_dict(_pay_code)
+
+
+
 
         value = d.pop("value", UNSET)
 
@@ -78,3 +84,4 @@ class FullSummaryOfPayReportLine:
         )
 
         return full_summary_of_pay_report_line
+

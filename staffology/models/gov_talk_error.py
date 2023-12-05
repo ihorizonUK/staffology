@@ -6,7 +6,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GovTalkError")
 
-
 @attr.s(auto_attribs=True)
 class GovTalkError:
     """
@@ -24,6 +23,7 @@ class GovTalkError:
     text: Union[Unset, None, str] = UNSET
     location: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         raised_by = self.raised_by
         number = self.number
@@ -32,7 +32,8 @@ class GovTalkError:
         location = self.location
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if raised_by is not UNSET:
             field_dict["raisedBy"] = raised_by
         if number is not UNSET:
@@ -45,6 +46,8 @@ class GovTalkError:
             field_dict["location"] = location
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -68,3 +71,4 @@ class GovTalkError:
         )
 
         return gov_talk_error
+

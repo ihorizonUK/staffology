@@ -19,27 +19,35 @@ def _get_kwargs(
     client: Client,
     ordinal: Union[Unset, None, int] = 1,
     payrun_entry_id: Union[Unset, None, str] = UNSET,
+
 ) -> Dict[str, Any]:
     url = "{}/employers/{employerId}/payrun/{taxYear}/{payPeriod}/{periodNumber}/processingnotes".format(
-        client.base_url,
-        employerId=employer_id,
-        taxYear=tax_year,
-        payPeriod=pay_period,
-        periodNumber=period_number,
-    )
+        client.base_url,employerId=employer_id,taxYear=tax_year,payPeriod=pay_period,periodNumber=period_number)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
 
+    
+
+    
+
     params: Dict[str, Any] = {}
     params["ordinal"] = ordinal
 
+
     params["payrunEntryId"] = payrun_entry_id
+
+
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
+
+    
+
+    
+
     return {
-        "method": "get",
+	    "method": "get",
         "url": url,
         "headers": headers,
         "cookies": cookies,
@@ -52,8 +60,10 @@ def _parse_response(*, response: httpx.Response) -> Optional[List[Item]]:
     if response.status_code == 200:
         response_200 = []
         _response_200 = response.json()
-        for response_200_item_data in _response_200:
+        for response_200_item_data in (_response_200):
             response_200_item = Item.from_dict(response_200_item_data)
+
+
 
             response_200.append(response_200_item)
 
@@ -79,6 +89,7 @@ def sync_detailed(
     client: Client,
     ordinal: Union[Unset, None, int] = 1,
     payrun_entry_id: Union[Unset, None, str] = UNSET,
+
 ) -> Response[List[Item]]:
     """List ProcessingNotes for a PayRun
 
@@ -94,14 +105,16 @@ def sync_detailed(
         Response[List[Item]]
     """
 
+
     kwargs = _get_kwargs(
         employer_id=employer_id,
-        tax_year=tax_year,
-        pay_period=pay_period,
-        period_number=period_number,
-        client=client,
-        ordinal=ordinal,
-        payrun_entry_id=payrun_entry_id,
+tax_year=tax_year,
+pay_period=pay_period,
+period_number=period_number,
+client=client,
+ordinal=ordinal,
+payrun_entry_id=payrun_entry_id,
+
     )
 
     response = httpx.request(
@@ -110,7 +123,6 @@ def sync_detailed(
     )
 
     return _build_response(response=response)
-
 
 def sync(
     employer_id: str,
@@ -121,6 +133,7 @@ def sync(
     client: Client,
     ordinal: Union[Unset, None, int] = 1,
     payrun_entry_id: Union[Unset, None, str] = UNSET,
+
 ) -> Optional[List[Item]]:
     """List ProcessingNotes for a PayRun
 
@@ -136,16 +149,17 @@ def sync(
         Response[List[Item]]
     """
 
+
     return sync_detailed(
         employer_id=employer_id,
-        tax_year=tax_year,
-        pay_period=pay_period,
-        period_number=period_number,
-        client=client,
-        ordinal=ordinal,
-        payrun_entry_id=payrun_entry_id,
-    ).parsed
+tax_year=tax_year,
+pay_period=pay_period,
+period_number=period_number,
+client=client,
+ordinal=ordinal,
+payrun_entry_id=payrun_entry_id,
 
+    ).parsed
 
 async def asyncio_detailed(
     employer_id: str,
@@ -156,6 +170,7 @@ async def asyncio_detailed(
     client: Client,
     ordinal: Union[Unset, None, int] = 1,
     payrun_entry_id: Union[Unset, None, str] = UNSET,
+
 ) -> Response[List[Item]]:
     """List ProcessingNotes for a PayRun
 
@@ -171,21 +186,24 @@ async def asyncio_detailed(
         Response[List[Item]]
     """
 
+
     kwargs = _get_kwargs(
         employer_id=employer_id,
-        tax_year=tax_year,
-        pay_period=pay_period,
-        period_number=period_number,
-        client=client,
-        ordinal=ordinal,
-        payrun_entry_id=payrun_entry_id,
+tax_year=tax_year,
+pay_period=pay_period,
+period_number=period_number,
+client=client,
+ordinal=ordinal,
+payrun_entry_id=payrun_entry_id,
+
     )
 
     async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+        response = await _client.request(
+            **kwargs
+        )
 
     return _build_response(response=response)
-
 
 async def asyncio(
     employer_id: str,
@@ -196,6 +214,7 @@ async def asyncio(
     client: Client,
     ordinal: Union[Unset, None, int] = 1,
     payrun_entry_id: Union[Unset, None, str] = UNSET,
+
 ) -> Optional[List[Item]]:
     """List ProcessingNotes for a PayRun
 
@@ -211,14 +230,15 @@ async def asyncio(
         Response[List[Item]]
     """
 
-    return (
-        await asyncio_detailed(
-            employer_id=employer_id,
-            tax_year=tax_year,
-            pay_period=pay_period,
-            period_number=period_number,
-            client=client,
-            ordinal=ordinal,
-            payrun_entry_id=payrun_entry_id,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        employer_id=employer_id,
+tax_year=tax_year,
+pay_period=pay_period,
+period_number=period_number,
+client=client,
+ordinal=ordinal,
+payrun_entry_id=payrun_entry_id,
+
+    )).parsed
+

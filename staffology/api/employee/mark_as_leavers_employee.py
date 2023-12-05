@@ -16,9 +16,7 @@ def _get_kwargs(
     date: Union[Unset, None, datetime.datetime] = UNSET,
     email_p45: Union[Unset, None, bool] = UNSET,
 ) -> Dict[str, Any]:
-    url = "{}/employers/{employerId}/employees/leavers".format(
-        client.base_url, employerId=employer_id
-    )
+    url = "{}/employers/{employerId}/employees/leavers".format(client.base_url, employerId=employer_id)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()

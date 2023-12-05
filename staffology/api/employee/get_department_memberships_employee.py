@@ -14,9 +14,7 @@ def _get_kwargs(
     *,
     client: Client,
 ) -> Dict[str, Any]:
-    url = "{}/employers/{employerId}/employees/{id}/departments".format(
-        client.base_url, employerId=employer_id, id=id
-    )
+    url = "{}/employers/{employerId}/employees/{id}/departments".format(client.base_url, employerId=employer_id, id=id)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
@@ -30,9 +28,7 @@ def _get_kwargs(
     }
 
 
-def _parse_response(
-    *, response: httpx.Response
-) -> Optional[List[DepartmentMembership]]:
+def _parse_response(*, response: httpx.Response) -> Optional[List[DepartmentMembership]]:
     if response.status_code == 200:
         response_200 = []
         _response_200 = response.json()
@@ -45,9 +41,7 @@ def _parse_response(
     return raise_staffology_exception(response)
 
 
-def _build_response(
-    *, response: httpx.Response
-) -> Response[List[DepartmentMembership]]:
+def _build_response(*, response: httpx.Response) -> Response[List[DepartmentMembership]]:
     return Response(
         status_code=response.status_code,
         content=response.content,

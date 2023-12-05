@@ -6,7 +6,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="AnalysisReportLineValue")
 
-
 @attr.s(auto_attribs=True)
 class AnalysisReportLineValue:
     """
@@ -20,13 +19,15 @@ class AnalysisReportLineValue:
     code: Union[Unset, None, str] = UNSET
     value: Union[Unset, float] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         qty = self.qty
         code = self.code
         value = self.value
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if qty is not UNSET:
             field_dict["qty"] = qty
         if code is not UNSET:
@@ -35,6 +36,8 @@ class AnalysisReportLineValue:
             field_dict["value"] = value
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -52,3 +55,4 @@ class AnalysisReportLineValue:
         )
 
         return analysis_report_line_value
+

@@ -20,11 +20,7 @@ def _get_kwargs(
     ordinal: Union[Unset, None, int] = 1,
 ) -> Dict[str, Any]:
     url = "{}/employers/{employerId}/payrun/{taxYear}/{payPeriod}/{periodNumber}/events".format(
-        client.base_url,
-        employerId=employer_id,
-        taxYear=tax_year,
-        payPeriod=pay_period,
-        periodNumber=period_number,
+        client.base_url, employerId=employer_id, taxYear=tax_year, payPeriod=pay_period, periodNumber=period_number
     )
 
     headers: Dict[str, str] = client.get_headers()
@@ -45,9 +41,7 @@ def _get_kwargs(
     }
 
 
-def _parse_response(
-    *, response: httpx.Response
-) -> Optional[List[PaySchedulePeriodEvent]]:
+def _parse_response(*, response: httpx.Response) -> Optional[List[PaySchedulePeriodEvent]]:
     if response.status_code == 200:
         response_200 = []
         _response_200 = response.json()
@@ -60,9 +54,7 @@ def _parse_response(
     return raise_staffology_exception(response)
 
 
-def _build_response(
-    *, response: httpx.Response
-) -> Response[List[PaySchedulePeriodEvent]]:
+def _build_response(*, response: httpx.Response) -> Response[List[PaySchedulePeriodEvent]]:
     return Response(
         status_code=response.status_code,
         content=response.content,

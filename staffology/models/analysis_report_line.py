@@ -8,7 +8,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="AnalysisReportLine")
 
-
 @attr.s(auto_attribs=True)
 class AnalysisReportLine:
     """
@@ -22,6 +21,7 @@ class AnalysisReportLine:
         employer_nic (Union[Unset, float]):
         employer_pension (Union[Unset, float]):
         show_qty_column (Union[Unset, bool]):
+        ni_saving (Union[Unset, float]):
         lines (Union[Unset, None, List[AnalysisReportLineValue]]):
     """
 
@@ -34,7 +34,9 @@ class AnalysisReportLine:
     employer_nic: Union[Unset, float] = UNSET
     employer_pension: Union[Unset, float] = UNSET
     show_qty_column: Union[Unset, bool] = UNSET
+    ni_saving: Union[Unset, float] = UNSET
     lines: Union[Unset, None, List[AnalysisReportLineValue]] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         employee: Union[Unset, Dict[str, Any]] = UNSET
@@ -49,6 +51,7 @@ class AnalysisReportLine:
         employer_nic = self.employer_nic
         employer_pension = self.employer_pension
         show_qty_column = self.show_qty_column
+        ni_saving = self.ni_saving
         lines: Union[Unset, None, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.lines, Unset):
             if self.lines is None:
@@ -60,8 +63,13 @@ class AnalysisReportLine:
 
                     lines.append(lines_item)
 
+
+
+
+
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if employee is not UNSET:
             field_dict["employee"] = employee
         if gross is not UNSET:
@@ -80,20 +88,27 @@ class AnalysisReportLine:
             field_dict["employerPension"] = employer_pension
         if show_qty_column is not UNSET:
             field_dict["showQtyColumn"] = show_qty_column
+        if ni_saving is not UNSET:
+            field_dict["niSaving"] = ni_saving
         if lines is not UNSET:
             field_dict["lines"] = lines
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _employee = d.pop("employee", UNSET)
         employee: Union[Unset, Item]
-        if isinstance(_employee, Unset):
+        if isinstance(_employee,  Unset):
             employee = UNSET
         else:
             employee = Item.from_dict(_employee)
+
+
+
 
         gross = d.pop("gross", UNSET)
 
@@ -111,12 +126,17 @@ class AnalysisReportLine:
 
         show_qty_column = d.pop("showQtyColumn", UNSET)
 
+        ni_saving = d.pop("niSaving", UNSET)
+
         lines = []
         _lines = d.pop("lines", UNSET)
-        for lines_item_data in _lines or []:
+        for lines_item_data in (_lines or []):
             lines_item = AnalysisReportLineValue.from_dict(lines_item_data)
 
+
+
             lines.append(lines_item)
+
 
         analysis_report_line = cls(
             employee=employee,
@@ -128,7 +148,9 @@ class AnalysisReportLine:
             employer_nic=employer_nic,
             employer_pension=employer_pension,
             show_qty_column=show_qty_column,
+            ni_saving=ni_saving,
             lines=lines,
         )
 
         return analysis_report_line
+

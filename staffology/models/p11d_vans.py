@@ -6,7 +6,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="P11DVans")
 
-
 @attr.s(auto_attribs=True)
 class P11DVans:
     """
@@ -40,6 +39,7 @@ class P11DVans:
     made_good: Union[Unset, None, str] = UNSET
     cash_equiv_or_relevant_amt: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         fuel_cash_equiv_or_relevant_amt = self.fuel_cash_equiv_or_relevant_amt
         type_letter = self.type_letter
@@ -56,7 +56,8 @@ class P11DVans:
         cash_equiv_or_relevant_amt = self.cash_equiv_or_relevant_amt
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if fuel_cash_equiv_or_relevant_amt is not UNSET:
             field_dict["fuelCashEquivOrRelevantAmt"] = fuel_cash_equiv_or_relevant_amt
         if type_letter is not UNSET:
@@ -85,6 +86,8 @@ class P11DVans:
             field_dict["cashEquivOrRelevantAmt"] = cash_equiv_or_relevant_amt
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -132,3 +135,4 @@ class P11DVans:
         )
 
         return p11d_vans
+

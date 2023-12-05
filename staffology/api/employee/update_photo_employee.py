@@ -4,10 +4,8 @@ import httpx
 from staffology.propagate_exceptions import raise_staffology_exception
 
 from ...client import Client
-from ...models.employee import Employee
-from ...models.update_photo_employee_multipart_data import (
-    UpdatePhotoEmployeeMultipartData,
-)
+from ...models.contract_employee_response import ContractEmployeeResponse
+from ...models.update_photo_employee_multipart_data import UpdatePhotoEmployeeMultipartData
 from ...types import Response
 
 
@@ -18,9 +16,7 @@ def _get_kwargs(
     client: Client,
     multipart_data: UpdatePhotoEmployeeMultipartData,
 ) -> Dict[str, Any]:
-    url = "{}/employers/{employerId}/employees/{id}/photo".format(
-        client.base_url, employerId=employer_id, id=id
-    )
+    url = "{}/employers/{employerId}/employees/{id}/photo".format(client.base_url, employerId=employer_id, id=id)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
@@ -37,15 +33,15 @@ def _get_kwargs(
     }
 
 
-def _parse_response(*, response: httpx.Response) -> Optional[Employee]:
+def _parse_response(*, response: httpx.Response) -> Optional[ContractEmployeeResponse]:
     if response.status_code == 200:
-        response_200 = Employee.from_dict(response.json())
+        response_200 = ContractEmployeeResponse.from_dict(response.json())
 
         return response_200
     return raise_staffology_exception(response)
 
 
-def _build_response(*, response: httpx.Response) -> Response[Employee]:
+def _build_response(*, response: httpx.Response) -> Response[ContractEmployeeResponse]:
     return Response(
         status_code=response.status_code,
         content=response.content,
@@ -60,7 +56,7 @@ def sync_detailed(
     *,
     client: Client,
     multipart_data: UpdatePhotoEmployeeMultipartData,
-) -> Response[Employee]:
+) -> Response[ContractEmployeeResponse]:
     """Update Photo
 
      If you already have a URL for the employee photo then you can just set the PhotoUrl property of the
@@ -74,7 +70,7 @@ def sync_detailed(
         multipart_data (UpdatePhotoEmployeeMultipartData):
 
     Returns:
-        Response[Employee]
+        Response[ContractEmployeeResponse]
     """
 
     kwargs = _get_kwargs(
@@ -98,7 +94,7 @@ def sync(
     *,
     client: Client,
     multipart_data: UpdatePhotoEmployeeMultipartData,
-) -> Optional[Employee]:
+) -> Optional[ContractEmployeeResponse]:
     """Update Photo
 
      If you already have a URL for the employee photo then you can just set the PhotoUrl property of the
@@ -112,7 +108,7 @@ def sync(
         multipart_data (UpdatePhotoEmployeeMultipartData):
 
     Returns:
-        Response[Employee]
+        Response[ContractEmployeeResponse]
     """
 
     return sync_detailed(
@@ -129,7 +125,7 @@ async def asyncio_detailed(
     *,
     client: Client,
     multipart_data: UpdatePhotoEmployeeMultipartData,
-) -> Response[Employee]:
+) -> Response[ContractEmployeeResponse]:
     """Update Photo
 
      If you already have a URL for the employee photo then you can just set the PhotoUrl property of the
@@ -143,7 +139,7 @@ async def asyncio_detailed(
         multipart_data (UpdatePhotoEmployeeMultipartData):
 
     Returns:
-        Response[Employee]
+        Response[ContractEmployeeResponse]
     """
 
     kwargs = _get_kwargs(
@@ -165,7 +161,7 @@ async def asyncio(
     *,
     client: Client,
     multipart_data: UpdatePhotoEmployeeMultipartData,
-) -> Optional[Employee]:
+) -> Optional[ContractEmployeeResponse]:
     """Update Photo
 
      If you already have a URL for the employee photo then you can just set the PhotoUrl property of the
@@ -179,7 +175,7 @@ async def asyncio(
         multipart_data (UpdatePhotoEmployeeMultipartData):
 
     Returns:
-        Response[Employee]
+        Response[ContractEmployeeResponse]
     """
 
     return (

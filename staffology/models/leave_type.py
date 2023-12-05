@@ -12,6 +12,7 @@ class LeaveType(str, Enum):
     BEREAVEMENT = "Bereavement"
     SHAREDPARENTALADOPTION = "SharedParentalAdoption"
     PATERNITYADOPTION = "PaternityAdoption"
+    STRIKEACTION = "StrikeAction"
 
     def __str__(self) -> str:
         return str(self.value)

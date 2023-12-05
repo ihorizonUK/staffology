@@ -6,7 +6,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="Cis300Declarations")
 
-
 @attr.s(auto_attribs=True)
 class Cis300Declarations:
     """
@@ -22,6 +21,7 @@ class Cis300Declarations:
     information_correct: Union[Unset, None, str] = UNSET
     inactivity: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         employment_status = self.employment_status
         verification = self.verification
@@ -29,7 +29,8 @@ class Cis300Declarations:
         inactivity = self.inactivity
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if employment_status is not UNSET:
             field_dict["employmentStatus"] = employment_status
         if verification is not UNSET:
@@ -40,6 +41,8 @@ class Cis300Declarations:
             field_dict["inactivity"] = inactivity
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -60,3 +63,4 @@ class Cis300Declarations:
         )
 
         return cis_300_declarations
+

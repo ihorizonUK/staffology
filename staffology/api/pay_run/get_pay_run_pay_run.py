@@ -1,4 +1,4 @@
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, Optional, Union, cast
 
 import httpx
 from staffology.propagate_exceptions import raise_staffology_exception
@@ -18,15 +18,12 @@ def _get_kwargs(
     *,
     client: Client,
     ordinal: Union[Unset, None, int] = 1,
+    page_num: Union[Unset, None, int] = UNSET,
+    page_size: Union[Unset, None, int] = UNSET,
+    search_term: Union[Unset, None, str] = UNSET,
 ) -> Dict[str, Any]:
-    url = (
-        "{}/employers/{employerId}/payrun/{taxYear}/{payPeriod}/{periodNumber}".format(
-            client.base_url,
-            employerId=employer_id,
-            taxYear=tax_year,
-            payPeriod=pay_period,
-            periodNumber=period_number,
-        )
+    url = "{}/employers/{employerId}/payrun/{taxYear}/{payPeriod}/{periodNumber}".format(
+        client.base_url, employerId=employer_id, taxYear=tax_year, payPeriod=pay_period, periodNumber=period_number
     )
 
     headers: Dict[str, str] = client.get_headers()
@@ -34,6 +31,12 @@ def _get_kwargs(
 
     params: Dict[str, Any] = {}
     params["ordinal"] = ordinal
+
+    params["pageNum"] = page_num
+
+    params["pageSize"] = page_size
+
+    params["searchTerm"] = search_term
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
@@ -47,15 +50,18 @@ def _get_kwargs(
     }
 
 
-def _parse_response(*, response: httpx.Response) -> Optional[PayRun]:
+def _parse_response(*, response: httpx.Response) -> Optional[Union[Any, PayRun]]:
     if response.status_code == 200:
         response_200 = PayRun.from_dict(response.json())
 
         return response_200
+    if response.status_code == 400:
+        response_400 = cast(Any, None)
+        return response_400
     return raise_staffology_exception(response)
 
 
-def _build_response(*, response: httpx.Response) -> Response[PayRun]:
+def _build_response(*, response: httpx.Response) -> Response[Union[Any, PayRun]]:
     return Response(
         status_code=response.status_code,
         content=response.content,
@@ -72,7 +78,10 @@ def sync_detailed(
     *,
     client: Client,
     ordinal: Union[Unset, None, int] = 1,
-) -> Response[PayRun]:
+    page_num: Union[Unset, None, int] = UNSET,
+    page_size: Union[Unset, None, int] = UNSET,
+    search_term: Union[Unset, None, str] = UNSET,
+) -> Response[Union[Any, PayRun]]:
     """Get a PayRun
 
     Args:
@@ -81,9 +90,12 @@ def sync_detailed(
         pay_period (PayPeriods):
         period_number (int):
         ordinal (Union[Unset, None, int]):  Default: 1.
+        page_num (Union[Unset, None, int]):
+        page_size (Union[Unset, None, int]):
+        search_term (Union[Unset, None, str]):
 
     Returns:
-        Response[PayRun]
+        Response[Union[Any, PayRun]]
     """
 
     kwargs = _get_kwargs(
@@ -93,6 +105,9 @@ def sync_detailed(
         period_number=period_number,
         client=client,
         ordinal=ordinal,
+        page_num=page_num,
+        page_size=page_size,
+        search_term=search_term,
     )
 
     response = httpx.request(
@@ -111,7 +126,10 @@ def sync(
     *,
     client: Client,
     ordinal: Union[Unset, None, int] = 1,
-) -> Optional[PayRun]:
+    page_num: Union[Unset, None, int] = UNSET,
+    page_size: Union[Unset, None, int] = UNSET,
+    search_term: Union[Unset, None, str] = UNSET,
+) -> Optional[Union[Any, PayRun]]:
     """Get a PayRun
 
     Args:
@@ -120,9 +138,12 @@ def sync(
         pay_period (PayPeriods):
         period_number (int):
         ordinal (Union[Unset, None, int]):  Default: 1.
+        page_num (Union[Unset, None, int]):
+        page_size (Union[Unset, None, int]):
+        search_term (Union[Unset, None, str]):
 
     Returns:
-        Response[PayRun]
+        Response[Union[Any, PayRun]]
     """
 
     return sync_detailed(
@@ -132,6 +153,9 @@ def sync(
         period_number=period_number,
         client=client,
         ordinal=ordinal,
+        page_num=page_num,
+        page_size=page_size,
+        search_term=search_term,
     ).parsed
 
 
@@ -143,7 +167,10 @@ async def asyncio_detailed(
     *,
     client: Client,
     ordinal: Union[Unset, None, int] = 1,
-) -> Response[PayRun]:
+    page_num: Union[Unset, None, int] = UNSET,
+    page_size: Union[Unset, None, int] = UNSET,
+    search_term: Union[Unset, None, str] = UNSET,
+) -> Response[Union[Any, PayRun]]:
     """Get a PayRun
 
     Args:
@@ -152,9 +179,12 @@ async def asyncio_detailed(
         pay_period (PayPeriods):
         period_number (int):
         ordinal (Union[Unset, None, int]):  Default: 1.
+        page_num (Union[Unset, None, int]):
+        page_size (Union[Unset, None, int]):
+        search_term (Union[Unset, None, str]):
 
     Returns:
-        Response[PayRun]
+        Response[Union[Any, PayRun]]
     """
 
     kwargs = _get_kwargs(
@@ -164,6 +194,9 @@ async def asyncio_detailed(
         period_number=period_number,
         client=client,
         ordinal=ordinal,
+        page_num=page_num,
+        page_size=page_size,
+        search_term=search_term,
     )
 
     async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
@@ -180,7 +213,10 @@ async def asyncio(
     *,
     client: Client,
     ordinal: Union[Unset, None, int] = 1,
-) -> Optional[PayRun]:
+    page_num: Union[Unset, None, int] = UNSET,
+    page_size: Union[Unset, None, int] = UNSET,
+    search_term: Union[Unset, None, str] = UNSET,
+) -> Optional[Union[Any, PayRun]]:
     """Get a PayRun
 
     Args:
@@ -189,9 +225,12 @@ async def asyncio(
         pay_period (PayPeriods):
         period_number (int):
         ordinal (Union[Unset, None, int]):  Default: 1.
+        page_num (Union[Unset, None, int]):
+        page_size (Union[Unset, None, int]):
+        search_term (Union[Unset, None, str]):
 
     Returns:
-        Response[PayRun]
+        Response[Union[Any, PayRun]]
     """
 
     return (
@@ -202,5 +241,8 @@ async def asyncio(
             period_number=period_number,
             client=client,
             ordinal=ordinal,
+            page_num=page_num,
+            page_size=page_size,
+            search_term=search_term,
         )
     ).parsed

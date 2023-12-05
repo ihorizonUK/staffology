@@ -7,7 +7,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="EmailAttachment")
 
-
 @attr.s(auto_attribs=True)
 class EmailAttachment:
     """
@@ -23,6 +22,7 @@ class EmailAttachment:
     pdf_password_type: Union[Unset, PdfPasswordType] = UNSET
     id: Union[Unset, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         url = self.url
         filename = self.filename
@@ -33,18 +33,18 @@ class EmailAttachment:
         id = self.id
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update(
-            {
-                "url": url,
-                "filename": filename,
-            }
-        )
+        field_dict.update({
+            "url": url,
+            "filename": filename,
+        })
         if pdf_password_type is not UNSET:
             field_dict["pdfPasswordType"] = pdf_password_type
         if id is not UNSET:
             field_dict["id"] = id
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -55,10 +55,13 @@ class EmailAttachment:
 
         _pdf_password_type = d.pop("pdfPasswordType", UNSET)
         pdf_password_type: Union[Unset, PdfPasswordType]
-        if isinstance(_pdf_password_type, Unset):
+        if isinstance(_pdf_password_type,  Unset):
             pdf_password_type = UNSET
         else:
             pdf_password_type = PdfPasswordType(_pdf_password_type)
+
+
+
 
         id = d.pop("id", UNSET)
 
@@ -70,3 +73,4 @@ class EmailAttachment:
         )
 
         return email_attachment
+

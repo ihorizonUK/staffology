@@ -8,7 +8,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="RtiAgent")
 
-
 @attr.s(auto_attribs=True)
 class RtiAgent:
     """
@@ -24,6 +23,7 @@ class RtiAgent:
     address: Union[Unset, Address] = UNSET
     contact: Union[Unset, RtiContact] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         agent_id = self.agent_id
         company = self.company
@@ -35,8 +35,10 @@ class RtiAgent:
         if not isinstance(self.contact, Unset):
             contact = self.contact.to_dict()
 
+
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if agent_id is not UNSET:
             field_dict["agentId"] = agent_id
         if company is not UNSET:
@@ -48,6 +50,8 @@ class RtiAgent:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
@@ -57,17 +61,23 @@ class RtiAgent:
 
         _address = d.pop("address", UNSET)
         address: Union[Unset, Address]
-        if isinstance(_address, Unset):
+        if isinstance(_address,  Unset):
             address = UNSET
         else:
             address = Address.from_dict(_address)
 
+
+
+
         _contact = d.pop("contact", UNSET)
         contact: Union[Unset, RtiContact]
-        if isinstance(_contact, Unset):
+        if isinstance(_contact,  Unset):
             contact = UNSET
         else:
             contact = RtiContact.from_dict(_contact)
+
+
+
 
         rti_agent = cls(
             agent_id=agent_id,
@@ -77,3 +87,4 @@ class RtiAgent:
         )
 
         return rti_agent
+

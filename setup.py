@@ -5,7 +5,7 @@ with open('README.md') as f:
 
 setup(
     name='staffology',
-    version='0.1.4',
+    version='0.1.6',
     packages=find_packages(),
     url='https://github.com/ihorizonUK/staffology',
     description="Staffology openapi client with authentication patch",

@@ -6,23 +6,22 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="NationalInsuranceCalculationPeriodValues")
 
-
 @attr.s(auto_attribs=True)
 class NationalInsuranceCalculationPeriodValues:
     """Part of the TaxYearConfig that our engine uses to calculate National Insurance Contributions.
-    It is used internally when our engine performs calculations.
-    You do not need to do anything with this model, it's provided purely for informational purposes.
+It is used internally when our engine performs calculations.
+You do not need to do anything with this model, it's provided purely for informational purposes.
 
-        Attributes:
-            lel (Union[Unset, float]): [readonly] Lower Earnings Limit
-            pt (Union[Unset, float]): [readonly] Primary Threshold
-            st (Union[Unset, float]): [readonly] Secondary Threshold
-            fust (Union[Unset, float]): [readonly] Freeports Upper Accrual Threshold
-            uap (Union[Unset, float]): [readonly] Upper Accrual Point
-            ust (Union[Unset, float]): [readonly] Upper Secondary Threshold (under 21)
-            aust (Union[Unset, float]): [readonly] Apprentice Upper Secondary Threshold (apprentice under 25)
-            uel (Union[Unset, float]): [readonly] Upper Earnings Limit
-            vust (Union[Unset, float]): [readonly] Veterian Upper Secondary Threshold
+    Attributes:
+        lel (Union[Unset, float]): [readonly] Lower Earnings Limit
+        pt (Union[Unset, float]): [readonly] Primary Threshold
+        st (Union[Unset, float]): [readonly] Secondary Threshold
+        fust (Union[Unset, float]): [readonly] Freeports Upper Accrual Threshold
+        uap (Union[Unset, float]): [readonly] Upper Accrual Point
+        ust (Union[Unset, float]): [readonly] Upper Secondary Threshold (under 21)
+        aust (Union[Unset, float]): [readonly] Apprentice Upper Secondary Threshold (apprentice under 25)
+        uel (Union[Unset, float]): [readonly] Upper Earnings Limit
+        vust (Union[Unset, float]): [readonly] Veterian Upper Secondary Threshold
     """
 
     lel: Union[Unset, float] = UNSET
@@ -34,6 +33,7 @@ class NationalInsuranceCalculationPeriodValues:
     aust: Union[Unset, float] = UNSET
     uel: Union[Unset, float] = UNSET
     vust: Union[Unset, float] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         lel = self.lel
@@ -47,7 +47,8 @@ class NationalInsuranceCalculationPeriodValues:
         vust = self.vust
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if lel is not UNSET:
             field_dict["lel"] = lel
         if pt is not UNSET:
@@ -68,6 +69,8 @@ class NationalInsuranceCalculationPeriodValues:
             field_dict["vust"] = vust
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -103,3 +106,4 @@ class NationalInsuranceCalculationPeriodValues:
         )
 
         return national_insurance_calculation_period_values
+

@@ -9,7 +9,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="CisStatement")
 
-
 @attr.s(auto_attribs=True)
 class CisStatement:
     """CIS Payment and Deduction Statement (CISOL1)
@@ -46,6 +45,7 @@ class CisStatement:
     amount_deducted: Union[Unset, float] = UNSET
     amount_payable: Union[Unset, float] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         tax_year: Union[Unset, str] = UNSET
         if not isinstance(self.tax_year, Unset):
@@ -72,7 +72,8 @@ class CisStatement:
         amount_payable = self.amount_payable
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if tax_year is not UNSET:
             field_dict["taxYear"] = tax_year
         if tax_month is not UNSET:
@@ -104,15 +105,20 @@ class CisStatement:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _tax_year = d.pop("taxYear", UNSET)
         tax_year: Union[Unset, TaxYear]
-        if isinstance(_tax_year, Unset):
+        if isinstance(_tax_year,  Unset):
             tax_year = UNSET
         else:
             tax_year = TaxYear(_tax_year)
+
+
+
 
         tax_month = d.pop("taxMonth", UNSET)
 
@@ -120,10 +126,13 @@ class CisStatement:
 
         _contractor_address = d.pop("contractorAddress", UNSET)
         contractor_address: Union[Unset, Address]
-        if isinstance(_contractor_address, Unset):
+        if isinstance(_contractor_address,  Unset):
             contractor_address = UNSET
         else:
             contractor_address = Address.from_dict(_contractor_address)
+
+
+
 
         contractor_office_number = d.pop("contractorOfficeNumber", UNSET)
 
@@ -131,10 +140,13 @@ class CisStatement:
 
         _subcontractor_name = d.pop("subcontractorName", UNSET)
         subcontractor_name: Union[Unset, RtiEmployeeName]
-        if isinstance(_subcontractor_name, Unset):
+        if isinstance(_subcontractor_name,  Unset):
             subcontractor_name = UNSET
         else:
             subcontractor_name = RtiEmployeeName.from_dict(_subcontractor_name)
+
+
+
 
         sub_contractor_utr = d.pop("subContractorUtr", UNSET)
 
@@ -168,3 +180,4 @@ class CisStatement:
         )
 
         return cis_statement
+

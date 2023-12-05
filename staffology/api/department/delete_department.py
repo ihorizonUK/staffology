@@ -13,9 +13,7 @@ def _get_kwargs(
     *,
     client: Client,
 ) -> Dict[str, Any]:
-    url = "{}/employers/{employerId}/departments/{code}".format(
-        client.base_url, employerId=employer_id, code=code
-    )
+    url = "{}/employers/{employerId}/departments/{code}".format(client.base_url, employerId=employer_id, code=code)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
@@ -44,7 +42,7 @@ def sync_detailed(
     *,
     client: Client,
 ) -> Response[Any]:
-    """Delete Department
+    """Delete Department (deprecated)
 
      Deletes the specified Department.
 
@@ -76,7 +74,7 @@ async def asyncio_detailed(
     *,
     client: Client,
 ) -> Response[Any]:
-    """Delete Department
+    """Delete Department (deprecated)
 
      Deletes the specified Department.
 

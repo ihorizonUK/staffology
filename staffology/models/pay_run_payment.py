@@ -12,7 +12,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="PayRunPayment")
 
-
 @attr.s(auto_attribs=True)
 class PayRunPayment:
     """
@@ -39,6 +38,7 @@ class PayRunPayment:
     bank_details: Union[Unset, BankDetails] = UNSET
     bacs_hash: Union[Unset, None, str] = UNSET
     bacs_sub_reference: Union[Unset, None, str] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET
@@ -67,7 +67,8 @@ class PayRunPayment:
         bacs_sub_reference = self.bacs_sub_reference
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if type is not UNSET:
             field_dict["type"] = type
         if payee is not UNSET:
@@ -89,36 +90,50 @@ class PayRunPayment:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _type = d.pop("type", UNSET)
         type: Union[Unset, PayeeType]
-        if isinstance(_type, Unset):
+        if isinstance(_type,  Unset):
             type = UNSET
         else:
             type = PayeeType(_type)
 
+
+
+
         _payee = d.pop("payee", UNSET)
         payee: Union[Unset, Item]
-        if isinstance(_payee, Unset):
+        if isinstance(_payee,  Unset):
             payee = UNSET
         else:
             payee = Item.from_dict(_payee)
 
+
+
+
         _date = d.pop("date", UNSET)
         date: Union[Unset, datetime.date]
-        if isinstance(_date, Unset):
+        if isinstance(_date,  Unset):
             date = UNSET
         else:
             date = isoparse(_date).date()
 
+
+
+
         _method = d.pop("method", UNSET)
         method: Union[Unset, PayMethod]
-        if isinstance(_method, Unset):
+        if isinstance(_method,  Unset):
             method = UNSET
         else:
             method = PayMethod(_method)
+
+
+
 
         amount = d.pop("amount", UNSET)
 
@@ -126,10 +141,13 @@ class PayRunPayment:
 
         _bank_details = d.pop("bankDetails", UNSET)
         bank_details: Union[Unset, BankDetails]
-        if isinstance(_bank_details, Unset):
+        if isinstance(_bank_details,  Unset):
             bank_details = UNSET
         else:
             bank_details = BankDetails.from_dict(_bank_details)
+
+
+
 
         bacs_hash = d.pop("bacsHash", UNSET)
 
@@ -148,3 +166,4 @@ class PayRunPayment:
         )
 
         return pay_run_payment
+

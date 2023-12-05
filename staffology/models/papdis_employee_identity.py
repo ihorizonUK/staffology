@@ -4,10 +4,10 @@ from typing import Any, Dict, Type, TypeVar, Union
 import attr
 from dateutil.parser import isoparse
 
+from ..models.marital_status import MaritalStatus
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="PapdisEmployeeIdentity")
-
 
 @attr.s(auto_attribs=True)
 class PapdisEmployeeIdentity:
@@ -18,6 +18,7 @@ class PapdisEmployeeIdentity:
         gender (Union[Unset, None, str]): [readonly]
         national_insurance_number (Union[Unset, None, str]): [readonly]
         employment_start_date (Union[Unset, datetime.date]): [readonly]
+        marital_status (Union[Unset, MaritalStatus]):
     """
 
     employee_id: Union[Unset, None, str] = UNSET
@@ -25,6 +26,8 @@ class PapdisEmployeeIdentity:
     gender: Union[Unset, None, str] = UNSET
     national_insurance_number: Union[Unset, None, str] = UNSET
     employment_start_date: Union[Unset, datetime.date] = UNSET
+    marital_status: Union[Unset, MaritalStatus] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         employee_id = self.employee_id
@@ -38,8 +41,14 @@ class PapdisEmployeeIdentity:
         if not isinstance(self.employment_start_date, Unset):
             employment_start_date = self.employment_start_date.isoformat()
 
+        marital_status: Union[Unset, str] = UNSET
+        if not isinstance(self.marital_status, Unset):
+            marital_status = self.marital_status.value
+
+
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if employee_id is not UNSET:
             field_dict["employeeId"] = employee_id
         if birth_date is not UNSET:
@@ -50,8 +59,12 @@ class PapdisEmployeeIdentity:
             field_dict["nationalInsuranceNumber"] = national_insurance_number
         if employment_start_date is not UNSET:
             field_dict["employmentStartDate"] = employment_start_date
+        if marital_status is not UNSET:
+            field_dict["maritalStatus"] = marital_status
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -60,10 +73,13 @@ class PapdisEmployeeIdentity:
 
         _birth_date = d.pop("birthDate", UNSET)
         birth_date: Union[Unset, datetime.date]
-        if isinstance(_birth_date, Unset):
+        if isinstance(_birth_date,  Unset):
             birth_date = UNSET
         else:
             birth_date = isoparse(_birth_date).date()
+
+
+
 
         gender = d.pop("gender", UNSET)
 
@@ -71,10 +87,23 @@ class PapdisEmployeeIdentity:
 
         _employment_start_date = d.pop("employmentStartDate", UNSET)
         employment_start_date: Union[Unset, datetime.date]
-        if isinstance(_employment_start_date, Unset):
+        if isinstance(_employment_start_date,  Unset):
             employment_start_date = UNSET
         else:
             employment_start_date = isoparse(_employment_start_date).date()
+
+
+
+
+        _marital_status = d.pop("maritalStatus", UNSET)
+        marital_status: Union[Unset, MaritalStatus]
+        if isinstance(_marital_status,  Unset):
+            marital_status = UNSET
+        else:
+            marital_status = MaritalStatus(_marital_status)
+
+
+
 
         papdis_employee_identity = cls(
             employee_id=employee_id,
@@ -82,6 +111,8 @@ class PapdisEmployeeIdentity:
             gender=gender,
             national_insurance_number=national_insurance_number,
             employment_start_date=employment_start_date,
+            marital_status=marital_status,
         )
 
         return papdis_employee_identity
+

@@ -1,17 +1,21 @@
+import datetime
 from typing import Any, Dict, Type, TypeVar, Union
 
 import attr
+from dateutil.parser import isoparse
 
 from ..models.item import Item
+from ..models.tax_year import TaxYear
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="NicSummary")
-
 
 @attr.s(auto_attribs=True)
 class NicSummary:
     """
     Attributes:
+        tax_year (Union[Unset, TaxYear]):
+        payment_date (Union[Unset, datetime.date]):
         ni_table (Union[Unset, str]):
         as_director (Union[Unset, bool]):
         gross_earnings_for_nics (Union[Unset, float]):
@@ -29,9 +33,14 @@ class NicSummary:
         employer_nics (Union[Unset, float]):
         employer_ni_rebate (Union[Unset, float]):
         has_values (Union[Unset, bool]):
+        id (Union[Unset, str]):
+        is_ni_ytd_override (Union[Unset, bool]):
+        child_id (Union[Unset, str]): This is nothing but the UniqueId of the model.
         employee (Union[Unset, Item]):
     """
 
+    tax_year: Union[Unset, TaxYear] = UNSET
+    payment_date: Union[Unset, datetime.date] = UNSET
     ni_table: Union[Unset, str] = UNSET
     as_director: Union[Unset, bool] = UNSET
     gross_earnings_for_nics: Union[Unset, float] = UNSET
@@ -49,9 +58,21 @@ class NicSummary:
     employer_nics: Union[Unset, float] = UNSET
     employer_ni_rebate: Union[Unset, float] = UNSET
     has_values: Union[Unset, bool] = UNSET
+    id: Union[Unset, str] = UNSET
+    is_ni_ytd_override: Union[Unset, bool] = UNSET
+    child_id: Union[Unset, str] = UNSET
     employee: Union[Unset, Item] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
+        tax_year: Union[Unset, str] = UNSET
+        if not isinstance(self.tax_year, Unset):
+            tax_year = self.tax_year.value
+
+        payment_date: Union[Unset, str] = UNSET
+        if not isinstance(self.payment_date, Unset):
+            payment_date = self.payment_date.isoformat()
+
         ni_table = self.ni_table
         as_director = self.as_director
         gross_earnings_for_nics = self.gross_earnings_for_nics
@@ -69,12 +90,21 @@ class NicSummary:
         employer_nics = self.employer_nics
         employer_ni_rebate = self.employer_ni_rebate
         has_values = self.has_values
+        id = self.id
+        is_ni_ytd_override = self.is_ni_ytd_override
+        child_id = self.child_id
         employee: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.employee, Unset):
             employee = self.employee.to_dict()
 
+
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
+        if tax_year is not UNSET:
+            field_dict["taxYear"] = tax_year
+        if payment_date is not UNSET:
+            field_dict["paymentDate"] = payment_date
         if ni_table is not UNSET:
             field_dict["niTable"] = ni_table
         if as_director is not UNSET:
@@ -109,14 +139,42 @@ class NicSummary:
             field_dict["employerNiRebate"] = employer_ni_rebate
         if has_values is not UNSET:
             field_dict["hasValues"] = has_values
+        if id is not UNSET:
+            field_dict["id"] = id
+        if is_ni_ytd_override is not UNSET:
+            field_dict["isNiYtdOverride"] = is_ni_ytd_override
+        if child_id is not UNSET:
+            field_dict["childId"] = child_id
         if employee is not UNSET:
             field_dict["employee"] = employee
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
+        _tax_year = d.pop("taxYear", UNSET)
+        tax_year: Union[Unset, TaxYear]
+        if isinstance(_tax_year,  Unset):
+            tax_year = UNSET
+        else:
+            tax_year = TaxYear(_tax_year)
+
+
+
+
+        _payment_date = d.pop("paymentDate", UNSET)
+        payment_date: Union[Unset, datetime.date]
+        if isinstance(_payment_date,  Unset):
+            payment_date = UNSET
+        else:
+            payment_date = isoparse(_payment_date).date()
+
+
+
+
         ni_table = d.pop("niTable", UNSET)
 
         as_director = d.pop("asDirector", UNSET)
@@ -151,14 +209,25 @@ class NicSummary:
 
         has_values = d.pop("hasValues", UNSET)
 
+        id = d.pop("id", UNSET)
+
+        is_ni_ytd_override = d.pop("isNiYtdOverride", UNSET)
+
+        child_id = d.pop("childId", UNSET)
+
         _employee = d.pop("employee", UNSET)
         employee: Union[Unset, Item]
-        if isinstance(_employee, Unset):
+        if isinstance(_employee,  Unset):
             employee = UNSET
         else:
             employee = Item.from_dict(_employee)
 
+
+
+
         nic_summary = cls(
+            tax_year=tax_year,
+            payment_date=payment_date,
             ni_table=ni_table,
             as_director=as_director,
             gross_earnings_for_nics=gross_earnings_for_nics,
@@ -176,7 +245,11 @@ class NicSummary:
             employer_nics=employer_nics,
             employer_ni_rebate=employer_ni_rebate,
             has_values=has_values,
+            id=id,
+            is_ni_ytd_override=is_ni_ytd_override,
+            child_id=child_id,
             employee=employee,
         )
 
         return nic_summary
+

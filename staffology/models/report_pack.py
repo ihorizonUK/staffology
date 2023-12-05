@@ -7,7 +7,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="ReportPack")
 
-
 @attr.s(auto_attribs=True)
 class ReportPack:
     """A ReportPack is used to group together a number of reports
@@ -22,6 +21,7 @@ class ReportPack:
     reports: Union[Unset, None, List[Report]] = UNSET
     id: Union[Unset, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         title = self.title
         reports: Union[Unset, None, List[str]] = UNSET
@@ -35,20 +35,23 @@ class ReportPack:
 
                     reports.append(reports_item)
 
+
+
+
         id = self.id
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update(
-            {
-                "title": title,
-            }
-        )
+        field_dict.update({
+            "title": title,
+        })
         if reports is not UNSET:
             field_dict["reports"] = reports
         if id is not UNSET:
             field_dict["id"] = id
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -57,10 +60,13 @@ class ReportPack:
 
         reports = []
         _reports = d.pop("reports", UNSET)
-        for reports_item_data in _reports or []:
+        for reports_item_data in (_reports or []):
             reports_item = Report(reports_item_data)
 
+
+
             reports.append(reports_item)
+
 
         id = d.pop("id", UNSET)
 
@@ -71,3 +77,4 @@ class ReportPack:
         )
 
         return report_pack
+

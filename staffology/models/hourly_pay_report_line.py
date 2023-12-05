@@ -7,7 +7,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="HourlyPayReportLine")
 
-
 @attr.s(auto_attribs=True)
 class HourlyPayReportLine:
     """
@@ -29,6 +28,7 @@ class HourlyPayReportLine:
     rate: Union[Unset, float] = UNSET
     total: Union[Unset, float] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         employee: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.employee, Unset):
@@ -42,7 +42,8 @@ class HourlyPayReportLine:
         total = self.total
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if employee is not UNSET:
             field_dict["employee"] = employee
         if payroll_code is not UNSET:
@@ -60,15 +61,20 @@ class HourlyPayReportLine:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _employee = d.pop("employee", UNSET)
         employee: Union[Unset, Item]
-        if isinstance(_employee, Unset):
+        if isinstance(_employee,  Unset):
             employee = UNSET
         else:
             employee = Item.from_dict(_employee)
+
+
+
 
         payroll_code = d.pop("payrollCode", UNSET)
 
@@ -93,3 +99,4 @@ class HourlyPayReportLine:
         )
 
         return hourly_pay_report_line
+

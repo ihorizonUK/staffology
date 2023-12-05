@@ -6,22 +6,22 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="StatutoryPay")
 
-
 @attr.s(auto_attribs=True)
 class StatutoryPay:
     """Part of the TaxYearConfig that our engine uses to calculate Statutory Pay.
-    It is used internally when our engine performs calculations.
-    You do not need to do anything with this model, it's provided purely for informational purposes.
+It is used internally when our engine performs calculations.
+You do not need to do anything with this model, it's provided purely for informational purposes.
 
-        Attributes:
-            weekly_parental_leave_amount (Union[Unset, float]): [readonly]
-            weekly_sick_pay_amount (Union[Unset, float]): [readonly]
-            awe_eligibility_threshold (Union[Unset, float]):
+    Attributes:
+        weekly_parental_leave_amount (Union[Unset, float]): [readonly]
+        weekly_sick_pay_amount (Union[Unset, float]): [readonly]
+        awe_eligibility_threshold (Union[Unset, float]):
     """
 
     weekly_parental_leave_amount: Union[Unset, float] = UNSET
     weekly_sick_pay_amount: Union[Unset, float] = UNSET
     awe_eligibility_threshold: Union[Unset, float] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         weekly_parental_leave_amount = self.weekly_parental_leave_amount
@@ -29,7 +29,8 @@ class StatutoryPay:
         awe_eligibility_threshold = self.awe_eligibility_threshold
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if weekly_parental_leave_amount is not UNSET:
             field_dict["weeklyParentalLeaveAmount"] = weekly_parental_leave_amount
         if weekly_sick_pay_amount is not UNSET:
@@ -38,6 +39,8 @@ class StatutoryPay:
             field_dict["aweEligibilityThreshold"] = awe_eligibility_threshold
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -55,3 +58,4 @@ class StatutoryPay:
         )
 
         return statutory_pay
+

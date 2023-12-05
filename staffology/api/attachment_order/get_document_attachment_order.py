@@ -17,11 +17,7 @@ def _get_kwargs(
     client: Client,
 ) -> Dict[str, Any]:
     url = "{}/employers/{employerId}/employees/{employeeId}/attachmentorders/{id}/documents/{documentId}".format(
-        client.base_url,
-        employerId=employer_id,
-        employeeId=employee_id,
-        id=id,
-        documentId=document_id,
+        client.base_url, employerId=employer_id, employeeId=employee_id, id=id, documentId=document_id
     )
 
     headers: Dict[str, str] = client.get_headers()

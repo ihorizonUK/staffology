@@ -13,10 +13,10 @@ def _get_kwargs(
     *,
     client: Client,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Dict[str, Any]:
     url = "{}/employers/{employerId}/reports/AeAssessments".format(
-        client.base_url, employerId=employer_id
-    )
+        client.base_url,employerId=employer_id)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
@@ -24,8 +24,18 @@ def _get_kwargs(
     if not isinstance(accept, Unset):
         headers["accept"] = accept
 
+
+
+    
+
+    
+
+    
+
+    
+
     return {
-        "method": "get",
+	    "method": "get",
         "url": url,
         "headers": headers,
         "cookies": cookies,
@@ -36,6 +46,8 @@ def _get_kwargs(
 def _parse_response(*, response: httpx.Response) -> Optional[ItemListReportResponse]:
     if response.status_code == 200:
         response_200 = ItemListReportResponse.from_dict(response.json())
+
+
 
         return response_200
     return raise_staffology_exception(response)
@@ -55,6 +67,7 @@ def sync_detailed(
     *,
     client: Client,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Response[ItemListReportResponse]:
     """AutoEnrolment Assessments
 
@@ -69,10 +82,12 @@ def sync_detailed(
         Response[ItemListReportResponse]
     """
 
+
     kwargs = _get_kwargs(
         employer_id=employer_id,
-        client=client,
-        accept=accept,
+client=client,
+accept=accept,
+
     )
 
     response = httpx.request(
@@ -82,12 +97,12 @@ def sync_detailed(
 
     return _build_response(response=response)
 
-
 def sync(
     employer_id: str,
     *,
     client: Client,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Optional[ItemListReportResponse]:
     """AutoEnrolment Assessments
 
@@ -102,18 +117,20 @@ def sync(
         Response[ItemListReportResponse]
     """
 
+
     return sync_detailed(
         employer_id=employer_id,
-        client=client,
-        accept=accept,
-    ).parsed
+client=client,
+accept=accept,
 
+    ).parsed
 
 async def asyncio_detailed(
     employer_id: str,
     *,
     client: Client,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Response[ItemListReportResponse]:
     """AutoEnrolment Assessments
 
@@ -128,23 +145,27 @@ async def asyncio_detailed(
         Response[ItemListReportResponse]
     """
 
+
     kwargs = _get_kwargs(
         employer_id=employer_id,
-        client=client,
-        accept=accept,
+client=client,
+accept=accept,
+
     )
 
     async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+        response = await _client.request(
+            **kwargs
+        )
 
     return _build_response(response=response)
-
 
 async def asyncio(
     employer_id: str,
     *,
     client: Client,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Optional[ItemListReportResponse]:
     """AutoEnrolment Assessments
 
@@ -159,10 +180,11 @@ async def asyncio(
         Response[ItemListReportResponse]
     """
 
-    return (
-        await asyncio_detailed(
-            employer_id=employer_id,
-            client=client,
-            accept=accept,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        employer_id=employer_id,
+client=client,
+accept=accept,
+
+    )).parsed
+

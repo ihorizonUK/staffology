@@ -10,11 +10,11 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="FpsEmployee")
 
-
 @attr.s(auto_attribs=True)
 class FpsEmployee:
     """
     Attributes:
+        payrun_entry_id (Union[Unset, str]):
         employee_unique_id (Union[Unset, str]):
         item (Union[Unset, Item]):
         employee_details (Union[Unset, FpsEmployeeDetails]):
@@ -22,13 +22,16 @@ class FpsEmployee:
         validation_warnings (Union[Unset, None, List[RtiValidationWarning]]):
     """
 
+    payrun_entry_id: Union[Unset, str] = UNSET
     employee_unique_id: Union[Unset, str] = UNSET
     item: Union[Unset, Item] = UNSET
     employee_details: Union[Unset, FpsEmployeeDetails] = UNSET
     employment: Union[Unset, FpsEmployment] = UNSET
     validation_warnings: Union[Unset, None, List[RtiValidationWarning]] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
+        payrun_entry_id = self.payrun_entry_id
         employee_unique_id = self.employee_unique_id
         item: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.item, Unset):
@@ -53,8 +56,15 @@ class FpsEmployee:
 
                     validation_warnings.append(validation_warnings_item)
 
+
+
+
+
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
+        if payrun_entry_id is not UNSET:
+            field_dict["payrunEntryId"] = payrun_entry_id
         if employee_unique_id is not UNSET:
             field_dict["employeeUniqueId"] = employee_unique_id
         if item is not UNSET:
@@ -68,42 +78,57 @@ class FpsEmployee:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
+        payrun_entry_id = d.pop("payrunEntryId", UNSET)
+
         employee_unique_id = d.pop("employeeUniqueId", UNSET)
 
         _item = d.pop("item", UNSET)
         item: Union[Unset, Item]
-        if isinstance(_item, Unset):
+        if isinstance(_item,  Unset):
             item = UNSET
         else:
             item = Item.from_dict(_item)
 
+
+
+
         _employee_details = d.pop("employeeDetails", UNSET)
         employee_details: Union[Unset, FpsEmployeeDetails]
-        if isinstance(_employee_details, Unset):
+        if isinstance(_employee_details,  Unset):
             employee_details = UNSET
         else:
             employee_details = FpsEmployeeDetails.from_dict(_employee_details)
 
+
+
+
         _employment = d.pop("employment", UNSET)
         employment: Union[Unset, FpsEmployment]
-        if isinstance(_employment, Unset):
+        if isinstance(_employment,  Unset):
             employment = UNSET
         else:
             employment = FpsEmployment.from_dict(_employment)
 
+
+
+
         validation_warnings = []
         _validation_warnings = d.pop("validationWarnings", UNSET)
-        for validation_warnings_item_data in _validation_warnings or []:
-            validation_warnings_item = RtiValidationWarning.from_dict(
-                validation_warnings_item_data
-            )
+        for validation_warnings_item_data in (_validation_warnings or []):
+            validation_warnings_item = RtiValidationWarning.from_dict(validation_warnings_item_data)
+
+
 
             validation_warnings.append(validation_warnings_item)
 
+
         fps_employee = cls(
+            payrun_entry_id=payrun_entry_id,
             employee_unique_id=employee_unique_id,
             item=item,
             employee_details=employee_details,
@@ -112,3 +137,4 @@ class FpsEmployee:
         )
 
         return fps_employee
+

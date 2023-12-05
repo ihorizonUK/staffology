@@ -9,7 +9,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="P11NiAndStatPaymentsLine")
 
-
 @attr.s(auto_attribs=True)
 class P11NiAndStatPaymentsLine:
     """Lines for the NI Contributions and Statutory Payments table in the P11 Detailed Report
@@ -44,6 +43,7 @@ class P11NiAndStatPaymentsLine:
     ni_values: Union[Unset, P11DetailedNiValues] = UNSET
     tax_code: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         date: Union[Unset, str] = UNSET
         if not isinstance(self.date, Unset):
@@ -66,7 +66,8 @@ class P11NiAndStatPaymentsLine:
         tax_code = self.tax_code
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if date is not UNSET:
             field_dict["date"] = date
         if period is not UNSET:
@@ -96,15 +97,20 @@ class P11NiAndStatPaymentsLine:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _date = d.pop("date", UNSET)
         date: Union[Unset, datetime.date]
-        if isinstance(_date, Unset):
+        if isinstance(_date,  Unset):
             date = UNSET
         else:
             date = isoparse(_date).date()
+
+
+
 
         period = d.pop("period", UNSET)
 
@@ -128,10 +134,13 @@ class P11NiAndStatPaymentsLine:
 
         _ni_values = d.pop("niValues", UNSET)
         ni_values: Union[Unset, P11DetailedNiValues]
-        if isinstance(_ni_values, Unset):
+        if isinstance(_ni_values,  Unset):
             ni_values = UNSET
         else:
             ni_values = P11DetailedNiValues.from_dict(_ni_values)
+
+
+
 
         tax_code = d.pop("taxCode", UNSET)
 
@@ -152,3 +161,4 @@ class P11NiAndStatPaymentsLine:
         )
 
         return p11_ni_and_stat_payments_line
+

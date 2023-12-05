@@ -15,10 +15,8 @@ def _get_kwargs(
     *,
     client: Client,
 ) -> Dict[str, Any]:
-    url = (
-        "{}/employers/{employerId}/employees/{employeeId}/attachmentorders/{id}".format(
-            client.base_url, employerId=employer_id, employeeId=employee_id, id=id
-        )
+    url = "{}/employers/{employerId}/employees/{employeeId}/attachmentorders/{id}".format(
+        client.base_url, employerId=employer_id, employeeId=employee_id, id=id
     )
 
     headers: Dict[str, str] = client.get_headers()
@@ -33,9 +31,7 @@ def _get_kwargs(
     }
 
 
-def _parse_response(
-    *, response: httpx.Response
-) -> Optional[Union[Any, AttachmentOrder]]:
+def _parse_response(*, response: httpx.Response) -> Optional[Union[Any, AttachmentOrder]]:
     if response.status_code == 200:
         response_200 = AttachmentOrder.from_dict(response.json())
 
@@ -46,9 +42,7 @@ def _parse_response(
     return raise_staffology_exception(response)
 
 
-def _build_response(
-    *, response: httpx.Response
-) -> Response[Union[Any, AttachmentOrder]]:
+def _build_response(*, response: httpx.Response) -> Response[Union[Any, AttachmentOrder]]:
     return Response(
         status_code=response.status_code,
         content=response.content,

@@ -7,7 +7,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="P11DPaymentCollection")
 
-
 @attr.s(auto_attribs=True)
 class P11DPaymentCollection:
     """
@@ -21,6 +20,7 @@ class P11DPaymentCollection:
     tax: Union[Unset, None, str] = UNSET
     type_letter: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         payment: Union[Unset, None, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.payment, Unset):
@@ -33,11 +33,15 @@ class P11DPaymentCollection:
 
                     payment.append(payment_item)
 
+
+
+
         tax = self.tax
         type_letter = self.type_letter
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if payment is not UNSET:
             field_dict["payment"] = payment
         if tax is not UNSET:
@@ -47,15 +51,20 @@ class P11DPaymentCollection:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         payment = []
         _payment = d.pop("payment", UNSET)
-        for payment_item_data in _payment or []:
+        for payment_item_data in (_payment or []):
             payment_item = P11DDescOther.from_dict(payment_item_data)
 
+
+
             payment.append(payment_item)
+
 
         tax = d.pop("tax", UNSET)
 
@@ -68,3 +77,4 @@ class P11DPaymentCollection:
         )
 
         return p11d_payment_collection
+

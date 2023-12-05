@@ -7,7 +7,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="P11DLoanCollection")
 
-
 @attr.s(auto_attribs=True)
 class P11DLoanCollection:
     """
@@ -18,6 +17,7 @@ class P11DLoanCollection:
 
     loan: Union[Unset, None, List[P11DLoan]] = UNSET
     type_letter: Union[Unset, None, str] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         loan: Union[Unset, None, List[Dict[str, Any]]] = UNSET
@@ -31,10 +31,14 @@ class P11DLoanCollection:
 
                     loan.append(loan_item)
 
+
+
+
         type_letter = self.type_letter
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if loan is not UNSET:
             field_dict["loan"] = loan
         if type_letter is not UNSET:
@@ -42,15 +46,20 @@ class P11DLoanCollection:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         loan = []
         _loan = d.pop("loan", UNSET)
-        for loan_item_data in _loan or []:
+        for loan_item_data in (_loan or []):
             loan_item = P11DLoan.from_dict(loan_item_data)
 
+
+
             loan.append(loan_item)
+
 
         type_letter = d.pop("typeLetter", UNSET)
 
@@ -60,3 +69,4 @@ class P11DLoanCollection:
         )
 
         return p11d_loan_collection
+

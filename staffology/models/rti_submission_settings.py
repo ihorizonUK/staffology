@@ -9,7 +9,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="RtiSubmissionSettings")
 
-
 @attr.s(auto_attribs=True)
 class RtiSubmissionSettings:
     """
@@ -32,6 +31,8 @@ class RtiSubmissionSettings:
             on the RTI submission. This would normally only be used for testing purposes.
         contact (Union[Unset, RtiContact]):
         agent (Union[Unset, RtiAgent]):
+        allow_linked_eps (Union[Unset, bool]): If set to true this will allow you to submit a combined Employer Payment
+            Summary
     """
 
     sender_type: Union[Unset, RtiSenderType] = UNSET
@@ -45,6 +46,8 @@ class RtiSubmissionSettings:
     override_timestamp_value: Union[Unset, None, str] = UNSET
     contact: Union[Unset, RtiContact] = UNSET
     agent: Union[Unset, RtiAgent] = UNSET
+    allow_linked_eps: Union[Unset, bool] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         sender_type: Union[Unset, str] = UNSET
@@ -67,8 +70,11 @@ class RtiSubmissionSettings:
         if not isinstance(self.agent, Unset):
             agent = self.agent.to_dict()
 
+        allow_linked_eps = self.allow_linked_eps
+
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if sender_type is not UNSET:
             field_dict["senderType"] = sender_type
         if sender_id is not UNSET:
@@ -91,18 +97,25 @@ class RtiSubmissionSettings:
             field_dict["contact"] = contact
         if agent is not UNSET:
             field_dict["agent"] = agent
+        if allow_linked_eps is not UNSET:
+            field_dict["allowLinkedEps"] = allow_linked_eps
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _sender_type = d.pop("senderType", UNSET)
         sender_type: Union[Unset, RtiSenderType]
-        if isinstance(_sender_type, Unset):
+        if isinstance(_sender_type,  Unset):
             sender_type = UNSET
         else:
             sender_type = RtiSenderType(_sender_type)
+
+
+
 
         sender_id = d.pop("senderId", UNSET)
 
@@ -122,17 +135,25 @@ class RtiSubmissionSettings:
 
         _contact = d.pop("contact", UNSET)
         contact: Union[Unset, RtiContact]
-        if isinstance(_contact, Unset):
+        if isinstance(_contact,  Unset):
             contact = UNSET
         else:
             contact = RtiContact.from_dict(_contact)
 
+
+
+
         _agent = d.pop("agent", UNSET)
         agent: Union[Unset, RtiAgent]
-        if isinstance(_agent, Unset):
+        if isinstance(_agent,  Unset):
             agent = UNSET
         else:
             agent = RtiAgent.from_dict(_agent)
+
+
+
+
+        allow_linked_eps = d.pop("allowLinkedEps", UNSET)
 
         rti_submission_settings = cls(
             sender_type=sender_type,
@@ -146,6 +167,8 @@ class RtiSubmissionSettings:
             override_timestamp_value=override_timestamp_value,
             contact=contact,
             agent=agent,
+            allow_linked_eps=allow_linked_eps,
         )
 
         return rti_submission_settings
+

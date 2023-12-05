@@ -7,7 +7,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="FpsFields")
 
-
 @attr.s(auto_attribs=True)
 class FpsFields:
     """
@@ -24,6 +23,7 @@ class FpsFields:
     non_individual: Union[Unset, bool] = UNSET
     hours_normally_worked: Union[Unset, HoursNormallyWorked] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         off_payroll_worker = self.off_payroll_worker
         irregular_payment_pattern = self.irregular_payment_pattern
@@ -32,8 +32,10 @@ class FpsFields:
         if not isinstance(self.hours_normally_worked, Unset):
             hours_normally_worked = self.hours_normally_worked.value
 
+
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if off_payroll_worker is not UNSET:
             field_dict["offPayrollWorker"] = off_payroll_worker
         if irregular_payment_pattern is not UNSET:
@@ -44,6 +46,8 @@ class FpsFields:
             field_dict["hoursNormallyWorked"] = hours_normally_worked
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -56,10 +60,13 @@ class FpsFields:
 
         _hours_normally_worked = d.pop("hoursNormallyWorked", UNSET)
         hours_normally_worked: Union[Unset, HoursNormallyWorked]
-        if isinstance(_hours_normally_worked, Unset):
+        if isinstance(_hours_normally_worked,  Unset):
             hours_normally_worked = UNSET
         else:
             hours_normally_worked = HoursNormallyWorked(_hours_normally_worked)
+
+
+
 
         fps_fields = cls(
             off_payroll_worker=off_payroll_worker,
@@ -69,3 +76,4 @@ class FpsFields:
         )
 
         return fps_fields
+

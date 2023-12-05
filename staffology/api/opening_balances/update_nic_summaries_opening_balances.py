@@ -18,10 +18,7 @@ def _get_kwargs(
     json_body: List[NicSummary],
 ) -> Dict[str, Any]:
     url = "{}/employers/{employerId}/employees/{employeeId}/openingBalances/nic/{taxYear}".format(
-        client.base_url,
-        employerId=employer_id,
-        employeeId=employee_id,
-        taxYear=tax_year,
+        client.base_url, employerId=employer_id, employeeId=employee_id, taxYear=tax_year
     )
 
     headers: Dict[str, str] = client.get_headers()
@@ -43,9 +40,7 @@ def _get_kwargs(
     }
 
 
-def _parse_response(
-    *, response: httpx.Response
-) -> Optional[Union[Any, List[NicSummary]]]:
+def _parse_response(*, response: httpx.Response) -> Optional[Union[Any, List[NicSummary]]]:
     if response.status_code == 200:
         response_200 = []
         _response_200 = response.json()
@@ -64,9 +59,7 @@ def _parse_response(
     return raise_staffology_exception(response)
 
 
-def _build_response(
-    *, response: httpx.Response
-) -> Response[Union[Any, List[NicSummary]]]:
+def _build_response(*, response: httpx.Response) -> Response[Union[Any, List[NicSummary]]]:
     return Response(
         status_code=response.status_code,
         content=response.content,

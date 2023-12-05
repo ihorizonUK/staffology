@@ -6,7 +6,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="FpsEmployerPayIdChanged")
 
-
 @attr.s(auto_attribs=True)
 class FpsEmployerPayIdChanged:
     """
@@ -18,18 +17,22 @@ class FpsEmployerPayIdChanged:
     payroll_id_changed_indicator: Union[Unset, None, str] = UNSET
     old_payroll_id: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         payroll_id_changed_indicator = self.payroll_id_changed_indicator
         old_payroll_id = self.old_payroll_id
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if payroll_id_changed_indicator is not UNSET:
             field_dict["payrollIdChangedIndicator"] = payroll_id_changed_indicator
         if old_payroll_id is not UNSET:
             field_dict["oldPayrollId"] = old_payroll_id
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -44,3 +47,4 @@ class FpsEmployerPayIdChanged:
         )
 
         return fps_employer_pay_id_changed
+

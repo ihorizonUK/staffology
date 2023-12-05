@@ -11,7 +11,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="Nvr")
 
-
 @attr.s(auto_attribs=True)
 class Nvr:
     """
@@ -20,7 +19,8 @@ class Nvr:
         employee_count (Union[Unset, int]):
         nvr_request (Union[Unset, NvrRequest]):
         i_rmark (Union[Unset, None, str]):
-        xml (Union[Unset, None, str]):
+        xml (Union[Unset, None, str]): THis property will soon be removed and should not be used.
+            There is now a dedicated API endpoint for retrieving the XML for a submission.
         tax_year (Union[Unset, TaxYear]):
         employer_references (Union[Unset, EmpRefs]):
         gov_talk_submission (Union[Unset, GovTalkSubmission]):
@@ -37,6 +37,7 @@ class Nvr:
     gov_talk_submission: Union[Unset, GovTalkSubmission] = UNSET
     id: Union[Unset, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         employees: Union[Unset, None, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.employees, Unset):
@@ -48,6 +49,9 @@ class Nvr:
                     employees_item = employees_item_data.to_dict()
 
                     employees.append(employees_item)
+
+
+
 
         employee_count = self.employee_count
         nvr_request: Union[Unset, Dict[str, Any]] = UNSET
@@ -71,7 +75,8 @@ class Nvr:
         id = self.id
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if employees is not UNSET:
             field_dict["employees"] = employees
         if employee_count is not UNSET:
@@ -93,24 +98,32 @@ class Nvr:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         employees = []
         _employees = d.pop("employees", UNSET)
-        for employees_item_data in _employees or []:
+        for employees_item_data in (_employees or []):
             employees_item = Item.from_dict(employees_item_data)
 
+
+
             employees.append(employees_item)
+
 
         employee_count = d.pop("employeeCount", UNSET)
 
         _nvr_request = d.pop("nvrRequest", UNSET)
         nvr_request: Union[Unset, NvrRequest]
-        if isinstance(_nvr_request, Unset):
+        if isinstance(_nvr_request,  Unset):
             nvr_request = UNSET
         else:
             nvr_request = NvrRequest.from_dict(_nvr_request)
+
+
+
 
         i_rmark = d.pop("iRmark", UNSET)
 
@@ -118,24 +131,33 @@ class Nvr:
 
         _tax_year = d.pop("taxYear", UNSET)
         tax_year: Union[Unset, TaxYear]
-        if isinstance(_tax_year, Unset):
+        if isinstance(_tax_year,  Unset):
             tax_year = UNSET
         else:
             tax_year = TaxYear(_tax_year)
 
+
+
+
         _employer_references = d.pop("employerReferences", UNSET)
         employer_references: Union[Unset, EmpRefs]
-        if isinstance(_employer_references, Unset):
+        if isinstance(_employer_references,  Unset):
             employer_references = UNSET
         else:
             employer_references = EmpRefs.from_dict(_employer_references)
 
+
+
+
         _gov_talk_submission = d.pop("govTalkSubmission", UNSET)
         gov_talk_submission: Union[Unset, GovTalkSubmission]
-        if isinstance(_gov_talk_submission, Unset):
+        if isinstance(_gov_talk_submission,  Unset):
             gov_talk_submission = UNSET
         else:
             gov_talk_submission = GovTalkSubmission.from_dict(_gov_talk_submission)
+
+
+
 
         id = d.pop("id", UNSET)
 
@@ -152,3 +174,4 @@ class Nvr:
         )
 
         return nvr
+

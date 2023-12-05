@@ -7,7 +7,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="EmployerTemplate")
 
-
 @attr.s(auto_attribs=True)
 class EmployerTemplate:
     """
@@ -42,6 +41,7 @@ class EmployerTemplate:
     tokens_expanded: Union[Unset, bool] = UNSET
     id: Union[Unset, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET
         if not isinstance(self.type, Unset):
@@ -61,11 +61,15 @@ class EmployerTemplate:
             else:
                 tokens = self.tokens
 
+
+
+
         tokens_expanded = self.tokens_expanded
         id = self.id
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if type is not UNSET:
             field_dict["type"] = type
         if description is not UNSET:
@@ -91,15 +95,20 @@ class EmployerTemplate:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _type = d.pop("type", UNSET)
         type: Union[Unset, EmployerTemplateType]
-        if isinstance(_type, Unset):
+        if isinstance(_type,  Unset):
             type = UNSET
         else:
             type = EmployerTemplateType(_type)
+
+
+
 
         description = d.pop("description", UNSET)
 
@@ -116,6 +125,7 @@ class EmployerTemplate:
         has_subject = d.pop("hasSubject", UNSET)
 
         tokens = cast(List[str], d.pop("tokens", UNSET))
+
 
         tokens_expanded = d.pop("tokensExpanded", UNSET)
 
@@ -136,3 +146,4 @@ class EmployerTemplate:
         )
 
         return employer_template
+

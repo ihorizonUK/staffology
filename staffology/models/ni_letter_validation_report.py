@@ -13,7 +13,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="NiLetterValidationReport")
 
-
 @attr.s(auto_attribs=True)
 class NiLetterValidationReport:
     """
@@ -33,6 +32,7 @@ class NiLetterValidationReport:
         end_date (Union[Unset, datetime.date]):
         report (Union[Unset, Report]):
         tax_year (Union[Unset, TaxYear]):
+        is_draft (Union[Unset, bool]):
     """
 
     based_on_payrun: Union[Unset, bool] = UNSET
@@ -49,6 +49,8 @@ class NiLetterValidationReport:
     end_date: Union[Unset, datetime.date] = UNSET
     report: Union[Unset, Report] = UNSET
     tax_year: Union[Unset, TaxYear] = UNSET
+    is_draft: Union[Unset, bool] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         based_on_payrun = self.based_on_payrun
@@ -62,6 +64,9 @@ class NiLetterValidationReport:
                     error_lines_item = error_lines_item_data.to_dict()
 
                     error_lines.append(error_lines_item)
+
+
+
 
         payment_date: Union[Unset, None, str] = UNSET
         if not isinstance(self.payment_date, Unset):
@@ -96,8 +101,11 @@ class NiLetterValidationReport:
         if not isinstance(self.tax_year, Unset):
             tax_year = self.tax_year.value
 
+        is_draft = self.is_draft
+
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if based_on_payrun is not UNSET:
             field_dict["basedOnPayrun"] = based_on_payrun
         if error_lines is not UNSET:
@@ -126,8 +134,12 @@ class NiLetterValidationReport:
             field_dict["report"] = report
         if tax_year is not UNSET:
             field_dict["taxYear"] = tax_year
+        if is_draft is not UNSET:
+            field_dict["isDraft"] = is_draft
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -136,35 +148,45 @@ class NiLetterValidationReport:
 
         error_lines = []
         _error_lines = d.pop("errorLines", UNSET)
-        for error_lines_item_data in _error_lines or []:
-            error_lines_item = NiLetterValidationReportLine.from_dict(
-                error_lines_item_data
-            )
+        for error_lines_item_data in (_error_lines or []):
+            error_lines_item = NiLetterValidationReportLine.from_dict(error_lines_item_data)
+
+
 
             error_lines.append(error_lines_item)
+
 
         _payment_date = d.pop("paymentDate", UNSET)
         payment_date: Union[Unset, None, datetime.date]
         if _payment_date is None:
             payment_date = None
-        elif isinstance(_payment_date, Unset):
+        elif isinstance(_payment_date,  Unset):
             payment_date = UNSET
         else:
             payment_date = isoparse(_payment_date).date()
 
+
+
+
         _employer = d.pop("employer", UNSET)
         employer: Union[Unset, Item]
-        if isinstance(_employer, Unset):
+        if isinstance(_employer,  Unset):
             employer = UNSET
         else:
             employer = Item.from_dict(_employer)
 
+
+
+
         _pay_period = d.pop("payPeriod", UNSET)
         pay_period: Union[Unset, PayPeriods]
-        if isinstance(_pay_period, Unset):
+        if isinstance(_pay_period,  Unset):
             pay_period = UNSET
         else:
             pay_period = PayPeriods(_pay_period)
+
+
+
 
         ordinal = d.pop("ordinal", UNSET)
 
@@ -178,31 +200,45 @@ class NiLetterValidationReport:
 
         _start_date = d.pop("startDate", UNSET)
         start_date: Union[Unset, datetime.date]
-        if isinstance(_start_date, Unset):
+        if isinstance(_start_date,  Unset):
             start_date = UNSET
         else:
             start_date = isoparse(_start_date).date()
 
+
+
+
         _end_date = d.pop("endDate", UNSET)
         end_date: Union[Unset, datetime.date]
-        if isinstance(_end_date, Unset):
+        if isinstance(_end_date,  Unset):
             end_date = UNSET
         else:
             end_date = isoparse(_end_date).date()
 
+
+
+
         _report = d.pop("report", UNSET)
         report: Union[Unset, Report]
-        if isinstance(_report, Unset):
+        if isinstance(_report,  Unset):
             report = UNSET
         else:
             report = Report(_report)
 
+
+
+
         _tax_year = d.pop("taxYear", UNSET)
         tax_year: Union[Unset, TaxYear]
-        if isinstance(_tax_year, Unset):
+        if isinstance(_tax_year,  Unset):
             tax_year = UNSET
         else:
             tax_year = TaxYear(_tax_year)
+
+
+
+
+        is_draft = d.pop("isDraft", UNSET)
 
         ni_letter_validation_report = cls(
             based_on_payrun=based_on_payrun,
@@ -219,6 +255,8 @@ class NiLetterValidationReport:
             end_date=end_date,
             report=report,
             tax_year=tax_year,
+            is_draft=is_draft,
         )
 
         return ni_letter_validation_report
+

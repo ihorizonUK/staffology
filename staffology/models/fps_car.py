@@ -7,7 +7,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="FpsCar")
 
-
 @attr.s(auto_attribs=True)
 class FpsCar:
     """
@@ -39,6 +38,7 @@ class FpsCar:
     avail_to: Union[Unset, None, str] = UNSET
     free_fuel: Union[Unset, FpsCarFuel] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         make = self.make
         first_regd = self.first_regd
@@ -55,8 +55,10 @@ class FpsCar:
         if not isinstance(self.free_fuel, Unset):
             free_fuel = self.free_fuel.to_dict()
 
+
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if make is not UNSET:
             field_dict["make"] = make
         if first_regd is not UNSET:
@@ -83,6 +85,8 @@ class FpsCar:
             field_dict["freeFuel"] = free_fuel
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -111,10 +115,13 @@ class FpsCar:
 
         _free_fuel = d.pop("freeFuel", UNSET)
         free_fuel: Union[Unset, FpsCarFuel]
-        if isinstance(_free_fuel, Unset):
+        if isinstance(_free_fuel,  Unset):
             free_fuel = UNSET
         else:
             free_fuel = FpsCarFuel.from_dict(_free_fuel)
+
+
+
 
         fps_car = cls(
             make=make,
@@ -132,3 +139,4 @@ class FpsCar:
         )
 
         return fps_car
+

@@ -6,7 +6,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="BankDetails")
 
-
 @attr.s(auto_attribs=True)
 class BankDetails:
     """
@@ -18,6 +17,7 @@ class BankDetails:
         account_number (Union[Unset, None, str]):
         sort_code (Union[Unset, None, str]):
         note (Union[Unset, None, str]):
+        building_society_roll_number (Union[Unset, None, str]):
     """
 
     bank_name: Union[Unset, None, str] = UNSET
@@ -27,6 +27,8 @@ class BankDetails:
     account_number: Union[Unset, None, str] = UNSET
     sort_code: Union[Unset, None, str] = UNSET
     note: Union[Unset, None, str] = UNSET
+    building_society_roll_number: Union[Unset, None, str] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         bank_name = self.bank_name
@@ -36,9 +38,11 @@ class BankDetails:
         account_number = self.account_number
         sort_code = self.sort_code
         note = self.note
+        building_society_roll_number = self.building_society_roll_number
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if bank_name is not UNSET:
             field_dict["bankName"] = bank_name
         if bank_branch is not UNSET:
@@ -53,8 +57,12 @@ class BankDetails:
             field_dict["sortCode"] = sort_code
         if note is not UNSET:
             field_dict["note"] = note
+        if building_society_roll_number is not UNSET:
+            field_dict["buildingSocietyRollNumber"] = building_society_roll_number
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -73,6 +81,8 @@ class BankDetails:
 
         note = d.pop("note", UNSET)
 
+        building_society_roll_number = d.pop("buildingSocietyRollNumber", UNSET)
+
         bank_details = cls(
             bank_name=bank_name,
             bank_branch=bank_branch,
@@ -81,6 +91,8 @@ class BankDetails:
             account_number=account_number,
             sort_code=sort_code,
             note=note,
+            building_society_roll_number=building_society_roll_number,
         )
 
         return bank_details
+

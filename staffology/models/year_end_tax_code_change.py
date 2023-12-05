@@ -7,7 +7,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="YearEndTaxCodeChange")
 
-
 @attr.s(auto_attribs=True)
 class YearEndTaxCodeChange:
     """Forms part of the YearEnd model to list changes to Tax Codes
@@ -22,6 +21,7 @@ class YearEndTaxCodeChange:
     current_code: Union[Unset, None, str] = UNSET
     new_code: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         employee: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.employee, Unset):
@@ -31,7 +31,8 @@ class YearEndTaxCodeChange:
         new_code = self.new_code
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if employee is not UNSET:
             field_dict["employee"] = employee
         if current_code is not UNSET:
@@ -41,15 +42,20 @@ class YearEndTaxCodeChange:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _employee = d.pop("employee", UNSET)
         employee: Union[Unset, Item]
-        if isinstance(_employee, Unset):
+        if isinstance(_employee,  Unset):
             employee = UNSET
         else:
             employee = Item.from_dict(_employee)
+
+
+
 
         current_code = d.pop("currentCode", UNSET)
 
@@ -62,3 +68,4 @@ class YearEndTaxCodeChange:
         )
 
         return year_end_tax_code_change
+

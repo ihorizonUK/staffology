@@ -7,7 +7,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="ValueOverride")
 
-
 @attr.s(auto_attribs=True)
 class ValueOverride:
     """
@@ -15,11 +14,12 @@ class ValueOverride:
         type (Union[Unset, PayrollValueType]):
         value (Union[Unset, float]): The value to use in place of the original value
         original_value (Union[Unset, float]): [readonly] The original value
-        note (Union[Unset, None, str]): The reason given for the overrride
+        note (Union[Unset, None, str]): The reason given for the override
         attachment_order_id (Union[Unset, None, str]): The Id of the AttachmentOrder. Only relevant if the Type is set
             to AttachmentOrderDeductions
         pension_id (Union[Unset, None, str]): The Id of the associated Pension. Only included if the Code is PENSION,
             PENSIONSS or PENSIONRAS
+        leave_id (Union[Unset, None, str]): The Id of the associated Leave.
     """
 
     type: Union[Unset, PayrollValueType] = UNSET
@@ -28,6 +28,8 @@ class ValueOverride:
     note: Union[Unset, None, str] = UNSET
     attachment_order_id: Union[Unset, None, str] = UNSET
     pension_id: Union[Unset, None, str] = UNSET
+    leave_id: Union[Unset, None, str] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET
@@ -39,9 +41,11 @@ class ValueOverride:
         note = self.note
         attachment_order_id = self.attachment_order_id
         pension_id = self.pension_id
+        leave_id = self.leave_id
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if type is not UNSET:
             field_dict["type"] = type
         if value is not UNSET:
@@ -54,18 +58,25 @@ class ValueOverride:
             field_dict["attachmentOrderId"] = attachment_order_id
         if pension_id is not UNSET:
             field_dict["pensionId"] = pension_id
+        if leave_id is not UNSET:
+            field_dict["leaveId"] = leave_id
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _type = d.pop("type", UNSET)
         type: Union[Unset, PayrollValueType]
-        if isinstance(_type, Unset):
+        if isinstance(_type,  Unset):
             type = UNSET
         else:
             type = PayrollValueType(_type)
+
+
+
 
         value = d.pop("value", UNSET)
 
@@ -77,6 +88,8 @@ class ValueOverride:
 
         pension_id = d.pop("pensionId", UNSET)
 
+        leave_id = d.pop("leaveId", UNSET)
+
         value_override = cls(
             type=type,
             value=value,
@@ -84,6 +97,8 @@ class ValueOverride:
             note=note,
             attachment_order_id=attachment_order_id,
             pension_id=pension_id,
+            leave_id=leave_id,
         )
 
         return value_override
+

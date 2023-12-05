@@ -7,25 +7,27 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="P11ReportResponse")
 
-
 @attr.s(auto_attribs=True)
 class P11ReportResponse:
     """Used to encapsulate a response for any of the reports.
-    See the Introduction Guide for Reports for more details
+See the Introduction Guide for Reports for more details
 
-        Attributes:
-            type (Union[Unset, None, str]): [readonly] The content-type, this would usually be the same as the accept header
-                you provided when you requested the report
-            content (Union[Unset, None, str]): [readonly] This could contain a link to a PDF file, HTML content or other
-                content, depending on the Type value.
-            model (Union[Unset, P11]): A P11 Report summarises payments and deductions made to an employee.
-                Our Reports API can return this to you in many formats including as a PDF file
-                If you request is as a JSOn object then it is represented using this model.
+    Attributes:
+        type (Union[Unset, None, str]): [readonly] The content-type, this would usually be the same as the accept header
+            you provided when you requested the report
+        content (Union[Unset, None, str]): [readonly] This could contain a link to a PDF file, HTML content or other
+            content, depending on the Type value.
+        model (Union[Unset, P11]): A P11 Report summarises payments and deductions made to an employee.
+            Our Reports API can return this to you in many formats including as a PDF file
+            If you request is as a JSOn object then it is represented using this model.
+        stream (Union[Unset, None, str]): byte array
     """
 
     type: Union[Unset, None, str] = UNSET
     content: Union[Unset, None, str] = UNSET
     model: Union[Unset, P11] = UNSET
+    stream: Union[Unset, None, str] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         type = self.type
@@ -34,16 +36,23 @@ class P11ReportResponse:
         if not isinstance(self.model, Unset):
             model = self.model.to_dict()
 
+        stream = self.stream
+
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if type is not UNSET:
             field_dict["type"] = type
         if content is not UNSET:
             field_dict["content"] = content
         if model is not UNSET:
             field_dict["model"] = model
+        if stream is not UNSET:
+            field_dict["stream"] = stream
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -54,15 +63,22 @@ class P11ReportResponse:
 
         _model = d.pop("model", UNSET)
         model: Union[Unset, P11]
-        if isinstance(_model, Unset):
+        if isinstance(_model,  Unset):
             model = UNSET
         else:
             model = P11.from_dict(_model)
+
+
+
+
+        stream = d.pop("stream", UNSET)
 
         p11_report_response = cls(
             type=type,
             content=content,
             model=model,
+            stream=stream,
         )
 
         return p11_report_response
+

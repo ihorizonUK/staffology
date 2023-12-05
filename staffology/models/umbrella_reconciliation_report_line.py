@@ -7,7 +7,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="UmbrellaReconciliationReportLine")
 
-
 @attr.s(auto_attribs=True)
 class UmbrellaReconciliationReportLine:
     """
@@ -51,6 +50,7 @@ class UmbrellaReconciliationReportLine:
     employer_costs: Union[Unset, float] = UNSET
     total: Union[Unset, float] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         employee: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.employee, Unset):
@@ -75,7 +75,8 @@ class UmbrellaReconciliationReportLine:
         total = self.total
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if employee is not UNSET:
             field_dict["employee"] = employee
         if period is not UNSET:
@@ -115,15 +116,20 @@ class UmbrellaReconciliationReportLine:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _employee = d.pop("employee", UNSET)
         employee: Union[Unset, Item]
-        if isinstance(_employee, Unset):
+        if isinstance(_employee,  Unset):
             employee = UNSET
         else:
             employee = Item.from_dict(_employee)
+
+
+
 
         period = d.pop("period", UNSET)
 
@@ -181,3 +187,4 @@ class UmbrellaReconciliationReportLine:
         )
 
         return umbrella_reconciliation_report_line
+

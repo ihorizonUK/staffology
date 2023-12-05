@@ -6,7 +6,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="P11DSingleItem")
 
-
 @attr.s(auto_attribs=True)
 class P11DSingleItem:
     """
@@ -38,6 +37,7 @@ class P11DSingleItem:
     made_good: Union[Unset, None, str] = UNSET
     cash_equiv_or_relevant_amt: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         type_letter = self.type_letter
         taxable_pmt = self.taxable_pmt
@@ -53,7 +53,8 @@ class P11DSingleItem:
         cash_equiv_or_relevant_amt = self.cash_equiv_or_relevant_amt
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if type_letter is not UNSET:
             field_dict["typeLetter"] = type_letter
         if taxable_pmt is not UNSET:
@@ -80,6 +81,8 @@ class P11DSingleItem:
             field_dict["cashEquivOrRelevantAmt"] = cash_equiv_or_relevant_amt
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -124,3 +127,4 @@ class P11DSingleItem:
         )
 
         return p11d_single_item
+

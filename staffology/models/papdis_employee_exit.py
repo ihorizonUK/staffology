@@ -8,38 +8,37 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="PapdisEmployeeExit")
 
-
 @attr.s(auto_attribs=True)
 class PapdisEmployeeExit:
     """
     Attributes:
-        exit_date (Union[Unset, datetime.date]): [readonly]
+        exit_date (Union[Unset, None, datetime.date]): [readonly]
         exit_reason_code (Union[Unset, None, int]): [readonly]
         ae_opt_out_date (Union[Unset, None, datetime.date]): [readonly]
         ae_opt_out_reference (Union[Unset, None, str]): [readonly]
     """
 
-    exit_date: Union[Unset, datetime.date] = UNSET
+    exit_date: Union[Unset, None, datetime.date] = UNSET
     exit_reason_code: Union[Unset, None, int] = UNSET
     ae_opt_out_date: Union[Unset, None, datetime.date] = UNSET
     ae_opt_out_reference: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
-        exit_date: Union[Unset, str] = UNSET
+        exit_date: Union[Unset, None, str] = UNSET
         if not isinstance(self.exit_date, Unset):
-            exit_date = self.exit_date.isoformat()
+            exit_date = self.exit_date.isoformat() if self.exit_date else None
 
         exit_reason_code = self.exit_reason_code
         ae_opt_out_date: Union[Unset, None, str] = UNSET
         if not isinstance(self.ae_opt_out_date, Unset):
-            ae_opt_out_date = (
-                self.ae_opt_out_date.isoformat() if self.ae_opt_out_date else None
-            )
+            ae_opt_out_date = self.ae_opt_out_date.isoformat() if self.ae_opt_out_date else None
 
         ae_opt_out_reference = self.ae_opt_out_reference
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if exit_date is not UNSET:
             field_dict["exitDate"] = exit_date
         if exit_reason_code is not UNSET:
@@ -51,15 +50,22 @@ class PapdisEmployeeExit:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _exit_date = d.pop("exitDate", UNSET)
-        exit_date: Union[Unset, datetime.date]
-        if isinstance(_exit_date, Unset):
+        exit_date: Union[Unset, None, datetime.date]
+        if _exit_date is None:
+            exit_date = None
+        elif isinstance(_exit_date,  Unset):
             exit_date = UNSET
         else:
             exit_date = isoparse(_exit_date).date()
+
+
+
 
         exit_reason_code = d.pop("exitReasonCode", UNSET)
 
@@ -67,10 +73,13 @@ class PapdisEmployeeExit:
         ae_opt_out_date: Union[Unset, None, datetime.date]
         if _ae_opt_out_date is None:
             ae_opt_out_date = None
-        elif isinstance(_ae_opt_out_date, Unset):
+        elif isinstance(_ae_opt_out_date,  Unset):
             ae_opt_out_date = UNSET
         else:
             ae_opt_out_date = isoparse(_ae_opt_out_date).date()
+
+
+
 
         ae_opt_out_reference = d.pop("aeOptOutReference", UNSET)
 
@@ -82,3 +91,4 @@ class PapdisEmployeeExit:
         )
 
         return papdis_employee_exit
+

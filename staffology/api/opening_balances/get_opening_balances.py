@@ -30,9 +30,7 @@ def _get_kwargs(
     }
 
 
-def _parse_response(
-    *, response: httpx.Response
-) -> Optional[Union[Any, OpeningBalances]]:
+def _parse_response(*, response: httpx.Response) -> Optional[Union[Any, OpeningBalances]]:
     if response.status_code == 200:
         response_200 = OpeningBalances.from_dict(response.json())
 
@@ -43,9 +41,7 @@ def _parse_response(
     return raise_staffology_exception(response)
 
 
-def _build_response(
-    *, response: httpx.Response
-) -> Response[Union[Any, OpeningBalances]]:
+def _build_response(*, response: httpx.Response) -> Response[Union[Any, OpeningBalances]]:
     return Response(
         status_code=response.status_code,
         content=response.content,

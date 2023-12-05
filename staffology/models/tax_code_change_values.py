@@ -7,7 +7,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="TaxCodeChangeValues")
 
-
 @attr.s(auto_attribs=True)
 class TaxCodeChangeValues:
     """
@@ -33,6 +32,7 @@ class TaxCodeChangeValues:
     previous_tax_code: Union[Unset, None, str] = UNSET
     current_tax_code: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         employee_id = self.employee_id
         employee: Union[Unset, Dict[str, Any]] = UNSET
@@ -48,7 +48,8 @@ class TaxCodeChangeValues:
         current_tax_code = self.current_tax_code
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if employee_id is not UNSET:
             field_dict["employeeId"] = employee_id
         if employee is not UNSET:
@@ -70,6 +71,8 @@ class TaxCodeChangeValues:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
@@ -77,10 +80,13 @@ class TaxCodeChangeValues:
 
         _employee = d.pop("employee", UNSET)
         employee: Union[Unset, Item]
-        if isinstance(_employee, Unset):
+        if isinstance(_employee,  Unset):
             employee = UNSET
         else:
             employee = Item.from_dict(_employee)
+
+
+
 
         payroll_code = d.pop("payrollCode", UNSET)
 
@@ -109,3 +115,4 @@ class TaxCodeChangeValues:
         )
 
         return tax_code_change_values
+

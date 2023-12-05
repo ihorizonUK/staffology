@@ -13,7 +13,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="FullSummaryOfPayReport")
 
-
 @attr.s(auto_attribs=True)
 class FullSummaryOfPayReport:
     """
@@ -31,6 +30,7 @@ class FullSummaryOfPayReport:
         end_date (Union[Unset, datetime.date]):
         report (Union[Unset, Report]):
         tax_year (Union[Unset, TaxYear]):
+        is_draft (Union[Unset, bool]):
     """
 
     lines: Union[Unset, None, List[FullSummaryOfPayReportLine]] = UNSET
@@ -46,6 +46,8 @@ class FullSummaryOfPayReport:
     end_date: Union[Unset, datetime.date] = UNSET
     report: Union[Unset, Report] = UNSET
     tax_year: Union[Unset, TaxYear] = UNSET
+    is_draft: Union[Unset, bool] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         lines: Union[Unset, None, List[Dict[str, Any]]] = UNSET
@@ -59,6 +61,9 @@ class FullSummaryOfPayReport:
 
                     lines.append(lines_item)
 
+
+
+
         deduction_lines: Union[Unset, None, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.deduction_lines, Unset):
             if self.deduction_lines is None:
@@ -69,6 +74,9 @@ class FullSummaryOfPayReport:
                     deduction_lines_item = deduction_lines_item_data.to_dict()
 
                     deduction_lines.append(deduction_lines_item)
+
+
+
 
         employer: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.employer, Unset):
@@ -99,8 +107,11 @@ class FullSummaryOfPayReport:
         if not isinstance(self.tax_year, Unset):
             tax_year = self.tax_year.value
 
+        is_draft = self.is_draft
+
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if lines is not UNSET:
             field_dict["lines"] = lines
         if deduction_lines is not UNSET:
@@ -127,41 +138,55 @@ class FullSummaryOfPayReport:
             field_dict["report"] = report
         if tax_year is not UNSET:
             field_dict["taxYear"] = tax_year
+        if is_draft is not UNSET:
+            field_dict["isDraft"] = is_draft
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         lines = []
         _lines = d.pop("lines", UNSET)
-        for lines_item_data in _lines or []:
+        for lines_item_data in (_lines or []):
             lines_item = FullSummaryOfPayReportLine.from_dict(lines_item_data)
+
+
 
             lines.append(lines_item)
 
+
         deduction_lines = []
         _deduction_lines = d.pop("deductionLines", UNSET)
-        for deduction_lines_item_data in _deduction_lines or []:
-            deduction_lines_item = FullSummaryOfPayReportLine.from_dict(
-                deduction_lines_item_data
-            )
+        for deduction_lines_item_data in (_deduction_lines or []):
+            deduction_lines_item = FullSummaryOfPayReportLine.from_dict(deduction_lines_item_data)
+
+
 
             deduction_lines.append(deduction_lines_item)
 
+
         _employer = d.pop("employer", UNSET)
         employer: Union[Unset, Item]
-        if isinstance(_employer, Unset):
+        if isinstance(_employer,  Unset):
             employer = UNSET
         else:
             employer = Item.from_dict(_employer)
 
+
+
+
         _pay_period = d.pop("payPeriod", UNSET)
         pay_period: Union[Unset, PayPeriods]
-        if isinstance(_pay_period, Unset):
+        if isinstance(_pay_period,  Unset):
             pay_period = UNSET
         else:
             pay_period = PayPeriods(_pay_period)
+
+
+
 
         ordinal = d.pop("ordinal", UNSET)
 
@@ -175,31 +200,45 @@ class FullSummaryOfPayReport:
 
         _start_date = d.pop("startDate", UNSET)
         start_date: Union[Unset, datetime.date]
-        if isinstance(_start_date, Unset):
+        if isinstance(_start_date,  Unset):
             start_date = UNSET
         else:
             start_date = isoparse(_start_date).date()
 
+
+
+
         _end_date = d.pop("endDate", UNSET)
         end_date: Union[Unset, datetime.date]
-        if isinstance(_end_date, Unset):
+        if isinstance(_end_date,  Unset):
             end_date = UNSET
         else:
             end_date = isoparse(_end_date).date()
 
+
+
+
         _report = d.pop("report", UNSET)
         report: Union[Unset, Report]
-        if isinstance(_report, Unset):
+        if isinstance(_report,  Unset):
             report = UNSET
         else:
             report = Report(_report)
 
+
+
+
         _tax_year = d.pop("taxYear", UNSET)
         tax_year: Union[Unset, TaxYear]
-        if isinstance(_tax_year, Unset):
+        if isinstance(_tax_year,  Unset):
             tax_year = UNSET
         else:
             tax_year = TaxYear(_tax_year)
+
+
+
+
+        is_draft = d.pop("isDraft", UNSET)
 
         full_summary_of_pay_report = cls(
             lines=lines,
@@ -215,6 +254,8 @@ class FullSummaryOfPayReport:
             end_date=end_date,
             report=report,
             tax_year=tax_year,
+            is_draft=is_draft,
         )
 
         return full_summary_of_pay_report
+

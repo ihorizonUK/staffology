@@ -9,7 +9,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="BankPaymentInstruction")
 
-
 @attr.s(auto_attribs=True)
 class BankPaymentInstruction:
     """
@@ -31,6 +30,7 @@ class BankPaymentInstruction:
     service_user_number: Union[Unset, None, str] = UNSET
     bureau_number: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         originator: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.originator, Unset):
@@ -47,6 +47,9 @@ class BankPaymentInstruction:
 
                     bank_payments.append(bank_payments_item)
 
+
+
+
         status: Union[Unset, str] = UNSET
         if not isinstance(self.status, Unset):
             status = self.status.value
@@ -57,7 +60,8 @@ class BankPaymentInstruction:
         bureau_number = self.bureau_number
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if originator is not UNSET:
             field_dict["originator"] = originator
         if bank_payments is not UNSET:
@@ -75,29 +79,40 @@ class BankPaymentInstruction:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _originator = d.pop("originator", UNSET)
         originator: Union[Unset, BankDetails]
-        if isinstance(_originator, Unset):
+        if isinstance(_originator,  Unset):
             originator = UNSET
         else:
             originator = BankDetails.from_dict(_originator)
 
+
+
+
         bank_payments = []
         _bank_payments = d.pop("bankPayments", UNSET)
-        for bank_payments_item_data in _bank_payments or []:
+        for bank_payments_item_data in (_bank_payments or []):
             bank_payments_item = PayRunPayment.from_dict(bank_payments_item_data)
+
+
 
             bank_payments.append(bank_payments_item)
 
+
         _status = d.pop("status", UNSET)
         status: Union[Unset, BackgroundTaskStatus]
-        if isinstance(_status, Unset):
+        if isinstance(_status,  Unset):
             status = UNSET
         else:
             status = BackgroundTaskStatus(_status)
+
+
+
 
         status_message = d.pop("statusMessage", UNSET)
 
@@ -118,3 +133,4 @@ class BankPaymentInstruction:
         )
 
         return bank_payment_instruction
+

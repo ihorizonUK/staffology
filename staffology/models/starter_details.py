@@ -11,7 +11,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="StarterDetails")
 
-
 @attr.s(auto_attribs=True)
 class StarterDetails:
     """
@@ -27,8 +26,9 @@ class StarterDetails:
     overseas_employer_details: Union[Unset, OverseasEmployerDetails] = UNSET
     pensioner_payroll: Union[Unset, PensionerPayroll] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
-        start_date = self.start_date.isoformat()
+        start_date = self.start_date.isoformat() 
         starter_declaration = self.starter_declaration.value
 
         overseas_employer_details: Union[Unset, Dict[str, Any]] = UNSET
@@ -39,13 +39,12 @@ class StarterDetails:
         if not isinstance(self.pensioner_payroll, Unset):
             pensioner_payroll = self.pensioner_payroll.to_dict()
 
+
         field_dict: Dict[str, Any] = {}
-        field_dict.update(
-            {
-                "startDate": start_date,
-                "starterDeclaration": starter_declaration,
-            }
-        )
+        field_dict.update({
+            "startDate": start_date,
+            "starterDeclaration": starter_declaration,
+        })
         if overseas_employer_details is not UNSET:
             field_dict["overseasEmployerDetails"] = overseas_employer_details
         if pensioner_payroll is not UNSET:
@@ -53,28 +52,40 @@ class StarterDetails:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         start_date = isoparse(d.pop("startDate")).date()
 
+
+
+
         starter_declaration = StarterDeclaration(d.pop("starterDeclaration"))
+
+
+
 
         _overseas_employer_details = d.pop("overseasEmployerDetails", UNSET)
         overseas_employer_details: Union[Unset, OverseasEmployerDetails]
-        if isinstance(_overseas_employer_details, Unset):
+        if isinstance(_overseas_employer_details,  Unset):
             overseas_employer_details = UNSET
         else:
-            overseas_employer_details = OverseasEmployerDetails.from_dict(
-                _overseas_employer_details
-            )
+            overseas_employer_details = OverseasEmployerDetails.from_dict(_overseas_employer_details)
+
+
+
 
         _pensioner_payroll = d.pop("pensionerPayroll", UNSET)
         pensioner_payroll: Union[Unset, PensionerPayroll]
-        if isinstance(_pensioner_payroll, Unset):
+        if isinstance(_pensioner_payroll,  Unset):
             pensioner_payroll = UNSET
         else:
             pensioner_payroll = PensionerPayroll.from_dict(_pensioner_payroll)
+
+
+
 
         starter_details = cls(
             start_date=start_date,
@@ -84,3 +95,4 @@ class StarterDetails:
         )
 
         return starter_details
+

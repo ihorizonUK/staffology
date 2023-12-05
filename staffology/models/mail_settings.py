@@ -8,25 +8,24 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="MailSettings")
 
-
 @attr.s(auto_attribs=True)
 class MailSettings:
     """Determines the settings used when the Employer sends emails.
-    If CustomiseSmtpSettings is false then SmtpSettings will be null and our default internal settings will be used;
+If CustomiseSmtpSettings is false then SmtpSettings will be null and our default internal settings will be used;
 
-        Attributes:
-            sender_name (str):
-            sender_email (str):
-            customise_smtp_settings (bool):
-            customise_html_email_settings (bool):
-            use_system_from_address (Union[Unset, bool]): If set to true then the SenderEmail provided will only be used in
-                the
-                ReplyTo fields. The system defaults will be used for the From address.
-            sender_email_verified (Union[Unset, bool]): [readonly] The SenderEmail must be verified before you can send
-                email using that address
-            smtp_settings (Union[Unset, SmtpSettings]):
-            html_email_settings (Union[Unset, HtmlEmailSettings]):
-            id (Union[Unset, str]): [readonly] The unique id of the object
+    Attributes:
+        sender_name (str):
+        sender_email (str):
+        customise_smtp_settings (bool):
+        customise_html_email_settings (bool):
+        use_system_from_address (Union[Unset, bool]): If set to true then the SenderEmail provided will only be used in
+            the
+            ReplyTo fields. The system defaults will be used for the From address.
+        sender_email_verified (Union[Unset, bool]): [readonly] The SenderEmail must be verified before you can send
+            email using that address
+        smtp_settings (Union[Unset, SmtpSettings]):
+        html_email_settings (Union[Unset, HtmlEmailSettings]):
+        id (Union[Unset, str]): [readonly] The unique id of the object
     """
 
     sender_name: str
@@ -38,6 +37,7 @@ class MailSettings:
     smtp_settings: Union[Unset, SmtpSettings] = UNSET
     html_email_settings: Union[Unset, HtmlEmailSettings] = UNSET
     id: Union[Unset, str] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         sender_name = self.sender_name
@@ -57,14 +57,12 @@ class MailSettings:
         id = self.id
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update(
-            {
-                "senderName": sender_name,
-                "senderEmail": sender_email,
-                "customiseSmtpSettings": customise_smtp_settings,
-                "customiseHtmlEmailSettings": customise_html_email_settings,
-            }
-        )
+        field_dict.update({
+            "senderName": sender_name,
+            "senderEmail": sender_email,
+            "customiseSmtpSettings": customise_smtp_settings,
+            "customiseHtmlEmailSettings": customise_html_email_settings,
+        })
         if use_system_from_address is not UNSET:
             field_dict["useSystemFromAddress"] = use_system_from_address
         if sender_email_verified is not UNSET:
@@ -77,6 +75,8 @@ class MailSettings:
             field_dict["id"] = id
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -95,17 +95,23 @@ class MailSettings:
 
         _smtp_settings = d.pop("smtpSettings", UNSET)
         smtp_settings: Union[Unset, SmtpSettings]
-        if isinstance(_smtp_settings, Unset):
+        if isinstance(_smtp_settings,  Unset):
             smtp_settings = UNSET
         else:
             smtp_settings = SmtpSettings.from_dict(_smtp_settings)
 
+
+
+
         _html_email_settings = d.pop("htmlEmailSettings", UNSET)
         html_email_settings: Union[Unset, HtmlEmailSettings]
-        if isinstance(_html_email_settings, Unset):
+        if isinstance(_html_email_settings,  Unset):
             html_email_settings = UNSET
         else:
             html_email_settings = HtmlEmailSettings.from_dict(_html_email_settings)
+
+
+
 
         id = d.pop("id", UNSET)
 
@@ -122,3 +128,4 @@ class MailSettings:
         )
 
         return mail_settings
+

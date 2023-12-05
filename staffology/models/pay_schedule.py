@@ -14,7 +14,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="PaySchedule")
 
-
 @attr.s(auto_attribs=True)
 class PaySchedule:
     """
@@ -27,6 +26,7 @@ class PaySchedule:
         first_period_end_date (Union[Unset, datetime.date]): The last day of the first pay period
         first_payment_date (Union[Unset, datetime.date]): The first payment date
         payment_date_type (Union[Unset, PaymentDateType]):
+        period_end_date_type (Union[Unset, PaymentDateType]):
         period_lengths (Union[Unset, None, List[int]]): Only applicable for PayPeriod of Custom. Defines the length of
             each period
         high_gross_pay (Union[Unset, float]): A gross pay amount considered high for this PaySchedule
@@ -61,6 +61,7 @@ class PaySchedule:
     first_period_end_date: Union[Unset, datetime.date] = UNSET
     first_payment_date: Union[Unset, datetime.date] = UNSET
     payment_date_type: Union[Unset, PaymentDateType] = UNSET
+    period_end_date_type: Union[Unset, PaymentDateType] = UNSET
     period_lengths: Union[Unset, None, List[int]] = UNSET
     high_gross_pay: Union[Unset, float] = UNSET
     high_net_pay: Union[Unset, float] = UNSET
@@ -76,6 +77,7 @@ class PaySchedule:
     pay_runs: Union[Unset, None, List[Item]] = UNSET
     current_pay_run: Union[Unset, Item] = UNSET
     next_pay_run: Union[Unset, PayRun] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         name = self.name
@@ -100,6 +102,10 @@ class PaySchedule:
         if not isinstance(self.payment_date_type, Unset):
             payment_date_type = self.payment_date_type.value
 
+        period_end_date_type: Union[Unset, str] = UNSET
+        if not isinstance(self.period_end_date_type, Unset):
+            period_end_date_type = self.period_end_date_type.value
+
         period_lengths: Union[Unset, None, List[int]] = UNSET
         if not isinstance(self.period_lengths, Unset):
             if self.period_lengths is None:
@@ -107,24 +113,19 @@ class PaySchedule:
             else:
                 period_lengths = self.period_lengths
 
+
+
+
         high_gross_pay = self.high_gross_pay
         high_net_pay = self.high_net_pay
         period_events_config: Union[Unset, None, Dict[str, Any]] = UNSET
         if not isinstance(self.period_events_config, Unset):
-            period_events_config = (
-                self.period_events_config.to_dict()
-                if self.period_events_config
-                else None
-            )
+            period_events_config = self.period_events_config.to_dict() if self.period_events_config else None
 
         has_open_pay_run_period = self.has_open_pay_run_period
         last_period_end_date: Union[Unset, None, str] = UNSET
         if not isinstance(self.last_period_end_date, Unset):
-            last_period_end_date = (
-                self.last_period_end_date.isoformat()
-                if self.last_period_end_date
-                else None
-            )
+            last_period_end_date = self.last_period_end_date.isoformat() if self.last_period_end_date else None
 
         last_period_number = self.last_period_number
         employee_count = self.employee_count
@@ -138,6 +139,9 @@ class PaySchedule:
             else:
                 year_end_tasks = self.year_end_tasks
 
+
+
+
         pay_runs: Union[Unset, None, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.pay_runs, Unset):
             if self.pay_runs is None:
@@ -149,6 +153,9 @@ class PaySchedule:
 
                     pay_runs.append(pay_runs_item)
 
+
+
+
         current_pay_run: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.current_pay_run, Unset):
             current_pay_run = self.current_pay_run.to_dict()
@@ -157,8 +164,10 @@ class PaySchedule:
         if not isinstance(self.next_pay_run, Unset):
             next_pay_run = self.next_pay_run.to_dict()
 
+
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if name is not UNSET:
             field_dict["name"] = name
         if ordinal is not UNSET:
@@ -173,6 +182,8 @@ class PaySchedule:
             field_dict["firstPaymentDate"] = first_payment_date
         if payment_date_type is not UNSET:
             field_dict["paymentDateType"] = payment_date_type
+        if period_end_date_type is not UNSET:
+            field_dict["periodEndDateType"] = period_end_date_type
         if period_lengths is not UNSET:
             field_dict["periodLengths"] = period_lengths
         if high_gross_pay is not UNSET:
@@ -206,6 +217,8 @@ class PaySchedule:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
@@ -215,40 +228,66 @@ class PaySchedule:
 
         _tax_year = d.pop("taxYear", UNSET)
         tax_year: Union[Unset, TaxYear]
-        if isinstance(_tax_year, Unset):
+        if isinstance(_tax_year,  Unset):
             tax_year = UNSET
         else:
             tax_year = TaxYear(_tax_year)
 
+
+
+
         _pay_period = d.pop("payPeriod", UNSET)
         pay_period: Union[Unset, PayPeriods]
-        if isinstance(_pay_period, Unset):
+        if isinstance(_pay_period,  Unset):
             pay_period = UNSET
         else:
             pay_period = PayPeriods(_pay_period)
 
+
+
+
         _first_period_end_date = d.pop("firstPeriodEndDate", UNSET)
         first_period_end_date: Union[Unset, datetime.date]
-        if isinstance(_first_period_end_date, Unset):
+        if isinstance(_first_period_end_date,  Unset):
             first_period_end_date = UNSET
         else:
             first_period_end_date = isoparse(_first_period_end_date).date()
 
+
+
+
         _first_payment_date = d.pop("firstPaymentDate", UNSET)
         first_payment_date: Union[Unset, datetime.date]
-        if isinstance(_first_payment_date, Unset):
+        if isinstance(_first_payment_date,  Unset):
             first_payment_date = UNSET
         else:
             first_payment_date = isoparse(_first_payment_date).date()
 
+
+
+
         _payment_date_type = d.pop("paymentDateType", UNSET)
         payment_date_type: Union[Unset, PaymentDateType]
-        if isinstance(_payment_date_type, Unset):
+        if isinstance(_payment_date_type,  Unset):
             payment_date_type = UNSET
         else:
             payment_date_type = PaymentDateType(_payment_date_type)
 
+
+
+
+        _period_end_date_type = d.pop("periodEndDateType", UNSET)
+        period_end_date_type: Union[Unset, PaymentDateType]
+        if isinstance(_period_end_date_type,  Unset):
+            period_end_date_type = UNSET
+        else:
+            period_end_date_type = PaymentDateType(_period_end_date_type)
+
+
+
+
         period_lengths = cast(List[int], d.pop("periodLengths", UNSET))
+
 
         high_gross_pay = d.pop("highGrossPay", UNSET)
 
@@ -258,12 +297,13 @@ class PaySchedule:
         period_events_config: Union[Unset, None, PaySchedulePeriodEventsConfig]
         if _period_events_config is None:
             period_events_config = None
-        elif isinstance(_period_events_config, Unset):
+        elif isinstance(_period_events_config,  Unset):
             period_events_config = UNSET
         else:
-            period_events_config = PaySchedulePeriodEventsConfig.from_dict(
-                _period_events_config
-            )
+            period_events_config = PaySchedulePeriodEventsConfig.from_dict(_period_events_config)
+
+
+
 
         has_open_pay_run_period = d.pop("hasOpenPayRunPeriod", UNSET)
 
@@ -271,10 +311,13 @@ class PaySchedule:
         last_period_end_date: Union[Unset, None, datetime.date]
         if _last_period_end_date is None:
             last_period_end_date = None
-        elif isinstance(_last_period_end_date, Unset):
+        elif isinstance(_last_period_end_date,  Unset):
             last_period_end_date = UNSET
         else:
             last_period_end_date = isoparse(_last_period_end_date).date()
+
+
+
 
         last_period_number = d.pop("lastPeriodNumber", UNSET)
 
@@ -288,26 +331,36 @@ class PaySchedule:
 
         year_end_tasks = cast(List[str], d.pop("yearEndTasks", UNSET))
 
+
         pay_runs = []
         _pay_runs = d.pop("payRuns", UNSET)
-        for pay_runs_item_data in _pay_runs or []:
+        for pay_runs_item_data in (_pay_runs or []):
             pay_runs_item = Item.from_dict(pay_runs_item_data)
+
+
 
             pay_runs.append(pay_runs_item)
 
+
         _current_pay_run = d.pop("currentPayRun", UNSET)
         current_pay_run: Union[Unset, Item]
-        if isinstance(_current_pay_run, Unset):
+        if isinstance(_current_pay_run,  Unset):
             current_pay_run = UNSET
         else:
             current_pay_run = Item.from_dict(_current_pay_run)
 
+
+
+
         _next_pay_run = d.pop("nextPayRun", UNSET)
         next_pay_run: Union[Unset, PayRun]
-        if isinstance(_next_pay_run, Unset):
+        if isinstance(_next_pay_run,  Unset):
             next_pay_run = UNSET
         else:
             next_pay_run = PayRun.from_dict(_next_pay_run)
+
+
+
 
         pay_schedule = cls(
             name=name,
@@ -317,6 +370,7 @@ class PaySchedule:
             first_period_end_date=first_period_end_date,
             first_payment_date=first_payment_date,
             payment_date_type=payment_date_type,
+            period_end_date_type=period_end_date_type,
             period_lengths=period_lengths,
             high_gross_pay=high_gross_pay,
             high_net_pay=high_net_pay,
@@ -335,3 +389,4 @@ class PaySchedule:
         )
 
         return pay_schedule
+

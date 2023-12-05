@@ -10,7 +10,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="TenantEmail")
 
-
 @attr.s(auto_attribs=True)
 class TenantEmail:
     """
@@ -44,10 +43,12 @@ class TenantEmail:
     after_btn_body: Union[Unset, None, str] = UNSET
     status: Union[Unset, BackgroundTaskStatus] = UNSET
     status_date: Union[Unset, datetime.datetime] = UNSET
+    status_message: Union[Unset, None, str] = UNSET
     send_attempts: Union[Unset, int] = UNSET
     web_app_base_url: Union[Unset, None, str] = UNSET
     attachments: Union[Unset, None, List[EmailAttachment]] = UNSET
     id: Union[Unset, str] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         to_name = self.to_name
@@ -81,16 +82,17 @@ class TenantEmail:
 
                     attachments.append(attachments_item)
 
+
+
+
         id = self.id
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update(
-            {
-                "toName": to_name,
-                "toEmail": to_email,
-                "subject": subject,
-            }
-        )
+        field_dict.update({
+            "toName": to_name,
+            "toEmail": to_email,
+            "subject": subject,
+        })
         if status_message is not UNSET:
             field_dict["_statusMessage"] = status_message
         if button_text is not UNSET:
@@ -120,6 +122,8 @@ class TenantEmail:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
@@ -143,17 +147,23 @@ class TenantEmail:
 
         _status = d.pop("status", UNSET)
         status: Union[Unset, BackgroundTaskStatus]
-        if isinstance(_status, Unset):
+        if isinstance(_status,  Unset):
             status = UNSET
         else:
             status = BackgroundTaskStatus(_status)
 
+
+
+
         _status_date = d.pop("statusDate", UNSET)
         status_date: Union[Unset, datetime.datetime]
-        if isinstance(_status_date, Unset):
+        if isinstance(_status_date,  Unset):
             status_date = UNSET
         else:
             status_date = isoparse(_status_date)
+
+
+
 
         status_message = d.pop("statusMessage", UNSET)
 
@@ -163,10 +173,13 @@ class TenantEmail:
 
         attachments = []
         _attachments = d.pop("attachments", UNSET)
-        for attachments_item_data in _attachments or []:
+        for attachments_item_data in (_attachments or []):
             attachments_item = EmailAttachment.from_dict(attachments_item_data)
 
+
+
             attachments.append(attachments_item)
+
 
         id = d.pop("id", UNSET)
 
@@ -182,6 +195,7 @@ class TenantEmail:
             after_btn_body=after_btn_body,
             status=status,
             status_date=status_date,
+            status_message=status_message,
             send_attempts=send_attempts,
             web_app_base_url=web_app_base_url,
             attachments=attachments,
@@ -189,3 +203,4 @@ class TenantEmail:
         )
 
         return tenant_email
+

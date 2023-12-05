@@ -6,7 +6,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="P11NiAndStatPaymentsTotalsLine")
 
-
 @attr.s(auto_attribs=True)
 class P11NiAndStatPaymentsTotalsLine:
     """Summary line for the NI Contributions and Statutory Payments table in the P11 Detailed report
@@ -39,6 +38,7 @@ class P11NiAndStatPaymentsTotalsLine:
     sap: Union[Unset, float] = UNSET
     spbp: Union[Unset, float] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         to_lel = self.to_lel
         lel_to_pt = self.lel_to_pt
@@ -54,7 +54,8 @@ class P11NiAndStatPaymentsTotalsLine:
         spbp = self.spbp
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if to_lel is not UNSET:
             field_dict["toLel"] = to_lel
         if lel_to_pt is not UNSET:
@@ -81,6 +82,8 @@ class P11NiAndStatPaymentsTotalsLine:
             field_dict["spbp"] = spbp
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -125,3 +128,4 @@ class P11NiAndStatPaymentsTotalsLine:
         )
 
         return p11_ni_and_stat_payments_totals_line
+

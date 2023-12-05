@@ -7,7 +7,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="NvrRequest")
 
-
 @attr.s(auto_attribs=True)
 class NvrRequest:
     """
@@ -18,6 +17,7 @@ class NvrRequest:
 
     employee: Union[Unset, None, List[NvrEmployee]] = UNSET
     related_tax_year: Union[Unset, None, str] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         employee: Union[Unset, None, List[Dict[str, Any]]] = UNSET
@@ -31,10 +31,14 @@ class NvrRequest:
 
                     employee.append(employee_item)
 
+
+
+
         related_tax_year = self.related_tax_year
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if employee is not UNSET:
             field_dict["employee"] = employee
         if related_tax_year is not UNSET:
@@ -42,15 +46,20 @@ class NvrRequest:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         employee = []
         _employee = d.pop("employee", UNSET)
-        for employee_item_data in _employee or []:
+        for employee_item_data in (_employee or []):
             employee_item = NvrEmployee.from_dict(employee_item_data)
 
+
+
             employee.append(employee_item)
+
 
         related_tax_year = d.pop("relatedTaxYear", UNSET)
 
@@ -60,3 +69,4 @@ class NvrRequest:
         )
 
         return nvr_request
+

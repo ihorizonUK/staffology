@@ -9,7 +9,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="Loan")
 
-
 @attr.s(auto_attribs=True)
 class Loan:
     """Used to represent an Attachment of Earnings Order (AEO)
@@ -48,6 +47,7 @@ class Loan:
     employee: Union[Unset, Item] = UNSET
     id: Union[Unset, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         issue_date: Union[Unset, str] = UNSET
         if not isinstance(self.issue_date, Unset):
@@ -74,6 +74,9 @@ class Loan:
 
                     documents.append(documents_item)
 
+
+
+
         employee: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.employee, Unset):
             employee = self.employee.to_dict()
@@ -81,7 +84,8 @@ class Loan:
         id = self.id
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if issue_date is not UNSET:
             field_dict["issueDate"] = issue_date
         if reference is not UNSET:
@@ -113,15 +117,20 @@ class Loan:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _issue_date = d.pop("issueDate", UNSET)
         issue_date: Union[Unset, datetime.date]
-        if isinstance(_issue_date, Unset):
+        if isinstance(_issue_date,  Unset):
             issue_date = UNSET
         else:
             issue_date = isoparse(_issue_date).date()
+
+
+
 
         reference = d.pop("reference", UNSET)
 
@@ -145,17 +154,23 @@ class Loan:
 
         documents = []
         _documents = d.pop("documents", UNSET)
-        for documents_item_data in _documents or []:
+        for documents_item_data in (_documents or []):
             documents_item = Item.from_dict(documents_item_data)
+
+
 
             documents.append(documents_item)
 
+
         _employee = d.pop("employee", UNSET)
         employee: Union[Unset, Item]
-        if isinstance(_employee, Unset):
+        if isinstance(_employee,  Unset):
             employee = UNSET
         else:
             employee = Item.from_dict(_employee)
+
+
+
 
         id = d.pop("id", UNSET)
 
@@ -177,3 +192,4 @@ class Loan:
         )
 
         return loan
+

@@ -9,7 +9,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="PensionContributionsSubmission")
 
-
 @attr.s(auto_attribs=True)
 class PensionContributionsSubmission:
     """This model is used to track submission of Pension Contributions to an external data provider.
@@ -42,6 +41,7 @@ class PensionContributionsSubmission:
     submission_data: Union[Unset, Any] = UNSET
     id: Union[Unset, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         employer_id = self.employer_id
         pay_run_id = self.pay_run_id
@@ -66,7 +66,8 @@ class PensionContributionsSubmission:
         id = self.id
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if employer_id is not UNSET:
             field_dict["employerId"] = employer_id
         if pay_run_id is not UNSET:
@@ -94,6 +95,8 @@ class PensionContributionsSubmission:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
@@ -103,10 +106,13 @@ class PensionContributionsSubmission:
 
         _pay_period = d.pop("payPeriod", UNSET)
         pay_period: Union[Unset, PayPeriods]
-        if isinstance(_pay_period, Unset):
+        if isinstance(_pay_period,  Unset):
             pay_period = UNSET
         else:
             pay_period = PayPeriods(_pay_period)
+
+
+
 
         ordinal = d.pop("ordinal", UNSET)
 
@@ -114,19 +120,25 @@ class PensionContributionsSubmission:
 
         _tax_year = d.pop("taxYear", UNSET)
         tax_year: Union[Unset, TaxYear]
-        if isinstance(_tax_year, Unset):
+        if isinstance(_tax_year,  Unset):
             tax_year = UNSET
         else:
             tax_year = TaxYear(_tax_year)
+
+
+
 
         scheme_id = d.pop("schemeId", UNSET)
 
         _status = d.pop("status", UNSET)
         status: Union[Unset, BackgroundTaskStatus]
-        if isinstance(_status, Unset):
+        if isinstance(_status,  Unset):
             status = UNSET
         else:
             status = BackgroundTaskStatus(_status)
+
+
+
 
         external_id = d.pop("externalId", UNSET)
 
@@ -152,3 +164,4 @@ class PensionContributionsSubmission:
         )
 
         return pension_contributions_submission
+

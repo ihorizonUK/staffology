@@ -7,7 +7,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="PayRunChanges")
 
-
 @attr.s(auto_attribs=True)
 class PayRunChanges:
     """
@@ -17,6 +16,7 @@ class PayRunChanges:
     """
 
     pay_run_entries: Union[Unset, None, List[Item]] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         pay_run_entries: Union[Unset, None, List[Dict[str, Any]]] = UNSET
@@ -30,25 +30,36 @@ class PayRunChanges:
 
                     pay_run_entries.append(pay_run_entries_item)
 
+
+
+
+
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if pay_run_entries is not UNSET:
             field_dict["payRunEntries"] = pay_run_entries
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         pay_run_entries = []
         _pay_run_entries = d.pop("payRunEntries", UNSET)
-        for pay_run_entries_item_data in _pay_run_entries or []:
+        for pay_run_entries_item_data in (_pay_run_entries or []):
             pay_run_entries_item = Item.from_dict(pay_run_entries_item_data)
 
+
+
             pay_run_entries.append(pay_run_entries_item)
+
 
         pay_run_changes = cls(
             pay_run_entries=pay_run_entries,
         )
 
         return pay_run_changes
+

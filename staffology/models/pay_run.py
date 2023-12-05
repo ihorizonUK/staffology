@@ -13,39 +13,39 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="PayRun")
 
-
 @attr.s(auto_attribs=True)
 class PayRun:
     """This model is right at the very heart of the software.
-    There is a PayRun for each period in which people are paid.
+There is a PayRun for each period in which people are paid.
 
-        Attributes:
-            tax_year (Union[Unset, TaxYear]):
-            tax_month (Union[Unset, int]): [readonly] The Tax Month that the Payment Date falls in
-            pay_period (Union[Unset, PayPeriods]):
-            ordinal (Union[Unset, int]): [readonly] Indicates whether this uses first, second, third (etc.) PaySchedule for
-                this PayPeriod.
-            period (Union[Unset, int]): [readonly] The period (i.e, Tax Week or Tax Month) that this PayRun is for.
-            start_date (Union[Unset, datetime.date]): [readonly] The start date of the period this PayRun covers
-            end_date (Union[Unset, datetime.date]): [readonly] The end date of the period this PayRun covers
-            payment_date (Union[Unset, datetime.date]): [readonly] The intended date that Employees will be paid, although
-                this can be changed on a per PayRunEntry basis
-            employee_count (Union[Unset, int]): [readonly] The number of Employees included in this PayRun (including any
-                CIS Subcontractors)
-            sub_contractor_count (Union[Unset, int]): [readonly] The number of CIS Subcontractors included in this PayRun
-            totals (Union[Unset, PayRunTotals]): Used to represent totals for a PayRun or PayRunEntry.
-                If a value is 0 then it will not be shown in the JSON.
-            state (Union[Unset, PayRunState]): The state of the payrun. You would set this value when updating a payrun to
-                finalise or re-open it.
-                Other states are used with Bureau functionality which isn't currently generally available.
-            is_closed (Union[Unset, bool]): [readonly] Set to True if the PayRun is Finalised and changes can no longer be
-                made
-            date_closed (Union[Unset, None, datetime.datetime]):
-            auto_pilot_close_date (Union[Unset, None, datetime.date]): [readonly] If AutoPilot is enabled in the
-                AutomationSettings for the Employer then this property will tell you when
-                the payrun will be automatically closed
-            entries (Union[Unset, None, List[Item]]): [readonly] The PayRunEntries that make up this PayRun.
-                This is populate automatically when you start a PayRun.
+    Attributes:
+        tax_year (Union[Unset, TaxYear]):
+        tax_month (Union[Unset, int]): [readonly] The Tax Month that the Payment Date falls in
+        pay_period (Union[Unset, PayPeriods]):
+        ordinal (Union[Unset, int]): [readonly] Indicates whether this uses first, second, third (etc.) PaySchedule for
+            this PayPeriod.
+        period (Union[Unset, int]): [readonly] The period (i.e, Tax Week or Tax Month) that this PayRun is for.
+        start_date (Union[Unset, datetime.date]): [readonly] The start date of the period this PayRun covers
+        end_date (Union[Unset, datetime.date]): [readonly] The end date of the period this PayRun covers
+        payment_date (Union[Unset, datetime.date]): [readonly] The intended date that Employees will be paid, although
+            this can be changed on a per PayRunEntry basis
+        employee_count (Union[Unset, int]): [readonly] The number of Employees included in this PayRun (including any
+            CIS Subcontractors)
+        sub_contractor_count (Union[Unset, int]): [readonly] The number of CIS Subcontractors included in this PayRun
+        totals (Union[Unset, PayRunTotals]): Used to represent totals for a PayRun or PayRunEntry.
+            If a value is 0 then it will not be shown in the JSON.
+        payslip_scheduled_date_time (Union[Unset, None, datetime.date]): The scheduled date time for sending payslips by
+            email.
+        state (Union[Unset, PayRunState]):
+        is_closed (Union[Unset, bool]): [readonly] Set to True if the PayRun is Finalised and changes can no longer be
+            made
+        is_rolled_back (Union[Unset, bool]): [readonly] Set to True if the PayRun is currently rolled back
+        date_closed (Union[Unset, None, datetime.datetime]):
+        auto_pilot_close_date (Union[Unset, None, datetime.date]): [readonly] If AutoPilot is enabled in the
+            AutomationSettings for the Employer then this property will tell you when
+            the payrun will be automatically closed
+        entries (Union[Unset, None, List[Item]]): [readonly] The PayRunEntries that make up this PayRun.
+            This is populate automatically when you start a PayRun.
     """
 
     tax_year: Union[Unset, TaxYear] = UNSET
@@ -59,11 +59,14 @@ class PayRun:
     employee_count: Union[Unset, int] = UNSET
     sub_contractor_count: Union[Unset, int] = UNSET
     totals: Union[Unset, PayRunTotals] = UNSET
+    payslip_scheduled_date_time: Union[Unset, None, datetime.date] = UNSET
     state: Union[Unset, PayRunState] = UNSET
     is_closed: Union[Unset, bool] = UNSET
+    is_rolled_back: Union[Unset, bool] = UNSET
     date_closed: Union[Unset, None, datetime.datetime] = UNSET
     auto_pilot_close_date: Union[Unset, None, datetime.date] = UNSET
     entries: Union[Unset, None, List[Item]] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         tax_year: Union[Unset, str] = UNSET
@@ -95,22 +98,23 @@ class PayRun:
         if not isinstance(self.totals, Unset):
             totals = self.totals.to_dict()
 
+        payslip_scheduled_date_time: Union[Unset, None, str] = UNSET
+        if not isinstance(self.payslip_scheduled_date_time, Unset):
+            payslip_scheduled_date_time = self.payslip_scheduled_date_time.isoformat() if self.payslip_scheduled_date_time else None
+
         state: Union[Unset, str] = UNSET
         if not isinstance(self.state, Unset):
             state = self.state.value
 
         is_closed = self.is_closed
+        is_rolled_back = self.is_rolled_back
         date_closed: Union[Unset, None, str] = UNSET
         if not isinstance(self.date_closed, Unset):
             date_closed = self.date_closed.isoformat() if self.date_closed else None
 
         auto_pilot_close_date: Union[Unset, None, str] = UNSET
         if not isinstance(self.auto_pilot_close_date, Unset):
-            auto_pilot_close_date = (
-                self.auto_pilot_close_date.isoformat()
-                if self.auto_pilot_close_date
-                else None
-            )
+            auto_pilot_close_date = self.auto_pilot_close_date.isoformat() if self.auto_pilot_close_date else None
 
         entries: Union[Unset, None, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.entries, Unset):
@@ -123,8 +127,13 @@ class PayRun:
 
                     entries.append(entries_item)
 
+
+
+
+
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if tax_year is not UNSET:
             field_dict["taxYear"] = tax_year
         if tax_month is not UNSET:
@@ -147,10 +156,14 @@ class PayRun:
             field_dict["subContractorCount"] = sub_contractor_count
         if totals is not UNSET:
             field_dict["totals"] = totals
+        if payslip_scheduled_date_time is not UNSET:
+            field_dict["payslipScheduledDateTime"] = payslip_scheduled_date_time
         if state is not UNSET:
             field_dict["state"] = state
         if is_closed is not UNSET:
             field_dict["isClosed"] = is_closed
+        if is_rolled_back is not UNSET:
+            field_dict["isRolledBack"] = is_rolled_back
         if date_closed is not UNSET:
             field_dict["dateClosed"] = date_closed
         if auto_pilot_close_date is not UNSET:
@@ -160,24 +173,32 @@ class PayRun:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _tax_year = d.pop("taxYear", UNSET)
         tax_year: Union[Unset, TaxYear]
-        if isinstance(_tax_year, Unset):
+        if isinstance(_tax_year,  Unset):
             tax_year = UNSET
         else:
             tax_year = TaxYear(_tax_year)
+
+
+
 
         tax_month = d.pop("taxMonth", UNSET)
 
         _pay_period = d.pop("payPeriod", UNSET)
         pay_period: Union[Unset, PayPeriods]
-        if isinstance(_pay_period, Unset):
+        if isinstance(_pay_period,  Unset):
             pay_period = UNSET
         else:
             pay_period = PayPeriods(_pay_period)
+
+
+
 
         ordinal = d.pop("ordinal", UNSET)
 
@@ -185,24 +206,33 @@ class PayRun:
 
         _start_date = d.pop("startDate", UNSET)
         start_date: Union[Unset, datetime.date]
-        if isinstance(_start_date, Unset):
+        if isinstance(_start_date,  Unset):
             start_date = UNSET
         else:
             start_date = isoparse(_start_date).date()
 
+
+
+
         _end_date = d.pop("endDate", UNSET)
         end_date: Union[Unset, datetime.date]
-        if isinstance(_end_date, Unset):
+        if isinstance(_end_date,  Unset):
             end_date = UNSET
         else:
             end_date = isoparse(_end_date).date()
 
+
+
+
         _payment_date = d.pop("paymentDate", UNSET)
         payment_date: Union[Unset, datetime.date]
-        if isinstance(_payment_date, Unset):
+        if isinstance(_payment_date,  Unset):
             payment_date = UNSET
         else:
             payment_date = isoparse(_payment_date).date()
+
+
+
 
         employee_count = d.pop("employeeCount", UNSET)
 
@@ -210,44 +240,73 @@ class PayRun:
 
         _totals = d.pop("totals", UNSET)
         totals: Union[Unset, PayRunTotals]
-        if isinstance(_totals, Unset):
+        if isinstance(_totals,  Unset):
             totals = UNSET
         else:
             totals = PayRunTotals.from_dict(_totals)
 
+
+
+
+        _payslip_scheduled_date_time = d.pop("payslipScheduledDateTime", UNSET)
+        payslip_scheduled_date_time: Union[Unset, None, datetime.date]
+        if _payslip_scheduled_date_time is None:
+            payslip_scheduled_date_time = None
+        elif isinstance(_payslip_scheduled_date_time,  Unset):
+            payslip_scheduled_date_time = UNSET
+        else:
+            payslip_scheduled_date_time = isoparse(_payslip_scheduled_date_time).date()
+
+
+
+
         _state = d.pop("state", UNSET)
         state: Union[Unset, PayRunState]
-        if isinstance(_state, Unset):
+        if isinstance(_state,  Unset):
             state = UNSET
         else:
             state = PayRunState(_state)
 
+
+
+
         is_closed = d.pop("isClosed", UNSET)
+
+        is_rolled_back = d.pop("isRolledBack", UNSET)
 
         _date_closed = d.pop("dateClosed", UNSET)
         date_closed: Union[Unset, None, datetime.datetime]
         if _date_closed is None:
             date_closed = None
-        elif isinstance(_date_closed, Unset):
+        elif isinstance(_date_closed,  Unset):
             date_closed = UNSET
         else:
             date_closed = isoparse(_date_closed)
+
+
+
 
         _auto_pilot_close_date = d.pop("autoPilotCloseDate", UNSET)
         auto_pilot_close_date: Union[Unset, None, datetime.date]
         if _auto_pilot_close_date is None:
             auto_pilot_close_date = None
-        elif isinstance(_auto_pilot_close_date, Unset):
+        elif isinstance(_auto_pilot_close_date,  Unset):
             auto_pilot_close_date = UNSET
         else:
             auto_pilot_close_date = isoparse(_auto_pilot_close_date).date()
 
+
+
+
         entries = []
         _entries = d.pop("entries", UNSET)
-        for entries_item_data in _entries or []:
+        for entries_item_data in (_entries or []):
             entries_item = Item.from_dict(entries_item_data)
 
+
+
             entries.append(entries_item)
+
 
         pay_run = cls(
             tax_year=tax_year,
@@ -261,11 +320,14 @@ class PayRun:
             employee_count=employee_count,
             sub_contractor_count=sub_contractor_count,
             totals=totals,
+            payslip_scheduled_date_time=payslip_scheduled_date_time,
             state=state,
             is_closed=is_closed,
+            is_rolled_back=is_rolled_back,
             date_closed=date_closed,
             auto_pilot_close_date=auto_pilot_close_date,
             entries=entries,
         )
 
         return pay_run
+

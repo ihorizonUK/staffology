@@ -8,7 +8,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="HmrcPayment")
 
-
 @attr.s(auto_attribs=True)
 class HmrcPayment:
     """
@@ -22,6 +21,7 @@ class HmrcPayment:
     date: Union[Unset, datetime.date] = UNSET
     id: Union[Unset, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         amount = self.amount
         date: Union[Unset, str] = UNSET
@@ -31,7 +31,8 @@ class HmrcPayment:
         id = self.id
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if amount is not UNSET:
             field_dict["amount"] = amount
         if date is not UNSET:
@@ -41,6 +42,8 @@ class HmrcPayment:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
@@ -48,10 +51,13 @@ class HmrcPayment:
 
         _date = d.pop("date", UNSET)
         date: Union[Unset, datetime.date]
-        if isinstance(_date, Unset):
+        if isinstance(_date,  Unset):
             date = UNSET
         else:
             date = isoparse(_date).date()
+
+
+
 
         id = d.pop("id", UNSET)
 
@@ -62,3 +68,4 @@ class HmrcPayment:
         )
 
         return hmrc_payment
+

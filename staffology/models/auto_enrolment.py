@@ -12,7 +12,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="AutoEnrolment")
 
-
 @attr.s(auto_attribs=True)
 class AutoEnrolment:
     """
@@ -49,6 +48,7 @@ class AutoEnrolment:
     ae_postponement_letter_sent: Union[Unset, bool] = UNSET
     last_assessment: Union[Unset, AeAssessment] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         state: Union[Unset, str] = UNSET
         if not isinstance(self.state, Unset):
@@ -65,9 +65,7 @@ class AutoEnrolment:
         days_to_defer_assessment = self.days_to_defer_assessment
         postponement_date: Union[Unset, None, str] = UNSET
         if not isinstance(self.postponement_date, Unset):
-            postponement_date = (
-                self.postponement_date.isoformat() if self.postponement_date else None
-            )
+            postponement_date = self.postponement_date.isoformat() if self.postponement_date else None
 
         defer_by_months_not_days = self.defer_by_months_not_days
         exempt = self.exempt
@@ -80,8 +78,10 @@ class AutoEnrolment:
         if not isinstance(self.last_assessment, Unset):
             last_assessment = self.last_assessment.to_dict()
 
+
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if state is not UNSET:
             field_dict["state"] = state
         if state_date is not UNSET:
@@ -105,31 +105,42 @@ class AutoEnrolment:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _state = d.pop("state", UNSET)
         state: Union[Unset, AeEmployeeState]
-        if isinstance(_state, Unset):
+        if isinstance(_state,  Unset):
             state = UNSET
         else:
             state = AeEmployeeState(_state)
+
+
+
 
         _state_date = d.pop("stateDate", UNSET)
         state_date: Union[Unset, None, datetime.date]
         if _state_date is None:
             state_date = None
-        elif isinstance(_state_date, Unset):
+        elif isinstance(_state_date,  Unset):
             state_date = UNSET
         else:
             state_date = isoparse(_state_date).date()
 
+
+
+
         _uk_worker = d.pop("ukWorker", UNSET)
         uk_worker: Union[Unset, AeUKWorker]
-        if isinstance(_uk_worker, Unset):
+        if isinstance(_uk_worker,  Unset):
             uk_worker = UNSET
         else:
             uk_worker = AeUKWorker(_uk_worker)
+
+
+
 
         days_to_defer_assessment = d.pop("daysToDeferAssessment", UNSET)
 
@@ -137,10 +148,13 @@ class AutoEnrolment:
         postponement_date: Union[Unset, None, datetime.date]
         if _postponement_date is None:
             postponement_date = None
-        elif isinstance(_postponement_date, Unset):
+        elif isinstance(_postponement_date,  Unset):
             postponement_date = UNSET
         else:
             postponement_date = isoparse(_postponement_date).date()
+
+
+
 
         defer_by_months_not_days = d.pop("deferByMonthsNotDays", UNSET)
 
@@ -148,19 +162,25 @@ class AutoEnrolment:
 
         _ae_exclusion_code = d.pop("aeExclusionCode", UNSET)
         ae_exclusion_code: Union[Unset, AeExclusionCode]
-        if isinstance(_ae_exclusion_code, Unset):
+        if isinstance(_ae_exclusion_code,  Unset):
             ae_exclusion_code = UNSET
         else:
             ae_exclusion_code = AeExclusionCode(_ae_exclusion_code)
+
+
+
 
         ae_postponement_letter_sent = d.pop("aePostponementLetterSent", UNSET)
 
         _last_assessment = d.pop("lastAssessment", UNSET)
         last_assessment: Union[Unset, AeAssessment]
-        if isinstance(_last_assessment, Unset):
+        if isinstance(_last_assessment,  Unset):
             last_assessment = UNSET
         else:
             last_assessment = AeAssessment.from_dict(_last_assessment)
+
+
+
 
         auto_enrolment = cls(
             state=state,
@@ -176,3 +196,4 @@ class AutoEnrolment:
         )
 
         return auto_enrolment
+

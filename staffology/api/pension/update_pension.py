@@ -11,21 +11,32 @@ from ...types import Response
 def _get_kwargs(
     employer_id: str,
     employee_id: str,
+    id: str,
     *,
     client: Client,
     json_body: Pension,
+
 ) -> Dict[str, Any]:
-    url = "{}/employers/{employerId}/employees/{employeeId}/pension".format(
-        client.base_url, employerId=employer_id, employeeId=employee_id
-    )
+    url = "{}/employers/{employerId}/employees/{employeeId}/pension/{id}".format(
+        client.base_url,employerId=employer_id,employeeId=employee_id,id=id)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
 
+    
+
+    
+
+    
+
     json_json_body = json_body.to_dict()
 
+
+
+    
+
     return {
-        "method": "put",
+	    "method": "put",
         "url": url,
         "headers": headers,
         "cookies": cookies,
@@ -37,6 +48,8 @@ def _get_kwargs(
 def _parse_response(*, response: httpx.Response) -> Optional[Union[Any, Pension]]:
     if response.status_code == 200:
         response_200 = Pension.from_dict(response.json())
+
+
 
         return response_200
     if response.status_code == 400:
@@ -60,9 +73,11 @@ def _build_response(*, response: httpx.Response) -> Response[Union[Any, Pension]
 def sync_detailed(
     employer_id: str,
     employee_id: str,
+    id: str,
     *,
     client: Client,
     json_body: Pension,
+
 ) -> Response[Union[Any, Pension]]:
     """Update Pension
 
@@ -71,17 +86,21 @@ def sync_detailed(
     Args:
         employer_id (str):
         employee_id (str):
+        id (str):
         json_body (Pension):
 
     Returns:
         Response[Union[Any, Pension]]
     """
 
+
     kwargs = _get_kwargs(
         employer_id=employer_id,
-        employee_id=employee_id,
-        client=client,
-        json_body=json_body,
+employee_id=employee_id,
+id=id,
+client=client,
+json_body=json_body,
+
     )
 
     response = httpx.request(
@@ -91,13 +110,14 @@ def sync_detailed(
 
     return _build_response(response=response)
 
-
 def sync(
     employer_id: str,
     employee_id: str,
+    id: str,
     *,
     client: Client,
     json_body: Pension,
+
 ) -> Optional[Union[Any, Pension]]:
     """Update Pension
 
@@ -106,26 +126,31 @@ def sync(
     Args:
         employer_id (str):
         employee_id (str):
+        id (str):
         json_body (Pension):
 
     Returns:
         Response[Union[Any, Pension]]
     """
 
+
     return sync_detailed(
         employer_id=employer_id,
-        employee_id=employee_id,
-        client=client,
-        json_body=json_body,
-    ).parsed
+employee_id=employee_id,
+id=id,
+client=client,
+json_body=json_body,
 
+    ).parsed
 
 async def asyncio_detailed(
     employer_id: str,
     employee_id: str,
+    id: str,
     *,
     client: Client,
     json_body: Pension,
+
 ) -> Response[Union[Any, Pension]]:
     """Update Pension
 
@@ -134,31 +159,38 @@ async def asyncio_detailed(
     Args:
         employer_id (str):
         employee_id (str):
+        id (str):
         json_body (Pension):
 
     Returns:
         Response[Union[Any, Pension]]
     """
 
+
     kwargs = _get_kwargs(
         employer_id=employer_id,
-        employee_id=employee_id,
-        client=client,
-        json_body=json_body,
+employee_id=employee_id,
+id=id,
+client=client,
+json_body=json_body,
+
     )
 
     async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+        response = await _client.request(
+            **kwargs
+        )
 
     return _build_response(response=response)
-
 
 async def asyncio(
     employer_id: str,
     employee_id: str,
+    id: str,
     *,
     client: Client,
     json_body: Pension,
+
 ) -> Optional[Union[Any, Pension]]:
     """Update Pension
 
@@ -167,17 +199,20 @@ async def asyncio(
     Args:
         employer_id (str):
         employee_id (str):
+        id (str):
         json_body (Pension):
 
     Returns:
         Response[Union[Any, Pension]]
     """
 
-    return (
-        await asyncio_detailed(
-            employer_id=employer_id,
-            employee_id=employee_id,
-            client=client,
-            json_body=json_body,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        employer_id=employer_id,
+employee_id=employee_id,
+id=id,
+client=client,
+json_body=json_body,
+
+    )).parsed
+

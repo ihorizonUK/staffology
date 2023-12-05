@@ -7,7 +7,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="P11DCarCollection")
 
-
 @attr.s(auto_attribs=True)
 class P11DCarCollection:
     """
@@ -23,6 +22,7 @@ class P11DCarCollection:
     total_fuel_or_relevant_amt: Union[Unset, None, str] = UNSET
     type_letter: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         car: Union[Unset, None, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.car, Unset):
@@ -35,12 +35,16 @@ class P11DCarCollection:
 
                     car.append(car_item)
 
+
+
+
         total_cars_or_relevant_amt = self.total_cars_or_relevant_amt
         total_fuel_or_relevant_amt = self.total_fuel_or_relevant_amt
         type_letter = self.type_letter
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if car is not UNSET:
             field_dict["car"] = car
         if total_cars_or_relevant_amt is not UNSET:
@@ -52,15 +56,20 @@ class P11DCarCollection:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         car = []
         _car = d.pop("car", UNSET)
-        for car_item_data in _car or []:
+        for car_item_data in (_car or []):
             car_item = P11DCar.from_dict(car_item_data)
 
+
+
             car.append(car_item)
+
 
         total_cars_or_relevant_amt = d.pop("totalCarsOrRelevantAmt", UNSET)
 
@@ -76,3 +85,4 @@ class P11DCarCollection:
         )
 
         return p11d_car_collection
+

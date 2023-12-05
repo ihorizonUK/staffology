@@ -14,9 +14,7 @@ def _get_kwargs(
     client: Client,
     json_body: Invitation,
 ) -> Dict[str, Any]:
-    url = "{}/employers/{employerId}/invitation".format(
-        client.base_url, employerId=employer_id
-    )
+    url = "{}/employers/{employerId}/invitation".format(client.base_url, employerId=employer_id)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
@@ -41,6 +39,9 @@ def _parse_response(*, response: httpx.Response) -> Optional[Union[Any, Invitati
         response_201 = Invitation.from_dict(response.json())
 
         return response_201
+    if response.status_code == 404:
+        response_404 = cast(Any, None)
+        return response_404
     return raise_staffology_exception(response)
 
 

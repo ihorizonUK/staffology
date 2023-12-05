@@ -9,7 +9,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="P11Line")
 
-
 @attr.s(auto_attribs=True)
 class P11Line:
     """Lines for the P11 Report
@@ -46,6 +45,7 @@ class P11Line:
     postgrad_loan_ytd: Union[Unset, float] = UNSET
     ni_values: Union[Unset, None, List[P11NiValues]] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         date: Union[Unset, str] = UNSET
         if not isinstance(self.date, Unset):
@@ -74,8 +74,13 @@ class P11Line:
 
                     ni_values.append(ni_values_item)
 
+
+
+
+
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if date is not UNSET:
             field_dict["date"] = date
         if period is not UNSET:
@@ -107,15 +112,20 @@ class P11Line:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _date = d.pop("date", UNSET)
         date: Union[Unset, datetime.date]
-        if isinstance(_date, Unset):
+        if isinstance(_date,  Unset):
             date = UNSET
         else:
             date = isoparse(_date).date()
+
+
+
 
         period = d.pop("period", UNSET)
 
@@ -143,10 +153,13 @@ class P11Line:
 
         ni_values = []
         _ni_values = d.pop("niValues", UNSET)
-        for ni_values_item_data in _ni_values or []:
+        for ni_values_item_data in (_ni_values or []):
             ni_values_item = P11NiValues.from_dict(ni_values_item_data)
 
+
+
             ni_values.append(ni_values_item)
+
 
         p11_line = cls(
             date=date,
@@ -166,3 +179,4 @@ class P11Line:
         )
 
         return p11_line
+

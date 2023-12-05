@@ -60,7 +60,7 @@ def sync_detailed(
 ) -> Response[Any]:
     """Http Post
 
-     Perform a GET to given URL of the specified ExtenalDataProvider API
+     Perform a GET to given URL of the specified ExternalDataProvider API
 
     Args:
         employer_id (str):
@@ -98,7 +98,7 @@ async def asyncio_detailed(
 ) -> Response[Any]:
     """Http Post
 
-     Perform a GET to given URL of the specified ExtenalDataProvider API
+     Perform a GET to given URL of the specified ExternalDataProvider API
 
     Args:
         employer_id (str):

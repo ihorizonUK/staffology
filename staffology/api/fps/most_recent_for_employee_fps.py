@@ -18,10 +18,7 @@ def _get_kwargs(
     correction: Union[Unset, None, bool] = False,
 ) -> Dict[str, Any]:
     url = "{}/employers/{employerId}/rti/fps/{taxYear}/mostrecentforemployee/{employeeId}".format(
-        client.base_url,
-        employerId=employer_id,
-        taxYear=tax_year,
-        employeeId=employee_id,
+        client.base_url, employerId=employer_id, taxYear=tax_year, employeeId=employee_id
     )
 
     headers: Dict[str, str] = client.get_headers()

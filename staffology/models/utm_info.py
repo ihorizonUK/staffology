@@ -6,7 +6,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="UtmInfo")
 
-
 @attr.s(auto_attribs=True)
 class UtmInfo:
     """
@@ -24,6 +23,7 @@ class UtmInfo:
     content: Union[Unset, None, str] = UNSET
     campaign: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         source = self.source
         medium = self.medium
@@ -32,7 +32,8 @@ class UtmInfo:
         campaign = self.campaign
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if source is not UNSET:
             field_dict["source"] = source
         if medium is not UNSET:
@@ -45,6 +46,8 @@ class UtmInfo:
             field_dict["campaign"] = campaign
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -68,3 +71,4 @@ class UtmInfo:
         )
 
         return utm_info
+

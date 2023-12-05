@@ -8,7 +8,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="P11PayeLine")
 
-
 @attr.s(auto_attribs=True)
 class P11PayeLine:
     """Lines for the Paye Income Tax table in the P11 Detailed report
@@ -39,6 +38,7 @@ class P11PayeLine:
     postgrad_loan: Union[Unset, float] = UNSET
     tax_code: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         date: Union[Unset, str] = UNSET
         if not isinstance(self.date, Unset):
@@ -56,7 +56,8 @@ class P11PayeLine:
         tax_code = self.tax_code
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if date is not UNSET:
             field_dict["date"] = date
         if period is not UNSET:
@@ -82,15 +83,20 @@ class P11PayeLine:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _date = d.pop("date", UNSET)
         date: Union[Unset, datetime.date]
-        if isinstance(_date, Unset):
+        if isinstance(_date,  Unset):
             date = UNSET
         else:
             date = isoparse(_date).date()
+
+
+
 
         period = d.pop("period", UNSET)
 
@@ -127,3 +133,4 @@ class P11PayeLine:
         )
 
         return p11_paye_line
+

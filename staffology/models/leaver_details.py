@@ -8,7 +8,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="LeaverDetails")
 
-
 @attr.s(auto_attribs=True)
 class LeaverDetails:
     """
@@ -18,6 +17,7 @@ class LeaverDetails:
         is_deceased (Union[Unset, bool]):
         payment_after_leaving (Union[Unset, bool]):
         p_45_sent (Union[Unset, bool]):
+        pay_accrued_balance (Union[Unset, bool]):
     """
 
     has_left: Union[Unset, bool] = UNSET
@@ -25,6 +25,8 @@ class LeaverDetails:
     is_deceased: Union[Unset, bool] = UNSET
     payment_after_leaving: Union[Unset, bool] = UNSET
     p_45_sent: Union[Unset, bool] = UNSET
+    pay_accrued_balance: Union[Unset, bool] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         has_left = self.has_left
@@ -35,9 +37,11 @@ class LeaverDetails:
         is_deceased = self.is_deceased
         payment_after_leaving = self.payment_after_leaving
         p_45_sent = self.p_45_sent
+        pay_accrued_balance = self.pay_accrued_balance
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if has_left is not UNSET:
             field_dict["hasLeft"] = has_left
         if leave_date is not UNSET:
@@ -48,8 +52,12 @@ class LeaverDetails:
             field_dict["paymentAfterLeaving"] = payment_after_leaving
         if p_45_sent is not UNSET:
             field_dict["p45Sent"] = p_45_sent
+        if pay_accrued_balance is not UNSET:
+            field_dict["payAccruedBalance"] = pay_accrued_balance
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -60,10 +68,13 @@ class LeaverDetails:
         leave_date: Union[Unset, None, datetime.date]
         if _leave_date is None:
             leave_date = None
-        elif isinstance(_leave_date, Unset):
+        elif isinstance(_leave_date,  Unset):
             leave_date = UNSET
         else:
             leave_date = isoparse(_leave_date).date()
+
+
+
 
         is_deceased = d.pop("isDeceased", UNSET)
 
@@ -71,12 +82,16 @@ class LeaverDetails:
 
         p_45_sent = d.pop("p45Sent", UNSET)
 
+        pay_accrued_balance = d.pop("payAccruedBalance", UNSET)
+
         leaver_details = cls(
             has_left=has_left,
             leave_date=leave_date,
             is_deceased=is_deceased,
             payment_after_leaving=payment_after_leaving,
             p_45_sent=p_45_sent,
+            pay_accrued_balance=pay_accrued_balance,
         )
 
         return leaver_details
+

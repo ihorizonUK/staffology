@@ -9,7 +9,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="BenefitDetailsCar")
 
-
 @attr.s(auto_attribs=True)
 class BenefitDetailsCar:
     """
@@ -68,14 +67,13 @@ class BenefitDetailsCar:
     cash_equivalent: Union[Unset, float] = UNSET
     cash_equivalent_fuel: Union[Unset, float] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         make_and_model = self.make_and_model
         registration = self.registration
         first_registered: Union[Unset, None, str] = UNSET
         if not isinstance(self.first_registered, Unset):
-            first_registered = (
-                self.first_registered.isoformat() if self.first_registered else None
-            )
+            first_registered = self.first_registered.isoformat() if self.first_registered else None
 
         has_approved_emissions_value = self.has_approved_emissions_value
         co_2_emissions = self.co_2_emissions
@@ -87,9 +85,7 @@ class BenefitDetailsCar:
 
         available_from: Union[Unset, None, str] = UNSET
         if not isinstance(self.available_from, Unset):
-            available_from = (
-                self.available_from.isoformat() if self.available_from else None
-            )
+            available_from = self.available_from.isoformat() if self.available_from else None
 
         available_to: Union[Unset, None, str] = UNSET
         if not isinstance(self.available_to, Unset):
@@ -103,17 +99,11 @@ class BenefitDetailsCar:
         free_fuel = self.free_fuel
         fuel_available_from: Union[Unset, None, str] = UNSET
         if not isinstance(self.fuel_available_from, Unset):
-            fuel_available_from = (
-                self.fuel_available_from.isoformat()
-                if self.fuel_available_from
-                else None
-            )
+            fuel_available_from = self.fuel_available_from.isoformat() if self.fuel_available_from else None
 
         fuel_available_to: Union[Unset, None, str] = UNSET
         if not isinstance(self.fuel_available_to, Unset):
-            fuel_available_to = (
-                self.fuel_available_to.isoformat() if self.fuel_available_to else None
-            )
+            fuel_available_to = self.fuel_available_to.isoformat() if self.fuel_available_to else None
 
         free_fuel_reinstated = self.free_fuel_reinstated
         registered_prior_to_1998 = self.registered_prior_to_1998
@@ -124,7 +114,8 @@ class BenefitDetailsCar:
         cash_equivalent_fuel = self.cash_equivalent_fuel
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if make_and_model is not UNSET:
             field_dict["makeAndModel"] = make_and_model
         if registration is not UNSET:
@@ -178,6 +169,8 @@ class BenefitDetailsCar:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
@@ -189,10 +182,13 @@ class BenefitDetailsCar:
         first_registered: Union[Unset, None, datetime.date]
         if _first_registered is None:
             first_registered = None
-        elif isinstance(_first_registered, Unset):
+        elif isinstance(_first_registered,  Unset):
             first_registered = UNSET
         else:
             first_registered = isoparse(_first_registered).date()
+
+
+
 
         has_approved_emissions_value = d.pop("hasApprovedEmissionsValue", UNSET)
 
@@ -204,28 +200,37 @@ class BenefitDetailsCar:
 
         _fuel_type = d.pop("fuelType", UNSET)
         fuel_type: Union[Unset, BenefitDetailsCarPowerType]
-        if isinstance(_fuel_type, Unset):
+        if isinstance(_fuel_type,  Unset):
             fuel_type = UNSET
         else:
             fuel_type = BenefitDetailsCarPowerType(_fuel_type)
+
+
+
 
         _available_from = d.pop("availableFrom", UNSET)
         available_from: Union[Unset, None, datetime.date]
         if _available_from is None:
             available_from = None
-        elif isinstance(_available_from, Unset):
+        elif isinstance(_available_from,  Unset):
             available_from = UNSET
         else:
             available_from = isoparse(_available_from).date()
+
+
+
 
         _available_to = d.pop("availableTo", UNSET)
         available_to: Union[Unset, None, datetime.date]
         if _available_to is None:
             available_to = None
-        elif isinstance(_available_to, Unset):
+        elif isinstance(_available_to,  Unset):
             available_to = UNSET
         else:
             available_to = isoparse(_available_to).date()
+
+
+
 
         days_unavailable = d.pop("daysUnavailable", UNSET)
 
@@ -243,19 +248,25 @@ class BenefitDetailsCar:
         fuel_available_from: Union[Unset, None, datetime.date]
         if _fuel_available_from is None:
             fuel_available_from = None
-        elif isinstance(_fuel_available_from, Unset):
+        elif isinstance(_fuel_available_from,  Unset):
             fuel_available_from = UNSET
         else:
             fuel_available_from = isoparse(_fuel_available_from).date()
+
+
+
 
         _fuel_available_to = d.pop("fuelAvailableTo", UNSET)
         fuel_available_to: Union[Unset, None, datetime.date]
         if _fuel_available_to is None:
             fuel_available_to = None
-        elif isinstance(_fuel_available_to, Unset):
+        elif isinstance(_fuel_available_to,  Unset):
             fuel_available_to = UNSET
         else:
             fuel_available_to = isoparse(_fuel_available_to).date()
+
+
+
 
         free_fuel_reinstated = d.pop("freeFuelReinstated", UNSET)
 
@@ -300,3 +311,4 @@ class BenefitDetailsCar:
         )
 
         return benefit_details_car
+

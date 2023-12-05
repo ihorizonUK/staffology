@@ -5,9 +5,7 @@ import httpx
 from staffology.propagate_exceptions import raise_staffology_exception
 
 from ...client import Client
-from ...models.national_insurance_calculation_period_values import (
-    NationalInsuranceCalculationPeriodValues,
-)
+from ...models.national_insurance_calculation_period_values import NationalInsuranceCalculationPeriodValues
 from ...models.pay_periods import PayPeriods
 from ...models.tax_year import TaxYear
 from ...types import UNSET, Response, Unset
@@ -22,9 +20,7 @@ def _get_kwargs(
     period_end: Union[Unset, None, datetime.datetime] = UNSET,
     effective_date: Union[Unset, None, datetime.datetime] = UNSET,
 ) -> Dict[str, Any]:
-    url = "{}/engine/config/{taxYear}/ni/{payPeriod}".format(
-        client.base_url, taxYear=tax_year, payPeriod=pay_period
-    )
+    url = "{}/engine/config/{taxYear}/ni/{payPeriod}".format(client.base_url, taxYear=tax_year, payPeriod=pay_period)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
@@ -60,21 +56,15 @@ def _get_kwargs(
     }
 
 
-def _parse_response(
-    *, response: httpx.Response
-) -> Optional[NationalInsuranceCalculationPeriodValues]:
+def _parse_response(*, response: httpx.Response) -> Optional[NationalInsuranceCalculationPeriodValues]:
     if response.status_code == 200:
-        response_200 = NationalInsuranceCalculationPeriodValues.from_dict(
-            response.json()
-        )
+        response_200 = NationalInsuranceCalculationPeriodValues.from_dict(response.json())
 
         return response_200
     return raise_staffology_exception(response)
 
 
-def _build_response(
-    *, response: httpx.Response
-) -> Response[NationalInsuranceCalculationPeriodValues]:
+def _build_response(*, response: httpx.Response) -> Response[NationalInsuranceCalculationPeriodValues]:
     return Response(
         status_code=response.status_code,
         content=response.content,

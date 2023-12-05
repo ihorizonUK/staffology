@@ -4,11 +4,10 @@ import attr
 
 from ..models.background_task_status import BackgroundTaskStatus
 from ..models.item import Item
-from ..models.role import Role
+from ..models.user_role import UserRole
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="Invitation")
-
 
 @attr.s(auto_attribs=True)
 class Invitation:
@@ -18,7 +17,7 @@ class Invitation:
         email_address (str): The email address of the user that is being invited to access the Employer
         employer (Union[Unset, Item]):
         message (Union[Unset, None, str]): An optional message to include in the email sent to the EmailAddress
-        role (Union[Unset, Role]):
+        role (Union[Unset, UserRole]):
         email_id (Union[Unset, None, str]):
         email_status (Union[Unset, BackgroundTaskStatus]):
         invited_by (Union[Unset, Item]):
@@ -28,11 +27,12 @@ class Invitation:
     email_address: str
     employer: Union[Unset, Item] = UNSET
     message: Union[Unset, None, str] = UNSET
-    role: Union[Unset, Role] = UNSET
+    role: Union[Unset, UserRole] = UNSET
     email_id: Union[Unset, None, str] = UNSET
     email_status: Union[Unset, BackgroundTaskStatus] = UNSET
     invited_by: Union[Unset, Item] = UNSET
     id: Union[Unset, str] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         email_address = self.email_address
@@ -57,11 +57,9 @@ class Invitation:
         id = self.id
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update(
-            {
-                "emailAddress": email_address,
-            }
-        )
+        field_dict.update({
+            "emailAddress": email_address,
+        })
         if employer is not UNSET:
             field_dict["employer"] = employer
         if message is not UNSET:
@@ -79,6 +77,8 @@ class Invitation:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
@@ -86,35 +86,47 @@ class Invitation:
 
         _employer = d.pop("employer", UNSET)
         employer: Union[Unset, Item]
-        if isinstance(_employer, Unset):
+        if isinstance(_employer,  Unset):
             employer = UNSET
         else:
             employer = Item.from_dict(_employer)
 
+
+
+
         message = d.pop("message", UNSET)
 
         _role = d.pop("role", UNSET)
-        role: Union[Unset, Role]
-        if isinstance(_role, Unset):
+        role: Union[Unset, UserRole]
+        if isinstance(_role,  Unset):
             role = UNSET
         else:
-            role = Role(_role)
+            role = UserRole(_role)
+
+
+
 
         email_id = d.pop("emailId", UNSET)
 
         _email_status = d.pop("emailStatus", UNSET)
         email_status: Union[Unset, BackgroundTaskStatus]
-        if isinstance(_email_status, Unset):
+        if isinstance(_email_status,  Unset):
             email_status = UNSET
         else:
             email_status = BackgroundTaskStatus(_email_status)
 
+
+
+
         _invited_by = d.pop("invitedBy", UNSET)
         invited_by: Union[Unset, Item]
-        if isinstance(_invited_by, Unset):
+        if isinstance(_invited_by,  Unset):
             invited_by = UNSET
         else:
             invited_by = Item.from_dict(_invited_by)
+
+
+
 
         id = d.pop("id", UNSET)
 
@@ -130,3 +142,4 @@ class Invitation:
         )
 
         return invitation
+

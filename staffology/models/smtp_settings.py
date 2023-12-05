@@ -7,7 +7,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="SmtpSettings")
 
-
 @attr.s(auto_attribs=True)
 class SmtpSettings:
     """
@@ -25,6 +24,7 @@ class SmtpSettings:
     smtp_username: Union[Unset, None, str] = UNSET
     smtp_password: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         smtp_server = self.smtp_server
         smtp_port = self.smtp_port
@@ -36,7 +36,8 @@ class SmtpSettings:
         smtp_password = self.smtp_password
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if smtp_server is not UNSET:
             field_dict["smtpServer"] = smtp_server
         if smtp_port is not UNSET:
@@ -50,6 +51,8 @@ class SmtpSettings:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
@@ -59,10 +62,13 @@ class SmtpSettings:
 
         _encryption = d.pop("encryption", UNSET)
         encryption: Union[Unset, SmtpEncryption]
-        if isinstance(_encryption, Unset):
+        if isinstance(_encryption,  Unset):
             encryption = UNSET
         else:
             encryption = SmtpEncryption(_encryption)
+
+
+
 
         smtp_username = d.pop("smtpUsername", UNSET)
 
@@ -77,3 +83,4 @@ class SmtpSettings:
         )
 
         return smtp_settings
+

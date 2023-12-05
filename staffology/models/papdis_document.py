@@ -11,22 +11,22 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="PapdisDocument")
 
-
 @attr.s(auto_attribs=True)
 class PapdisDocument:
     """PAPDIS stands for 'Payroll and Pension Data Interface Standard'.
-    It is an industry standard for exchanging data between payroll software and pension providers.
-    Our system provides an export of data in this standard and these models are used to represent the data.
-    Whilst the relevant reporting API endpoint can provide this data as a JSON entity, it is usually represented in CSV
-    or XML format which our API also provides.
+It is an industry standard for exchanging data between payroll software and pension providers.
+Our system provides an export of data in this standard and these models are used to represent the data.
+Whilst the relevant reporting API endpoint can provide this data as a JSON entity, it is usually represented in CSV
+or XML format which our API also provides.
 
-        Attributes:
-            message_function_code (Union[Unset, PapdisMessageFunctionCode]):
-            version (Union[Unset, PapdisVersion]):
-            message_function_code_int (Union[Unset, int]): [readonly]
-            pension_provider (Union[Unset, PapdisPensionProvider]):
-            report (Union[Unset, Report]):
-            tax_year (Union[Unset, TaxYear]):
+    Attributes:
+        message_function_code (Union[Unset, PapdisMessageFunctionCode]):
+        version (Union[Unset, PapdisVersion]):
+        message_function_code_int (Union[Unset, int]): [readonly]
+        pension_provider (Union[Unset, PapdisPensionProvider]):
+        report (Union[Unset, Report]):
+        tax_year (Union[Unset, TaxYear]):
+        is_draft (Union[Unset, bool]):
     """
 
     message_function_code: Union[Unset, PapdisMessageFunctionCode] = UNSET
@@ -35,6 +35,8 @@ class PapdisDocument:
     pension_provider: Union[Unset, PapdisPensionProvider] = UNSET
     report: Union[Unset, Report] = UNSET
     tax_year: Union[Unset, TaxYear] = UNSET
+    is_draft: Union[Unset, bool] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         message_function_code: Union[Unset, str] = UNSET
@@ -58,8 +60,11 @@ class PapdisDocument:
         if not isinstance(self.tax_year, Unset):
             tax_year = self.tax_year.value
 
+        is_draft = self.is_draft
+
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if message_function_code is not UNSET:
             field_dict["messageFunctionCode"] = message_function_code
         if version is not UNSET:
@@ -72,48 +77,69 @@ class PapdisDocument:
             field_dict["report"] = report
         if tax_year is not UNSET:
             field_dict["taxYear"] = tax_year
+        if is_draft is not UNSET:
+            field_dict["isDraft"] = is_draft
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _message_function_code = d.pop("messageFunctionCode", UNSET)
         message_function_code: Union[Unset, PapdisMessageFunctionCode]
-        if isinstance(_message_function_code, Unset):
+        if isinstance(_message_function_code,  Unset):
             message_function_code = UNSET
         else:
             message_function_code = PapdisMessageFunctionCode(_message_function_code)
 
+
+
+
         _version = d.pop("version", UNSET)
         version: Union[Unset, PapdisVersion]
-        if isinstance(_version, Unset):
+        if isinstance(_version,  Unset):
             version = UNSET
         else:
             version = PapdisVersion(_version)
+
+
+
 
         message_function_code_int = d.pop("messageFunctionCodeInt", UNSET)
 
         _pension_provider = d.pop("pensionProvider", UNSET)
         pension_provider: Union[Unset, PapdisPensionProvider]
-        if isinstance(_pension_provider, Unset):
+        if isinstance(_pension_provider,  Unset):
             pension_provider = UNSET
         else:
             pension_provider = PapdisPensionProvider.from_dict(_pension_provider)
 
+
+
+
         _report = d.pop("report", UNSET)
         report: Union[Unset, Report]
-        if isinstance(_report, Unset):
+        if isinstance(_report,  Unset):
             report = UNSET
         else:
             report = Report(_report)
 
+
+
+
         _tax_year = d.pop("taxYear", UNSET)
         tax_year: Union[Unset, TaxYear]
-        if isinstance(_tax_year, Unset):
+        if isinstance(_tax_year,  Unset):
             tax_year = UNSET
         else:
             tax_year = TaxYear(_tax_year)
+
+
+
+
+        is_draft = d.pop("isDraft", UNSET)
 
         papdis_document = cls(
             message_function_code=message_function_code,
@@ -122,6 +148,8 @@ class PapdisDocument:
             pension_provider=pension_provider,
             report=report,
             tax_year=tax_year,
+            is_draft=is_draft,
         )
 
         return papdis_document
+

@@ -51,7 +51,7 @@ def sync_detailed(
 
      This helper method returns a unique code for the next Employee that you create for the specified
     Employer.
-    You don't have to use the value provided, you can use any value that is unqiue across Employees for
+    You don't have to use the value provided, you can use any value that is unique across Employees for
     the Employer.
 
     Args:
@@ -83,7 +83,7 @@ def sync(
 
      This helper method returns a unique code for the next Employee that you create for the specified
     Employer.
-    You don't have to use the value provided, you can use any value that is unqiue across Employees for
+    You don't have to use the value provided, you can use any value that is unique across Employees for
     the Employer.
 
     Args:
@@ -108,7 +108,7 @@ async def asyncio_detailed(
 
      This helper method returns a unique code for the next Employee that you create for the specified
     Employer.
-    You don't have to use the value provided, you can use any value that is unqiue across Employees for
+    You don't have to use the value provided, you can use any value that is unique across Employees for
     the Employer.
 
     Args:
@@ -138,7 +138,7 @@ async def asyncio(
 
      This helper method returns a unique code for the next Employee that you create for the specified
     Employer.
-    You don't have to use the value provided, you can use any value that is unqiue across Employees for
+    You don't have to use the value provided, you can use any value that is unique across Employees for
     the Employer.
 
     Args:

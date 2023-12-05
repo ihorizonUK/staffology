@@ -8,7 +8,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="AutomationSettings")
 
-
 @attr.s(auto_attribs=True)
 class AutomationSettings:
     """Configures various automation settings for an Employer
@@ -67,6 +66,7 @@ class AutomationSettings:
     coding_notices_automatically_applied: Union[Unset, bool] = UNSET
     payrun_emails: Union[Unset, None, List[PayrunEmail]] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         enable_auto_pilot = self.enable_auto_pilot
         auto_pilot_time: Union[Unset, str] = UNSET
@@ -84,12 +84,8 @@ class AutomationSettings:
         auto_submit_payments_aeos = self.auto_submit_payments_aeos
         auto_submit_payments_pensions = self.auto_submit_payments_pensions
         employees_without_email_address = self.employees_without_email_address
-        employees_with_email_address_but_not_auto_sending = (
-            self.employees_with_email_address_but_not_auto_sending
-        )
-        subcontractors_not_auto_sending_statement = (
-            self.subcontractors_not_auto_sending_statement
-        )
+        employees_with_email_address_but_not_auto_sending = self.employees_with_email_address_but_not_auto_sending
+        subcontractors_not_auto_sending_statement = self.subcontractors_not_auto_sending_statement
         coding_notices_automatically_applied = self.coding_notices_automatically_applied
         payrun_emails: Union[Unset, None, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.payrun_emails, Unset):
@@ -102,8 +98,13 @@ class AutomationSettings:
 
                     payrun_emails.append(payrun_emails_item)
 
+
+
+
+
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if enable_auto_pilot is not UNSET:
             field_dict["enableAutoPilot"] = enable_auto_pilot
         if auto_pilot_time is not UNSET:
@@ -123,9 +124,7 @@ class AutomationSettings:
         if auto_submit_payments_hmrc is not UNSET:
             field_dict["autoSubmitPayments_Hmrc"] = auto_submit_payments_hmrc
         if auto_submit_payments_deductions is not UNSET:
-            field_dict[
-                "autoSubmitPayments_Deductions"
-            ] = auto_submit_payments_deductions
+            field_dict["autoSubmitPayments_Deductions"] = auto_submit_payments_deductions
         if auto_submit_payments_aeos is not UNSET:
             field_dict["autoSubmitPayments_Aeos"] = auto_submit_payments_aeos
         if auto_submit_payments_pensions is not UNSET:
@@ -133,21 +132,17 @@ class AutomationSettings:
         if employees_without_email_address is not UNSET:
             field_dict["employeesWithoutEmailAddress"] = employees_without_email_address
         if employees_with_email_address_but_not_auto_sending is not UNSET:
-            field_dict[
-                "employeesWithEmailAddressButNotAutoSending"
-            ] = employees_with_email_address_but_not_auto_sending
+            field_dict["employeesWithEmailAddressButNotAutoSending"] = employees_with_email_address_but_not_auto_sending
         if subcontractors_not_auto_sending_statement is not UNSET:
-            field_dict[
-                "subcontractorsNotAutoSendingStatement"
-            ] = subcontractors_not_auto_sending_statement
+            field_dict["subcontractorsNotAutoSendingStatement"] = subcontractors_not_auto_sending_statement
         if coding_notices_automatically_applied is not UNSET:
-            field_dict[
-                "codingNoticesAutomaticallyApplied"
-            ] = coding_notices_automatically_applied
+            field_dict["codingNoticesAutomaticallyApplied"] = coding_notices_automatically_applied
         if payrun_emails is not UNSET:
             field_dict["payrunEmails"] = payrun_emails
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -156,10 +151,13 @@ class AutomationSettings:
 
         _auto_pilot_time = d.pop("autoPilotTime", UNSET)
         auto_pilot_time: Union[Unset, AutoPilotFinaliseTime]
-        if isinstance(_auto_pilot_time, Unset):
+        if isinstance(_auto_pilot_time,  Unset):
             auto_pilot_time = UNSET
         else:
             auto_pilot_time = AutoPilotFinaliseTime(_auto_pilot_time)
+
+
+
 
         auto_pilot_offset = d.pop("autoPilotOffset", UNSET)
 
@@ -183,24 +181,21 @@ class AutomationSettings:
 
         employees_without_email_address = d.pop("employeesWithoutEmailAddress", UNSET)
 
-        employees_with_email_address_but_not_auto_sending = d.pop(
-            "employeesWithEmailAddressButNotAutoSending", UNSET
-        )
+        employees_with_email_address_but_not_auto_sending = d.pop("employeesWithEmailAddressButNotAutoSending", UNSET)
 
-        subcontractors_not_auto_sending_statement = d.pop(
-            "subcontractorsNotAutoSendingStatement", UNSET
-        )
+        subcontractors_not_auto_sending_statement = d.pop("subcontractorsNotAutoSendingStatement", UNSET)
 
-        coding_notices_automatically_applied = d.pop(
-            "codingNoticesAutomaticallyApplied", UNSET
-        )
+        coding_notices_automatically_applied = d.pop("codingNoticesAutomaticallyApplied", UNSET)
 
         payrun_emails = []
         _payrun_emails = d.pop("payrunEmails", UNSET)
-        for payrun_emails_item_data in _payrun_emails or []:
+        for payrun_emails_item_data in (_payrun_emails or []):
             payrun_emails_item = PayrunEmail.from_dict(payrun_emails_item_data)
 
+
+
             payrun_emails.append(payrun_emails_item)
+
 
         automation_settings = cls(
             enable_auto_pilot=enable_auto_pilot,
@@ -223,3 +218,4 @@ class AutomationSettings:
         )
 
         return automation_settings
+

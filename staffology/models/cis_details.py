@@ -8,23 +8,22 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="CisDetails")
 
-
 @attr.s(auto_attribs=True)
 class CisDetails:
     """If an Employee is marked as a CIS Subcontractor then this model provides further details specifically related to the
-    CIS details of the Employee.
+CIS details of the Employee.
 
-        Attributes:
-            type (Union[Unset, CISSubContractorType]):
-            utr (Union[Unset, None, str]):
-            trading_name (Union[Unset, None, str]):
-            company_utr (Union[Unset, None, str]):
-            company_number (Union[Unset, None, str]):
-            vat_registered (Union[Unset, bool]):
-            vat_number (Union[Unset, None, str]):
-            vat_rate (Union[Unset, float]):
-            reverse_charge_vat (Union[Unset, bool]):
-            verification (Union[Unset, CisVerificationDetails]):
+    Attributes:
+        type (Union[Unset, CISSubContractorType]):
+        utr (Union[Unset, None, str]):
+        trading_name (Union[Unset, None, str]):
+        company_utr (Union[Unset, None, str]):
+        company_number (Union[Unset, None, str]):
+        vat_registered (Union[Unset, bool]):
+        vat_number (Union[Unset, None, str]):
+        vat_rate (Union[Unset, float]):
+        reverse_charge_vat (Union[Unset, bool]):
+        verification (Union[Unset, CisVerificationDetails]):
     """
 
     type: Union[Unset, CISSubContractorType] = UNSET
@@ -37,6 +36,7 @@ class CisDetails:
     vat_rate: Union[Unset, float] = UNSET
     reverse_charge_vat: Union[Unset, bool] = UNSET
     verification: Union[Unset, CisVerificationDetails] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET
@@ -55,8 +55,10 @@ class CisDetails:
         if not isinstance(self.verification, Unset):
             verification = self.verification.to_dict()
 
+
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if type is not UNSET:
             field_dict["type"] = type
         if utr is not UNSET:
@@ -80,15 +82,20 @@ class CisDetails:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _type = d.pop("type", UNSET)
         type: Union[Unset, CISSubContractorType]
-        if isinstance(_type, Unset):
+        if isinstance(_type,  Unset):
             type = UNSET
         else:
             type = CISSubContractorType(_type)
+
+
+
 
         utr = d.pop("utr", UNSET)
 
@@ -108,10 +115,13 @@ class CisDetails:
 
         _verification = d.pop("verification", UNSET)
         verification: Union[Unset, CisVerificationDetails]
-        if isinstance(_verification, Unset):
+        if isinstance(_verification,  Unset):
             verification = UNSET
         else:
             verification = CisVerificationDetails.from_dict(_verification)
+
+
+
 
         cis_details = cls(
             type=type,
@@ -127,3 +137,4 @@ class CisDetails:
         )
 
         return cis_details
+

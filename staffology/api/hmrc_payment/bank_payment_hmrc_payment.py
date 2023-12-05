@@ -5,9 +5,7 @@ import httpx
 from staffology.propagate_exceptions import raise_staffology_exception
 
 from ...client import Client
-from ...models.bank_payment_instruction_report_response import (
-    BankPaymentInstructionReportResponse,
-)
+from ...models.bank_payment_instruction_report_response import BankPaymentInstructionReportResponse
 from ...models.tax_year import TaxYear
 from ...types import UNSET, Response, Unset
 
@@ -21,10 +19,7 @@ def _get_kwargs(
     accept: Union[Unset, str] = UNSET,
 ) -> Dict[str, Any]:
     url = "{}/employers/{employerId}/hmrcpayment/{taxYear}/{periodEnding}/bankpayment".format(
-        client.base_url,
-        employerId=employer_id,
-        taxYear=tax_year,
-        periodEnding=period_ending,
+        client.base_url, employerId=employer_id, taxYear=tax_year, periodEnding=period_ending
     )
 
     headers: Dict[str, str] = client.get_headers()
@@ -42,9 +37,7 @@ def _get_kwargs(
     }
 
 
-def _parse_response(
-    *, response: httpx.Response
-) -> Optional[BankPaymentInstructionReportResponse]:
+def _parse_response(*, response: httpx.Response) -> Optional[BankPaymentInstructionReportResponse]:
     if response.status_code == 200:
         response_200 = BankPaymentInstructionReportResponse.from_dict(response.json())
 
@@ -52,9 +45,7 @@ def _parse_response(
     return raise_staffology_exception(response)
 
 
-def _build_response(
-    *, response: httpx.Response
-) -> Response[BankPaymentInstructionReportResponse]:
+def _build_response(*, response: httpx.Response) -> Response[BankPaymentInstructionReportResponse]:
     return Response(
         status_code=response.status_code,
         content=response.content,

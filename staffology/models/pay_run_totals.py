@@ -2,106 +2,113 @@ from typing import Any, Dict, Type, TypeVar, Union
 
 import attr
 
-from ..models.pay_run_cost_summary import PayRunCostSummary
 from ..models.recoverable_amounts import RecoverableAmounts
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="PayRunTotals")
 
-
 @attr.s(auto_attribs=True)
 class PayRunTotals:
     """Used to represent totals for a PayRun or PayRunEntry.
-    If a value is 0 then it will not be shown in the JSON.
+If a value is 0 then it will not be shown in the JSON.
 
-        Attributes:
-            basic_pay (Union[Unset, float]): [readonly] The amount to be paid to this Employee as a result of the PayOptions
-                that have been set
-            gross (Union[Unset, float]): [readonly] Gross pay
-            gross_for_ni (Union[Unset, float]): [readonly] The amount of the Gross that is subject to NI
-            gross_not_subject_to_employers_ni (Union[Unset, float]): [readonly] The amount of the Gross that is not subject
-                to Employers NI.
-                This is the same as GrossForNI where the employees NI Table has an Er contribution
-            gross_for_tax (Union[Unset, float]): [readonly] The amount of the Gross that is subject to PAYE
-            employer_ni (Union[Unset, float]): [readonly]
-            employee_ni (Union[Unset, float]): [readonly]
-            employer_ni_off_payroll (Union[Unset, float]): [readonly] The amount included in EmployerNi that is in relation
-                to Off-Payroll Workers
-            real_time_class_1a_ni (Union[Unset, float]): [readonly]
-            tax (Union[Unset, float]): [readonly]
-            net_pay (Union[Unset, float]): [readonly] The Net Pay for this Employee
-            adjustments (Union[Unset, float]): [readonly] The value of adjustments made to the Net Pay (Non taxable/NIable
-                additions/deductions)
-            additions (Union[Unset, float]): The value of all additions.  This minus Deductions should equal TakeHomePay
-            deductions (Union[Unset, float]): The value of all deductions.  Additions minus This value should equal
-                TakeHomePay
-            take_home_pay (Union[Unset, float]): [readonly] The amount this Employee takes home
-            non_tax_or_nic_pmt (Union[Unset, float]): [readonly] The value of any payments being made to this Employee that
-                aren't being subjected to PAYE or NI
-            items_subject_to_class_1nic (Union[Unset, float]): [readonly] Items subject to Class 1 NIC but not taxed under
-                PAYE regulations excluding pension contributions
-            dedns_from_net_pay (Union[Unset, float]): [readonly] The value of any deductions being made to the Net Pay for
-                this Employee
-            tcp_tcls (Union[Unset, float]): [readonly] Value of payments marked as Trivial Commutation Payment (A - TCLS)
-            tcp_pp (Union[Unset, float]): [readonly] Value of payments marked as Trivial Commutation Payment (B - Personal
-                Pension)
-            tcp_op (Union[Unset, float]): [readonly] Value of payments marked as Trivial Commutation Payment (C -
-                Occupational Pension)
-            flexi_dd_death (Union[Unset, float]): [readonly] Value of payments marked as flexibly accessing death benefit
-                (taxable)
-            flexi_dd_death_non_tax (Union[Unset, float]): [readonly] Value of payments marked as flexibly accessing death
-                benefit (non taxable)
-            flexi_dd_pension (Union[Unset, float]): [readonly] Value of payments marked as flexibly accessing pension
-                (taxable)
-            flexi_dd_pension_non_tax (Union[Unset, float]): [readonly] Value of payments marked as flexibly accessing
-                pension (non taxable)
-            smp (Union[Unset, float]): [readonly] Statutory Maternity Pay
-            spp (Union[Unset, float]): [readonly] Statutory Paternity Pay
-            sap (Union[Unset, float]): [readonly] Statutory Adoption Pay
-            shpp (Union[Unset, float]): [readonly] Statutory Shared Parental Pay
-            spbp (Union[Unset, float]): [readonly] Statutory Parental Bereavement Pay
-            ssp (Union[Unset, float]): [readonly] Statutory Sick  Pay
-            student_loan_recovered (Union[Unset, float]): [readonly]
-            postgrad_loan_recovered (Union[Unset, float]): [readonly]
-            pensionable_earnings (Union[Unset, float]): [readonly] The amount of the Gross that is subject to Pension
-                Deductions.
-                If the Pension Scheme uses Qualifying Earnings (upper and lower limits) then this value is before those are
-                applied
-            pensionable_pay (Union[Unset, float]): [readonly] The amount of the Gross that pension calculations are based on
-                after taking into account Upper and Lower Limits for the WorkerGroup.
-            non_tierable_pay (Union[Unset, float]): [readonly] The value of any pay that shouldn't count towards determining
-                a pension tier.
-            employee_pension_contribution (Union[Unset, float]): [readonly] The value of the Pension Contribution being made
-                by this Employee, excluding any Additional Voluntary Contributions
-            employee_pension_contribution_avc (Union[Unset, float]): [readonly] The value of the Pension Contribution being
-                made by this Employee as an Additional Voluntary Contribution
-            employer_pension_contribution (Union[Unset, float]): [readonly] The value of the Pension Contribution being made
-                by the Employer for this Employee
-            empee_pen_contribns_not_paid (Union[Unset, float]): [readonly] Value of employee pension contributions that are
-                not paid under 'net pay arrangements', including any AVC
-            empee_pen_contribns_paid (Union[Unset, float]): [readonly] Value of employee pension contributions paid under
-                'net pay arrangements', including any AVC
-            attachment_order_deductions (Union[Unset, float]): [readonly] Value of deductions made due to AttachmentOrders
-            cis_deduction (Union[Unset, float]): [readonly] Value of any CIS Deduction made
-            cis_vat (Union[Unset, float]): [readonly] Value of any VAT paid to CIS Subcontractor
-            cis_umbrella_fee (Union[Unset, float]): [readonly] Value of any pre-tax fee charged to the CIS Subcontractor for
-                processing the payment
-            cis_umbrella_fee_post_tax (Union[Unset, float]): [readonly] Value of any post-tax fee charged to the CIS
-                Subcontractor for processing the payment
-            pbik (Union[Unset, float]): [readonly] Value of any Payrolled Benefits In Kind
-            maps_miles (Union[Unset, int]): [readonly] The number of miles paid for Mileage Allowance Payments
-            umbrella_fee (Union[Unset, float]): [readonly] Value of any Umbrella fee charged for processing the payment
-            app_levy_deduction (Union[Unset, float]): [readonly] Value of any Apprenticeship Levy fee deducted for
-                processing the umbrella payment
-            payment_after_leaving (Union[Unset, float]): [readonly] Payment After Leaving
-            tax_on_payment_after_leaving (Union[Unset, float]): [readonly] Tax On Payment After Leaving
-            nil_paid (Union[Unset, int]): [readonly] The number of employees with NilPaid on the PayRun
-            leavers (Union[Unset, int]): [readonly] The number of Leavers on ths PayRun
-            starters (Union[Unset, int]): [readonly] The number of Starters on this PayRun
-            total_cost (Union[Unset, float]):
-            recoverable_amounts (Union[Unset, RecoverableAmounts]):
-            cost_summary (Union[Unset, PayRunCostSummary]): Represents the various components that make up the costs of a
-                PayRun
+    Attributes:
+        basic_pay (Union[Unset, float]): [readonly] The amount to be paid to this Employee as a result of the PayOptions
+            that have been set
+        gross (Union[Unset, float]): [readonly] Gross pay
+        gross_for_ni (Union[Unset, float]): [readonly] The amount of the Gross that is subject to NI
+        gross_not_subject_to_employers_ni (Union[Unset, float]): [readonly] The amount of the Gross that is not subject
+            to Employers NI.
+            This is the same as GrossForNI where the employees NI Table has an Er contribution
+        gross_for_tax (Union[Unset, float]): [readonly] The amount of the Gross that is subject to PAYE
+        employer_ni (Union[Unset, float]): [readonly]
+        employee_ni (Union[Unset, float]): [readonly]
+        employer_ni_off_payroll (Union[Unset, float]): [readonly] The amount included in EmployerNi that is in relation
+            to Off-Payroll Workers
+        real_time_class_1a_ni (Union[Unset, float]): [readonly]
+        tax (Union[Unset, float]): [readonly]
+        net_pay (Union[Unset, float]): [readonly] The Net Pay for this Employee
+        adjustments (Union[Unset, float]): [readonly] The value of adjustments made to the Net Pay (Non taxable/NIable
+            additions/deductions)
+        additions (Union[Unset, float]): The value of all additions.  This minus Deductions should equal TakeHomePay
+        deductions (Union[Unset, float]): The value of all deductions.  Additions minus This value should equal
+            TakeHomePay
+        take_home_pay (Union[Unset, float]): [readonly] The amount this Employee takes home
+        non_tax_or_nic_pmt (Union[Unset, float]): [readonly] The value of any payments being made to this Employee that
+            aren't being subjected to PAYE or NI
+        items_subject_to_class_1nic (Union[Unset, float]): [readonly] Items subject to Class 1 NIC but not taxed under
+            PAYE regulations excluding pension contributions
+        dedns_from_net_pay (Union[Unset, float]): [readonly] The value of any deductions being made to the Net Pay for
+            this Employee
+        tcp_tcls (Union[Unset, float]): [readonly] Value of payments marked as Trivial Commutation Payment (A - TCLS)
+        tcp_pp (Union[Unset, float]): [readonly] Value of payments marked as Trivial Commutation Payment (B - Personal
+            Pension)
+        tcp_op (Union[Unset, float]): [readonly] Value of payments marked as Trivial Commutation Payment (C -
+            Occupational Pension)
+        flexi_dd_death (Union[Unset, float]): [readonly] Value of payments marked as flexibly accessing death benefit
+            (taxable)
+        flexi_dd_death_non_tax (Union[Unset, float]): [readonly] Value of payments marked as flexibly accessing death
+            benefit (non taxable)
+        flexi_dd_pension (Union[Unset, float]): [readonly] Value of payments marked as flexibly accessing pension
+            (taxable)
+        flexi_dd_pension_non_tax (Union[Unset, float]): [readonly] Value of payments marked as flexibly accessing
+            pension (non taxable)
+        flexi_dd_serious_ill_health (Union[Unset, float]): [readonly] Value of payments marked as flexibly accessing
+            serious ill health lump sum (taxable)
+        flexi_dd_serious_ill_health_non_tax (Union[Unset, float]): [readonly] Value of payments marked as flexibly
+            accessing serious ill health lump sum (non taxable)
+        smp (Union[Unset, float]): [readonly] Statutory Maternity Pay
+        spp (Union[Unset, float]): [readonly] Statutory Paternity Pay
+        sap (Union[Unset, float]): [readonly] Statutory Adoption Pay
+        shpp (Union[Unset, float]): [readonly] Statutory Shared Parental Pay
+        spbp (Union[Unset, float]): [readonly] Statutory Parental Bereavement Pay
+        ssp (Union[Unset, float]): [readonly] Statutory Sick  Pay
+        student_loan_recovered (Union[Unset, float]): [readonly]
+        postgrad_loan_recovered (Union[Unset, float]): [readonly]
+        pensionable_earnings (Union[Unset, float]): [readonly] The amount of the Gross that is subject to Pension
+            Deductions.
+            If the Pension Scheme uses Qualifying Earnings (upper and lower limits) then this value is before those are
+            applied
+        pensionable_pay (Union[Unset, float]): [readonly] The amount of the Gross that pension calculations are based on
+            after taking into account Upper and Lower Limits for the WorkerGroup.
+        non_tierable_pay (Union[Unset, float]): [readonly] The value of any pay that shouldn't count towards determining
+            a pension tier.
+        employee_pension_contribution (Union[Unset, float]): [readonly] The value of the Pension Contribution being made
+            by this Employee, excluding any Additional Voluntary Contributions
+        employee_pension_contribution_avc (Union[Unset, float]): [readonly] The value of the Pension Contribution being
+            made by this Employee as an Additional Voluntary Contribution
+        employer_pension_contribution (Union[Unset, float]): [readonly] The value of the Pension Contribution being made
+            by the Employer for this Employee
+        empee_pen_contribns_not_paid (Union[Unset, float]): [readonly] Value of employee pension contributions that are
+            not paid under 'net pay arrangements', including any AVC
+        empee_pen_contribns_paid (Union[Unset, float]): [readonly] Value of employee pension contributions paid under
+            'net pay arrangements', including any AVC
+        attachment_order_deductions (Union[Unset, float]): [readonly] Value of deductions made due to AttachmentOrders
+        cis_deduction (Union[Unset, float]): [readonly] Value of any CIS Deduction made
+        cis_vat (Union[Unset, float]): [readonly] Value of any VAT paid to CIS Subcontractor
+        cis_umbrella_fee (Union[Unset, float]): [readonly] Value of any pre-tax fee charged to the CIS Subcontractor for
+            processing the payment
+        cis_umbrella_fee_post_tax (Union[Unset, float]): [readonly] Value of any post-tax fee charged to the CIS
+            Subcontractor for processing the payment
+        pbik (Union[Unset, float]): [readonly] Value of any Payrolled Benefits In Kind
+        maps_miles (Union[Unset, int]): [readonly] The number of miles paid for Mileage Allowance Payments
+        foreign_tax_amount (Union[Unset, float]): [readonly] The amount paid for Foreign Tax Credits in this period
+        foreign_tax_amount_reclaimed (Union[Unset, float]): [readonly] The amount of Foreign Tax Credits that you
+            actually reclaimed
+        umbrella_fee (Union[Unset, float]): [readonly] Value of any Umbrella fee charged for processing the payment
+        app_levy_deduction (Union[Unset, float]): [readonly] Value of any Apprenticeship Levy fee deducted for
+            processing the umbrella payment
+        payment_after_leaving (Union[Unset, float]): [readonly] Payment After Leaving
+        tax_on_payment_after_leaving (Union[Unset, float]): [readonly] Tax On Payment After Leaving
+        nil_paid (Union[Unset, int]): [readonly] The number of employees with NilPaid on the PayRun
+        leavers (Union[Unset, int]): [readonly] The number of Leavers on ths PayRun
+        starters (Union[Unset, int]): [readonly] The number of Starters on this PayRun
+        p_45_gross (Union[Unset, None, float]): [readonly] The value P45 Gross which is held on the Employees Opening
+            Balance
+        p_45_tax (Union[Unset, None, float]): [readonly] The value of P45 Tax which is held on the Employees Opening
+            Balance
+        total_cost (Union[Unset, float]):
+        recoverable_amounts (Union[Unset, RecoverableAmounts]):
     """
 
     basic_pay: Union[Unset, float] = UNSET
@@ -129,6 +136,8 @@ class PayRunTotals:
     flexi_dd_death_non_tax: Union[Unset, float] = UNSET
     flexi_dd_pension: Union[Unset, float] = UNSET
     flexi_dd_pension_non_tax: Union[Unset, float] = UNSET
+    flexi_dd_serious_ill_health: Union[Unset, float] = UNSET
+    flexi_dd_serious_ill_health_non_tax: Union[Unset, float] = UNSET
     smp: Union[Unset, float] = UNSET
     spp: Union[Unset, float] = UNSET
     sap: Union[Unset, float] = UNSET
@@ -152,6 +161,8 @@ class PayRunTotals:
     cis_umbrella_fee_post_tax: Union[Unset, float] = UNSET
     pbik: Union[Unset, float] = UNSET
     maps_miles: Union[Unset, int] = UNSET
+    foreign_tax_amount: Union[Unset, float] = UNSET
+    foreign_tax_amount_reclaimed: Union[Unset, float] = UNSET
     umbrella_fee: Union[Unset, float] = UNSET
     app_levy_deduction: Union[Unset, float] = UNSET
     payment_after_leaving: Union[Unset, float] = UNSET
@@ -159,9 +170,11 @@ class PayRunTotals:
     nil_paid: Union[Unset, int] = UNSET
     leavers: Union[Unset, int] = UNSET
     starters: Union[Unset, int] = UNSET
+    p_45_gross: Union[Unset, None, float] = UNSET
+    p_45_tax: Union[Unset, None, float] = UNSET
     total_cost: Union[Unset, float] = UNSET
     recoverable_amounts: Union[Unset, RecoverableAmounts] = UNSET
-    cost_summary: Union[Unset, PayRunCostSummary] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         basic_pay = self.basic_pay
@@ -189,6 +202,8 @@ class PayRunTotals:
         flexi_dd_death_non_tax = self.flexi_dd_death_non_tax
         flexi_dd_pension = self.flexi_dd_pension
         flexi_dd_pension_non_tax = self.flexi_dd_pension_non_tax
+        flexi_dd_serious_ill_health = self.flexi_dd_serious_ill_health
+        flexi_dd_serious_ill_health_non_tax = self.flexi_dd_serious_ill_health_non_tax
         smp = self.smp
         spp = self.spp
         sap = self.sap
@@ -212,6 +227,8 @@ class PayRunTotals:
         cis_umbrella_fee_post_tax = self.cis_umbrella_fee_post_tax
         pbik = self.pbik
         maps_miles = self.maps_miles
+        foreign_tax_amount = self.foreign_tax_amount
+        foreign_tax_amount_reclaimed = self.foreign_tax_amount_reclaimed
         umbrella_fee = self.umbrella_fee
         app_levy_deduction = self.app_levy_deduction
         payment_after_leaving = self.payment_after_leaving
@@ -219,17 +236,17 @@ class PayRunTotals:
         nil_paid = self.nil_paid
         leavers = self.leavers
         starters = self.starters
+        p_45_gross = self.p_45_gross
+        p_45_tax = self.p_45_tax
         total_cost = self.total_cost
         recoverable_amounts: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.recoverable_amounts, Unset):
             recoverable_amounts = self.recoverable_amounts.to_dict()
 
-        cost_summary: Union[Unset, Dict[str, Any]] = UNSET
-        if not isinstance(self.cost_summary, Unset):
-            cost_summary = self.cost_summary.to_dict()
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if basic_pay is not UNSET:
             field_dict["basicPay"] = basic_pay
         if gross is not UNSET:
@@ -237,9 +254,7 @@ class PayRunTotals:
         if gross_for_ni is not UNSET:
             field_dict["grossForNi"] = gross_for_ni
         if gross_not_subject_to_employers_ni is not UNSET:
-            field_dict[
-                "grossNotSubjectToEmployersNi"
-            ] = gross_not_subject_to_employers_ni
+            field_dict["grossNotSubjectToEmployersNi"] = gross_not_subject_to_employers_ni
         if gross_for_tax is not UNSET:
             field_dict["grossForTax"] = gross_for_tax
         if employer_ni is not UNSET:
@@ -282,6 +297,10 @@ class PayRunTotals:
             field_dict["flexiDd_Pension"] = flexi_dd_pension
         if flexi_dd_pension_non_tax is not UNSET:
             field_dict["flexiDd_Pension_NonTax"] = flexi_dd_pension_non_tax
+        if flexi_dd_serious_ill_health is not UNSET:
+            field_dict["flexiDd_SeriousIllHealth"] = flexi_dd_serious_ill_health
+        if flexi_dd_serious_ill_health_non_tax is not UNSET:
+            field_dict["flexiDd_SeriousIllHealth_NonTax"] = flexi_dd_serious_ill_health_non_tax
         if smp is not UNSET:
             field_dict["smp"] = smp
         if spp is not UNSET:
@@ -307,9 +326,7 @@ class PayRunTotals:
         if employee_pension_contribution is not UNSET:
             field_dict["employeePensionContribution"] = employee_pension_contribution
         if employee_pension_contribution_avc is not UNSET:
-            field_dict[
-                "employeePensionContributionAvc"
-            ] = employee_pension_contribution_avc
+            field_dict["employeePensionContributionAvc"] = employee_pension_contribution_avc
         if employer_pension_contribution is not UNSET:
             field_dict["employerPensionContribution"] = employer_pension_contribution
         if empee_pen_contribns_not_paid is not UNSET:
@@ -330,6 +347,10 @@ class PayRunTotals:
             field_dict["pbik"] = pbik
         if maps_miles is not UNSET:
             field_dict["mapsMiles"] = maps_miles
+        if foreign_tax_amount is not UNSET:
+            field_dict["foreignTaxAmount"] = foreign_tax_amount
+        if foreign_tax_amount_reclaimed is not UNSET:
+            field_dict["foreignTaxAmountReclaimed"] = foreign_tax_amount_reclaimed
         if umbrella_fee is not UNSET:
             field_dict["umbrellaFee"] = umbrella_fee
         if app_levy_deduction is not UNSET:
@@ -344,14 +365,18 @@ class PayRunTotals:
             field_dict["leavers"] = leavers
         if starters is not UNSET:
             field_dict["starters"] = starters
+        if p_45_gross is not UNSET:
+            field_dict["p45Gross"] = p_45_gross
+        if p_45_tax is not UNSET:
+            field_dict["p45Tax"] = p_45_tax
         if total_cost is not UNSET:
             field_dict["totalCost"] = total_cost
         if recoverable_amounts is not UNSET:
             field_dict["recoverableAmounts"] = recoverable_amounts
-        if cost_summary is not UNSET:
-            field_dict["costSummary"] = cost_summary
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -406,6 +431,10 @@ class PayRunTotals:
 
         flexi_dd_pension_non_tax = d.pop("flexiDd_Pension_NonTax", UNSET)
 
+        flexi_dd_serious_ill_health = d.pop("flexiDd_SeriousIllHealth", UNSET)
+
+        flexi_dd_serious_ill_health_non_tax = d.pop("flexiDd_SeriousIllHealth_NonTax", UNSET)
+
         smp = d.pop("smp", UNSET)
 
         spp = d.pop("spp", UNSET)
@@ -430,9 +459,7 @@ class PayRunTotals:
 
         employee_pension_contribution = d.pop("employeePensionContribution", UNSET)
 
-        employee_pension_contribution_avc = d.pop(
-            "employeePensionContributionAvc", UNSET
-        )
+        employee_pension_contribution_avc = d.pop("employeePensionContributionAvc", UNSET)
 
         employer_pension_contribution = d.pop("employerPensionContribution", UNSET)
 
@@ -454,6 +481,10 @@ class PayRunTotals:
 
         maps_miles = d.pop("mapsMiles", UNSET)
 
+        foreign_tax_amount = d.pop("foreignTaxAmount", UNSET)
+
+        foreign_tax_amount_reclaimed = d.pop("foreignTaxAmountReclaimed", UNSET)
+
         umbrella_fee = d.pop("umbrellaFee", UNSET)
 
         app_levy_deduction = d.pop("appLevyDeduction", UNSET)
@@ -468,21 +499,21 @@ class PayRunTotals:
 
         starters = d.pop("starters", UNSET)
 
+        p_45_gross = d.pop("p45Gross", UNSET)
+
+        p_45_tax = d.pop("p45Tax", UNSET)
+
         total_cost = d.pop("totalCost", UNSET)
 
         _recoverable_amounts = d.pop("recoverableAmounts", UNSET)
         recoverable_amounts: Union[Unset, RecoverableAmounts]
-        if isinstance(_recoverable_amounts, Unset):
+        if isinstance(_recoverable_amounts,  Unset):
             recoverable_amounts = UNSET
         else:
             recoverable_amounts = RecoverableAmounts.from_dict(_recoverable_amounts)
 
-        _cost_summary = d.pop("costSummary", UNSET)
-        cost_summary: Union[Unset, PayRunCostSummary]
-        if isinstance(_cost_summary, Unset):
-            cost_summary = UNSET
-        else:
-            cost_summary = PayRunCostSummary.from_dict(_cost_summary)
+
+
 
         pay_run_totals = cls(
             basic_pay=basic_pay,
@@ -510,6 +541,8 @@ class PayRunTotals:
             flexi_dd_death_non_tax=flexi_dd_death_non_tax,
             flexi_dd_pension=flexi_dd_pension,
             flexi_dd_pension_non_tax=flexi_dd_pension_non_tax,
+            flexi_dd_serious_ill_health=flexi_dd_serious_ill_health,
+            flexi_dd_serious_ill_health_non_tax=flexi_dd_serious_ill_health_non_tax,
             smp=smp,
             spp=spp,
             sap=sap,
@@ -533,6 +566,8 @@ class PayRunTotals:
             cis_umbrella_fee_post_tax=cis_umbrella_fee_post_tax,
             pbik=pbik,
             maps_miles=maps_miles,
+            foreign_tax_amount=foreign_tax_amount,
+            foreign_tax_amount_reclaimed=foreign_tax_amount_reclaimed,
             umbrella_fee=umbrella_fee,
             app_levy_deduction=app_levy_deduction,
             payment_after_leaving=payment_after_leaving,
@@ -540,9 +575,11 @@ class PayRunTotals:
             nil_paid=nil_paid,
             leavers=leavers,
             starters=starters,
+            p_45_gross=p_45_gross,
+            p_45_tax=p_45_tax,
             total_cost=total_cost,
             recoverable_amounts=recoverable_amounts,
-            cost_summary=cost_summary,
         )
 
         return pay_run_totals
+

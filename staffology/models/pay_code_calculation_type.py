@@ -7,6 +7,7 @@ class PayCodeCalculationType(str, Enum):
     PERCENTAGEOFNET = "PercentageOfNet"
     MULTIPLEOFHOURLYRATE = "MultipleOfHourlyRate"
     MULTIPLEOFDAILYRATE = "MultipleOfDailyRate"
+    FIXEDANNUALAMOUNT = "FixedAnnualAmount"
 
     def __str__(self) -> str:
         return str(self.value)

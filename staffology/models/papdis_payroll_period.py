@@ -9,7 +9,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="PapdisPayrollPeriod")
 
-
 @attr.s(auto_attribs=True)
 class PapdisPayrollPeriod:
     """
@@ -32,6 +31,7 @@ class PapdisPayrollPeriod:
     pay_reference_start_date: Union[Unset, datetime.date] = UNSET
     pay_reference_end_date: Union[Unset, datetime.date] = UNSET
     employees: Union[Unset, None, List[PapdisEmployee]] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         pay_period_start_date: Union[Unset, str] = UNSET
@@ -67,8 +67,13 @@ class PapdisPayrollPeriod:
 
                     employees.append(employees_item)
 
+
+
+
+
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if pay_period_start_date is not UNSET:
             field_dict["payPeriodStartDate"] = pay_period_start_date
         if pay_period_end_date is not UNSET:
@@ -88,29 +93,40 @@ class PapdisPayrollPeriod:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _pay_period_start_date = d.pop("payPeriodStartDate", UNSET)
         pay_period_start_date: Union[Unset, datetime.date]
-        if isinstance(_pay_period_start_date, Unset):
+        if isinstance(_pay_period_start_date,  Unset):
             pay_period_start_date = UNSET
         else:
             pay_period_start_date = isoparse(_pay_period_start_date).date()
 
+
+
+
         _pay_period_end_date = d.pop("payPeriodEndDate", UNSET)
         pay_period_end_date: Union[Unset, datetime.date]
-        if isinstance(_pay_period_end_date, Unset):
+        if isinstance(_pay_period_end_date,  Unset):
             pay_period_end_date = UNSET
         else:
             pay_period_end_date = isoparse(_pay_period_end_date).date()
 
+
+
+
         _contribution_deduction_date = d.pop("contributionDeductionDate", UNSET)
         contribution_deduction_date: Union[Unset, datetime.date]
-        if isinstance(_contribution_deduction_date, Unset):
+        if isinstance(_contribution_deduction_date,  Unset):
             contribution_deduction_date = UNSET
         else:
             contribution_deduction_date = isoparse(_contribution_deduction_date).date()
+
+
+
 
         frequency_code = d.pop("frequencyCode", UNSET)
 
@@ -118,24 +134,33 @@ class PapdisPayrollPeriod:
 
         _pay_reference_start_date = d.pop("payReferenceStartDate", UNSET)
         pay_reference_start_date: Union[Unset, datetime.date]
-        if isinstance(_pay_reference_start_date, Unset):
+        if isinstance(_pay_reference_start_date,  Unset):
             pay_reference_start_date = UNSET
         else:
             pay_reference_start_date = isoparse(_pay_reference_start_date).date()
 
+
+
+
         _pay_reference_end_date = d.pop("payReferenceEndDate", UNSET)
         pay_reference_end_date: Union[Unset, datetime.date]
-        if isinstance(_pay_reference_end_date, Unset):
+        if isinstance(_pay_reference_end_date,  Unset):
             pay_reference_end_date = UNSET
         else:
             pay_reference_end_date = isoparse(_pay_reference_end_date).date()
 
+
+
+
         employees = []
         _employees = d.pop("employees", UNSET)
-        for employees_item_data in _employees or []:
+        for employees_item_data in (_employees or []):
             employees_item = PapdisEmployee.from_dict(employees_item_data)
 
+
+
             employees.append(employees_item)
+
 
         papdis_payroll_period = cls(
             pay_period_start_date=pay_period_start_date,
@@ -149,3 +174,4 @@ class PapdisPayrollPeriod:
         )
 
         return papdis_payroll_period
+

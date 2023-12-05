@@ -14,10 +14,10 @@ def _get_kwargs(
     client: Client,
     accruals: Union[Unset, None, bool] = False,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Dict[str, Any]:
     url = "{}/employers/{employerId}/reports/holiday".format(
-        client.base_url, employerId=employer_id
-    )
+        client.base_url,employerId=employer_id)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
@@ -25,13 +25,24 @@ def _get_kwargs(
     if not isinstance(accept, Unset):
         headers["accept"] = accept
 
+
+
+    
+
     params: Dict[str, Any] = {}
     params["accruals"] = accruals
 
+
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
+
+    
+
+    
+
     return {
-        "method": "get",
+	    "method": "get",
         "url": url,
         "headers": headers,
         "cookies": cookies,
@@ -40,19 +51,17 @@ def _get_kwargs(
     }
 
 
-def _parse_response(
-    *, response: httpx.Response
-) -> Optional[HolidayReportReportResponse]:
+def _parse_response(*, response: httpx.Response) -> Optional[HolidayReportReportResponse]:
     if response.status_code == 200:
         response_200 = HolidayReportReportResponse.from_dict(response.json())
+
+
 
         return response_200
     return raise_staffology_exception(response)
 
 
-def _build_response(
-    *, response: httpx.Response
-) -> Response[HolidayReportReportResponse]:
+def _build_response(*, response: httpx.Response) -> Response[HolidayReportReportResponse]:
     return Response(
         status_code=response.status_code,
         content=response.content,
@@ -67,6 +76,7 @@ def sync_detailed(
     client: Client,
     accruals: Union[Unset, None, bool] = False,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Response[HolidayReportReportResponse]:
     """Holiday
 
@@ -81,11 +91,13 @@ def sync_detailed(
         Response[HolidayReportReportResponse]
     """
 
+
     kwargs = _get_kwargs(
         employer_id=employer_id,
-        client=client,
-        accruals=accruals,
-        accept=accept,
+client=client,
+accruals=accruals,
+accept=accept,
+
     )
 
     response = httpx.request(
@@ -95,13 +107,13 @@ def sync_detailed(
 
     return _build_response(response=response)
 
-
 def sync(
     employer_id: str,
     *,
     client: Client,
     accruals: Union[Unset, None, bool] = False,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Optional[HolidayReportReportResponse]:
     """Holiday
 
@@ -116,13 +128,14 @@ def sync(
         Response[HolidayReportReportResponse]
     """
 
+
     return sync_detailed(
         employer_id=employer_id,
-        client=client,
-        accruals=accruals,
-        accept=accept,
-    ).parsed
+client=client,
+accruals=accruals,
+accept=accept,
 
+    ).parsed
 
 async def asyncio_detailed(
     employer_id: str,
@@ -130,6 +143,7 @@ async def asyncio_detailed(
     client: Client,
     accruals: Union[Unset, None, bool] = False,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Response[HolidayReportReportResponse]:
     """Holiday
 
@@ -144,18 +158,21 @@ async def asyncio_detailed(
         Response[HolidayReportReportResponse]
     """
 
+
     kwargs = _get_kwargs(
         employer_id=employer_id,
-        client=client,
-        accruals=accruals,
-        accept=accept,
+client=client,
+accruals=accruals,
+accept=accept,
+
     )
 
     async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+        response = await _client.request(
+            **kwargs
+        )
 
     return _build_response(response=response)
-
 
 async def asyncio(
     employer_id: str,
@@ -163,6 +180,7 @@ async def asyncio(
     client: Client,
     accruals: Union[Unset, None, bool] = False,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Optional[HolidayReportReportResponse]:
     """Holiday
 
@@ -177,11 +195,12 @@ async def asyncio(
         Response[HolidayReportReportResponse]
     """
 
-    return (
-        await asyncio_detailed(
-            employer_id=employer_id,
-            client=client,
-            accruals=accruals,
-            accept=accept,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        employer_id=employer_id,
+client=client,
+accruals=accruals,
+accept=accept,
+
+    )).parsed
+

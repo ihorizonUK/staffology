@@ -13,12 +13,10 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="CostOfEmploymentReport")
 
-
 @attr.s(auto_attribs=True)
 class CostOfEmploymentReport:
     """
     Attributes:
-        payrun_count (Union[Unset, int]):
         has_departments (Union[Unset, bool]):
         lines (Union[Unset, None, List[CostOfEmploymentReportLine]]):
         employer (Union[Unset, Item]):
@@ -32,9 +30,9 @@ class CostOfEmploymentReport:
         end_date (Union[Unset, datetime.date]):
         report (Union[Unset, Report]):
         tax_year (Union[Unset, TaxYear]):
+        is_draft (Union[Unset, bool]):
     """
 
-    payrun_count: Union[Unset, int] = UNSET
     has_departments: Union[Unset, bool] = UNSET
     lines: Union[Unset, None, List[CostOfEmploymentReportLine]] = UNSET
     employer: Union[Unset, Item] = UNSET
@@ -48,9 +46,10 @@ class CostOfEmploymentReport:
     end_date: Union[Unset, datetime.date] = UNSET
     report: Union[Unset, Report] = UNSET
     tax_year: Union[Unset, TaxYear] = UNSET
+    is_draft: Union[Unset, bool] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
-        payrun_count = self.payrun_count
         has_departments = self.has_departments
         lines: Union[Unset, None, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.lines, Unset):
@@ -62,6 +61,9 @@ class CostOfEmploymentReport:
                     lines_item = lines_item_data.to_dict()
 
                     lines.append(lines_item)
+
+
+
 
         employer: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.employer, Unset):
@@ -92,10 +94,11 @@ class CostOfEmploymentReport:
         if not isinstance(self.tax_year, Unset):
             tax_year = self.tax_year.value
 
+        is_draft = self.is_draft
+
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
-        if payrun_count is not UNSET:
-            field_dict["payrunCount"] = payrun_count
+        field_dict.update({
+        })
         if has_departments is not UNSET:
             field_dict["hasDepartments"] = has_departments
         if lines is not UNSET:
@@ -122,36 +125,47 @@ class CostOfEmploymentReport:
             field_dict["report"] = report
         if tax_year is not UNSET:
             field_dict["taxYear"] = tax_year
+        if is_draft is not UNSET:
+            field_dict["isDraft"] = is_draft
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        payrun_count = d.pop("payrunCount", UNSET)
-
         has_departments = d.pop("hasDepartments", UNSET)
 
         lines = []
         _lines = d.pop("lines", UNSET)
-        for lines_item_data in _lines or []:
+        for lines_item_data in (_lines or []):
             lines_item = CostOfEmploymentReportLine.from_dict(lines_item_data)
+
+
 
             lines.append(lines_item)
 
+
         _employer = d.pop("employer", UNSET)
         employer: Union[Unset, Item]
-        if isinstance(_employer, Unset):
+        if isinstance(_employer,  Unset):
             employer = UNSET
         else:
             employer = Item.from_dict(_employer)
 
+
+
+
         _pay_period = d.pop("payPeriod", UNSET)
         pay_period: Union[Unset, PayPeriods]
-        if isinstance(_pay_period, Unset):
+        if isinstance(_pay_period,  Unset):
             pay_period = UNSET
         else:
             pay_period = PayPeriods(_pay_period)
+
+
+
 
         ordinal = d.pop("ordinal", UNSET)
 
@@ -165,34 +179,47 @@ class CostOfEmploymentReport:
 
         _start_date = d.pop("startDate", UNSET)
         start_date: Union[Unset, datetime.date]
-        if isinstance(_start_date, Unset):
+        if isinstance(_start_date,  Unset):
             start_date = UNSET
         else:
             start_date = isoparse(_start_date).date()
 
+
+
+
         _end_date = d.pop("endDate", UNSET)
         end_date: Union[Unset, datetime.date]
-        if isinstance(_end_date, Unset):
+        if isinstance(_end_date,  Unset):
             end_date = UNSET
         else:
             end_date = isoparse(_end_date).date()
 
+
+
+
         _report = d.pop("report", UNSET)
         report: Union[Unset, Report]
-        if isinstance(_report, Unset):
+        if isinstance(_report,  Unset):
             report = UNSET
         else:
             report = Report(_report)
 
+
+
+
         _tax_year = d.pop("taxYear", UNSET)
         tax_year: Union[Unset, TaxYear]
-        if isinstance(_tax_year, Unset):
+        if isinstance(_tax_year,  Unset):
             tax_year = UNSET
         else:
             tax_year = TaxYear(_tax_year)
 
+
+
+
+        is_draft = d.pop("isDraft", UNSET)
+
         cost_of_employment_report = cls(
-            payrun_count=payrun_count,
             has_departments=has_departments,
             lines=lines,
             employer=employer,
@@ -206,6 +233,8 @@ class CostOfEmploymentReport:
             end_date=end_date,
             report=report,
             tax_year=tax_year,
+            is_draft=is_draft,
         )
 
         return cost_of_employment_report
+

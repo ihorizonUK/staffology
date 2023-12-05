@@ -20,10 +20,9 @@ def _get_kwargs(
     tax_year: Union[Unset, None, TaxYear] = UNSET,
     force: Union[Unset, None, bool] = UNSET,
     ordinal: Union[Unset, None, int] = 1,
+    employee_id: Union[Unset, None, str] = UNSET,
 ) -> Dict[str, Any]:
-    url = "{}/employers/{employerId}/external-data/{id}/payslips".format(
-        client.base_url, employerId=employer_id, id=id
-    )
+    url = "{}/employers/{employerId}/external-data/{id}/payslips".format(client.base_url, employerId=employer_id, id=id)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
@@ -46,6 +45,8 @@ def _get_kwargs(
     params["force"] = force
 
     params["ordinal"] = ordinal
+
+    params["employeeId"] = employee_id
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
@@ -78,6 +79,7 @@ def sync_detailed(
     tax_year: Union[Unset, None, TaxYear] = UNSET,
     force: Union[Unset, None, bool] = UNSET,
     ordinal: Union[Unset, None, int] = 1,
+    employee_id: Union[Unset, None, str] = UNSET,
 ) -> Response[Any]:
     """Push Payslips
 
@@ -91,6 +93,7 @@ def sync_detailed(
         tax_year (Union[Unset, None, TaxYear]):
         force (Union[Unset, None, bool]):
         ordinal (Union[Unset, None, int]):  Default: 1.
+        employee_id (Union[Unset, None, str]):
 
     Returns:
         Response[Any]
@@ -105,6 +108,7 @@ def sync_detailed(
         tax_year=tax_year,
         force=force,
         ordinal=ordinal,
+        employee_id=employee_id,
     )
 
     response = httpx.request(
@@ -125,6 +129,7 @@ async def asyncio_detailed(
     tax_year: Union[Unset, None, TaxYear] = UNSET,
     force: Union[Unset, None, bool] = UNSET,
     ordinal: Union[Unset, None, int] = 1,
+    employee_id: Union[Unset, None, str] = UNSET,
 ) -> Response[Any]:
     """Push Payslips
 
@@ -138,6 +143,7 @@ async def asyncio_detailed(
         tax_year (Union[Unset, None, TaxYear]):
         force (Union[Unset, None, bool]):
         ordinal (Union[Unset, None, int]):  Default: 1.
+        employee_id (Union[Unset, None, str]):
 
     Returns:
         Response[Any]
@@ -152,6 +158,7 @@ async def asyncio_detailed(
         tax_year=tax_year,
         force=force,
         ordinal=ordinal,
+        employee_id=employee_id,
     )
 
     async with httpx.AsyncClient(verify=client.verify_ssl) as _client:

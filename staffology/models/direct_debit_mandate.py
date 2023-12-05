@@ -6,7 +6,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="DirectDebitMandate")
 
-
 @attr.s(auto_attribs=True)
 class DirectDebitMandate:
     """
@@ -26,6 +25,7 @@ class DirectDebitMandate:
     account_number_ending: Union[Unset, None, str] = UNSET
     id: Union[Unset, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         is_completed = self.is_completed
         mandate_link = self.mandate_link
@@ -35,7 +35,8 @@ class DirectDebitMandate:
         id = self.id
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if is_completed is not UNSET:
             field_dict["isCompleted"] = is_completed
         if mandate_link is not UNSET:
@@ -50,6 +51,8 @@ class DirectDebitMandate:
             field_dict["id"] = id
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -76,3 +79,4 @@ class DirectDebitMandate:
         )
 
         return direct_debit_mandate
+

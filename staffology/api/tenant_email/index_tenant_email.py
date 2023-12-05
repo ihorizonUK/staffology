@@ -14,21 +14,35 @@ def _get_kwargs(
     client: Client,
     page_num: Union[Unset, None, int] = UNSET,
     page_size: Union[Unset, None, int] = UNSET,
+
 ) -> Dict[str, Any]:
-    url = "{}/tenants/{id}/email".format(client.base_url, id=id)
+    url = "{}/tenants/{id}/email".format(
+        client.base_url,id=id)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
 
+    
+
+    
+
     params: Dict[str, Any] = {}
     params["pageNum"] = page_num
 
+
     params["pageSize"] = page_size
+
+
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
+
+    
+
+    
+
     return {
-        "method": "get",
+	    "method": "get",
         "url": url,
         "headers": headers,
         "cookies": cookies,
@@ -41,8 +55,10 @@ def _parse_response(*, response: httpx.Response) -> Optional[List[Item]]:
     if response.status_code == 200:
         response_200 = []
         _response_200 = response.json()
-        for response_200_item_data in _response_200:
+        for response_200_item_data in (_response_200):
             response_200_item = Item.from_dict(response_200_item_data)
+
+
 
             response_200.append(response_200_item)
 
@@ -65,6 +81,7 @@ def sync_detailed(
     client: Client,
     page_num: Union[Unset, None, int] = UNSET,
     page_size: Union[Unset, None, int] = UNSET,
+
 ) -> Response[List[Item]]:
     """List Emails
 
@@ -79,11 +96,13 @@ def sync_detailed(
         Response[List[Item]]
     """
 
+
     kwargs = _get_kwargs(
         id=id,
-        client=client,
-        page_num=page_num,
-        page_size=page_size,
+client=client,
+page_num=page_num,
+page_size=page_size,
+
     )
 
     response = httpx.request(
@@ -93,13 +112,13 @@ def sync_detailed(
 
     return _build_response(response=response)
 
-
 def sync(
     id: str,
     *,
     client: Client,
     page_num: Union[Unset, None, int] = UNSET,
     page_size: Union[Unset, None, int] = UNSET,
+
 ) -> Optional[List[Item]]:
     """List Emails
 
@@ -114,13 +133,14 @@ def sync(
         Response[List[Item]]
     """
 
+
     return sync_detailed(
         id=id,
-        client=client,
-        page_num=page_num,
-        page_size=page_size,
-    ).parsed
+client=client,
+page_num=page_num,
+page_size=page_size,
 
+    ).parsed
 
 async def asyncio_detailed(
     id: str,
@@ -128,6 +148,7 @@ async def asyncio_detailed(
     client: Client,
     page_num: Union[Unset, None, int] = UNSET,
     page_size: Union[Unset, None, int] = UNSET,
+
 ) -> Response[List[Item]]:
     """List Emails
 
@@ -142,18 +163,21 @@ async def asyncio_detailed(
         Response[List[Item]]
     """
 
+
     kwargs = _get_kwargs(
         id=id,
-        client=client,
-        page_num=page_num,
-        page_size=page_size,
+client=client,
+page_num=page_num,
+page_size=page_size,
+
     )
 
     async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+        response = await _client.request(
+            **kwargs
+        )
 
     return _build_response(response=response)
-
 
 async def asyncio(
     id: str,
@@ -161,6 +185,7 @@ async def asyncio(
     client: Client,
     page_num: Union[Unset, None, int] = UNSET,
     page_size: Union[Unset, None, int] = UNSET,
+
 ) -> Optional[List[Item]]:
     """List Emails
 
@@ -175,11 +200,12 @@ async def asyncio(
         Response[List[Item]]
     """
 
-    return (
-        await asyncio_detailed(
-            id=id,
-            client=client,
-            page_num=page_num,
-            page_size=page_size,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        id=id,
+client=client,
+page_num=page_num,
+page_size=page_size,
+
+    )).parsed
+

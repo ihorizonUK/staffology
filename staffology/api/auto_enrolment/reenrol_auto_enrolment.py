@@ -15,9 +15,7 @@ def _get_kwargs(
     client: Client,
     cyclical_reenrolment_date: Union[Unset, None, datetime.datetime] = UNSET,
 ) -> Dict[str, Any]:
-    url = "{}/employers/{employerId}/autoenrolment/renrol".format(
-        client.base_url, employerId=employer_id
-    )
+    url = "{}/employers/{employerId}/autoenrolment/renrol".format(client.base_url, employerId=employer_id)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
@@ -25,9 +23,7 @@ def _get_kwargs(
     params: Dict[str, Any] = {}
     json_cyclical_reenrolment_date: Union[Unset, None, str] = UNSET
     if not isinstance(cyclical_reenrolment_date, Unset):
-        json_cyclical_reenrolment_date = (
-            cyclical_reenrolment_date.isoformat() if cyclical_reenrolment_date else None
-        )
+        json_cyclical_reenrolment_date = cyclical_reenrolment_date.isoformat() if cyclical_reenrolment_date else None
 
     params["cyclicalReenrolmentDate"] = json_cyclical_reenrolment_date
 

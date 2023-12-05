@@ -6,7 +6,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="P11PayeTotalsLine")
 
-
 @attr.s(auto_attribs=True)
 class P11PayeTotalsLine:
     """Summary line for the Paye Income Tax table in the P11 Detailed report
@@ -27,6 +26,7 @@ class P11PayeTotalsLine:
     tax_due_to_date: Union[Unset, float] = UNSET
     tax_due: Union[Unset, float] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         student_loan = self.student_loan
         postgrad_loan = self.postgrad_loan
@@ -36,7 +36,8 @@ class P11PayeTotalsLine:
         tax_due = self.tax_due
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if student_loan is not UNSET:
             field_dict["studentLoan"] = student_loan
         if postgrad_loan is not UNSET:
@@ -51,6 +52,8 @@ class P11PayeTotalsLine:
             field_dict["taxDue"] = tax_due
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -77,3 +80,4 @@ class P11PayeTotalsLine:
         )
 
         return p11_paye_totals_line
+

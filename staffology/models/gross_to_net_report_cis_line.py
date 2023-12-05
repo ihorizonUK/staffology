@@ -7,7 +7,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GrossToNetReportCisLine")
 
-
 @attr.s(auto_attribs=True)
 class GrossToNetReportCisLine:
     """
@@ -23,6 +22,7 @@ class GrossToNetReportCisLine:
         umbrella_fee (Union[Unset, float]):
         vat (Union[Unset, float]):
         payment (Union[Unset, float]):
+        last_name (Union[Unset, None, str]):
     """
 
     employee: Union[Unset, Item] = UNSET
@@ -36,6 +36,8 @@ class GrossToNetReportCisLine:
     umbrella_fee: Union[Unset, float] = UNSET
     vat: Union[Unset, float] = UNSET
     payment: Union[Unset, float] = UNSET
+    last_name: Union[Unset, None, str] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         employee: Union[Unset, Dict[str, Any]] = UNSET
@@ -52,9 +54,11 @@ class GrossToNetReportCisLine:
         umbrella_fee = self.umbrella_fee
         vat = self.vat
         payment = self.payment
+        last_name = self.last_name
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if employee is not UNSET:
             field_dict["employee"] = employee
         if payroll_code is not UNSET:
@@ -77,18 +81,25 @@ class GrossToNetReportCisLine:
             field_dict["vat"] = vat
         if payment is not UNSET:
             field_dict["payment"] = payment
+        if last_name is not UNSET:
+            field_dict["lastName"] = last_name
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _employee = d.pop("employee", UNSET)
         employee: Union[Unset, Item]
-        if isinstance(_employee, Unset):
+        if isinstance(_employee,  Unset):
             employee = UNSET
         else:
             employee = Item.from_dict(_employee)
+
+
+
 
         payroll_code = d.pop("payrollCode", UNSET)
 
@@ -110,6 +121,8 @@ class GrossToNetReportCisLine:
 
         payment = d.pop("payment", UNSET)
 
+        last_name = d.pop("lastName", UNSET)
+
         gross_to_net_report_cis_line = cls(
             employee=employee,
             payroll_code=payroll_code,
@@ -122,6 +135,8 @@ class GrossToNetReportCisLine:
             umbrella_fee=umbrella_fee,
             vat=vat,
             payment=payment,
+            last_name=last_name,
         )
 
         return gross_to_net_report_cis_line
+

@@ -7,24 +7,25 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="PayRunSummaryLine")
 
-
 @attr.s(auto_attribs=True)
 class PayRunSummaryLine:
     """An array of this model is used to represent a summary of a PayRun.
-    This would typically be used for creating accounting entries for the PayRun.
+This would typically be used for creating accounting entries for the PayRun.
 
-        Attributes:
-            nominal_code (Union[Unset, None, str]): [readonly] If you've set up NominalCodeMapping then the relevant Nominal
-                code for the PayCode will be shown here.
-            department_code (Union[Unset, None, str]): [readonly] If the journal is split by department then the relevant
-                department code is shown here.
-            nominal_name (Union[Unset, None, str]): [readonly] As above
-            description (Union[Unset, None, str]): [readonly] A description of what this line summarises.
-            qty (Union[Unset, None, float]): [readonly] If the PayCode is a Multiplier code then this will contain the
-                number of days/hours
-            value (Union[Unset, float]): [readonly] The total value for this line.
-            pay_code (Union[Unset, PayCode]): Each PayLine has a Code. The Code will match the Code property of a PayCode.
-                The PayCode that is used determines how the amount is treated with regards to tax, NI and pensions
+    Attributes:
+        nominal_code (Union[Unset, None, str]): [readonly] If you've set up NominalCodeMapping then the relevant Nominal
+            code for the PayCode will be shown here.
+        department_code (Union[Unset, None, str]): [readonly] If the journal is split by department then the relevant
+            department code is shown here.
+        nominal_name (Union[Unset, None, str]): [readonly] As above
+        description (Union[Unset, None, str]): [readonly] A description of what this line summarises.
+        qty (Union[Unset, None, float]): [readonly] If the PayCode is a Multiplier code then this will contain the
+            number of days/hours
+        value (Union[Unset, float]): [readonly] The total value for this line.
+        pay_code (Union[Unset, PayCode]): Each PayLine has a Code. The Code will match the Code property of a PayCode.
+            The PayCode that is used determines how the amount is treated with regards to tax, NI and pensions
+        cost_centre_code (Union[Unset, None, str]): [readonly] If the journal is split by cost centre then the relevant
+            cost centre code is shown here.
     """
 
     nominal_code: Union[Unset, None, str] = UNSET
@@ -34,6 +35,8 @@ class PayRunSummaryLine:
     qty: Union[Unset, None, float] = UNSET
     value: Union[Unset, float] = UNSET
     pay_code: Union[Unset, PayCode] = UNSET
+    cost_centre_code: Union[Unset, None, str] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         nominal_code = self.nominal_code
@@ -46,8 +49,11 @@ class PayRunSummaryLine:
         if not isinstance(self.pay_code, Unset):
             pay_code = self.pay_code.to_dict()
 
+        cost_centre_code = self.cost_centre_code
+
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if nominal_code is not UNSET:
             field_dict["nominalCode"] = nominal_code
         if department_code is not UNSET:
@@ -62,8 +68,12 @@ class PayRunSummaryLine:
             field_dict["value"] = value
         if pay_code is not UNSET:
             field_dict["payCode"] = pay_code
+        if cost_centre_code is not UNSET:
+            field_dict["costCentreCode"] = cost_centre_code
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -82,10 +92,15 @@ class PayRunSummaryLine:
 
         _pay_code = d.pop("payCode", UNSET)
         pay_code: Union[Unset, PayCode]
-        if isinstance(_pay_code, Unset):
+        if isinstance(_pay_code,  Unset):
             pay_code = UNSET
         else:
             pay_code = PayCode.from_dict(_pay_code)
+
+
+
+
+        cost_centre_code = d.pop("costCentreCode", UNSET)
 
         pay_run_summary_line = cls(
             nominal_code=nominal_code,
@@ -95,6 +110,8 @@ class PayRunSummaryLine:
             qty=qty,
             value=value,
             pay_code=pay_code,
+            cost_centre_code=cost_centre_code,
         )
 
         return pay_run_summary_line
+

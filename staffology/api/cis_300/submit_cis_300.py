@@ -1,4 +1,4 @@
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, Union
 
 import httpx
 from staffology.propagate_exceptions import raise_staffology_exception
@@ -6,7 +6,7 @@ from staffology.propagate_exceptions import raise_staffology_exception
 from ...client import Client
 from ...models.cis_300 import Cis300
 from ...models.tax_year import TaxYear
-from ...types import Response
+from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
@@ -15,6 +15,7 @@ def _get_kwargs(
     id: str,
     *,
     client: Client,
+    force: Union[Unset, None, bool] = False,
 ) -> Dict[str, Any]:
     url = "{}/employers/{employerId}/rti/cis300/{taxYear}/{id}/submit".format(
         client.base_url, employerId=employer_id, taxYear=tax_year, id=id
@@ -23,12 +24,18 @@ def _get_kwargs(
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
 
+    params: Dict[str, Any] = {}
+    params["force"] = force
+
+    params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
     return {
         "method": "post",
         "url": url,
         "headers": headers,
         "cookies": cookies,
         "timeout": client.get_timeout(),
+        "params": params,
     }
 
 
@@ -55,6 +62,7 @@ def sync_detailed(
     id: str,
     *,
     client: Client,
+    force: Union[Unset, None, bool] = False,
 ) -> Response[Cis300]:
     """Submit Cis300
 
@@ -64,6 +72,7 @@ def sync_detailed(
         employer_id (str):
         tax_year (TaxYear):
         id (str):
+        force (Union[Unset, None, bool]):
 
     Returns:
         Response[Cis300]
@@ -74,6 +83,7 @@ def sync_detailed(
         tax_year=tax_year,
         id=id,
         client=client,
+        force=force,
     )
 
     response = httpx.request(
@@ -90,6 +100,7 @@ def sync(
     id: str,
     *,
     client: Client,
+    force: Union[Unset, None, bool] = False,
 ) -> Optional[Cis300]:
     """Submit Cis300
 
@@ -99,6 +110,7 @@ def sync(
         employer_id (str):
         tax_year (TaxYear):
         id (str):
+        force (Union[Unset, None, bool]):
 
     Returns:
         Response[Cis300]
@@ -109,6 +121,7 @@ def sync(
         tax_year=tax_year,
         id=id,
         client=client,
+        force=force,
     ).parsed
 
 
@@ -118,6 +131,7 @@ async def asyncio_detailed(
     id: str,
     *,
     client: Client,
+    force: Union[Unset, None, bool] = False,
 ) -> Response[Cis300]:
     """Submit Cis300
 
@@ -127,6 +141,7 @@ async def asyncio_detailed(
         employer_id (str):
         tax_year (TaxYear):
         id (str):
+        force (Union[Unset, None, bool]):
 
     Returns:
         Response[Cis300]
@@ -137,6 +152,7 @@ async def asyncio_detailed(
         tax_year=tax_year,
         id=id,
         client=client,
+        force=force,
     )
 
     async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
@@ -151,6 +167,7 @@ async def asyncio(
     id: str,
     *,
     client: Client,
+    force: Union[Unset, None, bool] = False,
 ) -> Optional[Cis300]:
     """Submit Cis300
 
@@ -160,6 +177,7 @@ async def asyncio(
         employer_id (str):
         tax_year (TaxYear):
         id (str):
+        force (Union[Unset, None, bool]):
 
     Returns:
         Response[Cis300]
@@ -171,5 +189,6 @@ async def asyncio(
             tax_year=tax_year,
             id=id,
             client=client,
+            force=force,
         )
     ).parsed

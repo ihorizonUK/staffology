@@ -6,22 +6,22 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="NationalMinimumWage")
 
-
 @attr.s(auto_attribs=True)
 class NationalMinimumWage:
     """Part of the TaxYearConfig that our engine uses to calculate National Minimum Wage.
-    It is used internally when our engine performs calculations.
-    You do not need to do anything with this model, it's provided purely for informational purposes.
+It is used internally when our engine performs calculations.
+You do not need to do anything with this model, it's provided purely for informational purposes.
 
-        Attributes:
-            apprentice (Union[Unset, None, bool]):
-            max_age (Union[Unset, int]):
-            hourly_amount (Union[Unset, float]):
+    Attributes:
+        apprentice (Union[Unset, None, bool]):
+        max_age (Union[Unset, int]):
+        hourly_amount (Union[Unset, float]):
     """
 
     apprentice: Union[Unset, None, bool] = UNSET
     max_age: Union[Unset, int] = UNSET
     hourly_amount: Union[Unset, float] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         apprentice = self.apprentice
@@ -29,7 +29,8 @@ class NationalMinimumWage:
         hourly_amount = self.hourly_amount
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if apprentice is not UNSET:
             field_dict["apprentice"] = apprentice
         if max_age is not UNSET:
@@ -38,6 +39,8 @@ class NationalMinimumWage:
             field_dict["hourlyAmount"] = hourly_amount
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -55,3 +58,4 @@ class NationalMinimumWage:
         )
 
         return national_minimum_wage
+

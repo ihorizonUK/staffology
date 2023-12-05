@@ -4,7 +4,7 @@ import httpx
 from staffology.propagate_exceptions import raise_staffology_exception
 
 from ...client import Client
-from ...models.employee import Employee
+from ...models.contract_employee_response import ContractEmployeeResponse
 from ...types import Response
 
 
@@ -14,9 +14,7 @@ def _get_kwargs(
     *,
     client: Client,
 ) -> Dict[str, Any]:
-    url = "{}/employers/{employerId}/employees/{id}".format(
-        client.base_url, employerId=employer_id, id=id
-    )
+    url = "{}/employers/{employerId}/employees/{id}".format(client.base_url, employerId=employer_id, id=id)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
@@ -30,15 +28,15 @@ def _get_kwargs(
     }
 
 
-def _parse_response(*, response: httpx.Response) -> Optional[Employee]:
+def _parse_response(*, response: httpx.Response) -> Optional[ContractEmployeeResponse]:
     if response.status_code == 200:
-        response_200 = Employee.from_dict(response.json())
+        response_200 = ContractEmployeeResponse.from_dict(response.json())
 
         return response_200
     return raise_staffology_exception(response)
 
 
-def _build_response(*, response: httpx.Response) -> Response[Employee]:
+def _build_response(*, response: httpx.Response) -> Response[ContractEmployeeResponse]:
     return Response(
         status_code=response.status_code,
         content=response.content,
@@ -52,7 +50,7 @@ def sync_detailed(
     id: str,
     *,
     client: Client,
-) -> Response[Employee]:
+) -> Response[ContractEmployeeResponse]:
     """Get an Employee
 
     Args:
@@ -60,7 +58,7 @@ def sync_detailed(
         id (str):
 
     Returns:
-        Response[Employee]
+        Response[ContractEmployeeResponse]
     """
 
     kwargs = _get_kwargs(
@@ -82,7 +80,7 @@ def sync(
     id: str,
     *,
     client: Client,
-) -> Optional[Employee]:
+) -> Optional[ContractEmployeeResponse]:
     """Get an Employee
 
     Args:
@@ -90,7 +88,7 @@ def sync(
         id (str):
 
     Returns:
-        Response[Employee]
+        Response[ContractEmployeeResponse]
     """
 
     return sync_detailed(
@@ -105,7 +103,7 @@ async def asyncio_detailed(
     id: str,
     *,
     client: Client,
-) -> Response[Employee]:
+) -> Response[ContractEmployeeResponse]:
     """Get an Employee
 
     Args:
@@ -113,7 +111,7 @@ async def asyncio_detailed(
         id (str):
 
     Returns:
-        Response[Employee]
+        Response[ContractEmployeeResponse]
     """
 
     kwargs = _get_kwargs(
@@ -133,7 +131,7 @@ async def asyncio(
     id: str,
     *,
     client: Client,
-) -> Optional[Employee]:
+) -> Optional[ContractEmployeeResponse]:
     """Get an Employee
 
     Args:
@@ -141,7 +139,7 @@ async def asyncio(
         id (str):
 
     Returns:
-        Response[Employee]
+        Response[ContractEmployeeResponse]
     """
 
     return (

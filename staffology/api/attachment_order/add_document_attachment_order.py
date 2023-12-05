@@ -4,9 +4,7 @@ import httpx
 from staffology.propagate_exceptions import raise_staffology_exception
 
 from ...client import Client
-from ...models.add_document_attachment_order_multipart_data import (
-    AddDocumentAttachmentOrderMultipartData,
-)
+from ...models.add_document_attachment_order_multipart_data import AddDocumentAttachmentOrderMultipartData
 from ...types import Response
 
 

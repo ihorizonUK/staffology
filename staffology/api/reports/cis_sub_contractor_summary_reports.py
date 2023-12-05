@@ -4,9 +4,7 @@ import httpx
 from staffology.propagate_exceptions import raise_staffology_exception
 
 from ...client import Client
-from ...models.cis_sub_contractor_summary_list_report_response import (
-    CisSubContractorSummaryListReportResponse,
-)
+from ...models.cis_sub_contractor_summary_list_report_response import CisSubContractorSummaryListReportResponse
 from ...types import UNSET, Response, Unset
 
 
@@ -15,10 +13,10 @@ def _get_kwargs(
     *,
     client: Client,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Dict[str, Any]:
     url = "{}/employers/{employerId}/reports/cissummary".format(
-        client.base_url, employerId=employer_id
-    )
+        client.base_url,employerId=employer_id)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
@@ -26,8 +24,18 @@ def _get_kwargs(
     if not isinstance(accept, Unset):
         headers["accept"] = accept
 
+
+
+    
+
+    
+
+    
+
+    
+
     return {
-        "method": "get",
+	    "method": "get",
         "url": url,
         "headers": headers,
         "cookies": cookies,
@@ -35,21 +43,17 @@ def _get_kwargs(
     }
 
 
-def _parse_response(
-    *, response: httpx.Response
-) -> Optional[CisSubContractorSummaryListReportResponse]:
+def _parse_response(*, response: httpx.Response) -> Optional[CisSubContractorSummaryListReportResponse]:
     if response.status_code == 200:
-        response_200 = CisSubContractorSummaryListReportResponse.from_dict(
-            response.text
-        )
+        response_200 = CisSubContractorSummaryListReportResponse.from_dict(response.text)
+
+
 
         return response_200
     return raise_staffology_exception(response)
 
 
-def _build_response(
-    *, response: httpx.Response
-) -> Response[CisSubContractorSummaryListReportResponse]:
+def _build_response(*, response: httpx.Response) -> Response[CisSubContractorSummaryListReportResponse]:
     return Response(
         status_code=response.status_code,
         content=response.content,
@@ -63,6 +67,7 @@ def sync_detailed(
     *,
     client: Client,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Response[CisSubContractorSummaryListReportResponse]:
     """CIS Subcontractor Summary
 
@@ -76,10 +81,12 @@ def sync_detailed(
         Response[CisSubContractorSummaryListReportResponse]
     """
 
+
     kwargs = _get_kwargs(
         employer_id=employer_id,
-        client=client,
-        accept=accept,
+client=client,
+accept=accept,
+
     )
 
     response = httpx.request(
@@ -89,12 +96,12 @@ def sync_detailed(
 
     return _build_response(response=response)
 
-
 def sync(
     employer_id: str,
     *,
     client: Client,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Optional[CisSubContractorSummaryListReportResponse]:
     """CIS Subcontractor Summary
 
@@ -108,18 +115,20 @@ def sync(
         Response[CisSubContractorSummaryListReportResponse]
     """
 
+
     return sync_detailed(
         employer_id=employer_id,
-        client=client,
-        accept=accept,
-    ).parsed
+client=client,
+accept=accept,
 
+    ).parsed
 
 async def asyncio_detailed(
     employer_id: str,
     *,
     client: Client,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Response[CisSubContractorSummaryListReportResponse]:
     """CIS Subcontractor Summary
 
@@ -133,23 +142,27 @@ async def asyncio_detailed(
         Response[CisSubContractorSummaryListReportResponse]
     """
 
+
     kwargs = _get_kwargs(
         employer_id=employer_id,
-        client=client,
-        accept=accept,
+client=client,
+accept=accept,
+
     )
 
     async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+        response = await _client.request(
+            **kwargs
+        )
 
     return _build_response(response=response)
-
 
 async def asyncio(
     employer_id: str,
     *,
     client: Client,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Optional[CisSubContractorSummaryListReportResponse]:
     """CIS Subcontractor Summary
 
@@ -163,10 +176,11 @@ async def asyncio(
         Response[CisSubContractorSummaryListReportResponse]
     """
 
-    return (
-        await asyncio_detailed(
-            employer_id=employer_id,
-            client=client,
-            accept=accept,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        employer_id=employer_id,
+client=client,
+accept=accept,
+
+    )).parsed
+

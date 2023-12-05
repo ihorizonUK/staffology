@@ -7,7 +7,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="YtdValue")
 
-
 @attr.s(auto_attribs=True)
 class YtdValue:
     """
@@ -23,6 +22,7 @@ class YtdValue:
     period: Union[Unset, float] = UNSET
     value: Union[Unset, float] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET
         if not isinstance(self.type, Unset):
@@ -33,7 +33,8 @@ class YtdValue:
         value = self.value
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if type is not UNSET:
             field_dict["type"] = type
         if brought_forward is not UNSET:
@@ -45,15 +46,20 @@ class YtdValue:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _type = d.pop("type", UNSET)
         type: Union[Unset, PayrollValueType]
-        if isinstance(_type, Unset):
+        if isinstance(_type,  Unset):
             type = UNSET
         else:
             type = PayrollValueType(_type)
+
+
+
 
         brought_forward = d.pop("broughtForward", UNSET)
 
@@ -69,3 +75,4 @@ class YtdValue:
         )
 
         return ytd_value
+

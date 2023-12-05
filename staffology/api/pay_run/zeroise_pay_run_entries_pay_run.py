@@ -19,27 +19,37 @@ def _get_kwargs(
     client: Client,
     json_body: List[str],
     ordinal: Union[Unset, None, int] = 1,
+
 ) -> Dict[str, Any]:
     url = "{}/employers/{employerId}/payrun/{taxYear}/{payPeriod}/{periodNumber}/zeroise".format(
-        client.base_url,
-        employerId=employer_id,
-        taxYear=tax_year,
-        payPeriod=pay_period,
-        periodNumber=period_number,
-    )
+        client.base_url,employerId=employer_id,taxYear=tax_year,payPeriod=pay_period,periodNumber=period_number)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
 
+    
+
+    
+
     params: Dict[str, Any] = {}
     params["ordinal"] = ordinal
 
+
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     json_json_body = json_body
 
+
+
+
+
+
+    
+
     return {
-        "method": "post",
+	    "method": "post",
         "url": url,
         "headers": headers,
         "cookies": cookies,
@@ -52,6 +62,8 @@ def _get_kwargs(
 def _parse_response(*, response: httpx.Response) -> Optional[PayRun]:
     if response.status_code == 200:
         response_200 = PayRun.from_dict(response.json())
+
+
 
         return response_200
     return raise_staffology_exception(response)
@@ -75,6 +87,7 @@ def sync_detailed(
     client: Client,
     json_body: List[str],
     ordinal: Union[Unset, None, int] = 1,
+
 ) -> Response[PayRun]:
     """Zeroise PayRunEntries
 
@@ -92,14 +105,16 @@ def sync_detailed(
         Response[PayRun]
     """
 
+
     kwargs = _get_kwargs(
         employer_id=employer_id,
-        tax_year=tax_year,
-        pay_period=pay_period,
-        period_number=period_number,
-        client=client,
-        json_body=json_body,
-        ordinal=ordinal,
+tax_year=tax_year,
+pay_period=pay_period,
+period_number=period_number,
+client=client,
+json_body=json_body,
+ordinal=ordinal,
+
     )
 
     response = httpx.request(
@@ -108,7 +123,6 @@ def sync_detailed(
     )
 
     return _build_response(response=response)
-
 
 def sync(
     employer_id: str,
@@ -119,6 +133,7 @@ def sync(
     client: Client,
     json_body: List[str],
     ordinal: Union[Unset, None, int] = 1,
+
 ) -> Optional[PayRun]:
     """Zeroise PayRunEntries
 
@@ -136,16 +151,17 @@ def sync(
         Response[PayRun]
     """
 
+
     return sync_detailed(
         employer_id=employer_id,
-        tax_year=tax_year,
-        pay_period=pay_period,
-        period_number=period_number,
-        client=client,
-        json_body=json_body,
-        ordinal=ordinal,
-    ).parsed
+tax_year=tax_year,
+pay_period=pay_period,
+period_number=period_number,
+client=client,
+json_body=json_body,
+ordinal=ordinal,
 
+    ).parsed
 
 async def asyncio_detailed(
     employer_id: str,
@@ -156,6 +172,7 @@ async def asyncio_detailed(
     client: Client,
     json_body: List[str],
     ordinal: Union[Unset, None, int] = 1,
+
 ) -> Response[PayRun]:
     """Zeroise PayRunEntries
 
@@ -173,21 +190,24 @@ async def asyncio_detailed(
         Response[PayRun]
     """
 
+
     kwargs = _get_kwargs(
         employer_id=employer_id,
-        tax_year=tax_year,
-        pay_period=pay_period,
-        period_number=period_number,
-        client=client,
-        json_body=json_body,
-        ordinal=ordinal,
+tax_year=tax_year,
+pay_period=pay_period,
+period_number=period_number,
+client=client,
+json_body=json_body,
+ordinal=ordinal,
+
     )
 
     async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+        response = await _client.request(
+            **kwargs
+        )
 
     return _build_response(response=response)
-
 
 async def asyncio(
     employer_id: str,
@@ -198,6 +218,7 @@ async def asyncio(
     client: Client,
     json_body: List[str],
     ordinal: Union[Unset, None, int] = 1,
+
 ) -> Optional[PayRun]:
     """Zeroise PayRunEntries
 
@@ -215,14 +236,15 @@ async def asyncio(
         Response[PayRun]
     """
 
-    return (
-        await asyncio_detailed(
-            employer_id=employer_id,
-            tax_year=tax_year,
-            pay_period=pay_period,
-            period_number=period_number,
-            client=client,
-            json_body=json_body,
-            ordinal=ordinal,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        employer_id=employer_id,
+tax_year=tax_year,
+pay_period=pay_period,
+period_number=period_number,
+client=client,
+json_body=json_body,
+ordinal=ordinal,
+
+    )).parsed
+

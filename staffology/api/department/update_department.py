@@ -15,9 +15,7 @@ def _get_kwargs(
     client: Client,
     json_body: Department,
 ) -> Dict[str, Any]:
-    url = "{}/employers/{employerId}/departments/{code}".format(
-        client.base_url, employerId=employer_id, code=code
-    )
+    url = "{}/employers/{employerId}/departments/{code}".format(client.base_url, employerId=employer_id, code=code)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
@@ -61,7 +59,7 @@ def sync_detailed(
     client: Client,
     json_body: Department,
 ) -> Response[Union[Any, Department]]:
-    """Update Department
+    """Update Department (deprecated)
 
      Updates a Department for the Employer.
 
@@ -96,7 +94,7 @@ def sync(
     client: Client,
     json_body: Department,
 ) -> Optional[Union[Any, Department]]:
-    """Update Department
+    """Update Department (deprecated)
 
      Updates a Department for the Employer.
 
@@ -124,7 +122,7 @@ async def asyncio_detailed(
     client: Client,
     json_body: Department,
 ) -> Response[Union[Any, Department]]:
-    """Update Department
+    """Update Department (deprecated)
 
      Updates a Department for the Employer.
 
@@ -157,7 +155,7 @@ async def asyncio(
     client: Client,
     json_body: Department,
 ) -> Optional[Union[Any, Department]]:
-    """Update Department
+    """Update Department (deprecated)
 
      Updates a Department for the Employer.
 

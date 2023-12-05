@@ -10,7 +10,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="CisSubContractor")
 
-
 @attr.s(auto_attribs=True)
 class CisSubContractor:
     """
@@ -43,6 +42,7 @@ class CisSubContractor:
         total_deducted (Union[Unset, None, str]):
         matched (Union[Unset, None, str]):
         tax_treatment (Union[Unset, None, str]):
+        net_payment (Union[Unset, None, str]):
     """
 
     employee_unique_id: Union[Unset, str] = UNSET
@@ -72,6 +72,8 @@ class CisSubContractor:
     total_deducted: Union[Unset, None, str] = UNSET
     matched: Union[Unset, None, str] = UNSET
     tax_treatment: Union[Unset, None, str] = UNSET
+    net_payment: Union[Unset, None, str] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         employee_unique_id = self.employee_unique_id
@@ -113,9 +115,11 @@ class CisSubContractor:
         total_deducted = self.total_deducted
         matched = self.matched
         tax_treatment = self.tax_treatment
+        net_payment = self.net_payment
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if employee_unique_id is not UNSET:
             field_dict["employeeUniqueId"] = employee_unique_id
         if email_statement_to is not UNSET:
@@ -170,8 +174,12 @@ class CisSubContractor:
             field_dict["matched"] = matched
         if tax_treatment is not UNSET:
             field_dict["taxTreatment"] = tax_treatment
+        if net_payment is not UNSET:
+            field_dict["netPayment"] = net_payment
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -184,10 +192,13 @@ class CisSubContractor:
 
         _item = d.pop("item", UNSET)
         item: Union[Unset, Item]
-        if isinstance(_item, Unset):
+        if isinstance(_item,  Unset):
             item = UNSET
         else:
             item = Item.from_dict(_item)
+
+
+
 
         display_name = d.pop("displayName", UNSET)
 
@@ -197,10 +208,13 @@ class CisSubContractor:
 
         _name = d.pop("name", UNSET)
         name: Union[Unset, RtiEmployeeName]
-        if isinstance(_name, Unset):
+        if isinstance(_name,  Unset):
             name = UNSET
         else:
             name = RtiEmployeeName.from_dict(_name)
+
+
+
 
         trading_name = d.pop("tradingName", UNSET)
 
@@ -216,17 +230,23 @@ class CisSubContractor:
 
         _partnership = d.pop("partnership", UNSET)
         partnership: Union[Unset, CisPartnership]
-        if isinstance(_partnership, Unset):
+        if isinstance(_partnership,  Unset):
             partnership = UNSET
         else:
             partnership = CisPartnership.from_dict(_partnership)
 
+
+
+
         _address = d.pop("address", UNSET)
         address: Union[Unset, RtiEmployeeAddress]
-        if isinstance(_address, Unset):
+        if isinstance(_address,  Unset):
             address = UNSET
         else:
             address = RtiEmployeeAddress.from_dict(_address)
+
+
+
 
         telephone = d.pop("telephone", UNSET)
 
@@ -249,6 +269,8 @@ class CisSubContractor:
         matched = d.pop("matched", UNSET)
 
         tax_treatment = d.pop("taxTreatment", UNSET)
+
+        net_payment = d.pop("netPayment", UNSET)
 
         cis_sub_contractor = cls(
             employee_unique_id=employee_unique_id,
@@ -278,6 +300,8 @@ class CisSubContractor:
             total_deducted=total_deducted,
             matched=matched,
             tax_treatment=tax_treatment,
+            net_payment=net_payment,
         )
 
         return cis_sub_contractor
+

@@ -6,7 +6,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="EpsAccount")
 
-
 @attr.s(auto_attribs=True)
 class EpsAccount:
     """Used on an EPS to send bank account information
@@ -23,6 +22,7 @@ class EpsAccount:
     sort_code: Union[Unset, None, str] = UNSET
     building_soc_ref: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         account_holders_name = self.account_holders_name
         account_no = self.account_no
@@ -30,7 +30,8 @@ class EpsAccount:
         building_soc_ref = self.building_soc_ref
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if account_holders_name is not UNSET:
             field_dict["accountHoldersName"] = account_holders_name
         if account_no is not UNSET:
@@ -41,6 +42,8 @@ class EpsAccount:
             field_dict["buildingSocRef"] = building_soc_ref
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -61,3 +64,4 @@ class EpsAccount:
         )
 
         return eps_account
+

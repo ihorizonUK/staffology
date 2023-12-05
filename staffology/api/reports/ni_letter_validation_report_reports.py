@@ -4,9 +4,7 @@ import httpx
 from staffology.propagate_exceptions import raise_staffology_exception
 
 from ...client import Client
-from ...models.ni_letter_validation_report_report_response import (
-    NiLetterValidationReportReportResponse,
-)
+from ...models.ni_letter_validation_report_report_response import NiLetterValidationReportReportResponse
 from ...models.pay_periods import PayPeriods
 from ...models.tax_year import TaxYear
 from ...types import UNSET, Response, Unset
@@ -21,14 +19,10 @@ def _get_kwargs(
     client: Client,
     ordinal: Union[Unset, None, int] = 1,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Dict[str, Any]:
     url = "{}/employers/{employerId}/reports/{taxYear}/{payPeriod}/{periodNumber}/NiLetterValidationReport".format(
-        client.base_url,
-        employerId=employer_id,
-        taxYear=tax_year,
-        payPeriod=pay_period,
-        periodNumber=period_number,
-    )
+        client.base_url,employerId=employer_id,taxYear=tax_year,payPeriod=pay_period,periodNumber=period_number)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
@@ -36,13 +30,24 @@ def _get_kwargs(
     if not isinstance(accept, Unset):
         headers["accept"] = accept
 
+
+
+    
+
     params: Dict[str, Any] = {}
     params["ordinal"] = ordinal
 
+
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
+
+    
+
+    
+
     return {
-        "method": "get",
+	    "method": "get",
         "url": url,
         "headers": headers,
         "cookies": cookies,
@@ -51,19 +56,17 @@ def _get_kwargs(
     }
 
 
-def _parse_response(
-    *, response: httpx.Response
-) -> Optional[NiLetterValidationReportReportResponse]:
+def _parse_response(*, response: httpx.Response) -> Optional[NiLetterValidationReportReportResponse]:
     if response.status_code == 200:
         response_200 = NiLetterValidationReportReportResponse.from_dict(response.json())
+
+
 
         return response_200
     return raise_staffology_exception(response)
 
 
-def _build_response(
-    *, response: httpx.Response
-) -> Response[NiLetterValidationReportReportResponse]:
+def _build_response(*, response: httpx.Response) -> Response[NiLetterValidationReportReportResponse]:
     return Response(
         status_code=response.status_code,
         content=response.content,
@@ -81,6 +84,7 @@ def sync_detailed(
     client: Client,
     ordinal: Union[Unset, None, int] = 1,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Response[NiLetterValidationReportReportResponse]:
     """NI Letter Validation (Payrun)
 
@@ -98,14 +102,16 @@ def sync_detailed(
         Response[NiLetterValidationReportReportResponse]
     """
 
+
     kwargs = _get_kwargs(
         employer_id=employer_id,
-        tax_year=tax_year,
-        pay_period=pay_period,
-        period_number=period_number,
-        client=client,
-        ordinal=ordinal,
-        accept=accept,
+tax_year=tax_year,
+pay_period=pay_period,
+period_number=period_number,
+client=client,
+ordinal=ordinal,
+accept=accept,
+
     )
 
     response = httpx.request(
@@ -114,7 +120,6 @@ def sync_detailed(
     )
 
     return _build_response(response=response)
-
 
 def sync(
     employer_id: str,
@@ -125,6 +130,7 @@ def sync(
     client: Client,
     ordinal: Union[Unset, None, int] = 1,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Optional[NiLetterValidationReportReportResponse]:
     """NI Letter Validation (Payrun)
 
@@ -142,16 +148,17 @@ def sync(
         Response[NiLetterValidationReportReportResponse]
     """
 
+
     return sync_detailed(
         employer_id=employer_id,
-        tax_year=tax_year,
-        pay_period=pay_period,
-        period_number=period_number,
-        client=client,
-        ordinal=ordinal,
-        accept=accept,
-    ).parsed
+tax_year=tax_year,
+pay_period=pay_period,
+period_number=period_number,
+client=client,
+ordinal=ordinal,
+accept=accept,
 
+    ).parsed
 
 async def asyncio_detailed(
     employer_id: str,
@@ -162,6 +169,7 @@ async def asyncio_detailed(
     client: Client,
     ordinal: Union[Unset, None, int] = 1,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Response[NiLetterValidationReportReportResponse]:
     """NI Letter Validation (Payrun)
 
@@ -179,21 +187,24 @@ async def asyncio_detailed(
         Response[NiLetterValidationReportReportResponse]
     """
 
+
     kwargs = _get_kwargs(
         employer_id=employer_id,
-        tax_year=tax_year,
-        pay_period=pay_period,
-        period_number=period_number,
-        client=client,
-        ordinal=ordinal,
-        accept=accept,
+tax_year=tax_year,
+pay_period=pay_period,
+period_number=period_number,
+client=client,
+ordinal=ordinal,
+accept=accept,
+
     )
 
     async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+        response = await _client.request(
+            **kwargs
+        )
 
     return _build_response(response=response)
-
 
 async def asyncio(
     employer_id: str,
@@ -204,6 +215,7 @@ async def asyncio(
     client: Client,
     ordinal: Union[Unset, None, int] = 1,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Optional[NiLetterValidationReportReportResponse]:
     """NI Letter Validation (Payrun)
 
@@ -221,14 +233,15 @@ async def asyncio(
         Response[NiLetterValidationReportReportResponse]
     """
 
-    return (
-        await asyncio_detailed(
-            employer_id=employer_id,
-            tax_year=tax_year,
-            pay_period=pay_period,
-            period_number=period_number,
-            client=client,
-            ordinal=ordinal,
-            accept=accept,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        employer_id=employer_id,
+tax_year=tax_year,
+pay_period=pay_period,
+period_number=period_number,
+client=client,
+ordinal=ordinal,
+accept=accept,
+
+    )).parsed
+

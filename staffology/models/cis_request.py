@@ -8,7 +8,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="CisRequest")
 
-
 @attr.s(auto_attribs=True)
 class CisRequest:
     """
@@ -22,6 +21,7 @@ class CisRequest:
     contractor: Union[Unset, CisContractor] = UNSET
     subcontractor: Union[Unset, None, List[CisSubContractor]] = UNSET
     declaration: Union[Unset, None, str] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         contractor: Union[Unset, Dict[str, Any]] = UNSET
@@ -39,10 +39,14 @@ class CisRequest:
 
                     subcontractor.append(subcontractor_item)
 
+
+
+
         declaration = self.declaration
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if contractor is not UNSET:
             field_dict["contractor"] = contractor
         if subcontractor is not UNSET:
@@ -52,22 +56,30 @@ class CisRequest:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _contractor = d.pop("contractor", UNSET)
         contractor: Union[Unset, CisContractor]
-        if isinstance(_contractor, Unset):
+        if isinstance(_contractor,  Unset):
             contractor = UNSET
         else:
             contractor = CisContractor.from_dict(_contractor)
 
+
+
+
         subcontractor = []
         _subcontractor = d.pop("subcontractor", UNSET)
-        for subcontractor_item_data in _subcontractor or []:
+        for subcontractor_item_data in (_subcontractor or []):
             subcontractor_item = CisSubContractor.from_dict(subcontractor_item_data)
 
+
+
             subcontractor.append(subcontractor_item)
+
 
         declaration = d.pop("declaration", UNSET)
 
@@ -78,3 +90,4 @@ class CisRequest:
         )
 
         return cis_request
+

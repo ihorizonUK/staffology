@@ -10,7 +10,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="ExpensesAndBenefits")
 
-
 @attr.s(auto_attribs=True)
 class ExpensesAndBenefits:
     """
@@ -31,6 +30,7 @@ class ExpensesAndBenefits:
     p_46_car_record_count: Union[Unset, int] = UNSET
     p_11d: Union[Unset, None, List[ExbP11D]] = UNSET
     related_tax_year: Union[Unset, None, str] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         employer: Union[Unset, Dict[str, Any]] = UNSET
@@ -58,10 +58,14 @@ class ExpensesAndBenefits:
 
                     p_11d.append(p_11d_item)
 
+
+
+
         related_tax_year = self.related_tax_year
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if employer is not UNSET:
             field_dict["employer"] = employer
         if declarations is not UNSET:
@@ -79,29 +83,40 @@ class ExpensesAndBenefits:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _employer = d.pop("employer", UNSET)
         employer: Union[Unset, ExbEmployer]
-        if isinstance(_employer, Unset):
+        if isinstance(_employer,  Unset):
             employer = UNSET
         else:
             employer = ExbEmployer.from_dict(_employer)
 
+
+
+
         _declarations = d.pop("declarations", UNSET)
         declarations: Union[Unset, ExbDeclarations]
-        if isinstance(_declarations, Unset):
+        if isinstance(_declarations,  Unset):
             declarations = UNSET
         else:
             declarations = ExbDeclarations.from_dict(_declarations)
 
+
+
+
         _p_11_db = d.pop("p11Db", UNSET)
         p_11_db: Union[Unset, ExbP11Db]
-        if isinstance(_p_11_db, Unset):
+        if isinstance(_p_11_db,  Unset):
             p_11_db = UNSET
         else:
             p_11_db = ExbP11Db.from_dict(_p_11_db)
+
+
+
 
         p_11_drecord_count = d.pop("p11DrecordCount", UNSET)
 
@@ -109,10 +124,13 @@ class ExpensesAndBenefits:
 
         p_11d = []
         _p_11d = d.pop("p11D", UNSET)
-        for p_11d_item_data in _p_11d or []:
+        for p_11d_item_data in (_p_11d or []):
             p_11d_item = ExbP11D.from_dict(p_11d_item_data)
 
+
+
             p_11d.append(p_11d_item)
+
 
         related_tax_year = d.pop("relatedTaxYear", UNSET)
 
@@ -127,3 +145,4 @@ class ExpensesAndBenefits:
         )
 
         return expenses_and_benefits
+

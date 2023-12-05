@@ -20,11 +20,7 @@ def _get_kwargs(
     ordinal: Union[Unset, None, int] = 1,
 ) -> Dict[str, Any]:
     url = "{}/employers/{employerId}/payrun/{taxYear}/{payPeriod}/{periodNumber}/changes".format(
-        client.base_url,
-        employerId=employer_id,
-        taxYear=tax_year,
-        payPeriod=pay_period,
-        periodNumber=period_number,
+        client.base_url, employerId=employer_id, taxYear=tax_year, payPeriod=pay_period, periodNumber=period_number
     )
 
     headers: Dict[str, str] = client.get_headers()

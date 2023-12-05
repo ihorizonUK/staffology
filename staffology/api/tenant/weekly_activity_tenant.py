@@ -17,14 +17,20 @@ def _get_kwargs(
     to_date: Union[Unset, None, datetime.datetime] = UNSET,
     all_tenants: Union[Unset, None, bool] = False,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Dict[str, Any]:
-    url = "{}/tenants/{id}/reports/weeklyactivity".format(client.base_url, id=id)
+    url = "{}/tenants/{id}/reports/weeklyactivity".format(
+        client.base_url,id=id)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
 
     if not isinstance(accept, Unset):
         headers["accept"] = accept
+
+
+
+    
 
     params: Dict[str, Any] = {}
     json_from_date: Union[Unset, None, str] = UNSET
@@ -33,18 +39,27 @@ def _get_kwargs(
 
     params["fromDate"] = json_from_date
 
+
     json_to_date: Union[Unset, None, str] = UNSET
     if not isinstance(to_date, Unset):
         json_to_date = to_date.isoformat() if to_date else None
 
     params["toDate"] = json_to_date
 
+
     params["allTenants"] = all_tenants
+
+
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
+
+    
+
+    
+
     return {
-        "method": "get",
+	    "method": "get",
         "url": url,
         "headers": headers,
         "cookies": cookies,
@@ -56,6 +71,8 @@ def _get_kwargs(
 def _parse_response(*, response: httpx.Response) -> Optional[ReportResponse]:
     if response.status_code == 200:
         response_200 = ReportResponse.from_dict(response.json())
+
+
 
         return response_200
     return raise_staffology_exception(response)
@@ -78,6 +95,7 @@ def sync_detailed(
     to_date: Union[Unset, None, datetime.datetime] = UNSET,
     all_tenants: Union[Unset, None, bool] = False,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Response[ReportResponse]:
     """Weekly Activity Report
 
@@ -94,13 +112,15 @@ def sync_detailed(
         Response[ReportResponse]
     """
 
+
     kwargs = _get_kwargs(
         id=id,
-        client=client,
-        from_date=from_date,
-        to_date=to_date,
-        all_tenants=all_tenants,
-        accept=accept,
+client=client,
+from_date=from_date,
+to_date=to_date,
+all_tenants=all_tenants,
+accept=accept,
+
     )
 
     response = httpx.request(
@@ -110,7 +130,6 @@ def sync_detailed(
 
     return _build_response(response=response)
 
-
 def sync(
     id: str,
     *,
@@ -119,6 +138,7 @@ def sync(
     to_date: Union[Unset, None, datetime.datetime] = UNSET,
     all_tenants: Union[Unset, None, bool] = False,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Optional[ReportResponse]:
     """Weekly Activity Report
 
@@ -135,15 +155,16 @@ def sync(
         Response[ReportResponse]
     """
 
+
     return sync_detailed(
         id=id,
-        client=client,
-        from_date=from_date,
-        to_date=to_date,
-        all_tenants=all_tenants,
-        accept=accept,
-    ).parsed
+client=client,
+from_date=from_date,
+to_date=to_date,
+all_tenants=all_tenants,
+accept=accept,
 
+    ).parsed
 
 async def asyncio_detailed(
     id: str,
@@ -153,6 +174,7 @@ async def asyncio_detailed(
     to_date: Union[Unset, None, datetime.datetime] = UNSET,
     all_tenants: Union[Unset, None, bool] = False,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Response[ReportResponse]:
     """Weekly Activity Report
 
@@ -169,20 +191,23 @@ async def asyncio_detailed(
         Response[ReportResponse]
     """
 
+
     kwargs = _get_kwargs(
         id=id,
-        client=client,
-        from_date=from_date,
-        to_date=to_date,
-        all_tenants=all_tenants,
-        accept=accept,
+client=client,
+from_date=from_date,
+to_date=to_date,
+all_tenants=all_tenants,
+accept=accept,
+
     )
 
     async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+        response = await _client.request(
+            **kwargs
+        )
 
     return _build_response(response=response)
-
 
 async def asyncio(
     id: str,
@@ -192,6 +217,7 @@ async def asyncio(
     to_date: Union[Unset, None, datetime.datetime] = UNSET,
     all_tenants: Union[Unset, None, bool] = False,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Optional[ReportResponse]:
     """Weekly Activity Report
 
@@ -208,13 +234,14 @@ async def asyncio(
         Response[ReportResponse]
     """
 
-    return (
-        await asyncio_detailed(
-            id=id,
-            client=client,
-            from_date=from_date,
-            to_date=to_date,
-            all_tenants=all_tenants,
-            accept=accept,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        id=id,
+client=client,
+from_date=from_date,
+to_date=to_date,
+all_tenants=all_tenants,
+accept=accept,
+
+    )).parsed
+

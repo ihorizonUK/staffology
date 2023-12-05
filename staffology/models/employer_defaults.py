@@ -7,22 +7,21 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="EmployerDefaults")
 
-
 @attr.s(auto_attribs=True)
 class EmployerDefaults:
     """When a user creates a new Employer, certain settings can be copied from an existing employer.
-    This model determines which employer (if any) settings should be copied from and what should be copied.
+This model determines which employer (if any) settings should be copied from and what should be copied.
 
-        Attributes:
-            employer (Union[Unset, EmployerItem]):
-            pay_codes (Union[Unset, bool]): If true then PayCodes will be copied from the specified Employer
-            csv_mappings (Union[Unset, bool]): If true then CSV Mappings will be copied from the specified Employer
-            departments (Union[Unset, bool]): If true then Departments will be copied from the specified Employer
-            rti (Union[Unset, bool]): If true then RTI Settings will be copied from the specified Employer
-            users (Union[Unset, bool]): If true then Users will be copied from the specified Employer
-            hmrc_notice_settings (Union[Unset, bool]): If true then HMRC Notice Settings will be copied from the specified
-                Employer
-            pay_options (Union[Unset, bool]): If true then Default Pay Options will be copied from the specified Employer.
+    Attributes:
+        employer (Union[Unset, EmployerItem]):
+        pay_codes (Union[Unset, bool]): If true then PayCodes will be copied from the specified Employer
+        csv_mappings (Union[Unset, bool]): If true then CSV Mappings will be copied from the specified Employer
+        departments (Union[Unset, bool]): If true then Departments will be copied from the specified Employer
+        rti (Union[Unset, bool]): If true then RTI Settings will be copied from the specified Employer
+        users (Union[Unset, bool]): If true then Users will be copied from the specified Employer
+        hmrc_notice_settings (Union[Unset, bool]): If true then HMRC Notice Settings will be copied from the specified
+            Employer
+        pay_options (Union[Unset, bool]): If true then Default Pay Options will be copied from the specified Employer.
     """
 
     employer: Union[Unset, EmployerItem] = UNSET
@@ -33,6 +32,7 @@ class EmployerDefaults:
     users: Union[Unset, bool] = UNSET
     hmrc_notice_settings: Union[Unset, bool] = UNSET
     pay_options: Union[Unset, bool] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         employer: Union[Unset, Dict[str, Any]] = UNSET
@@ -48,7 +48,8 @@ class EmployerDefaults:
         pay_options = self.pay_options
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if employer is not UNSET:
             field_dict["employer"] = employer
         if pay_codes is not UNSET:
@@ -68,15 +69,20 @@ class EmployerDefaults:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _employer = d.pop("employer", UNSET)
         employer: Union[Unset, EmployerItem]
-        if isinstance(_employer, Unset):
+        if isinstance(_employer,  Unset):
             employer = UNSET
         else:
             employer = EmployerItem.from_dict(_employer)
+
+
+
 
         pay_codes = d.pop("payCodes", UNSET)
 
@@ -104,3 +110,4 @@ class EmployerDefaults:
         )
 
         return employer_defaults
+

@@ -27,16 +27,12 @@ def _get_kwargs(
     }
 
 
-def _parse_response(
-    *, response: httpx.Response
-) -> Optional[List[EmployerGroupMembership]]:
+def _parse_response(*, response: httpx.Response) -> Optional[List[EmployerGroupMembership]]:
     if response.status_code == 200:
         response_200 = []
         _response_200 = response.json()
         for response_200_item_data in _response_200:
-            response_200_item = EmployerGroupMembership.from_dict(
-                response_200_item_data
-            )
+            response_200_item = EmployerGroupMembership.from_dict(response_200_item_data)
 
             response_200.append(response_200_item)
 
@@ -44,9 +40,7 @@ def _parse_response(
     return raise_staffology_exception(response)
 
 
-def _build_response(
-    *, response: httpx.Response
-) -> Response[List[EmployerGroupMembership]]:
+def _build_response(*, response: httpx.Response) -> Response[List[EmployerGroupMembership]]:
     return Response(
         status_code=response.status_code,
         content=response.content,

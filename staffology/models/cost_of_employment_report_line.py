@@ -7,7 +7,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="CostOfEmploymentReportLine")
 
-
 @attr.s(auto_attribs=True)
 class CostOfEmploymentReportLine:
     """
@@ -33,6 +32,7 @@ class CostOfEmploymentReportLine:
     payroll_code: Union[Unset, None, str] = UNSET
     department: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         pay = self.pay
         employer_nic = self.employer_nic
@@ -48,7 +48,8 @@ class CostOfEmploymentReportLine:
         department = self.department
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if pay is not UNSET:
             field_dict["pay"] = pay
         if employer_nic is not UNSET:
@@ -70,6 +71,8 @@ class CostOfEmploymentReportLine:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
@@ -87,10 +90,13 @@ class CostOfEmploymentReportLine:
 
         _employee = d.pop("employee", UNSET)
         employee: Union[Unset, Item]
-        if isinstance(_employee, Unset):
+        if isinstance(_employee,  Unset):
             employee = UNSET
         else:
             employee = Item.from_dict(_employee)
+
+
+
 
         payroll_code = d.pop("payrollCode", UNSET)
 
@@ -109,3 +115,4 @@ class CostOfEmploymentReportLine:
         )
 
         return cost_of_employment_report_line
+

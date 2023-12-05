@@ -5,13 +5,13 @@ import attr
 from dateutil.parser import isoparse
 
 from ..models.background_task_status import BackgroundTaskStatus
+from ..models.journal_csv_format import JournalCsvFormat
 from ..models.pay_periods import PayPeriods
 from ..models.pay_run_summary_line import PayRunSummaryLine
 from ..models.tax_year import TaxYear
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="PayRunJournal")
-
 
 @attr.s(auto_attribs=True)
 class PayRunJournal:
@@ -28,6 +28,8 @@ class PayRunJournal:
         pay_period (Union[Unset, PayPeriods]):
         ordinal (Union[Unset, int]): [readonly]
         period (Union[Unset, int]): [readonly]
+        merge_matching_nominals (Union[Unset, bool]): [readonly]
+        csv_format (Union[Unset, JournalCsvFormat]):
     """
 
     lines: Union[Unset, None, List[PayRunSummaryLine]] = UNSET
@@ -40,6 +42,9 @@ class PayRunJournal:
     pay_period: Union[Unset, PayPeriods] = UNSET
     ordinal: Union[Unset, int] = UNSET
     period: Union[Unset, int] = UNSET
+    merge_matching_nominals: Union[Unset, bool] = UNSET
+    csv_format: Union[Unset, JournalCsvFormat] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         lines: Union[Unset, None, List[Dict[str, Any]]] = UNSET
@@ -52,6 +57,9 @@ class PayRunJournal:
                     lines_item = lines_item_data.to_dict()
 
                     lines.append(lines_item)
+
+
+
 
         date: Union[Unset, str] = UNSET
         if not isinstance(self.date, Unset):
@@ -74,9 +82,15 @@ class PayRunJournal:
 
         ordinal = self.ordinal
         period = self.period
+        merge_matching_nominals = self.merge_matching_nominals
+        csv_format: Union[Unset, str] = UNSET
+        if not isinstance(self.csv_format, Unset):
+            csv_format = self.csv_format.value
+
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if lines is not UNSET:
             field_dict["lines"] = lines
         if date is not UNSET:
@@ -97,34 +111,49 @@ class PayRunJournal:
             field_dict["ordinal"] = ordinal
         if period is not UNSET:
             field_dict["period"] = period
+        if merge_matching_nominals is not UNSET:
+            field_dict["mergeMatchingNominals"] = merge_matching_nominals
+        if csv_format is not UNSET:
+            field_dict["csvFormat"] = csv_format
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         lines = []
         _lines = d.pop("lines", UNSET)
-        for lines_item_data in _lines or []:
+        for lines_item_data in (_lines or []):
             lines_item = PayRunSummaryLine.from_dict(lines_item_data)
+
+
 
             lines.append(lines_item)
 
+
         _date = d.pop("date", UNSET)
         date: Union[Unset, datetime.date]
-        if isinstance(_date, Unset):
+        if isinstance(_date,  Unset):
             date = UNSET
         else:
             date = isoparse(_date).date()
+
+
+
 
         title = d.pop("title", UNSET)
 
         _status = d.pop("status", UNSET)
         status: Union[Unset, BackgroundTaskStatus]
-        if isinstance(_status, Unset):
+        if isinstance(_status,  Unset):
             status = UNSET
         else:
             status = BackgroundTaskStatus(_status)
+
+
+
 
         status_message = d.pop("statusMessage", UNSET)
 
@@ -132,21 +161,39 @@ class PayRunJournal:
 
         _tax_year = d.pop("taxYear", UNSET)
         tax_year: Union[Unset, TaxYear]
-        if isinstance(_tax_year, Unset):
+        if isinstance(_tax_year,  Unset):
             tax_year = UNSET
         else:
             tax_year = TaxYear(_tax_year)
 
+
+
+
         _pay_period = d.pop("payPeriod", UNSET)
         pay_period: Union[Unset, PayPeriods]
-        if isinstance(_pay_period, Unset):
+        if isinstance(_pay_period,  Unset):
             pay_period = UNSET
         else:
             pay_period = PayPeriods(_pay_period)
 
+
+
+
         ordinal = d.pop("ordinal", UNSET)
 
         period = d.pop("period", UNSET)
+
+        merge_matching_nominals = d.pop("mergeMatchingNominals", UNSET)
+
+        _csv_format = d.pop("csvFormat", UNSET)
+        csv_format: Union[Unset, JournalCsvFormat]
+        if isinstance(_csv_format,  Unset):
+            csv_format = UNSET
+        else:
+            csv_format = JournalCsvFormat(_csv_format)
+
+
+
 
         pay_run_journal = cls(
             lines=lines,
@@ -159,6 +206,9 @@ class PayRunJournal:
             pay_period=pay_period,
             ordinal=ordinal,
             period=period,
+            merge_matching_nominals=merge_matching_nominals,
+            csv_format=csv_format,
         )
 
         return pay_run_journal
+

@@ -15,7 +15,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="Eps")
 
-
 @attr.s(auto_attribs=True)
 class Eps:
     """
@@ -31,7 +30,8 @@ class Eps:
         de_minimis_state_aid (Union[Unset, EpsDeMinimisStateAid]): Used on an EPS to declare an Employment Allowance
             DeMinimis State Aid information
         i_rmark (Union[Unset, None, str]):
-        xml (Union[Unset, None, str]):
+        xml (Union[Unset, None, str]): THis property will soon be removed and should not be used.
+            There is now a dedicated API endpoint for retrieving the XML for a submission.
         tax_year (Union[Unset, TaxYear]):
         employer_references (Union[Unset, EmpRefs]):
         gov_talk_submission (Union[Unset, GovTalkSubmission]):
@@ -52,6 +52,7 @@ class Eps:
     employer_references: Union[Unset, EmpRefs] = UNSET
     gov_talk_submission: Union[Unset, GovTalkSubmission] = UNSET
     id: Union[Unset, str] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         period_of_inactivity: Union[Unset, Dict[str, Any]] = UNSET
@@ -100,7 +101,8 @@ class Eps:
         id = self.id
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if period_of_inactivity is not UNSET:
             field_dict["periodOfInactivity"] = period_of_inactivity
         if no_payment_for_period is not UNSET:
@@ -114,9 +116,7 @@ class Eps:
         if account is not UNSET:
             field_dict["account"] = account
         if eligible_for_employment_allowance is not UNSET:
-            field_dict[
-                "eligibleForEmploymentAllowance"
-            ] = eligible_for_employment_allowance
+            field_dict["eligibleForEmploymentAllowance"] = eligible_for_employment_allowance
         if de_minimis_state_aid is not UNSET:
             field_dict["deMinimisStateAid"] = de_minimis_state_aid
         if i_rmark is not UNSET:
@@ -134,61 +134,82 @@ class Eps:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _period_of_inactivity = d.pop("periodOfInactivity", UNSET)
         period_of_inactivity: Union[Unset, FromToDates]
-        if isinstance(_period_of_inactivity, Unset):
+        if isinstance(_period_of_inactivity,  Unset):
             period_of_inactivity = UNSET
         else:
             period_of_inactivity = FromToDates.from_dict(_period_of_inactivity)
 
+
+
+
         _no_payment_for_period = d.pop("noPaymentForPeriod", UNSET)
         no_payment_for_period: Union[Unset, FromToDates]
-        if isinstance(_no_payment_for_period, Unset):
+        if isinstance(_no_payment_for_period,  Unset):
             no_payment_for_period = UNSET
         else:
             no_payment_for_period = FromToDates.from_dict(_no_payment_for_period)
 
+
+
+
         _final_submission = d.pop("finalSubmission", UNSET)
         final_submission: Union[Unset, EpsFinalSubmission]
-        if isinstance(_final_submission, Unset):
+        if isinstance(_final_submission,  Unset):
             final_submission = UNSET
         else:
             final_submission = EpsFinalSubmission.from_dict(_final_submission)
 
+
+
+
         _recoverable_amounts = d.pop("recoverableAmounts", UNSET)
         recoverable_amounts: Union[Unset, RecoverableAmounts]
-        if isinstance(_recoverable_amounts, Unset):
+        if isinstance(_recoverable_amounts,  Unset):
             recoverable_amounts = UNSET
         else:
             recoverable_amounts = RecoverableAmounts.from_dict(_recoverable_amounts)
 
+
+
+
         _apprenticeship_levy = d.pop("apprenticeshipLevy", UNSET)
         apprenticeship_levy: Union[Unset, EpsApprenticeshipLevy]
-        if isinstance(_apprenticeship_levy, Unset):
+        if isinstance(_apprenticeship_levy,  Unset):
             apprenticeship_levy = UNSET
         else:
             apprenticeship_levy = EpsApprenticeshipLevy.from_dict(_apprenticeship_levy)
 
+
+
+
         _account = d.pop("account", UNSET)
         account: Union[Unset, EpsAccount]
-        if isinstance(_account, Unset):
+        if isinstance(_account,  Unset):
             account = UNSET
         else:
             account = EpsAccount.from_dict(_account)
 
-        eligible_for_employment_allowance = d.pop(
-            "eligibleForEmploymentAllowance", UNSET
-        )
+
+
+
+        eligible_for_employment_allowance = d.pop("eligibleForEmploymentAllowance", UNSET)
 
         _de_minimis_state_aid = d.pop("deMinimisStateAid", UNSET)
         de_minimis_state_aid: Union[Unset, EpsDeMinimisStateAid]
-        if isinstance(_de_minimis_state_aid, Unset):
+        if isinstance(_de_minimis_state_aid,  Unset):
             de_minimis_state_aid = UNSET
         else:
             de_minimis_state_aid = EpsDeMinimisStateAid.from_dict(_de_minimis_state_aid)
+
+
+
 
         i_rmark = d.pop("iRmark", UNSET)
 
@@ -196,24 +217,33 @@ class Eps:
 
         _tax_year = d.pop("taxYear", UNSET)
         tax_year: Union[Unset, TaxYear]
-        if isinstance(_tax_year, Unset):
+        if isinstance(_tax_year,  Unset):
             tax_year = UNSET
         else:
             tax_year = TaxYear(_tax_year)
 
+
+
+
         _employer_references = d.pop("employerReferences", UNSET)
         employer_references: Union[Unset, EmpRefs]
-        if isinstance(_employer_references, Unset):
+        if isinstance(_employer_references,  Unset):
             employer_references = UNSET
         else:
             employer_references = EmpRefs.from_dict(_employer_references)
 
+
+
+
         _gov_talk_submission = d.pop("govTalkSubmission", UNSET)
         gov_talk_submission: Union[Unset, GovTalkSubmission]
-        if isinstance(_gov_talk_submission, Unset):
+        if isinstance(_gov_talk_submission,  Unset):
             gov_talk_submission = UNSET
         else:
             gov_talk_submission = GovTalkSubmission.from_dict(_gov_talk_submission)
+
+
+
 
         id = d.pop("id", UNSET)
 
@@ -235,3 +265,4 @@ class Eps:
         )
 
         return eps
+

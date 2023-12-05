@@ -6,7 +6,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="Item")
 
-
 @attr.s(auto_attribs=True)
 class Item:
     """
@@ -22,6 +21,7 @@ class Item:
     metadata: Union[Unset, Any] = UNSET
     url: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         id = self.id
         name = self.name
@@ -29,7 +29,8 @@ class Item:
         url = self.url
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if name is not UNSET:
@@ -40,6 +41,8 @@ class Item:
             field_dict["url"] = url
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -60,3 +63,4 @@ class Item:
         )
 
         return item
+

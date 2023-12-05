@@ -7,7 +7,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="PensionSelection")
 
-
 @attr.s(auto_attribs=True)
 class PensionSelection:
     """
@@ -23,6 +22,7 @@ class PensionSelection:
     pension_scheme: Union[Unset, PensionScheme] = UNSET
     worker_group_id: Union[Unset, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         id = self.id
         pension_scheme_id = self.pension_scheme_id
@@ -33,7 +33,8 @@ class PensionSelection:
         worker_group_id = self.worker_group_id
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if pension_scheme_id is not UNSET:
@@ -45,6 +46,8 @@ class PensionSelection:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
@@ -54,10 +57,13 @@ class PensionSelection:
 
         _pension_scheme = d.pop("pensionScheme", UNSET)
         pension_scheme: Union[Unset, PensionScheme]
-        if isinstance(_pension_scheme, Unset):
+        if isinstance(_pension_scheme,  Unset):
             pension_scheme = UNSET
         else:
             pension_scheme = PensionScheme.from_dict(_pension_scheme)
+
+
+
 
         worker_group_id = d.pop("workerGroupId", UNSET)
 
@@ -69,3 +75,4 @@ class PensionSelection:
         )
 
         return pension_selection
+

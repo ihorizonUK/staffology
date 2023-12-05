@@ -17,6 +17,7 @@ class BankPaymentInstructionsCsvFormat(str, Enum):
     LLOYDSV11CSVBACS = "LloydsV11CsvBacs"
     COOPBULKCSVBACS = "CoOpBulkCsvBacs"
     COOPFASTERPAYMENTSCSV = "CoOpFasterPaymentsCsv"
+    BANKOFAMERICABACS = "BankOfAmericaBacs"
 
     def __str__(self) -> str:
         return str(self.value)

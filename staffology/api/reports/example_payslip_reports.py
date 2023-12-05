@@ -15,8 +15,10 @@ def _get_kwargs(
     json_body: PayslipCustomisation,
     employer_id: Union[Unset, None, str] = UNSET,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Dict[str, Any]:
-    url = "{}/payslip/example/pdf".format(client.base_url)
+    url = "{}/payslip/example/pdf".format(
+        client.base_url)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
@@ -24,15 +26,26 @@ def _get_kwargs(
     if not isinstance(accept, Unset):
         headers["accept"] = accept
 
+
+
+    
+
     params: Dict[str, Any] = {}
     params["employerId"] = employer_id
 
+
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     json_json_body = json_body.to_dict()
 
+
+
+    
+
     return {
-        "method": "post",
+	    "method": "post",
         "url": url,
         "headers": headers,
         "cookies": cookies,
@@ -45,6 +58,8 @@ def _get_kwargs(
 def _parse_response(*, response: httpx.Response) -> Optional[ReportResponse]:
     if response.status_code == 200:
         response_200 = ReportResponse.from_dict(response.json())
+
+
 
         return response_200
     return raise_staffology_exception(response)
@@ -65,6 +80,7 @@ def sync_detailed(
     json_body: PayslipCustomisation,
     employer_id: Union[Unset, None, str] = UNSET,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Response[ReportResponse]:
     """Example Payslip
 
@@ -83,11 +99,13 @@ def sync_detailed(
         Response[ReportResponse]
     """
 
+
     kwargs = _get_kwargs(
         client=client,
-        json_body=json_body,
-        employer_id=employer_id,
-        accept=accept,
+json_body=json_body,
+employer_id=employer_id,
+accept=accept,
+
     )
 
     response = httpx.request(
@@ -97,13 +115,13 @@ def sync_detailed(
 
     return _build_response(response=response)
 
-
 def sync(
     *,
     client: Client,
     json_body: PayslipCustomisation,
     employer_id: Union[Unset, None, str] = UNSET,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Optional[ReportResponse]:
     """Example Payslip
 
@@ -122,13 +140,14 @@ def sync(
         Response[ReportResponse]
     """
 
+
     return sync_detailed(
         client=client,
-        json_body=json_body,
-        employer_id=employer_id,
-        accept=accept,
-    ).parsed
+json_body=json_body,
+employer_id=employer_id,
+accept=accept,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
@@ -136,6 +155,7 @@ async def asyncio_detailed(
     json_body: PayslipCustomisation,
     employer_id: Union[Unset, None, str] = UNSET,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Response[ReportResponse]:
     """Example Payslip
 
@@ -154,18 +174,21 @@ async def asyncio_detailed(
         Response[ReportResponse]
     """
 
+
     kwargs = _get_kwargs(
         client=client,
-        json_body=json_body,
-        employer_id=employer_id,
-        accept=accept,
+json_body=json_body,
+employer_id=employer_id,
+accept=accept,
+
     )
 
     async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+        response = await _client.request(
+            **kwargs
+        )
 
     return _build_response(response=response)
-
 
 async def asyncio(
     *,
@@ -173,6 +196,7 @@ async def asyncio(
     json_body: PayslipCustomisation,
     employer_id: Union[Unset, None, str] = UNSET,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Optional[ReportResponse]:
     """Example Payslip
 
@@ -191,11 +215,12 @@ async def asyncio(
         Response[ReportResponse]
     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            json_body=json_body,
-            employer_id=employer_id,
-            accept=accept,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+json_body=json_body,
+employer_id=employer_id,
+accept=accept,
+
+    )).parsed
+

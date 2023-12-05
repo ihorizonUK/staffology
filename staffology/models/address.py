@@ -7,7 +7,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="Address")
 
-
 @attr.s(auto_attribs=True)
 class Address:
     """
@@ -31,6 +30,7 @@ class Address:
     country: Union[Unset, Country] = UNSET
     foreign_country: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         line1 = self.line1
         line2 = self.line2
@@ -45,7 +45,8 @@ class Address:
         foreign_country = self.foreign_country
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if line1 is not UNSET:
             field_dict["line1"] = line1
         if line2 is not UNSET:
@@ -65,6 +66,8 @@ class Address:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
@@ -82,10 +85,13 @@ class Address:
 
         _country = d.pop("country", UNSET)
         country: Union[Unset, Country]
-        if isinstance(_country, Unset):
+        if isinstance(_country,  Unset):
             country = UNSET
         else:
             country = Country(_country)
+
+
+
 
         foreign_country = d.pop("foreignCountry", UNSET)
 
@@ -101,3 +107,4 @@ class Address:
         )
 
         return address
+

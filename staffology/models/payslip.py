@@ -16,36 +16,35 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="Payslip")
 
-
 @attr.s(auto_attribs=True)
 class Payslip:
     """If you don't want to use our customisable PDFs for Payslips then you can retrieve the raw data used to create a
-    Payslip.
-    This is the model you will be provided with for each employee.
+Payslip.
+This is the model you will be provided with for each employee.
 
-        Attributes:
-            is_closed (Union[Unset, bool]): [readonly] Indicates if the Payrun has been finalised
-            period (Union[Unset, None, str]): [readonly] A description of the period that Payslip relates to.
-            from_ (Union[Unset, datetime.date]): [readonly] The start date of the period this Payslip covers.
-            to (Union[Unset, datetime.date]): [readonly] The end date of the period this Payslip covers.
-            payment_date (Union[Unset, datetime.date]): [readonly] The date the Employee will be paid on
-            note (Union[Unset, None, str]): [readonly] Any note that should appear on the payslip
-            allowance_note (Union[Unset, None, str]): [readonly] Details of remaining allowance to show on payslip
-            employee (Union[Unset, Item]):
-            logo_url (Union[Unset, None, str]): [readonly] The Logo to include on the payslip
-            employer (Union[Unset, Item]):
-            employer_address (Union[Unset, Address]):
-            hmrc_details (Union[Unset, HmrcDetails]):
-            pay_options (Union[Unset, PayOptions]): This object forms the basis of the Employees payment.
-            employment_details (Union[Unset, EmploymentDetails]):
-            personal_details (Union[Unset, PersonalDetails]):
-            totals (Union[Unset, PayRunTotals]): Used to represent totals for a PayRun or PayRunEntry.
-                If a value is 0 then it will not be shown in the JSON.
-            totals_ytd (Union[Unset, PayRunTotals]): Used to represent totals for a PayRun or PayRunEntry.
-                If a value is 0 then it will not be shown in the JSON.
-            lines (Union[Unset, None, List[PayslipLine]]): [readonly] The lines to display on the Payslip
-            employer_ni (Union[Unset, float]): [readonly] The Employer NI Contribution amount
-            employer_pension_contribs (Union[Unset, float]): [readonly] AThe Employer Pension Contribution Amount
+    Attributes:
+        is_closed (Union[Unset, bool]): [readonly] Indicates if the Payrun has been finalised
+        period (Union[Unset, None, str]): [readonly] A description of the period that Payslip relates to.
+        from_ (Union[Unset, datetime.date]): [readonly] The start date of the period this Payslip covers.
+        to (Union[Unset, datetime.date]): [readonly] The end date of the period this Payslip covers.
+        payment_date (Union[Unset, datetime.date]): [readonly] The date the Employee will be paid on
+        note (Union[Unset, None, str]): [readonly] Any note that should appear on the payslip
+        allowance_note (Union[Unset, None, str]): [readonly] Details of remaining allowance to show on payslip
+        employee (Union[Unset, Item]):
+        logo_url (Union[Unset, None, str]): [readonly] The Logo to include on the payslip
+        employer (Union[Unset, Item]):
+        employer_address (Union[Unset, Address]):
+        hmrc_details (Union[Unset, HmrcDetails]):
+        pay_options (Union[Unset, PayOptions]): This object forms the basis of the Employees payment.
+        employment_details (Union[Unset, EmploymentDetails]):
+        personal_details (Union[Unset, PersonalDetails]):
+        totals (Union[Unset, PayRunTotals]): Used to represent totals for a PayRun or PayRunEntry.
+            If a value is 0 then it will not be shown in the JSON.
+        totals_ytd (Union[Unset, PayRunTotals]): Used to represent totals for a PayRun or PayRunEntry.
+            If a value is 0 then it will not be shown in the JSON.
+        lines (Union[Unset, None, List[PayslipLine]]): [readonly] The lines to display on the Payslip
+        employer_ni (Union[Unset, float]): [readonly] The Employer NI Contribution amount
+        employer_pension_contribs (Union[Unset, float]): [readonly] AThe Employer Pension Contribution Amount
     """
 
     is_closed: Union[Unset, bool] = UNSET
@@ -68,6 +67,7 @@ class Payslip:
     lines: Union[Unset, None, List[PayslipLine]] = UNSET
     employer_ni: Union[Unset, float] = UNSET
     employer_pension_contribs: Union[Unset, float] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         is_closed = self.is_closed
@@ -134,11 +134,15 @@ class Payslip:
 
                     lines.append(lines_item)
 
+
+
+
         employer_ni = self.employer_ni
         employer_pension_contribs = self.employer_pension_contribs
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if is_closed is not UNSET:
             field_dict["isClosed"] = is_closed
         if period is not UNSET:
@@ -182,6 +186,8 @@ class Payslip:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
@@ -191,24 +197,33 @@ class Payslip:
 
         _from_ = d.pop("from", UNSET)
         from_: Union[Unset, datetime.date]
-        if isinstance(_from_, Unset):
+        if isinstance(_from_,  Unset):
             from_ = UNSET
         else:
             from_ = isoparse(_from_).date()
 
+
+
+
         _to = d.pop("to", UNSET)
         to: Union[Unset, datetime.date]
-        if isinstance(_to, Unset):
+        if isinstance(_to,  Unset):
             to = UNSET
         else:
             to = isoparse(_to).date()
 
+
+
+
         _payment_date = d.pop("paymentDate", UNSET)
         payment_date: Union[Unset, datetime.date]
-        if isinstance(_payment_date, Unset):
+        if isinstance(_payment_date,  Unset):
             payment_date = UNSET
         else:
             payment_date = isoparse(_payment_date).date()
+
+
+
 
         note = d.pop("note", UNSET)
 
@@ -216,75 +231,105 @@ class Payslip:
 
         _employee = d.pop("employee", UNSET)
         employee: Union[Unset, Item]
-        if isinstance(_employee, Unset):
+        if isinstance(_employee,  Unset):
             employee = UNSET
         else:
             employee = Item.from_dict(_employee)
+
+
+
 
         logo_url = d.pop("logoUrl", UNSET)
 
         _employer = d.pop("employer", UNSET)
         employer: Union[Unset, Item]
-        if isinstance(_employer, Unset):
+        if isinstance(_employer,  Unset):
             employer = UNSET
         else:
             employer = Item.from_dict(_employer)
 
+
+
+
         _employer_address = d.pop("employerAddress", UNSET)
         employer_address: Union[Unset, Address]
-        if isinstance(_employer_address, Unset):
+        if isinstance(_employer_address,  Unset):
             employer_address = UNSET
         else:
             employer_address = Address.from_dict(_employer_address)
 
+
+
+
         _hmrc_details = d.pop("hmrcDetails", UNSET)
         hmrc_details: Union[Unset, HmrcDetails]
-        if isinstance(_hmrc_details, Unset):
+        if isinstance(_hmrc_details,  Unset):
             hmrc_details = UNSET
         else:
             hmrc_details = HmrcDetails.from_dict(_hmrc_details)
 
+
+
+
         _pay_options = d.pop("payOptions", UNSET)
         pay_options: Union[Unset, PayOptions]
-        if isinstance(_pay_options, Unset):
+        if isinstance(_pay_options,  Unset):
             pay_options = UNSET
         else:
             pay_options = PayOptions.from_dict(_pay_options)
 
+
+
+
         _employment_details = d.pop("employmentDetails", UNSET)
         employment_details: Union[Unset, EmploymentDetails]
-        if isinstance(_employment_details, Unset):
+        if isinstance(_employment_details,  Unset):
             employment_details = UNSET
         else:
             employment_details = EmploymentDetails.from_dict(_employment_details)
 
+
+
+
         _personal_details = d.pop("personalDetails", UNSET)
         personal_details: Union[Unset, PersonalDetails]
-        if isinstance(_personal_details, Unset):
+        if isinstance(_personal_details,  Unset):
             personal_details = UNSET
         else:
             personal_details = PersonalDetails.from_dict(_personal_details)
 
+
+
+
         _totals = d.pop("totals", UNSET)
         totals: Union[Unset, PayRunTotals]
-        if isinstance(_totals, Unset):
+        if isinstance(_totals,  Unset):
             totals = UNSET
         else:
             totals = PayRunTotals.from_dict(_totals)
 
+
+
+
         _totals_ytd = d.pop("totalsYtd", UNSET)
         totals_ytd: Union[Unset, PayRunTotals]
-        if isinstance(_totals_ytd, Unset):
+        if isinstance(_totals_ytd,  Unset):
             totals_ytd = UNSET
         else:
             totals_ytd = PayRunTotals.from_dict(_totals_ytd)
 
+
+
+
         lines = []
         _lines = d.pop("lines", UNSET)
-        for lines_item_data in _lines or []:
+        for lines_item_data in (_lines or []):
             lines_item = PayslipLine.from_dict(lines_item_data)
 
+
+
             lines.append(lines_item)
+
 
         employer_ni = d.pop("employerNi", UNSET)
 
@@ -314,3 +359,4 @@ class Payslip:
         )
 
         return payslip
+

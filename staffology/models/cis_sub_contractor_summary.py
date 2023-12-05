@@ -8,7 +8,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="CisSubContractorSummary")
 
-
 @attr.s(auto_attribs=True)
 class CisSubContractorSummary:
     """
@@ -38,6 +37,7 @@ class CisSubContractorSummary:
     display_name: Union[Unset, None, str] = UNSET
     validation_message: Union[Unset, None, List[str]] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         payroll_code = self.payroll_code
         trading_name = self.trading_name
@@ -62,8 +62,13 @@ class CisSubContractorSummary:
             else:
                 validation_message = self.validation_message
 
+
+
+
+
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if payroll_code is not UNSET:
             field_dict["payrollCode"] = payroll_code
         if trading_name is not UNSET:
@@ -89,6 +94,8 @@ class CisSubContractorSummary:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
@@ -104,25 +111,32 @@ class CisSubContractorSummary:
 
         _type = d.pop("type", UNSET)
         type: Union[Unset, CISSubContractorType]
-        if isinstance(_type, Unset):
+        if isinstance(_type,  Unset):
             type = UNSET
         else:
             type = CISSubContractorType(_type)
+
+
+
 
         utr = d.pop("utr", UNSET)
 
         _tax_status = d.pop("taxStatus", UNSET)
         tax_status: Union[Unset, CISTaxStatus]
-        if isinstance(_tax_status, Unset):
+        if isinstance(_tax_status,  Unset):
             tax_status = UNSET
         else:
             tax_status = CISTaxStatus(_tax_status)
+
+
+
 
         verification_number = d.pop("verificationNumber", UNSET)
 
         display_name = d.pop("displayName", UNSET)
 
         validation_message = cast(List[str], d.pop("validationMessage", UNSET))
+
 
         cis_sub_contractor_summary = cls(
             payroll_code=payroll_code,
@@ -139,3 +153,4 @@ class CisSubContractorSummary:
         )
 
         return cis_sub_contractor_summary
+

@@ -10,7 +10,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="NiLetterValidationReportLine")
 
-
 @attr.s(auto_attribs=True)
 class NiLetterValidationReportLine:
     """
@@ -38,6 +37,7 @@ class NiLetterValidationReportLine:
     ni_letter: Union[Unset, None, str] = UNSET
     suggested_letter: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         employee_id = self.employee_id
         payroll_code = self.payroll_code
@@ -60,7 +60,8 @@ class NiLetterValidationReportLine:
         suggested_letter = self.suggested_letter
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if employee_id is not UNSET:
             field_dict["employeeId"] = employee_id
         if payroll_code is not UNSET:
@@ -84,6 +85,8 @@ class NiLetterValidationReportLine:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
@@ -97,24 +100,33 @@ class NiLetterValidationReportLine:
 
         _gender = d.pop("gender", UNSET)
         gender: Union[Unset, Gender]
-        if isinstance(_gender, Unset):
+        if isinstance(_gender,  Unset):
             gender = UNSET
         else:
             gender = Gender(_gender)
 
+
+
+
         _date_of_birth = d.pop("dateOfBirth", UNSET)
         date_of_birth: Union[Unset, datetime.date]
-        if isinstance(_date_of_birth, Unset):
+        if isinstance(_date_of_birth,  Unset):
             date_of_birth = UNSET
         else:
             date_of_birth = isoparse(_date_of_birth).date()
 
+
+
+
         _ni_letter_error = d.pop("niLetterError", UNSET)
         ni_letter_error: Union[Unset, NiLetterError]
-        if isinstance(_ni_letter_error, Unset):
+        if isinstance(_ni_letter_error,  Unset):
             ni_letter_error = UNSET
         else:
             ni_letter_error = NiLetterError(_ni_letter_error)
+
+
+
 
         error_details = d.pop("errorDetails", UNSET)
 
@@ -136,3 +148,4 @@ class NiLetterValidationReportLine:
         )
 
         return ni_letter_validation_report_line
+

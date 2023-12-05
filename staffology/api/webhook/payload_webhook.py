@@ -14,16 +14,26 @@ def _get_kwargs(
     payload_id: str,
     *,
     client: Client,
+
 ) -> Dict[str, Any]:
     url = "{}/employers/{employerId}/webhooks/{id}/payloads/{payloadId}".format(
-        client.base_url, employerId=employer_id, id=id, payloadId=payload_id
-    )
+        client.base_url,employerId=employer_id,id=id,payloadId=payload_id)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
 
+    
+
+    
+
+    
+
+    
+
+    
+
     return {
-        "method": "get",
+	    "method": "get",
         "url": url,
         "headers": headers,
         "cookies": cookies,
@@ -34,6 +44,8 @@ def _get_kwargs(
 def _parse_response(*, response: httpx.Response) -> Optional[WebhookPayload]:
     if response.status_code == 200:
         response_200 = WebhookPayload.from_dict(response.json())
+
+
 
         return response_200
     return raise_staffology_exception(response)
@@ -54,6 +66,7 @@ def sync_detailed(
     payload_id: str,
     *,
     client: Client,
+
 ) -> Response[WebhookPayload]:
     """Get WebhookPayload
 
@@ -68,11 +81,13 @@ def sync_detailed(
         Response[WebhookPayload]
     """
 
+
     kwargs = _get_kwargs(
         employer_id=employer_id,
-        id=id,
-        payload_id=payload_id,
-        client=client,
+id=id,
+payload_id=payload_id,
+client=client,
+
     )
 
     response = httpx.request(
@@ -82,13 +97,13 @@ def sync_detailed(
 
     return _build_response(response=response)
 
-
 def sync(
     employer_id: str,
     id: str,
     payload_id: str,
     *,
     client: Client,
+
 ) -> Optional[WebhookPayload]:
     """Get WebhookPayload
 
@@ -103,13 +118,14 @@ def sync(
         Response[WebhookPayload]
     """
 
+
     return sync_detailed(
         employer_id=employer_id,
-        id=id,
-        payload_id=payload_id,
-        client=client,
-    ).parsed
+id=id,
+payload_id=payload_id,
+client=client,
 
+    ).parsed
 
 async def asyncio_detailed(
     employer_id: str,
@@ -117,6 +133,7 @@ async def asyncio_detailed(
     payload_id: str,
     *,
     client: Client,
+
 ) -> Response[WebhookPayload]:
     """Get WebhookPayload
 
@@ -131,18 +148,21 @@ async def asyncio_detailed(
         Response[WebhookPayload]
     """
 
+
     kwargs = _get_kwargs(
         employer_id=employer_id,
-        id=id,
-        payload_id=payload_id,
-        client=client,
+id=id,
+payload_id=payload_id,
+client=client,
+
     )
 
     async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+        response = await _client.request(
+            **kwargs
+        )
 
     return _build_response(response=response)
-
 
 async def asyncio(
     employer_id: str,
@@ -150,6 +170,7 @@ async def asyncio(
     payload_id: str,
     *,
     client: Client,
+
 ) -> Optional[WebhookPayload]:
     """Get WebhookPayload
 
@@ -164,11 +185,12 @@ async def asyncio(
         Response[WebhookPayload]
     """
 
-    return (
-        await asyncio_detailed(
-            employer_id=employer_id,
-            id=id,
-            payload_id=payload_id,
-            client=client,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        employer_id=employer_id,
+id=id,
+payload_id=payload_id,
+client=client,
+
+    )).parsed
+

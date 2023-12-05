@@ -9,13 +9,12 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="OpeningBalances")
 
-
 @attr.s(auto_attribs=True)
 class OpeningBalances:
     """
     Attributes:
-        tax_year (Union[Unset, TaxYear]):
         not_new_starter (Union[Unset, bool]):
+        tax_year (Union[Unset, TaxYear]):
         previous_employer_gross (Union[Unset, float]):
         previous_employer_tax (Union[Unset, float]):
         current_employer_gross (Union[Unset, float]):
@@ -35,11 +34,13 @@ class OpeningBalances:
         maps_miles (Union[Unset, int]):
         benefits_taxed_via_payroll (Union[Unset, float]):
         nic_summaries (Union[Unset, None, List[NicSummary]]):
+        foreign_tax_credit (Union[Unset, float]):
+        foreign_tax_credit_reclaimed (Union[Unset, float]):
         employee (Union[Unset, Item]):
     """
 
-    tax_year: Union[Unset, TaxYear] = UNSET
     not_new_starter: Union[Unset, bool] = UNSET
+    tax_year: Union[Unset, TaxYear] = UNSET
     previous_employer_gross: Union[Unset, float] = UNSET
     previous_employer_tax: Union[Unset, float] = UNSET
     current_employer_gross: Union[Unset, float] = UNSET
@@ -59,14 +60,17 @@ class OpeningBalances:
     maps_miles: Union[Unset, int] = UNSET
     benefits_taxed_via_payroll: Union[Unset, float] = UNSET
     nic_summaries: Union[Unset, None, List[NicSummary]] = UNSET
+    foreign_tax_credit: Union[Unset, float] = UNSET
+    foreign_tax_credit_reclaimed: Union[Unset, float] = UNSET
     employee: Union[Unset, Item] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
+        not_new_starter = self.not_new_starter
         tax_year: Union[Unset, str] = UNSET
         if not isinstance(self.tax_year, Unset):
             tax_year = self.tax_year.value
 
-        not_new_starter = self.not_new_starter
         previous_employer_gross = self.previous_employer_gross
         previous_employer_tax = self.previous_employer_tax
         current_employer_gross = self.current_employer_gross
@@ -96,16 +100,23 @@ class OpeningBalances:
 
                     nic_summaries.append(nic_summaries_item)
 
+
+
+
+        foreign_tax_credit = self.foreign_tax_credit
+        foreign_tax_credit_reclaimed = self.foreign_tax_credit_reclaimed
         employee: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.employee, Unset):
             employee = self.employee.to_dict()
 
+
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
-        if tax_year is not UNSET:
-            field_dict["taxYear"] = tax_year
+        field_dict.update({
+        })
         if not_new_starter is not UNSET:
             field_dict["notNewStarter"] = not_new_starter
+        if tax_year is not UNSET:
+            field_dict["taxYear"] = tax_year
         if previous_employer_gross is not UNSET:
             field_dict["previousEmployerGross"] = previous_employer_gross
         if previous_employer_tax is not UNSET:
@@ -144,22 +155,31 @@ class OpeningBalances:
             field_dict["benefitsTaxedViaPayroll"] = benefits_taxed_via_payroll
         if nic_summaries is not UNSET:
             field_dict["nicSummaries"] = nic_summaries
+        if foreign_tax_credit is not UNSET:
+            field_dict["foreignTaxCredit"] = foreign_tax_credit
+        if foreign_tax_credit_reclaimed is not UNSET:
+            field_dict["foreignTaxCreditReclaimed"] = foreign_tax_credit_reclaimed
         if employee is not UNSET:
             field_dict["employee"] = employee
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
+        not_new_starter = d.pop("notNewStarter", UNSET)
+
         _tax_year = d.pop("taxYear", UNSET)
         tax_year: Union[Unset, TaxYear]
-        if isinstance(_tax_year, Unset):
+        if isinstance(_tax_year,  Unset):
             tax_year = UNSET
         else:
             tax_year = TaxYear(_tax_year)
 
-        not_new_starter = d.pop("notNewStarter", UNSET)
+
+
 
         previous_employer_gross = d.pop("previousEmployerGross", UNSET)
 
@@ -199,21 +219,31 @@ class OpeningBalances:
 
         nic_summaries = []
         _nic_summaries = d.pop("nicSummaries", UNSET)
-        for nic_summaries_item_data in _nic_summaries or []:
+        for nic_summaries_item_data in (_nic_summaries or []):
             nic_summaries_item = NicSummary.from_dict(nic_summaries_item_data)
+
+
 
             nic_summaries.append(nic_summaries_item)
 
+
+        foreign_tax_credit = d.pop("foreignTaxCredit", UNSET)
+
+        foreign_tax_credit_reclaimed = d.pop("foreignTaxCreditReclaimed", UNSET)
+
         _employee = d.pop("employee", UNSET)
         employee: Union[Unset, Item]
-        if isinstance(_employee, Unset):
+        if isinstance(_employee,  Unset):
             employee = UNSET
         else:
             employee = Item.from_dict(_employee)
 
+
+
+
         opening_balances = cls(
-            tax_year=tax_year,
             not_new_starter=not_new_starter,
+            tax_year=tax_year,
             previous_employer_gross=previous_employer_gross,
             previous_employer_tax=previous_employer_tax,
             current_employer_gross=current_employer_gross,
@@ -233,7 +263,10 @@ class OpeningBalances:
             maps_miles=maps_miles,
             benefits_taxed_via_payroll=benefits_taxed_via_payroll,
             nic_summaries=nic_summaries,
+            foreign_tax_credit=foreign_tax_credit,
+            foreign_tax_credit_reclaimed=foreign_tax_credit_reclaimed,
             employee=employee,
         )
 
         return opening_balances
+

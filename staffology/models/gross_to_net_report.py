@@ -14,7 +14,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GrossToNetReport")
 
-
 @attr.s(auto_attribs=True)
 class GrossToNetReport:
     """
@@ -33,6 +32,7 @@ class GrossToNetReport:
         end_date (Union[Unset, datetime.date]):
         report (Union[Unset, Report]):
         tax_year (Union[Unset, TaxYear]):
+        is_draft (Union[Unset, bool]):
     """
 
     for_cis: Union[Unset, bool] = UNSET
@@ -49,6 +49,8 @@ class GrossToNetReport:
     end_date: Union[Unset, datetime.date] = UNSET
     report: Union[Unset, Report] = UNSET
     tax_year: Union[Unset, TaxYear] = UNSET
+    is_draft: Union[Unset, bool] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         for_cis = self.for_cis
@@ -63,6 +65,9 @@ class GrossToNetReport:
 
                     lines.append(lines_item)
 
+
+
+
         cis_lines: Union[Unset, None, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.cis_lines, Unset):
             if self.cis_lines is None:
@@ -73,6 +78,9 @@ class GrossToNetReport:
                     cis_lines_item = cis_lines_item_data.to_dict()
 
                     cis_lines.append(cis_lines_item)
+
+
+
 
         employer: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.employer, Unset):
@@ -103,8 +111,11 @@ class GrossToNetReport:
         if not isinstance(self.tax_year, Unset):
             tax_year = self.tax_year.value
 
+        is_draft = self.is_draft
+
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if for_cis is not UNSET:
             field_dict["forCis"] = for_cis
         if lines is not UNSET:
@@ -133,8 +144,12 @@ class GrossToNetReport:
             field_dict["report"] = report
         if tax_year is not UNSET:
             field_dict["taxYear"] = tax_year
+        if is_draft is not UNSET:
+            field_dict["isDraft"] = is_draft
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -143,31 +158,43 @@ class GrossToNetReport:
 
         lines = []
         _lines = d.pop("lines", UNSET)
-        for lines_item_data in _lines or []:
+        for lines_item_data in (_lines or []):
             lines_item = GrossToNetReportLine.from_dict(lines_item_data)
+
+
 
             lines.append(lines_item)
 
+
         cis_lines = []
         _cis_lines = d.pop("cisLines", UNSET)
-        for cis_lines_item_data in _cis_lines or []:
+        for cis_lines_item_data in (_cis_lines or []):
             cis_lines_item = GrossToNetReportCisLine.from_dict(cis_lines_item_data)
+
+
 
             cis_lines.append(cis_lines_item)
 
+
         _employer = d.pop("employer", UNSET)
         employer: Union[Unset, Item]
-        if isinstance(_employer, Unset):
+        if isinstance(_employer,  Unset):
             employer = UNSET
         else:
             employer = Item.from_dict(_employer)
 
+
+
+
         _pay_period = d.pop("payPeriod", UNSET)
         pay_period: Union[Unset, PayPeriods]
-        if isinstance(_pay_period, Unset):
+        if isinstance(_pay_period,  Unset):
             pay_period = UNSET
         else:
             pay_period = PayPeriods(_pay_period)
+
+
+
 
         ordinal = d.pop("ordinal", UNSET)
 
@@ -181,31 +208,45 @@ class GrossToNetReport:
 
         _start_date = d.pop("startDate", UNSET)
         start_date: Union[Unset, datetime.date]
-        if isinstance(_start_date, Unset):
+        if isinstance(_start_date,  Unset):
             start_date = UNSET
         else:
             start_date = isoparse(_start_date).date()
 
+
+
+
         _end_date = d.pop("endDate", UNSET)
         end_date: Union[Unset, datetime.date]
-        if isinstance(_end_date, Unset):
+        if isinstance(_end_date,  Unset):
             end_date = UNSET
         else:
             end_date = isoparse(_end_date).date()
 
+
+
+
         _report = d.pop("report", UNSET)
         report: Union[Unset, Report]
-        if isinstance(_report, Unset):
+        if isinstance(_report,  Unset):
             report = UNSET
         else:
             report = Report(_report)
 
+
+
+
         _tax_year = d.pop("taxYear", UNSET)
         tax_year: Union[Unset, TaxYear]
-        if isinstance(_tax_year, Unset):
+        if isinstance(_tax_year,  Unset):
             tax_year = UNSET
         else:
             tax_year = TaxYear(_tax_year)
+
+
+
+
+        is_draft = d.pop("isDraft", UNSET)
 
         gross_to_net_report = cls(
             for_cis=for_cis,
@@ -222,6 +263,8 @@ class GrossToNetReport:
             end_date=end_date,
             report=report,
             tax_year=tax_year,
+            is_draft=is_draft,
         )
 
         return gross_to_net_report
+

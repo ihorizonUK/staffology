@@ -16,7 +16,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="ExbP11D")
 
-
 @attr.s(auto_attribs=True)
 class ExbP11D:
     """
@@ -53,6 +52,7 @@ class ExbP11D:
     assets_avail: Union[Unset, P11DAssetAvailableCollection] = UNSET
     other: Union[Unset, P11DOther] = UNSET
     exp_paid: Union[Unset, P11DExpenses] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         employee: Union[Unset, Dict[str, Any]] = UNSET
@@ -115,8 +115,10 @@ class ExbP11D:
         if not isinstance(self.exp_paid, Unset):
             exp_paid = self.exp_paid.to_dict()
 
+
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if employee is not UNSET:
             field_dict["employee"] = employee
         if transferred is not UNSET:
@@ -150,113 +152,160 @@ class ExbP11D:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _employee = d.pop("employee", UNSET)
         employee: Union[Unset, ExbP11DEmployee]
-        if isinstance(_employee, Unset):
+        if isinstance(_employee,  Unset):
             employee = UNSET
         else:
             employee = ExbP11DEmployee.from_dict(_employee)
 
+
+
+
         _transferred = d.pop("transferred", UNSET)
         transferred: Union[Unset, P11DAssetTransferredCollection]
-        if isinstance(_transferred, Unset):
+        if isinstance(_transferred,  Unset):
             transferred = UNSET
         else:
             transferred = P11DAssetTransferredCollection.from_dict(_transferred)
 
+
+
+
         _payments = d.pop("payments", UNSET)
         payments: Union[Unset, P11DPaymentCollection]
-        if isinstance(_payments, Unset):
+        if isinstance(_payments,  Unset):
             payments = UNSET
         else:
             payments = P11DPaymentCollection.from_dict(_payments)
 
+
+
+
         _vouchers_or_c_cs = d.pop("vouchersOrCCs", UNSET)
         vouchers_or_c_cs: Union[Unset, P11DSingleItem]
-        if isinstance(_vouchers_or_c_cs, Unset):
+        if isinstance(_vouchers_or_c_cs,  Unset):
             vouchers_or_c_cs = UNSET
         else:
             vouchers_or_c_cs = P11DSingleItem.from_dict(_vouchers_or_c_cs)
 
+
+
+
         _living_accom = d.pop("livingAccom", UNSET)
         living_accom: Union[Unset, P11DSingleItem]
-        if isinstance(_living_accom, Unset):
+        if isinstance(_living_accom,  Unset):
             living_accom = UNSET
         else:
             living_accom = P11DSingleItem.from_dict(_living_accom)
 
+
+
+
         _mileage_allow = d.pop("mileageAllow", UNSET)
         mileage_allow: Union[Unset, P11DSingleItem]
-        if isinstance(_mileage_allow, Unset):
+        if isinstance(_mileage_allow,  Unset):
             mileage_allow = UNSET
         else:
             mileage_allow = P11DSingleItem.from_dict(_mileage_allow)
 
+
+
+
         _cars = d.pop("cars", UNSET)
         cars: Union[Unset, P11DCarCollection]
-        if isinstance(_cars, Unset):
+        if isinstance(_cars,  Unset):
             cars = UNSET
         else:
             cars = P11DCarCollection.from_dict(_cars)
 
+
+
+
         _vans = d.pop("vans", UNSET)
         vans: Union[Unset, P11DVans]
-        if isinstance(_vans, Unset):
+        if isinstance(_vans,  Unset):
             vans = UNSET
         else:
             vans = P11DVans.from_dict(_vans)
 
+
+
+
         _loans = d.pop("loans", UNSET)
         loans: Union[Unset, P11DLoanCollection]
-        if isinstance(_loans, Unset):
+        if isinstance(_loans,  Unset):
             loans = UNSET
         else:
             loans = P11DLoanCollection.from_dict(_loans)
 
+
+
+
         _medical = d.pop("medical", UNSET)
         medical: Union[Unset, P11DSingleItem]
-        if isinstance(_medical, Unset):
+        if isinstance(_medical,  Unset):
             medical = UNSET
         else:
             medical = P11DSingleItem.from_dict(_medical)
 
+
+
+
         _relocation = d.pop("relocation", UNSET)
         relocation: Union[Unset, P11DSingleItem]
-        if isinstance(_relocation, Unset):
+        if isinstance(_relocation,  Unset):
             relocation = UNSET
         else:
             relocation = P11DSingleItem.from_dict(_relocation)
 
+
+
+
         _services = d.pop("services", UNSET)
         services: Union[Unset, P11DSingleItem]
-        if isinstance(_services, Unset):
+        if isinstance(_services,  Unset):
             services = UNSET
         else:
             services = P11DSingleItem.from_dict(_services)
 
+
+
+
         _assets_avail = d.pop("assetsAvail", UNSET)
         assets_avail: Union[Unset, P11DAssetAvailableCollection]
-        if isinstance(_assets_avail, Unset):
+        if isinstance(_assets_avail,  Unset):
             assets_avail = UNSET
         else:
             assets_avail = P11DAssetAvailableCollection.from_dict(_assets_avail)
 
+
+
+
         _other = d.pop("other", UNSET)
         other: Union[Unset, P11DOther]
-        if isinstance(_other, Unset):
+        if isinstance(_other,  Unset):
             other = UNSET
         else:
             other = P11DOther.from_dict(_other)
 
+
+
+
         _exp_paid = d.pop("expPaid", UNSET)
         exp_paid: Union[Unset, P11DExpenses]
-        if isinstance(_exp_paid, Unset):
+        if isinstance(_exp_paid,  Unset):
             exp_paid = UNSET
         else:
             exp_paid = P11DExpenses.from_dict(_exp_paid)
+
+
+
 
         exb_p11d = cls(
             employee=employee,
@@ -277,3 +326,4 @@ class ExbP11D:
         )
 
         return exb_p11d
+

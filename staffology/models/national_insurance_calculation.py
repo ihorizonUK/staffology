@@ -2,44 +2,42 @@ from typing import Any, Dict, List, Type, TypeVar, Union
 
 import attr
 
-from ..models.national_insurance_calculation_base import (
-    NationalInsuranceCalculationBase,
-)
+from ..models.national_insurance_calculation_base import NationalInsuranceCalculationBase
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="NationalInsuranceCalculation")
 
-
 @attr.s(auto_attribs=True)
 class NationalInsuranceCalculation:
     """Included as part of the PayRunEntry model to provide details of how the National Insurance Contribution was
-    calculated.
-    Unless the PayRunEntry.ManualNi property is set to true then these value will all be read-only and are recalculated
-    everytime a payrun is updated.
-    This calculation could be made up of one or more calculations made on different NI table letters.
-    Where more than NI table letter affects the calculation, the calculation for each NI table letter will be contain in
-    the Breakdown.
+calculated.
+Unless the PayRunEntry.ManualNi property is set to true then these value will all be read-only and are recalculated
+everytime a payrun is updated.
+This calculation could be made up of one or more calculations made on different NI table letters.
+Where more than NI table letter affects the calculation, the calculation for each NI table letter will be contain in
+the Breakdown.
 
-        Attributes:
-            breakdown (Union[Unset, None, List[NationalInsuranceCalculationBase]]): [readonly] List of calculations that
-                make up this calculation
-            ni_category (Union[Unset, str]): Calculated on NI table letter
-            as_director (Union[Unset, bool]): Calculated as a Director
-            earnings_upto_including_lel (Union[Unset, float]): Earnings up to and including LEL
-            earnings_above_lel_upto_including_pt (Union[Unset, float]): Earnings above LEL up to PT
-            earnings_above_pt_upto_including_st (Union[Unset, float]): Earnings above PT up to ST
-            earnings_above_pt_upto_including_uel (Union[Unset, float]): Earnings above PT up to UEL
-            earnings_above_st_upto_including_uel (Union[Unset, float]): Earnings above ST up to UEL
-            earnings_above_st_upto_including_fust (Union[Unset, None, float]): Earnings above ST up to FUST
-            earnings_above_fust_upto_including_uel (Union[Unset, None, float]): Earnings above FUST up to UEL
-            earnings_above_uel (Union[Unset, float]): Earnings above UEL
-            employee_ni_gross (Union[Unset, float]): Employee National Insurance Gross Value
-            employee_ni_rebate (Union[Unset, float]): Employee National Insurance Rebate Value
-            employer_ni_gross (Union[Unset, float]): Employer National Insurance Gross Value
-            employer_ni_rebate (Union[Unset, float]): Employer National Insurance Rebate Value
-            employee_ni (Union[Unset, float]): [readonly] Net Employee National Insurance
-            employer_ni (Union[Unset, float]): [readonly] Net Employer National Insurance
-            net_ni (Union[Unset, float]): [readonly] Net National Insurance (Employer + Employee)
+    Attributes:
+        breakdown (Union[Unset, None, List[NationalInsuranceCalculationBase]]): [readonly] List of calculations that
+            make up this calculation
+        ni_category (Union[Unset, str]): Calculated on NI table letter
+        as_director (Union[Unset, bool]): Calculated as a Director
+        earnings_upto_including_lel (Union[Unset, float]): Earnings up to and including LEL
+        earnings_above_lel_upto_including_pt (Union[Unset, float]): Earnings above LEL up to PT
+        earnings_above_pt_upto_including_st (Union[Unset, float]): Earnings above PT up to ST
+        earnings_above_pt_upto_including_uel (Union[Unset, float]): Earnings above PT up to UEL
+        earnings_above_st_upto_including_uel (Union[Unset, float]): Earnings above ST up to UEL
+        earnings_above_st_upto_including_fust (Union[Unset, None, float]): Earnings above ST up to FUST
+        earnings_above_fust_upto_including_uel (Union[Unset, None, float]): Earnings above FUST up to UEL
+        earnings_above_uel (Union[Unset, float]): Earnings above UEL
+        employee_ni_gross (Union[Unset, float]): Employee National Insurance Gross Value
+        employee_ni_rebate (Union[Unset, float]): Employee National Insurance Rebate Value
+        employer_ni_gross (Union[Unset, float]): Employer National Insurance Gross Value
+        employer_ni_rebate (Union[Unset, float]): Employer National Insurance Rebate Value
+        employee_ni (Union[Unset, float]): [readonly] Net Employee National Insurance
+        employer_ni (Union[Unset, float]): [readonly] Net Employer National Insurance
+        net_ni (Union[Unset, float]): [readonly] Net National Insurance (Employer + Employee)
+        niable_pay (Union[Unset, float]): Niable pay value, required for payrun overrides
     """
 
     breakdown: Union[Unset, None, List[NationalInsuranceCalculationBase]] = UNSET
@@ -60,6 +58,8 @@ class NationalInsuranceCalculation:
     employee_ni: Union[Unset, float] = UNSET
     employer_ni: Union[Unset, float] = UNSET
     net_ni: Union[Unset, float] = UNSET
+    niable_pay: Union[Unset, float] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         breakdown: Union[Unset, None, List[Dict[str, Any]]] = UNSET
@@ -73,6 +73,9 @@ class NationalInsuranceCalculation:
 
                     breakdown.append(breakdown_item)
 
+
+
+
         ni_category = self.ni_category
         as_director = self.as_director
         earnings_upto_including_lel = self.earnings_upto_including_lel
@@ -80,12 +83,8 @@ class NationalInsuranceCalculation:
         earnings_above_pt_upto_including_st = self.earnings_above_pt_upto_including_st
         earnings_above_pt_upto_including_uel = self.earnings_above_pt_upto_including_uel
         earnings_above_st_upto_including_uel = self.earnings_above_st_upto_including_uel
-        earnings_above_st_upto_including_fust = (
-            self.earnings_above_st_upto_including_fust
-        )
-        earnings_above_fust_upto_including_uel = (
-            self.earnings_above_fust_upto_including_uel
-        )
+        earnings_above_st_upto_including_fust = self.earnings_above_st_upto_including_fust
+        earnings_above_fust_upto_including_uel = self.earnings_above_fust_upto_including_uel
         earnings_above_uel = self.earnings_above_uel
         employee_ni_gross = self.employee_ni_gross
         employee_ni_rebate = self.employee_ni_rebate
@@ -94,9 +93,11 @@ class NationalInsuranceCalculation:
         employee_ni = self.employee_ni
         employer_ni = self.employer_ni
         net_ni = self.net_ni
+        niable_pay = self.niable_pay
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if breakdown is not UNSET:
             field_dict["breakdown"] = breakdown
         if ni_category is not UNSET:
@@ -106,29 +107,17 @@ class NationalInsuranceCalculation:
         if earnings_upto_including_lel is not UNSET:
             field_dict["earningsUptoIncludingLEL"] = earnings_upto_including_lel
         if earnings_above_lel_upto_including_pt is not UNSET:
-            field_dict[
-                "earningsAboveLELUptoIncludingPT"
-            ] = earnings_above_lel_upto_including_pt
+            field_dict["earningsAboveLELUptoIncludingPT"] = earnings_above_lel_upto_including_pt
         if earnings_above_pt_upto_including_st is not UNSET:
-            field_dict[
-                "earningsAbovePTUptoIncludingST"
-            ] = earnings_above_pt_upto_including_st
+            field_dict["earningsAbovePTUptoIncludingST"] = earnings_above_pt_upto_including_st
         if earnings_above_pt_upto_including_uel is not UNSET:
-            field_dict[
-                "earningsAbovePTUptoIncludingUEL"
-            ] = earnings_above_pt_upto_including_uel
+            field_dict["earningsAbovePTUptoIncludingUEL"] = earnings_above_pt_upto_including_uel
         if earnings_above_st_upto_including_uel is not UNSET:
-            field_dict[
-                "earningsAboveSTUptoIncludingUEL"
-            ] = earnings_above_st_upto_including_uel
+            field_dict["earningsAboveSTUptoIncludingUEL"] = earnings_above_st_upto_including_uel
         if earnings_above_st_upto_including_fust is not UNSET:
-            field_dict[
-                "earningsAboveSTUptoIncludingFUST"
-            ] = earnings_above_st_upto_including_fust
+            field_dict["earningsAboveSTUptoIncludingFUST"] = earnings_above_st_upto_including_fust
         if earnings_above_fust_upto_including_uel is not UNSET:
-            field_dict[
-                "earningsAboveFUSTUptoIncludingUEL"
-            ] = earnings_above_fust_upto_including_uel
+            field_dict["earningsAboveFUSTUptoIncludingUEL"] = earnings_above_fust_upto_including_uel
         if earnings_above_uel is not UNSET:
             field_dict["earningsAboveUEL"] = earnings_above_uel
         if employee_ni_gross is not UNSET:
@@ -145,20 +134,25 @@ class NationalInsuranceCalculation:
             field_dict["employerNi"] = employer_ni
         if net_ni is not UNSET:
             field_dict["netNi"] = net_ni
+        if niable_pay is not UNSET:
+            field_dict["niablePay"] = niable_pay
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         breakdown = []
         _breakdown = d.pop("breakdown", UNSET)
-        for breakdown_item_data in _breakdown or []:
-            breakdown_item = NationalInsuranceCalculationBase.from_dict(
-                breakdown_item_data
-            )
+        for breakdown_item_data in (_breakdown or []):
+            breakdown_item = NationalInsuranceCalculationBase.from_dict(breakdown_item_data)
+
+
 
             breakdown.append(breakdown_item)
+
 
         ni_category = d.pop("niCategory", UNSET)
 
@@ -166,29 +160,17 @@ class NationalInsuranceCalculation:
 
         earnings_upto_including_lel = d.pop("earningsUptoIncludingLEL", UNSET)
 
-        earnings_above_lel_upto_including_pt = d.pop(
-            "earningsAboveLELUptoIncludingPT", UNSET
-        )
+        earnings_above_lel_upto_including_pt = d.pop("earningsAboveLELUptoIncludingPT", UNSET)
 
-        earnings_above_pt_upto_including_st = d.pop(
-            "earningsAbovePTUptoIncludingST", UNSET
-        )
+        earnings_above_pt_upto_including_st = d.pop("earningsAbovePTUptoIncludingST", UNSET)
 
-        earnings_above_pt_upto_including_uel = d.pop(
-            "earningsAbovePTUptoIncludingUEL", UNSET
-        )
+        earnings_above_pt_upto_including_uel = d.pop("earningsAbovePTUptoIncludingUEL", UNSET)
 
-        earnings_above_st_upto_including_uel = d.pop(
-            "earningsAboveSTUptoIncludingUEL", UNSET
-        )
+        earnings_above_st_upto_including_uel = d.pop("earningsAboveSTUptoIncludingUEL", UNSET)
 
-        earnings_above_st_upto_including_fust = d.pop(
-            "earningsAboveSTUptoIncludingFUST", UNSET
-        )
+        earnings_above_st_upto_including_fust = d.pop("earningsAboveSTUptoIncludingFUST", UNSET)
 
-        earnings_above_fust_upto_including_uel = d.pop(
-            "earningsAboveFUSTUptoIncludingUEL", UNSET
-        )
+        earnings_above_fust_upto_including_uel = d.pop("earningsAboveFUSTUptoIncludingUEL", UNSET)
 
         earnings_above_uel = d.pop("earningsAboveUEL", UNSET)
 
@@ -205,6 +187,8 @@ class NationalInsuranceCalculation:
         employer_ni = d.pop("employerNi", UNSET)
 
         net_ni = d.pop("netNi", UNSET)
+
+        niable_pay = d.pop("niablePay", UNSET)
 
         national_insurance_calculation = cls(
             breakdown=breakdown,
@@ -225,6 +209,8 @@ class NationalInsuranceCalculation:
             employee_ni=employee_ni,
             employer_ni=employer_ni,
             net_ni=net_ni,
+            niable_pay=niable_pay,
         )
 
         return national_insurance_calculation
+

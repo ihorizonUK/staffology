@@ -10,7 +10,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="Exb")
 
-
 @attr.s(auto_attribs=True)
 class Exb:
     """
@@ -27,7 +26,8 @@ class Exb:
         nics_payable (Union[Unset, float]): [readonly] NICs Payable
         expenses_and_benefits (Union[Unset, ExpensesAndBenefits]):
         i_rmark (Union[Unset, None, str]):
-        xml (Union[Unset, None, str]):
+        xml (Union[Unset, None, str]): THis property will soon be removed and should not be used.
+            There is now a dedicated API endpoint for retrieving the XML for a submission.
         tax_year (Union[Unset, TaxYear]):
         employer_references (Union[Unset, EmpRefs]):
         gov_talk_submission (Union[Unset, GovTalkSubmission]):
@@ -50,6 +50,7 @@ class Exb:
     employer_references: Union[Unset, EmpRefs] = UNSET
     gov_talk_submission: Union[Unset, GovTalkSubmission] = UNSET
     id: Union[Unset, str] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         additions_amount = self.additions_amount
@@ -82,7 +83,8 @@ class Exb:
         id = self.id
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if additions_amount is not UNSET:
             field_dict["additionsAmount"] = additions_amount
         if additions_description is not UNSET:
@@ -118,6 +120,8 @@ class Exb:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
@@ -141,12 +145,13 @@ class Exb:
 
         _expenses_and_benefits = d.pop("expensesAndBenefits", UNSET)
         expenses_and_benefits: Union[Unset, ExpensesAndBenefits]
-        if isinstance(_expenses_and_benefits, Unset):
+        if isinstance(_expenses_and_benefits,  Unset):
             expenses_and_benefits = UNSET
         else:
-            expenses_and_benefits = ExpensesAndBenefits.from_dict(
-                _expenses_and_benefits
-            )
+            expenses_and_benefits = ExpensesAndBenefits.from_dict(_expenses_and_benefits)
+
+
+
 
         i_rmark = d.pop("iRmark", UNSET)
 
@@ -154,24 +159,33 @@ class Exb:
 
         _tax_year = d.pop("taxYear", UNSET)
         tax_year: Union[Unset, TaxYear]
-        if isinstance(_tax_year, Unset):
+        if isinstance(_tax_year,  Unset):
             tax_year = UNSET
         else:
             tax_year = TaxYear(_tax_year)
 
+
+
+
         _employer_references = d.pop("employerReferences", UNSET)
         employer_references: Union[Unset, EmpRefs]
-        if isinstance(_employer_references, Unset):
+        if isinstance(_employer_references,  Unset):
             employer_references = UNSET
         else:
             employer_references = EmpRefs.from_dict(_employer_references)
 
+
+
+
         _gov_talk_submission = d.pop("govTalkSubmission", UNSET)
         gov_talk_submission: Union[Unset, GovTalkSubmission]
-        if isinstance(_gov_talk_submission, Unset):
+        if isinstance(_gov_talk_submission,  Unset):
             gov_talk_submission = UNSET
         else:
             gov_talk_submission = GovTalkSubmission.from_dict(_gov_talk_submission)
+
+
+
 
         id = d.pop("id", UNSET)
 
@@ -195,3 +209,4 @@ class Exb:
         )
 
         return exb
+

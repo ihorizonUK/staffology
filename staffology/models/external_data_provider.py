@@ -9,7 +9,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="ExternalDataProvider")
 
-
 @attr.s(auto_attribs=True)
 class ExternalDataProvider:
     """
@@ -22,6 +21,7 @@ class ExternalDataProvider:
         connected (Union[Unset, bool]):
         connected_as (Union[Unset, None, str]):
         requires_config (Union[Unset, bool]):
+        deferral_url (Union[Unset, None, str]):
         types (Union[Unset, None, List[ExternalDataProviderType]]):
     """
 
@@ -33,7 +33,9 @@ class ExternalDataProvider:
     connected: Union[Unset, bool] = UNSET
     connected_as: Union[Unset, None, str] = UNSET
     requires_config: Union[Unset, bool] = UNSET
+    deferral_url: Union[Unset, None, str] = UNSET
     types: Union[Unset, None, List[ExternalDataProviderType]] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         name = self.name
@@ -50,6 +52,7 @@ class ExternalDataProvider:
         connected = self.connected
         connected_as = self.connected_as
         requires_config = self.requires_config
+        deferral_url = self.deferral_url
         types: Union[Unset, None, List[str]] = UNSET
         if not isinstance(self.types, Unset):
             if self.types is None:
@@ -61,8 +64,13 @@ class ExternalDataProvider:
 
                     types.append(types_item)
 
+
+
+
+
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if name is not UNSET:
             field_dict["name"] = name
         if id is not UNSET:
@@ -79,10 +87,14 @@ class ExternalDataProvider:
             field_dict["connectedAs"] = connected_as
         if requires_config is not UNSET:
             field_dict["requiresConfig"] = requires_config
+        if deferral_url is not UNSET:
+            field_dict["deferralUrl"] = deferral_url
         if types is not UNSET:
             field_dict["types"] = types
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -91,17 +103,23 @@ class ExternalDataProvider:
 
         _id = d.pop("id", UNSET)
         id: Union[Unset, ExternalDataProviderId]
-        if isinstance(_id, Unset):
+        if isinstance(_id,  Unset):
             id = UNSET
         else:
             id = ExternalDataProviderId(_id)
 
+
+
+
         _auth_scheme = d.pop("authScheme", UNSET)
         auth_scheme: Union[Unset, AuthScheme]
-        if isinstance(_auth_scheme, Unset):
+        if isinstance(_auth_scheme,  Unset):
             auth_scheme = UNSET
         else:
             auth_scheme = AuthScheme(_auth_scheme)
+
+
+
 
         logo_url = d.pop("logoUrl", UNSET)
 
@@ -113,12 +131,17 @@ class ExternalDataProvider:
 
         requires_config = d.pop("requiresConfig", UNSET)
 
+        deferral_url = d.pop("deferralUrl", UNSET)
+
         types = []
         _types = d.pop("types", UNSET)
-        for types_item_data in _types or []:
+        for types_item_data in (_types or []):
             types_item = ExternalDataProviderType(types_item_data)
 
+
+
             types.append(types_item)
+
 
         external_data_provider = cls(
             name=name,
@@ -129,7 +152,9 @@ class ExternalDataProvider:
             connected=connected,
             connected_as=connected_as,
             requires_config=requires_config,
+            deferral_url=deferral_url,
             types=types,
         )
 
         return external_data_provider
+

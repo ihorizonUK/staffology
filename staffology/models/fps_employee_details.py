@@ -2,15 +2,12 @@ from typing import Any, Dict, Type, TypeVar, Union
 
 import attr
 
-from ..models.fps_employee_details_partner_details import (
-    FpsEmployeeDetailsPartnerDetails,
-)
+from ..models.fps_employee_details_partner_details import FpsEmployeeDetailsPartnerDetails
 from ..models.rti_employee_address import RtiEmployeeAddress
 from ..models.rti_employee_name import RtiEmployeeName
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="FpsEmployeeDetails")
-
 
 @attr.s(auto_attribs=True)
 class FpsEmployeeDetails:
@@ -33,6 +30,7 @@ class FpsEmployeeDetails:
     passport_number: Union[Unset, None, str] = UNSET
     partner_details: Union[Unset, FpsEmployeeDetailsPartnerDetails] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         nino = self.nino
         name: Union[Unset, Dict[str, Any]] = UNSET
@@ -50,8 +48,10 @@ class FpsEmployeeDetails:
         if not isinstance(self.partner_details, Unset):
             partner_details = self.partner_details.to_dict()
 
+
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if nino is not UNSET:
             field_dict["nino"] = nino
         if name is not UNSET:
@@ -69,6 +69,8 @@ class FpsEmployeeDetails:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
@@ -76,17 +78,23 @@ class FpsEmployeeDetails:
 
         _name = d.pop("name", UNSET)
         name: Union[Unset, RtiEmployeeName]
-        if isinstance(_name, Unset):
+        if isinstance(_name,  Unset):
             name = UNSET
         else:
             name = RtiEmployeeName.from_dict(_name)
 
+
+
+
         _address = d.pop("address", UNSET)
         address: Union[Unset, RtiEmployeeAddress]
-        if isinstance(_address, Unset):
+        if isinstance(_address,  Unset):
             address = UNSET
         else:
             address = RtiEmployeeAddress.from_dict(_address)
+
+
+
 
         birth_date = d.pop("birthDate", UNSET)
 
@@ -96,12 +104,13 @@ class FpsEmployeeDetails:
 
         _partner_details = d.pop("partnerDetails", UNSET)
         partner_details: Union[Unset, FpsEmployeeDetailsPartnerDetails]
-        if isinstance(_partner_details, Unset):
+        if isinstance(_partner_details,  Unset):
             partner_details = UNSET
         else:
-            partner_details = FpsEmployeeDetailsPartnerDetails.from_dict(
-                _partner_details
-            )
+            partner_details = FpsEmployeeDetailsPartnerDetails.from_dict(_partner_details)
+
+
+
 
         fps_employee_details = cls(
             nino=nino,
@@ -114,3 +123,4 @@ class FpsEmployeeDetails:
         )
 
         return fps_employee_details
+

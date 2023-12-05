@@ -62,6 +62,9 @@ def sync_detailed(
     """List EPS
 
      Returns all Employment Payment Summaries for the given tax year.
+    If the 'Linked EPS' is enabled by the employer, Employment Payment Summaries
+    for employer as well as for any linked employers with 'Linked EPS' enabled
+    and with the same PAYE scheme are returned.
 
     Args:
         employer_id (str):
@@ -94,6 +97,9 @@ def sync(
     """List EPS
 
      Returns all Employment Payment Summaries for the given tax year.
+    If the 'Linked EPS' is enabled by the employer, Employment Payment Summaries
+    for employer as well as for any linked employers with 'Linked EPS' enabled
+    and with the same PAYE scheme are returned.
 
     Args:
         employer_id (str):
@@ -119,6 +125,9 @@ async def asyncio_detailed(
     """List EPS
 
      Returns all Employment Payment Summaries for the given tax year.
+    If the 'Linked EPS' is enabled by the employer, Employment Payment Summaries
+    for employer as well as for any linked employers with 'Linked EPS' enabled
+    and with the same PAYE scheme are returned.
 
     Args:
         employer_id (str):
@@ -149,6 +158,9 @@ async def asyncio(
     """List EPS
 
      Returns all Employment Payment Summaries for the given tax year.
+    If the 'Linked EPS' is enabled by the employer, Employment Payment Summaries
+    for employer as well as for any linked employers with 'Linked EPS' enabled
+    and with the same PAYE scheme are returned.
 
     Args:
         employer_id (str):

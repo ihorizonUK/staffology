@@ -11,7 +11,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="AttachmentOrderPayment")
 
-
 @attr.s(auto_attribs=True)
 class AttachmentOrderPayment:
     """Used to represent a payment towards an Attachment of Earnings Order (AEO)
@@ -57,6 +56,7 @@ class AttachmentOrderPayment:
     employee: Union[Unset, Item] = UNSET
     id: Union[Unset, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         attachment_order: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.attachment_order, Unset):
@@ -91,7 +91,8 @@ class AttachmentOrderPayment:
         id = self.id
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if attachment_order is not UNSET:
             field_dict["attachmentOrder"] = attachment_order
         if tax_year is not UNSET:
@@ -107,9 +108,7 @@ class AttachmentOrderPayment:
         if protected_pay is not UNSET:
             field_dict["protectedPay"] = protected_pay
         if other_attachment_order_deductions is not UNSET:
-            field_dict[
-                "otherAttachmentOrderDeductions"
-            ] = other_attachment_order_deductions
+            field_dict["otherAttachmentOrderDeductions"] = other_attachment_order_deductions
         if desired_deduction is not UNSET:
             field_dict["desiredDeduction"] = desired_deduction
         if shortfall is not UNSET:
@@ -129,36 +128,50 @@ class AttachmentOrderPayment:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _attachment_order = d.pop("attachmentOrder", UNSET)
         attachment_order: Union[Unset, Item]
-        if isinstance(_attachment_order, Unset):
+        if isinstance(_attachment_order,  Unset):
             attachment_order = UNSET
         else:
             attachment_order = Item.from_dict(_attachment_order)
 
+
+
+
         _tax_year = d.pop("taxYear", UNSET)
         tax_year: Union[Unset, TaxYear]
-        if isinstance(_tax_year, Unset):
+        if isinstance(_tax_year,  Unset):
             tax_year = UNSET
         else:
             tax_year = TaxYear(_tax_year)
 
+
+
+
         _pay_period = d.pop("payPeriod", UNSET)
         pay_period: Union[Unset, PayPeriods]
-        if isinstance(_pay_period, Unset):
+        if isinstance(_pay_period,  Unset):
             pay_period = UNSET
         else:
             pay_period = PayPeriods(_pay_period)
 
+
+
+
         _date = d.pop("date", UNSET)
         date: Union[Unset, datetime.date]
-        if isinstance(_date, Unset):
+        if isinstance(_date,  Unset):
             date = UNSET
         else:
             date = isoparse(_date).date()
+
+
+
 
         description = d.pop("description", UNSET)
 
@@ -166,9 +179,7 @@ class AttachmentOrderPayment:
 
         protected_pay = d.pop("protectedPay", UNSET)
 
-        other_attachment_order_deductions = d.pop(
-            "otherAttachmentOrderDeductions", UNSET
-        )
+        other_attachment_order_deductions = d.pop("otherAttachmentOrderDeductions", UNSET)
 
         desired_deduction = d.pop("desiredDeduction", UNSET)
 
@@ -184,10 +195,13 @@ class AttachmentOrderPayment:
 
         _employee = d.pop("employee", UNSET)
         employee: Union[Unset, Item]
-        if isinstance(_employee, Unset):
+        if isinstance(_employee,  Unset):
             employee = UNSET
         else:
             employee = Item.from_dict(_employee)
+
+
+
 
         id = d.pop("id", UNSET)
 
@@ -211,3 +225,4 @@ class AttachmentOrderPayment:
         )
 
         return attachment_order_payment
+

@@ -2,18 +2,17 @@ from typing import Any, Dict, Type, TypeVar, Union
 
 import attr
 
-from ..models.role import Role
+from ..models.user_role import UserRole
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="EmployerItem")
-
 
 @attr.s(auto_attribs=True)
 class EmployerItem:
     """
     Attributes:
         is_owner (Union[Unset, bool]):
-        role (Union[Unset, Role]):
+        role (Union[Unset, UserRole]):
         id (Union[Unset, str]):
         name (Union[Unset, None, str]):
         metadata (Union[Unset, Any]):
@@ -21,11 +20,12 @@ class EmployerItem:
     """
 
     is_owner: Union[Unset, bool] = UNSET
-    role: Union[Unset, Role] = UNSET
+    role: Union[Unset, UserRole] = UNSET
     id: Union[Unset, str] = UNSET
     name: Union[Unset, None, str] = UNSET
     metadata: Union[Unset, Any] = UNSET
     url: Union[Unset, None, str] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         is_owner = self.is_owner
@@ -39,7 +39,8 @@ class EmployerItem:
         url = self.url
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if is_owner is not UNSET:
             field_dict["isOwner"] = is_owner
         if role is not UNSET:
@@ -55,17 +56,22 @@ class EmployerItem:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         is_owner = d.pop("isOwner", UNSET)
 
         _role = d.pop("role", UNSET)
-        role: Union[Unset, Role]
-        if isinstance(_role, Unset):
+        role: Union[Unset, UserRole]
+        if isinstance(_role,  Unset):
             role = UNSET
         else:
-            role = Role(_role)
+            role = UserRole(_role)
+
+
+
 
         id = d.pop("id", UNSET)
 
@@ -85,3 +91,4 @@ class EmployerItem:
         )
 
         return employer_item
+

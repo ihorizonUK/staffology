@@ -18,9 +18,7 @@ def _get_kwargs(
     update_existing: Union[Unset, None, bool] = False,
     validate_only: Union[Unset, None, bool] = False,
 ) -> Dict[str, Any]:
-    url = "{}/employers/{employerId}/import/pay".format(
-        client.base_url, employerId=employer_id
-    )
+    url = "{}/employers/{employerId}/import/pay".format(client.base_url, employerId=employer_id)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()

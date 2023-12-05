@@ -6,7 +6,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="CisContractor")
 
-
 @attr.s(auto_attribs=True)
 class CisContractor:
     """Used to represent details of a CIS SubContractor when communicating with the HMRC Gateway
@@ -19,18 +18,22 @@ class CisContractor:
     utr: Union[Unset, None, str] = UNSET
     a_oref: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         utr = self.utr
         a_oref = self.a_oref
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if utr is not UNSET:
             field_dict["utr"] = utr
         if a_oref is not UNSET:
             field_dict["aOref"] = a_oref
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -45,3 +48,4 @@ class CisContractor:
         )
 
         return cis_contractor
+

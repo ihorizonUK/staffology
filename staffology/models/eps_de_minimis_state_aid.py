@@ -6,7 +6,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="EpsDeMinimisStateAid")
 
-
 @attr.s(auto_attribs=True)
 class EpsDeMinimisStateAid:
     """Used on an EPS to declare an Employment Allowance DeMinimis State Aid information
@@ -23,6 +22,7 @@ class EpsDeMinimisStateAid:
     road_trans: Union[Unset, bool] = UNSET
     indust: Union[Unset, bool] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         agri = self.agri
         fisheries_aqua = self.fisheries_aqua
@@ -30,7 +30,8 @@ class EpsDeMinimisStateAid:
         indust = self.indust
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if agri is not UNSET:
             field_dict["agri"] = agri
         if fisheries_aqua is not UNSET:
@@ -41,6 +42,8 @@ class EpsDeMinimisStateAid:
             field_dict["indust"] = indust
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -61,3 +64,4 @@ class EpsDeMinimisStateAid:
         )
 
         return eps_de_minimis_state_aid
+

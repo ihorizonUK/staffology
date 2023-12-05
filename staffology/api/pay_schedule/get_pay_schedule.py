@@ -17,20 +17,26 @@ def _get_kwargs(
     ordinal: int = 1,
     *,
     client: Client,
+
 ) -> Dict[str, Any]:
     url = "{}/employers/{employerId}/schedules/{taxYear}/{payPeriod}/{ordinal}".format(
-        client.base_url,
-        employerId=employer_id,
-        taxYear=tax_year,
-        payPeriod=pay_period,
-        ordinal=ordinal,
-    )
+        client.base_url,employerId=employer_id,taxYear=tax_year,payPeriod=pay_period,ordinal=ordinal)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
 
+    
+
+    
+
+    
+
+    
+
+    
+
     return {
-        "method": "get",
+	    "method": "get",
         "url": url,
         "headers": headers,
         "cookies": cookies,
@@ -41,6 +47,8 @@ def _get_kwargs(
 def _parse_response(*, response: httpx.Response) -> Optional[PaySchedule]:
     if response.status_code == 200:
         response_200 = PaySchedule.from_dict(response.json())
+
+
 
         return response_200
     return raise_staffology_exception(response)
@@ -62,6 +70,7 @@ def sync_detailed(
     ordinal: int = 1,
     *,
     client: Client,
+
 ) -> Response[PaySchedule]:
     """Get PaySchedule
 
@@ -77,12 +86,14 @@ def sync_detailed(
         Response[PaySchedule]
     """
 
+
     kwargs = _get_kwargs(
         employer_id=employer_id,
-        tax_year=tax_year,
-        pay_period=pay_period,
-        ordinal=ordinal,
-        client=client,
+tax_year=tax_year,
+pay_period=pay_period,
+ordinal=ordinal,
+client=client,
+
     )
 
     response = httpx.request(
@@ -92,7 +103,6 @@ def sync_detailed(
 
     return _build_response(response=response)
 
-
 def sync(
     employer_id: str,
     tax_year: TaxYear,
@@ -100,6 +110,7 @@ def sync(
     ordinal: int = 1,
     *,
     client: Client,
+
 ) -> Optional[PaySchedule]:
     """Get PaySchedule
 
@@ -115,14 +126,15 @@ def sync(
         Response[PaySchedule]
     """
 
+
     return sync_detailed(
         employer_id=employer_id,
-        tax_year=tax_year,
-        pay_period=pay_period,
-        ordinal=ordinal,
-        client=client,
-    ).parsed
+tax_year=tax_year,
+pay_period=pay_period,
+ordinal=ordinal,
+client=client,
 
+    ).parsed
 
 async def asyncio_detailed(
     employer_id: str,
@@ -131,6 +143,7 @@ async def asyncio_detailed(
     ordinal: int = 1,
     *,
     client: Client,
+
 ) -> Response[PaySchedule]:
     """Get PaySchedule
 
@@ -146,19 +159,22 @@ async def asyncio_detailed(
         Response[PaySchedule]
     """
 
+
     kwargs = _get_kwargs(
         employer_id=employer_id,
-        tax_year=tax_year,
-        pay_period=pay_period,
-        ordinal=ordinal,
-        client=client,
+tax_year=tax_year,
+pay_period=pay_period,
+ordinal=ordinal,
+client=client,
+
     )
 
     async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+        response = await _client.request(
+            **kwargs
+        )
 
     return _build_response(response=response)
-
 
 async def asyncio(
     employer_id: str,
@@ -167,6 +183,7 @@ async def asyncio(
     ordinal: int = 1,
     *,
     client: Client,
+
 ) -> Optional[PaySchedule]:
     """Get PaySchedule
 
@@ -182,12 +199,13 @@ async def asyncio(
         Response[PaySchedule]
     """
 
-    return (
-        await asyncio_detailed(
-            employer_id=employer_id,
-            tax_year=tax_year,
-            pay_period=pay_period,
-            ordinal=ordinal,
-            client=client,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        employer_id=employer_id,
+tax_year=tax_year,
+pay_period=pay_period,
+ordinal=ordinal,
+client=client,
+
+    )).parsed
+

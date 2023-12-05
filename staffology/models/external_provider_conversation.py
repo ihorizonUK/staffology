@@ -7,7 +7,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="ExternalProviderConversation")
 
-
 @attr.s(auto_attribs=True)
 class ExternalProviderConversation:
     """This model is used to provide details of a data exchange with an ExternalDataProvider
@@ -30,6 +29,7 @@ class ExternalProviderConversation:
     status: Union[Unset, BackgroundTaskStatus] = UNSET
     status_message: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         title = self.title
         content_type = self.content_type
@@ -43,7 +43,8 @@ class ExternalProviderConversation:
         status_message = self.status_message
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if title is not UNSET:
             field_dict["title"] = title
         if content_type is not UNSET:
@@ -61,6 +62,8 @@ class ExternalProviderConversation:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
@@ -76,10 +79,13 @@ class ExternalProviderConversation:
 
         _status = d.pop("status", UNSET)
         status: Union[Unset, BackgroundTaskStatus]
-        if isinstance(_status, Unset):
+        if isinstance(_status,  Unset):
             status = UNSET
         else:
             status = BackgroundTaskStatus(_status)
+
+
+
 
         status_message = d.pop("statusMessage", UNSET)
 
@@ -94,3 +100,4 @@ class ExternalProviderConversation:
         )
 
         return external_provider_conversation
+

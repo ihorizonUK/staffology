@@ -13,7 +13,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="PersonalDetails")
 
-
 @attr.s(auto_attribs=True)
 class PersonalDetails:
     """
@@ -26,11 +25,11 @@ class PersonalDetails:
         first_name (Union[Unset, None, str]):
         middle_name (Union[Unset, None, str]):
         last_name (Union[Unset, None, str]):
+        alternative_email (Union[Unset, None, str]):
+        previous_sur_name (Union[Unset, None, str]):
         email (Union[Unset, None, str]):
         email_payslip (Union[Unset, bool]): If set to true then the employees Payslip will be sent by email when a
             PayRun is finalised.
-        password_protect_payslip (Union[Unset, bool]): If set to true then when a payslip is sent by email a password
-            will be set on it.
         pdf_password (Union[Unset, None, str]): Set the password to be used on PDFs. If blank then we'll create a
             password based on the PdfPasswordType property.
         pdf_password_type (Union[Unset, PdfPasswordType]):
@@ -53,9 +52,10 @@ class PersonalDetails:
     first_name: Union[Unset, None, str] = UNSET
     middle_name: Union[Unset, None, str] = UNSET
     last_name: Union[Unset, None, str] = UNSET
+    alternative_email: Union[Unset, None, str] = UNSET
+    previous_sur_name: Union[Unset, None, str] = UNSET
     email: Union[Unset, None, str] = UNSET
     email_payslip: Union[Unset, bool] = UNSET
-    password_protect_payslip: Union[Unset, bool] = UNSET
     pdf_password: Union[Unset, None, str] = UNSET
     pdf_password_type: Union[Unset, PdfPasswordType] = UNSET
     email_statement: Union[Unset, bool] = UNSET
@@ -67,10 +67,11 @@ class PersonalDetails:
     passport_number: Union[Unset, None, str] = UNSET
     partner_details: Union[Unset, PartnerDetails] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         marital_status = self.marital_status.value
 
-        date_of_birth = self.date_of_birth.isoformat()
+        date_of_birth = self.date_of_birth.isoformat() 
         gender = self.gender.value
 
         address: Union[Unset, Dict[str, Any]] = UNSET
@@ -81,9 +82,10 @@ class PersonalDetails:
         first_name = self.first_name
         middle_name = self.middle_name
         last_name = self.last_name
+        alternative_email = self.alternative_email
+        previous_sur_name = self.previous_sur_name
         email = self.email
         email_payslip = self.email_payslip
-        password_protect_payslip = self.password_protect_payslip
         pdf_password = self.pdf_password
         pdf_password_type: Union[Unset, str] = UNSET
         if not isinstance(self.pdf_password_type, Unset):
@@ -100,14 +102,13 @@ class PersonalDetails:
         if not isinstance(self.partner_details, Unset):
             partner_details = self.partner_details.to_dict()
 
+
         field_dict: Dict[str, Any] = {}
-        field_dict.update(
-            {
-                "maritalStatus": marital_status,
-                "dateOfBirth": date_of_birth,
-                "gender": gender,
-            }
-        )
+        field_dict.update({
+            "maritalStatus": marital_status,
+            "dateOfBirth": date_of_birth,
+            "gender": gender,
+        })
         if address is not UNSET:
             field_dict["address"] = address
         if title is not UNSET:
@@ -118,12 +119,14 @@ class PersonalDetails:
             field_dict["middleName"] = middle_name
         if last_name is not UNSET:
             field_dict["lastName"] = last_name
+        if alternative_email is not UNSET:
+            field_dict["alternativeEmail"] = alternative_email
+        if previous_sur_name is not UNSET:
+            field_dict["previousSurName"] = previous_sur_name
         if email is not UNSET:
             field_dict["email"] = email
         if email_payslip is not UNSET:
             field_dict["emailPayslip"] = email_payslip
-        if password_protect_payslip is not UNSET:
-            field_dict["passwordProtectPayslip"] = password_protect_payslip
         if pdf_password is not UNSET:
             field_dict["pdfPassword"] = pdf_password
         if pdf_password_type is not UNSET:
@@ -147,21 +150,35 @@ class PersonalDetails:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         marital_status = MaritalStatus(d.pop("maritalStatus"))
 
+
+
+
         date_of_birth = isoparse(d.pop("dateOfBirth")).date()
+
+
+
 
         gender = Gender(d.pop("gender"))
 
+
+
+
         _address = d.pop("address", UNSET)
         address: Union[Unset, Address]
-        if isinstance(_address, Unset):
+        if isinstance(_address,  Unset):
             address = UNSET
         else:
             address = Address.from_dict(_address)
+
+
+
 
         title = d.pop("title", UNSET)
 
@@ -171,20 +188,25 @@ class PersonalDetails:
 
         last_name = d.pop("lastName", UNSET)
 
+        alternative_email = d.pop("alternativeEmail", UNSET)
+
+        previous_sur_name = d.pop("previousSurName", UNSET)
+
         email = d.pop("email", UNSET)
 
         email_payslip = d.pop("emailPayslip", UNSET)
-
-        password_protect_payslip = d.pop("passwordProtectPayslip", UNSET)
 
         pdf_password = d.pop("pdfPassword", UNSET)
 
         _pdf_password_type = d.pop("pdfPasswordType", UNSET)
         pdf_password_type: Union[Unset, PdfPasswordType]
-        if isinstance(_pdf_password_type, Unset):
+        if isinstance(_pdf_password_type,  Unset):
             pdf_password_type = UNSET
         else:
             pdf_password_type = PdfPasswordType(_pdf_password_type)
+
+
+
 
         email_statement = d.pop("emailStatement", UNSET)
 
@@ -202,10 +224,13 @@ class PersonalDetails:
 
         _partner_details = d.pop("partnerDetails", UNSET)
         partner_details: Union[Unset, PartnerDetails]
-        if isinstance(_partner_details, Unset):
+        if isinstance(_partner_details,  Unset):
             partner_details = UNSET
         else:
             partner_details = PartnerDetails.from_dict(_partner_details)
+
+
+
 
         personal_details = cls(
             marital_status=marital_status,
@@ -216,9 +241,10 @@ class PersonalDetails:
             first_name=first_name,
             middle_name=middle_name,
             last_name=last_name,
+            alternative_email=alternative_email,
+            previous_sur_name=previous_sur_name,
             email=email,
             email_payslip=email_payslip,
-            password_protect_payslip=password_protect_payslip,
             pdf_password=pdf_password,
             pdf_password_type=pdf_password_type,
             email_statement=email_statement,
@@ -232,3 +258,4 @@ class PersonalDetails:
         )
 
         return personal_details
+

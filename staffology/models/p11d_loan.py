@@ -6,7 +6,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="P11DLoan")
 
-
 @attr.s(auto_attribs=True)
 class P11DLoan:
     """
@@ -30,6 +29,7 @@ class P11DLoan:
     discharge: Union[Unset, None, str] = UNSET
     cash_equiv_or_relevant_amt: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         joint = self.joint
         init_os = self.init_os
@@ -41,7 +41,8 @@ class P11DLoan:
         cash_equiv_or_relevant_amt = self.cash_equiv_or_relevant_amt
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if joint is not UNSET:
             field_dict["joint"] = joint
         if init_os is not UNSET:
@@ -60,6 +61,8 @@ class P11DLoan:
             field_dict["cashEquivOrRelevantAmt"] = cash_equiv_or_relevant_amt
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -92,3 +95,4 @@ class P11DLoan:
         )
 
         return p11d_loan
+

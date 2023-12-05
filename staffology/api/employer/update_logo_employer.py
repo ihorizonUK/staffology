@@ -5,9 +5,7 @@ from staffology.propagate_exceptions import raise_staffology_exception
 
 from ...client import Client
 from ...models.employer import Employer
-from ...models.update_logo_employer_multipart_data import (
-    UpdateLogoEmployerMultipartData,
-)
+from ...models.update_logo_employer_multipart_data import UpdateLogoEmployerMultipartData
 from ...types import Response
 
 

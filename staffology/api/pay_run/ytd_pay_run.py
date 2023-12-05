@@ -20,27 +20,35 @@ def _get_kwargs(
     client: Client,
     multipart_data: YtdPayRunMultipartData,
     ordinal: Union[Unset, None, int] = UNSET,
+
 ) -> Dict[str, Any]:
     url = "{}/employers/{employerId}/payrun/{taxYear}/{payPeriod}/{periodNumber}/ytd".format(
-        client.base_url,
-        employerId=employer_id,
-        taxYear=tax_year,
-        payPeriod=pay_period,
-        periodNumber=period_number,
-    )
+        client.base_url,employerId=employer_id,taxYear=tax_year,payPeriod=pay_period,periodNumber=period_number)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
 
+    
+
+    
+
     params: Dict[str, Any] = {}
     params["ordinal"] = ordinal
 
+
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
+
+    
 
     multipart_multipart_data = multipart_data.to_multipart()
 
+
+
+
     return {
-        "method": "put",
+	    "method": "put",
         "url": url,
         "headers": headers,
         "cookies": cookies,
@@ -54,8 +62,10 @@ def _parse_response(*, response: httpx.Response) -> Optional[List[EmployeeYtdVal
     if response.status_code == 200:
         response_200 = []
         _response_200 = response.json()
-        for response_200_item_data in _response_200:
+        for response_200_item_data in (_response_200):
             response_200_item = EmployeeYtdValues.from_dict(response_200_item_data)
+
+
 
             response_200.append(response_200_item)
 
@@ -81,10 +91,11 @@ def sync_detailed(
     client: Client,
     multipart_data: YtdPayRunMultipartData,
     ordinal: Union[Unset, None, int] = UNSET,
+
 ) -> Response[List[EmployeeYtdValues]]:
     """Update YTD
 
-     Upload a CSV to override the YTD values on a Payrun.
+     Upload a CSV to override the YTD values on a Pay Run.
     The CSV should have the same headings as the YTD report
 
     Args:
@@ -99,14 +110,16 @@ def sync_detailed(
         Response[List[EmployeeYtdValues]]
     """
 
+
     kwargs = _get_kwargs(
         employer_id=employer_id,
-        tax_year=tax_year,
-        pay_period=pay_period,
-        period_number=period_number,
-        client=client,
-        multipart_data=multipart_data,
-        ordinal=ordinal,
+tax_year=tax_year,
+pay_period=pay_period,
+period_number=period_number,
+client=client,
+multipart_data=multipart_data,
+ordinal=ordinal,
+
     )
 
     response = httpx.request(
@@ -115,7 +128,6 @@ def sync_detailed(
     )
 
     return _build_response(response=response)
-
 
 def sync(
     employer_id: str,
@@ -126,10 +138,11 @@ def sync(
     client: Client,
     multipart_data: YtdPayRunMultipartData,
     ordinal: Union[Unset, None, int] = UNSET,
+
 ) -> Optional[List[EmployeeYtdValues]]:
     """Update YTD
 
-     Upload a CSV to override the YTD values on a Payrun.
+     Upload a CSV to override the YTD values on a Pay Run.
     The CSV should have the same headings as the YTD report
 
     Args:
@@ -144,16 +157,17 @@ def sync(
         Response[List[EmployeeYtdValues]]
     """
 
+
     return sync_detailed(
         employer_id=employer_id,
-        tax_year=tax_year,
-        pay_period=pay_period,
-        period_number=period_number,
-        client=client,
-        multipart_data=multipart_data,
-        ordinal=ordinal,
-    ).parsed
+tax_year=tax_year,
+pay_period=pay_period,
+period_number=period_number,
+client=client,
+multipart_data=multipart_data,
+ordinal=ordinal,
 
+    ).parsed
 
 async def asyncio_detailed(
     employer_id: str,
@@ -164,10 +178,11 @@ async def asyncio_detailed(
     client: Client,
     multipart_data: YtdPayRunMultipartData,
     ordinal: Union[Unset, None, int] = UNSET,
+
 ) -> Response[List[EmployeeYtdValues]]:
     """Update YTD
 
-     Upload a CSV to override the YTD values on a Payrun.
+     Upload a CSV to override the YTD values on a Pay Run.
     The CSV should have the same headings as the YTD report
 
     Args:
@@ -182,21 +197,24 @@ async def asyncio_detailed(
         Response[List[EmployeeYtdValues]]
     """
 
+
     kwargs = _get_kwargs(
         employer_id=employer_id,
-        tax_year=tax_year,
-        pay_period=pay_period,
-        period_number=period_number,
-        client=client,
-        multipart_data=multipart_data,
-        ordinal=ordinal,
+tax_year=tax_year,
+pay_period=pay_period,
+period_number=period_number,
+client=client,
+multipart_data=multipart_data,
+ordinal=ordinal,
+
     )
 
     async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+        response = await _client.request(
+            **kwargs
+        )
 
     return _build_response(response=response)
-
 
 async def asyncio(
     employer_id: str,
@@ -207,10 +225,11 @@ async def asyncio(
     client: Client,
     multipart_data: YtdPayRunMultipartData,
     ordinal: Union[Unset, None, int] = UNSET,
+
 ) -> Optional[List[EmployeeYtdValues]]:
     """Update YTD
 
-     Upload a CSV to override the YTD values on a Payrun.
+     Upload a CSV to override the YTD values on a Pay Run.
     The CSV should have the same headings as the YTD report
 
     Args:
@@ -225,14 +244,15 @@ async def asyncio(
         Response[List[EmployeeYtdValues]]
     """
 
-    return (
-        await asyncio_detailed(
-            employer_id=employer_id,
-            tax_year=tax_year,
-            pay_period=pay_period,
-            period_number=period_number,
-            client=client,
-            multipart_data=multipart_data,
-            ordinal=ordinal,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        employer_id=employer_id,
+tax_year=tax_year,
+pay_period=pay_period,
+period_number=period_number,
+client=client,
+multipart_data=multipart_data,
+ordinal=ordinal,
+
+    )).parsed
+

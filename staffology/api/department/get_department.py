@@ -14,9 +14,7 @@ def _get_kwargs(
     *,
     client: Client,
 ) -> Dict[str, Any]:
-    url = "{}/employers/{employerId}/departments/{code}".format(
-        client.base_url, employerId=employer_id, code=code
-    )
+    url = "{}/employers/{employerId}/departments/{code}".format(client.base_url, employerId=employer_id, code=code)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
@@ -53,9 +51,10 @@ def sync_detailed(
     *,
     client: Client,
 ) -> Response[Department]:
-    """Get Department
+    """Get Department (deprecated)
 
      Gets the Department specified.
+    Use the other GET endpoint that supports non-alphanumeric characters for a department code
 
     Args:
         employer_id (str):
@@ -85,9 +84,10 @@ def sync(
     *,
     client: Client,
 ) -> Optional[Department]:
-    """Get Department
+    """Get Department (deprecated)
 
      Gets the Department specified.
+    Use the other GET endpoint that supports non-alphanumeric characters for a department code
 
     Args:
         employer_id (str):
@@ -110,9 +110,10 @@ async def asyncio_detailed(
     *,
     client: Client,
 ) -> Response[Department]:
-    """Get Department
+    """Get Department (deprecated)
 
      Gets the Department specified.
+    Use the other GET endpoint that supports non-alphanumeric characters for a department code
 
     Args:
         employer_id (str):
@@ -140,9 +141,10 @@ async def asyncio(
     *,
     client: Client,
 ) -> Optional[Department]:
-    """Get Department
+    """Get Department (deprecated)
 
      Gets the Department specified.
+    Use the other GET endpoint that supports non-alphanumeric characters for a department code
 
     Args:
         employer_id (str):

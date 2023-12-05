@@ -6,19 +6,18 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="PaySchedulePeriodEventsConfig")
 
-
 @attr.s(auto_attribs=True)
 class PaySchedulePeriodEventsConfig:
     """Only applicable if Bureau functionality is enabled. Defines the number of days each event occurs before the Payment
-    Date.
+Date.
 
-        Attributes:
-            submit_for_processing (Union[Unset, int]):
-            send_for_approval (Union[Unset, int]):
-            approval (Union[Unset, int]):
-            finalise (Union[Unset, int]):
-            send_pay_slip (Union[Unset, int]):
-            submit_rti (Union[Unset, int]):
+    Attributes:
+        submit_for_processing (Union[Unset, int]):
+        send_for_approval (Union[Unset, int]):
+        approval (Union[Unset, int]):
+        finalise (Union[Unset, int]):
+        send_pay_slip (Union[Unset, int]):
+        submit_rti (Union[Unset, int]):
     """
 
     submit_for_processing: Union[Unset, int] = UNSET
@@ -27,6 +26,7 @@ class PaySchedulePeriodEventsConfig:
     finalise: Union[Unset, int] = UNSET
     send_pay_slip: Union[Unset, int] = UNSET
     submit_rti: Union[Unset, int] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         submit_for_processing = self.submit_for_processing
@@ -37,7 +37,8 @@ class PaySchedulePeriodEventsConfig:
         submit_rti = self.submit_rti
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if submit_for_processing is not UNSET:
             field_dict["SubmitForProcessing"] = submit_for_processing
         if send_for_approval is not UNSET:
@@ -52,6 +53,8 @@ class PaySchedulePeriodEventsConfig:
             field_dict["SubmitRti"] = submit_rti
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -78,3 +81,4 @@ class PaySchedulePeriodEventsConfig:
         )
 
         return pay_schedule_period_events_config
+

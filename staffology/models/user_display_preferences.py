@@ -2,12 +2,10 @@ from typing import Any, Dict, Type, TypeVar, Union
 
 import attr
 
-from ..models.cookie_preference import CookiePreference
 from ..models.userstart_page import UserstartPage
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="UserDisplayPreferences")
-
 
 @attr.s(auto_attribs=True)
 class UserDisplayPreferences:
@@ -27,7 +25,7 @@ class UserDisplayPreferences:
         enable_rti_timestamp_override (Union[Unset, bool]):
         enable_payrun_warnings (Union[Unset, bool]):
         enable_working_days_overrides (Union[Unset, bool]):
-        cookie_preference (Union[Unset, CookiePreference]):
+        enable_payrun_pagination (Union[Unset, bool]):
     """
 
     start_page: Union[Unset, UserstartPage] = UNSET
@@ -44,7 +42,8 @@ class UserDisplayPreferences:
     enable_rti_timestamp_override: Union[Unset, bool] = UNSET
     enable_payrun_warnings: Union[Unset, bool] = UNSET
     enable_working_days_overrides: Union[Unset, bool] = UNSET
-    cookie_preference: Union[Unset, CookiePreference] = UNSET
+    enable_payrun_pagination: Union[Unset, bool] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         start_page: Union[Unset, str] = UNSET
@@ -52,9 +51,7 @@ class UserDisplayPreferences:
             start_page = self.start_page.value
 
         show_zeroes = self.show_zeroes
-        show_tax_code_when_viewing_payrun_entry = (
-            self.show_tax_code_when_viewing_payrun_entry
-        )
+        show_tax_code_when_viewing_payrun_entry = self.show_tax_code_when_viewing_payrun_entry
         allow_journal_resubmit = self.allow_journal_resubmit
         hide_salary_on_employee_index_page = self.hide_salary_on_employee_index_page
         enable_multi_employer_import = self.enable_multi_employer_import
@@ -66,26 +63,21 @@ class UserDisplayPreferences:
         enable_rti_timestamp_override = self.enable_rti_timestamp_override
         enable_payrun_warnings = self.enable_payrun_warnings
         enable_working_days_overrides = self.enable_working_days_overrides
-        cookie_preference: Union[Unset, Dict[str, Any]] = UNSET
-        if not isinstance(self.cookie_preference, Unset):
-            cookie_preference = self.cookie_preference.to_dict()
+        enable_payrun_pagination = self.enable_payrun_pagination
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if start_page is not UNSET:
             field_dict["startPage"] = start_page
         if show_zeroes is not UNSET:
             field_dict["showZeroes"] = show_zeroes
         if show_tax_code_when_viewing_payrun_entry is not UNSET:
-            field_dict[
-                "showTaxCodeWhenViewingPayrunEntry"
-            ] = show_tax_code_when_viewing_payrun_entry
+            field_dict["showTaxCodeWhenViewingPayrunEntry"] = show_tax_code_when_viewing_payrun_entry
         if allow_journal_resubmit is not UNSET:
             field_dict["allowJournalResubmit"] = allow_journal_resubmit
         if hide_salary_on_employee_index_page is not UNSET:
-            field_dict[
-                "hideSalaryOnEmployeeIndexPage"
-            ] = hide_salary_on_employee_index_page
+            field_dict["hideSalaryOnEmployeeIndexPage"] = hide_salary_on_employee_index_page
         if enable_multi_employer_import is not UNSET:
             field_dict["enableMultiEmployerImport"] = enable_multi_employer_import
         if enable_covid_19_features is not UNSET:
@@ -104,32 +96,33 @@ class UserDisplayPreferences:
             field_dict["enablePayrunWarnings"] = enable_payrun_warnings
         if enable_working_days_overrides is not UNSET:
             field_dict["enableWorkingDaysOverrides"] = enable_working_days_overrides
-        if cookie_preference is not UNSET:
-            field_dict["cookiePreference"] = cookie_preference
+        if enable_payrun_pagination is not UNSET:
+            field_dict["enablePayrunPagination"] = enable_payrun_pagination
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _start_page = d.pop("startPage", UNSET)
         start_page: Union[Unset, UserstartPage]
-        if isinstance(_start_page, Unset):
+        if isinstance(_start_page,  Unset):
             start_page = UNSET
         else:
             start_page = UserstartPage(_start_page)
 
+
+
+
         show_zeroes = d.pop("showZeroes", UNSET)
 
-        show_tax_code_when_viewing_payrun_entry = d.pop(
-            "showTaxCodeWhenViewingPayrunEntry", UNSET
-        )
+        show_tax_code_when_viewing_payrun_entry = d.pop("showTaxCodeWhenViewingPayrunEntry", UNSET)
 
         allow_journal_resubmit = d.pop("allowJournalResubmit", UNSET)
 
-        hide_salary_on_employee_index_page = d.pop(
-            "hideSalaryOnEmployeeIndexPage", UNSET
-        )
+        hide_salary_on_employee_index_page = d.pop("hideSalaryOnEmployeeIndexPage", UNSET)
 
         enable_multi_employer_import = d.pop("enableMultiEmployerImport", UNSET)
 
@@ -149,12 +142,7 @@ class UserDisplayPreferences:
 
         enable_working_days_overrides = d.pop("enableWorkingDaysOverrides", UNSET)
 
-        _cookie_preference = d.pop("cookiePreference", UNSET)
-        cookie_preference: Union[Unset, CookiePreference]
-        if isinstance(_cookie_preference, Unset):
-            cookie_preference = UNSET
-        else:
-            cookie_preference = CookiePreference.from_dict(_cookie_preference)
+        enable_payrun_pagination = d.pop("enablePayrunPagination", UNSET)
 
         user_display_preferences = cls(
             start_page=start_page,
@@ -171,7 +159,8 @@ class UserDisplayPreferences:
             enable_rti_timestamp_override=enable_rti_timestamp_override,
             enable_payrun_warnings=enable_payrun_warnings,
             enable_working_days_overrides=enable_working_days_overrides,
-            cookie_preference=cookie_preference,
+            enable_payrun_pagination=enable_payrun_pagination,
         )
 
         return user_display_preferences
+

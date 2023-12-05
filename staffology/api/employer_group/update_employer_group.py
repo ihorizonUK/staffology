@@ -1,4 +1,4 @@
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, Union, cast
 
 import httpx
 from staffology.propagate_exceptions import raise_staffology_exception
@@ -31,15 +31,18 @@ def _get_kwargs(
     }
 
 
-def _parse_response(*, response: httpx.Response) -> Optional[EmployerGroup]:
+def _parse_response(*, response: httpx.Response) -> Optional[Union[Any, EmployerGroup]]:
     if response.status_code == 200:
         response_200 = EmployerGroup.from_dict(response.json())
 
         return response_200
+    if response.status_code == 404:
+        response_404 = cast(Any, None)
+        return response_404
     return raise_staffology_exception(response)
 
 
-def _build_response(*, response: httpx.Response) -> Response[EmployerGroup]:
+def _build_response(*, response: httpx.Response) -> Response[Union[Any, EmployerGroup]]:
     return Response(
         status_code=response.status_code,
         content=response.content,
@@ -53,7 +56,7 @@ def sync_detailed(
     *,
     client: Client,
     json_body: EmployerGroup,
-) -> Response[EmployerGroup]:
+) -> Response[Union[Any, EmployerGroup]]:
     """Update EmployerGroup
 
      Updates a EmployerGroup for the user.
@@ -63,7 +66,7 @@ def sync_detailed(
         json_body (EmployerGroup):
 
     Returns:
-        Response[EmployerGroup]
+        Response[Union[Any, EmployerGroup]]
     """
 
     kwargs = _get_kwargs(
@@ -85,7 +88,7 @@ def sync(
     *,
     client: Client,
     json_body: EmployerGroup,
-) -> Optional[EmployerGroup]:
+) -> Optional[Union[Any, EmployerGroup]]:
     """Update EmployerGroup
 
      Updates a EmployerGroup for the user.
@@ -95,7 +98,7 @@ def sync(
         json_body (EmployerGroup):
 
     Returns:
-        Response[EmployerGroup]
+        Response[Union[Any, EmployerGroup]]
     """
 
     return sync_detailed(
@@ -110,7 +113,7 @@ async def asyncio_detailed(
     *,
     client: Client,
     json_body: EmployerGroup,
-) -> Response[EmployerGroup]:
+) -> Response[Union[Any, EmployerGroup]]:
     """Update EmployerGroup
 
      Updates a EmployerGroup for the user.
@@ -120,7 +123,7 @@ async def asyncio_detailed(
         json_body (EmployerGroup):
 
     Returns:
-        Response[EmployerGroup]
+        Response[Union[Any, EmployerGroup]]
     """
 
     kwargs = _get_kwargs(
@@ -140,7 +143,7 @@ async def asyncio(
     *,
     client: Client,
     json_body: EmployerGroup,
-) -> Optional[EmployerGroup]:
+) -> Optional[Union[Any, EmployerGroup]]:
     """Update EmployerGroup
 
      Updates a EmployerGroup for the user.
@@ -150,7 +153,7 @@ async def asyncio(
         json_body (EmployerGroup):
 
     Returns:
-        Response[EmployerGroup]
+        Response[Union[Any, EmployerGroup]]
     """
 
     return (

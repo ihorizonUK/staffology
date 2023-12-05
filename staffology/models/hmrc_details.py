@@ -2,10 +2,10 @@ from typing import Any, Dict, Type, TypeVar, Union
 
 import attr
 
+from ..models.payment_date_rule import PaymentDateRule
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="HmrcDetails")
-
 
 @attr.s(auto_attribs=True)
 class HmrcDetails:
@@ -35,6 +35,8 @@ class HmrcDetails:
             periods will be brought forward
             to work out the liability for the current period.
             You'd set this to false if you don't want to track payments.
+        payment_date_rule (Union[Unset, PaymentDateRule]):
+        payment_date_day_of_month (Union[Unset, None, int]):
         id (Union[Unset, str]): [readonly] The unique id of the object
     """
 
@@ -52,7 +54,10 @@ class HmrcDetails:
     quarterly_payment_schedule: Union[Unset, bool] = UNSET
     include_employment_allowance_on_monthly_journal: Union[Unset, bool] = UNSET
     carry_forward_unpaid_liabilities: Union[Unset, bool] = UNSET
+    payment_date_rule: Union[Unset, PaymentDateRule] = UNSET
+    payment_date_day_of_month: Union[Unset, None, int] = UNSET
     id: Union[Unset, str] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         office_number = self.office_number
@@ -67,14 +72,18 @@ class HmrcDetails:
         apprenticeship_levy = self.apprenticeship_levy
         apprenticeship_levy_allowance = self.apprenticeship_levy_allowance
         quarterly_payment_schedule = self.quarterly_payment_schedule
-        include_employment_allowance_on_monthly_journal = (
-            self.include_employment_allowance_on_monthly_journal
-        )
+        include_employment_allowance_on_monthly_journal = self.include_employment_allowance_on_monthly_journal
         carry_forward_unpaid_liabilities = self.carry_forward_unpaid_liabilities
+        payment_date_rule: Union[Unset, str] = UNSET
+        if not isinstance(self.payment_date_rule, Unset):
+            payment_date_rule = self.payment_date_rule.value
+
+        payment_date_day_of_month = self.payment_date_day_of_month
         id = self.id
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if office_number is not UNSET:
             field_dict["officeNumber"] = office_number
         if paye_reference is not UNSET:
@@ -100,17 +109,19 @@ class HmrcDetails:
         if quarterly_payment_schedule is not UNSET:
             field_dict["quarterlyPaymentSchedule"] = quarterly_payment_schedule
         if include_employment_allowance_on_monthly_journal is not UNSET:
-            field_dict[
-                "includeEmploymentAllowanceOnMonthlyJournal"
-            ] = include_employment_allowance_on_monthly_journal
+            field_dict["includeEmploymentAllowanceOnMonthlyJournal"] = include_employment_allowance_on_monthly_journal
         if carry_forward_unpaid_liabilities is not UNSET:
-            field_dict[
-                "carryForwardUnpaidLiabilities"
-            ] = carry_forward_unpaid_liabilities
+            field_dict["carryForwardUnpaidLiabilities"] = carry_forward_unpaid_liabilities
+        if payment_date_rule is not UNSET:
+            field_dict["paymentDateRule"] = payment_date_rule
+        if payment_date_day_of_month is not UNSET:
+            field_dict["paymentDateDayOfMonth"] = payment_date_day_of_month
         if id is not UNSET:
             field_dict["id"] = id
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -139,11 +150,21 @@ class HmrcDetails:
 
         quarterly_payment_schedule = d.pop("quarterlyPaymentSchedule", UNSET)
 
-        include_employment_allowance_on_monthly_journal = d.pop(
-            "includeEmploymentAllowanceOnMonthlyJournal", UNSET
-        )
+        include_employment_allowance_on_monthly_journal = d.pop("includeEmploymentAllowanceOnMonthlyJournal", UNSET)
 
         carry_forward_unpaid_liabilities = d.pop("carryForwardUnpaidLiabilities", UNSET)
+
+        _payment_date_rule = d.pop("paymentDateRule", UNSET)
+        payment_date_rule: Union[Unset, PaymentDateRule]
+        if isinstance(_payment_date_rule,  Unset):
+            payment_date_rule = UNSET
+        else:
+            payment_date_rule = PaymentDateRule(_payment_date_rule)
+
+
+
+
+        payment_date_day_of_month = d.pop("paymentDateDayOfMonth", UNSET)
 
         id = d.pop("id", UNSET)
 
@@ -162,7 +183,10 @@ class HmrcDetails:
             quarterly_payment_schedule=quarterly_payment_schedule,
             include_employment_allowance_on_monthly_journal=include_employment_allowance_on_monthly_journal,
             carry_forward_unpaid_liabilities=carry_forward_unpaid_liabilities,
+            payment_date_rule=payment_date_rule,
+            payment_date_day_of_month=payment_date_day_of_month,
             id=id,
         )
 
         return hmrc_details
+

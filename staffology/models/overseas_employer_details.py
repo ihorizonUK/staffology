@@ -7,7 +7,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="OverseasEmployerDetails")
 
-
 @attr.s(auto_attribs=True)
 class OverseasEmployerDetails:
     """
@@ -23,6 +22,7 @@ class OverseasEmployerDetails:
     eea_citizen: Union[Unset, bool] = UNSET
     epm_6_scheme: Union[Unset, bool] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         overseas_employer = self.overseas_employer
         overseas_secondment_status: Union[Unset, str] = UNSET
@@ -33,7 +33,8 @@ class OverseasEmployerDetails:
         epm_6_scheme = self.epm_6_scheme
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if overseas_employer is not UNSET:
             field_dict["overseasEmployer"] = overseas_employer
         if overseas_secondment_status is not UNSET:
@@ -45,6 +46,8 @@ class OverseasEmployerDetails:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
@@ -52,12 +55,13 @@ class OverseasEmployerDetails:
 
         _overseas_secondment_status = d.pop("overseasSecondmentStatus", UNSET)
         overseas_secondment_status: Union[Unset, OverseasSecondmentStatus]
-        if isinstance(_overseas_secondment_status, Unset):
+        if isinstance(_overseas_secondment_status,  Unset):
             overseas_secondment_status = UNSET
         else:
-            overseas_secondment_status = OverseasSecondmentStatus(
-                _overseas_secondment_status
-            )
+            overseas_secondment_status = OverseasSecondmentStatus(_overseas_secondment_status)
+
+
+
 
         eea_citizen = d.pop("eeaCitizen", UNSET)
 
@@ -71,3 +75,4 @@ class OverseasEmployerDetails:
         )
 
         return overseas_employer_details
+

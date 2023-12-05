@@ -52,9 +52,7 @@ def _get_kwargs(
     }
 
 
-def _parse_response(
-    *, response: httpx.Response
-) -> Optional[NationalInsuranceCalculation]:
+def _parse_response(*, response: httpx.Response) -> Optional[NationalInsuranceCalculation]:
     if response.status_code == 200:
         response_200 = NationalInsuranceCalculation.from_dict(response.json())
 
@@ -62,9 +60,7 @@ def _parse_response(
     return raise_staffology_exception(response)
 
 
-def _build_response(
-    *, response: httpx.Response
-) -> Response[NationalInsuranceCalculation]:
+def _build_response(*, response: httpx.Response) -> Response[NationalInsuranceCalculation]:
     return Response(
         status_code=response.status_code,
         content=response.content,

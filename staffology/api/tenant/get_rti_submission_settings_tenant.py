@@ -12,19 +12,32 @@ def _get_kwargs(
     *,
     client: Client,
     id: Union[Unset, None, str] = UNSET,
+
 ) -> Dict[str, Any]:
-    url = "{}/tenants/ritsubmissionsettings".format(client.base_url)
+    url = "{}/tenants/ritsubmissionsettings".format(
+        client.base_url)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
 
+    
+
+    
+
     params: Dict[str, Any] = {}
     params["id"] = id
 
+
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
+
+    
+
+    
+
     return {
-        "method": "get",
+	    "method": "get",
         "url": url,
         "headers": headers,
         "cookies": cookies,
@@ -36,6 +49,8 @@ def _get_kwargs(
 def _parse_response(*, response: httpx.Response) -> Optional[RtiSubmissionSettings]:
     if response.status_code == 200:
         response_200 = RtiSubmissionSettings.from_dict(response.json())
+
+
 
         return response_200
     return raise_staffology_exception(response)
@@ -54,6 +69,7 @@ def sync_detailed(
     *,
     client: Client,
     id: Union[Unset, None, str] = UNSET,
+
 ) -> Response[RtiSubmissionSettings]:
     """Get RtiSubmissionSettings
 
@@ -68,9 +84,11 @@ def sync_detailed(
         Response[RtiSubmissionSettings]
     """
 
+
     kwargs = _get_kwargs(
         client=client,
-        id=id,
+id=id,
+
     )
 
     response = httpx.request(
@@ -80,11 +98,11 @@ def sync_detailed(
 
     return _build_response(response=response)
 
-
 def sync(
     *,
     client: Client,
     id: Union[Unset, None, str] = UNSET,
+
 ) -> Optional[RtiSubmissionSettings]:
     """Get RtiSubmissionSettings
 
@@ -99,16 +117,18 @@ def sync(
         Response[RtiSubmissionSettings]
     """
 
+
     return sync_detailed(
         client=client,
-        id=id,
-    ).parsed
+id=id,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
     client: Client,
     id: Union[Unset, None, str] = UNSET,
+
 ) -> Response[RtiSubmissionSettings]:
     """Get RtiSubmissionSettings
 
@@ -123,21 +143,25 @@ async def asyncio_detailed(
         Response[RtiSubmissionSettings]
     """
 
+
     kwargs = _get_kwargs(
         client=client,
-        id=id,
+id=id,
+
     )
 
     async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+        response = await _client.request(
+            **kwargs
+        )
 
     return _build_response(response=response)
-
 
 async def asyncio(
     *,
     client: Client,
     id: Union[Unset, None, str] = UNSET,
+
 ) -> Optional[RtiSubmissionSettings]:
     """Get RtiSubmissionSettings
 
@@ -152,9 +176,10 @@ async def asyncio(
         Response[RtiSubmissionSettings]
     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            id=id,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+id=id,
+
+    )).parsed
+

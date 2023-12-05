@@ -7,11 +7,11 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GrossToNetReportLine")
 
-
 @attr.s(auto_attribs=True)
 class GrossToNetReportLine:
     """
     Attributes:
+        ni_number (Union[Unset, None, str]):
         total_gross (Union[Unset, float]):
         taxable_gross (Union[Unset, float]):
         net_pay (Union[Unset, float]):
@@ -24,11 +24,13 @@ class GrossToNetReportLine:
         statutory_payments (Union[Unset, float]):
         attachments (Union[Unset, float]):
         other_deductions (Union[Unset, float]):
+        last_name (Union[Unset, None, str]):
         employee (Union[Unset, Item]):
         payroll_code (Union[Unset, None, str]):
         department (Union[Unset, None, str]):
     """
 
+    ni_number: Union[Unset, None, str] = UNSET
     total_gross: Union[Unset, float] = UNSET
     taxable_gross: Union[Unset, float] = UNSET
     net_pay: Union[Unset, float] = UNSET
@@ -41,11 +43,14 @@ class GrossToNetReportLine:
     statutory_payments: Union[Unset, float] = UNSET
     attachments: Union[Unset, float] = UNSET
     other_deductions: Union[Unset, float] = UNSET
+    last_name: Union[Unset, None, str] = UNSET
     employee: Union[Unset, Item] = UNSET
     payroll_code: Union[Unset, None, str] = UNSET
     department: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
+        ni_number = self.ni_number
         total_gross = self.total_gross
         taxable_gross = self.taxable_gross
         net_pay = self.net_pay
@@ -58,6 +63,7 @@ class GrossToNetReportLine:
         statutory_payments = self.statutory_payments
         attachments = self.attachments
         other_deductions = self.other_deductions
+        last_name = self.last_name
         employee: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.employee, Unset):
             employee = self.employee.to_dict()
@@ -66,7 +72,10 @@ class GrossToNetReportLine:
         department = self.department
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
+        if ni_number is not UNSET:
+            field_dict["niNumber"] = ni_number
         if total_gross is not UNSET:
             field_dict["totalGross"] = total_gross
         if taxable_gross is not UNSET:
@@ -91,6 +100,8 @@ class GrossToNetReportLine:
             field_dict["attachments"] = attachments
         if other_deductions is not UNSET:
             field_dict["otherDeductions"] = other_deductions
+        if last_name is not UNSET:
+            field_dict["lastName"] = last_name
         if employee is not UNSET:
             field_dict["employee"] = employee
         if payroll_code is not UNSET:
@@ -100,9 +111,13 @@ class GrossToNetReportLine:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
+        ni_number = d.pop("niNumber", UNSET)
+
         total_gross = d.pop("totalGross", UNSET)
 
         taxable_gross = d.pop("taxableGross", UNSET)
@@ -127,18 +142,24 @@ class GrossToNetReportLine:
 
         other_deductions = d.pop("otherDeductions", UNSET)
 
+        last_name = d.pop("lastName", UNSET)
+
         _employee = d.pop("employee", UNSET)
         employee: Union[Unset, Item]
-        if isinstance(_employee, Unset):
+        if isinstance(_employee,  Unset):
             employee = UNSET
         else:
             employee = Item.from_dict(_employee)
+
+
+
 
         payroll_code = d.pop("payrollCode", UNSET)
 
         department = d.pop("department", UNSET)
 
         gross_to_net_report_line = cls(
+            ni_number=ni_number,
             total_gross=total_gross,
             taxable_gross=taxable_gross,
             net_pay=net_pay,
@@ -151,9 +172,11 @@ class GrossToNetReportLine:
             statutory_payments=statutory_payments,
             attachments=attachments,
             other_deductions=other_deductions,
+            last_name=last_name,
             employee=employee,
             payroll_code=payroll_code,
             department=department,
         )
 
         return gross_to_net_report_line
+

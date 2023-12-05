@@ -6,7 +6,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="HtmlEmailSettings")
 
-
 @attr.s(auto_attribs=True)
 class HtmlEmailSettings:
     """
@@ -24,6 +23,7 @@ class HtmlEmailSettings:
     header_html: Union[Unset, None, str] = UNSET
     footer_html: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         body_css_style = self.body_css_style
         font_css_style = self.font_css_style
@@ -32,7 +32,8 @@ class HtmlEmailSettings:
         footer_html = self.footer_html
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if body_css_style is not UNSET:
             field_dict["bodyCssStyle"] = body_css_style
         if font_css_style is not UNSET:
@@ -45,6 +46,8 @@ class HtmlEmailSettings:
             field_dict["footerHtml"] = footer_html
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -68,3 +71,4 @@ class HtmlEmailSettings:
         )
 
         return html_email_settings
+

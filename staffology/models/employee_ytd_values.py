@@ -8,7 +8,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="EmployeeYtdValues")
 
-
 @attr.s(auto_attribs=True)
 class EmployeeYtdValues:
     """
@@ -25,6 +24,7 @@ class EmployeeYtdValues:
     first_name: Union[Unset, None, str] = UNSET
     last_name: Union[Unset, None, str] = UNSET
     values: Union[Unset, None, List[YtdValue]] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         employee: Union[Unset, Dict[str, Any]] = UNSET
@@ -45,8 +45,13 @@ class EmployeeYtdValues:
 
                     values.append(values_item)
 
+
+
+
+
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if employee is not UNSET:
             field_dict["employee"] = employee
         if payroll_code is not UNSET:
@@ -60,15 +65,20 @@ class EmployeeYtdValues:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _employee = d.pop("employee", UNSET)
         employee: Union[Unset, Item]
-        if isinstance(_employee, Unset):
+        if isinstance(_employee,  Unset):
             employee = UNSET
         else:
             employee = Item.from_dict(_employee)
+
+
+
 
         payroll_code = d.pop("payrollCode", UNSET)
 
@@ -78,10 +88,13 @@ class EmployeeYtdValues:
 
         values = []
         _values = d.pop("values", UNSET)
-        for values_item_data in _values or []:
+        for values_item_data in (_values or []):
             values_item = YtdValue.from_dict(values_item_data)
 
+
+
             values.append(values_item)
+
 
         employee_ytd_values = cls(
             employee=employee,
@@ -92,3 +105,4 @@ class EmployeeYtdValues:
         )
 
         return employee_ytd_values
+

@@ -6,7 +6,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="UmbrellaPayment")
 
-
 @attr.s(auto_attribs=True)
 class UmbrellaPayment:
     """
@@ -35,6 +34,7 @@ class UmbrellaPayment:
     gross_deduction: Union[Unset, float] = UNSET
     gross_addition: Union[Unset, float] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         payroll_code = self.payroll_code
         charge_per_timesheet = self.charge_per_timesheet
@@ -47,7 +47,8 @@ class UmbrellaPayment:
         gross_addition = self.gross_addition
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if payroll_code is not UNSET:
             field_dict["payrollCode"] = payroll_code
         if charge_per_timesheet is not UNSET:
@@ -68,6 +69,8 @@ class UmbrellaPayment:
             field_dict["grossAddition"] = gross_addition
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -103,3 +106,4 @@ class UmbrellaPayment:
         )
 
         return umbrella_payment
+

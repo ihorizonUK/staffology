@@ -9,7 +9,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="PensionProvider")
 
-
 @attr.s(auto_attribs=True)
 class PensionProvider:
     """
@@ -69,6 +68,7 @@ class PensionProvider:
     opt_out_window_is_months: Union[Unset, bool] = UNSET
     id: Union[Unset, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         name = self.name
         account_no = self.account_no
@@ -100,11 +100,9 @@ class PensionProvider:
         id = self.id
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update(
-            {
-                "name": name,
-            }
-        )
+        field_dict.update({
+            "name": name,
+        })
         if account_no is not UNSET:
             field_dict["accountNo"] = account_no
         if portal is not UNSET:
@@ -124,9 +122,7 @@ class PensionProvider:
         if csv_format is not UNSET:
             field_dict["csvFormat"] = csv_format
         if exclude_nil_paid_from_contributions is not UNSET:
-            field_dict[
-                "excludeNilPaidFromContributions"
-            ] = exclude_nil_paid_from_contributions
+            field_dict["excludeNilPaidFromContributions"] = exclude_nil_paid_from_contributions
         if pay_period_date_adjustment is not UNSET:
             field_dict["payPeriodDateAdjustment"] = pay_period_date_adjustment
         if misc_boolean_1 is not UNSET:
@@ -146,6 +142,8 @@ class PensionProvider:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
@@ -159,19 +157,25 @@ class PensionProvider:
 
         _address = d.pop("address", UNSET)
         address: Union[Unset, Address]
-        if isinstance(_address, Unset):
+        if isinstance(_address,  Unset):
             address = UNSET
         else:
             address = Address.from_dict(_address)
+
+
+
 
         telephone = d.pop("telephone", UNSET)
 
         _papdis_version = d.pop("papdisVersion", UNSET)
         papdis_version: Union[Unset, PapdisVersion]
-        if isinstance(_papdis_version, Unset):
+        if isinstance(_papdis_version,  Unset):
             papdis_version = UNSET
         else:
             papdis_version = PapdisVersion(_papdis_version)
+
+
+
 
         papdis_provider_id = d.pop("papdisProviderId", UNSET)
 
@@ -179,14 +183,15 @@ class PensionProvider:
 
         _csv_format = d.pop("csvFormat", UNSET)
         csv_format: Union[Unset, PensionCsvFormat]
-        if isinstance(_csv_format, Unset):
+        if isinstance(_csv_format,  Unset):
             csv_format = UNSET
         else:
             csv_format = PensionCsvFormat(_csv_format)
 
-        exclude_nil_paid_from_contributions = d.pop(
-            "excludeNilPaidFromContributions", UNSET
-        )
+
+
+
+        exclude_nil_paid_from_contributions = d.pop("excludeNilPaidFromContributions", UNSET)
 
         pay_period_date_adjustment = d.pop("payPeriodDateAdjustment", UNSET)
 
@@ -227,3 +232,4 @@ class PensionProvider:
         )
 
         return pension_provider
+

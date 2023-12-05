@@ -1,4 +1,4 @@
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, Union, cast
 
 import httpx
 from staffology.propagate_exceptions import raise_staffology_exception
@@ -14,9 +14,7 @@ def _get_kwargs(
     *,
     client: Client,
 ) -> Dict[str, Any]:
-    url = "{}/employers/{employerId}/paycodes/{code}".format(
-        client.base_url, employerId=employer_id, code=code
-    )
+    url = "{}/employers/{employerId}/paycodes/{code}".format(client.base_url, employerId=employer_id, code=code)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
@@ -30,15 +28,18 @@ def _get_kwargs(
     }
 
 
-def _parse_response(*, response: httpx.Response) -> Optional[PayCode]:
+def _parse_response(*, response: httpx.Response) -> Optional[Union[Any, PayCode]]:
     if response.status_code == 200:
         response_200 = PayCode.from_dict(response.json())
 
         return response_200
+    if response.status_code == 404:
+        response_404 = cast(Any, None)
+        return response_404
     return raise_staffology_exception(response)
 
 
-def _build_response(*, response: httpx.Response) -> Response[PayCode]:
+def _build_response(*, response: httpx.Response) -> Response[Union[Any, PayCode]]:
     return Response(
         status_code=response.status_code,
         content=response.content,
@@ -52,17 +53,18 @@ def sync_detailed(
     code: str,
     *,
     client: Client,
-) -> Response[PayCode]:
-    """Get PayCode
+) -> Response[Union[Any, PayCode]]:
+    """Get PayCode (deprecated)
 
      Gets the PayCode specified.
+    Use the other GET endpoint that supports non-alphanumeric characters for a pay code
 
     Args:
         employer_id (str):
         code (str):
 
     Returns:
-        Response[PayCode]
+        Response[Union[Any, PayCode]]
     """
 
     kwargs = _get_kwargs(
@@ -84,17 +86,18 @@ def sync(
     code: str,
     *,
     client: Client,
-) -> Optional[PayCode]:
-    """Get PayCode
+) -> Optional[Union[Any, PayCode]]:
+    """Get PayCode (deprecated)
 
      Gets the PayCode specified.
+    Use the other GET endpoint that supports non-alphanumeric characters for a pay code
 
     Args:
         employer_id (str):
         code (str):
 
     Returns:
-        Response[PayCode]
+        Response[Union[Any, PayCode]]
     """
 
     return sync_detailed(
@@ -109,17 +112,18 @@ async def asyncio_detailed(
     code: str,
     *,
     client: Client,
-) -> Response[PayCode]:
-    """Get PayCode
+) -> Response[Union[Any, PayCode]]:
+    """Get PayCode (deprecated)
 
      Gets the PayCode specified.
+    Use the other GET endpoint that supports non-alphanumeric characters for a pay code
 
     Args:
         employer_id (str):
         code (str):
 
     Returns:
-        Response[PayCode]
+        Response[Union[Any, PayCode]]
     """
 
     kwargs = _get_kwargs(
@@ -139,17 +143,18 @@ async def asyncio(
     code: str,
     *,
     client: Client,
-) -> Optional[PayCode]:
-    """Get PayCode
+) -> Optional[Union[Any, PayCode]]:
+    """Get PayCode (deprecated)
 
      Gets the PayCode specified.
+    Use the other GET endpoint that supports non-alphanumeric characters for a pay code
 
     Args:
         employer_id (str):
         code (str):
 
     Returns:
-        Response[PayCode]
+        Response[Union[Any, PayCode]]
     """
 
     return (

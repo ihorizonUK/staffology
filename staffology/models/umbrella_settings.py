@@ -6,7 +6,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="UmbrellaSettings")
 
-
 @attr.s(auto_attribs=True)
 class UmbrellaSettings:
     """
@@ -34,6 +33,7 @@ class UmbrellaSettings:
     cis_fee_code: Union[Unset, None, str] = UNSET
     detail_fee_in_comment: Union[Unset, bool] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         enabled = self.enabled
         charge_per_timesheet = self.charge_per_timesheet
@@ -47,7 +47,8 @@ class UmbrellaSettings:
         detail_fee_in_comment = self.detail_fee_in_comment
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if enabled is not UNSET:
             field_dict["enabled"] = enabled
         if charge_per_timesheet is not UNSET:
@@ -70,6 +71,8 @@ class UmbrellaSettings:
             field_dict["detailFeeInComment"] = detail_fee_in_comment
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -108,3 +111,4 @@ class UmbrellaSettings:
         )
 
         return umbrella_settings
+

@@ -6,7 +6,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="P11PayeSummary")
 
-
 @attr.s(auto_attribs=True)
 class P11PayeSummary:
     """Forms the PAYE summary in the P11 Detailed report
@@ -27,6 +26,7 @@ class P11PayeSummary:
     total_pay_for_year: Union[Unset, float] = UNSET
     total_tax_for_year: Union[Unset, float] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         previous_employment_pay = self.previous_employment_pay
         previous_employment_tax = self.previous_employment_tax
@@ -36,7 +36,8 @@ class P11PayeSummary:
         total_tax_for_year = self.total_tax_for_year
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if previous_employment_pay is not UNSET:
             field_dict["previousEmploymentPay"] = previous_employment_pay
         if previous_employment_tax is not UNSET:
@@ -51,6 +52,8 @@ class P11PayeSummary:
             field_dict["totalTaxForYear"] = total_tax_for_year
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -77,3 +80,4 @@ class P11PayeSummary:
         )
 
         return p11_paye_summary
+

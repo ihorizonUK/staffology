@@ -16,13 +16,12 @@ class NiLetterError(str, Enum):
     LUSEDFORNONFREEPORTWORKER = "LUsedForNonFreeportWorker"
     SUSEDFORNONFREEPORTWORKER = "SUsedForNonFreeportWorker"
     VUSEDFORNONVETERAN = "VUsedForNonVeteran"
-    VUSEDFORVETERANSFIRSTEMPLOYMENTDATEOVERONEYEAROLD = (
-        "VUsedForVeteransFirstEmploymentDateOverOneYearOld"
-    )
+    VUSEDFORVETERANSFIRSTEMPLOYMENTDATEOVERONEYEAROLD = "VUsedForVeteransFirstEmploymentDateOverOneYearOld"
     FUSEDFORFREEPORTWORKEROVERTHREEYEARSOLD = "FUsedForFreeportWorkerOverThreeYearsOld"
     IUSEDFORFREEPORTWORKEROVERTHREEYEARSOLD = "IUsedForFreeportWorkerOverThreeYearsOld"
     LUSEDFORFREEPORTWORKEROVERTHREEYEARSOLD = "LUsedForFreeportWorkerOverThreeYearsOld"
     SUSEDFORFREEPORTWORKEROVERTHREEYEARSOLD = "SUsedForFreeportWorkerOverThreeYearsOld"
+    XNOTUSEDFORUNDER16 = "XNotUsedForUnder16"
 
     def __str__(self) -> str:
         return str(self.value)

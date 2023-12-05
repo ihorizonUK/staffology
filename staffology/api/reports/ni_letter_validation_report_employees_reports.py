@@ -5,9 +5,7 @@ import httpx
 from staffology.propagate_exceptions import raise_staffology_exception
 
 from ...client import Client
-from ...models.ni_letter_validation_report_report_response import (
-    NiLetterValidationReportReportResponse,
-)
+from ...models.ni_letter_validation_report_report_response import NiLetterValidationReportReportResponse
 from ...models.pay_periods import PayPeriods
 from ...types import UNSET, Response, Unset
 
@@ -19,16 +17,20 @@ def _get_kwargs(
     pay_date: Union[Unset, None, datetime.datetime] = UNSET,
     pay_period: Union[Unset, None, PayPeriods] = UNSET,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Dict[str, Any]:
     url = "{}/employers/{employerId}/reports/NiLetterValidationReport".format(
-        client.base_url, employerId=employer_id
-    )
+        client.base_url,employerId=employer_id)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
 
     if not isinstance(accept, Unset):
         headers["accept"] = accept
+
+
+
+    
 
     params: Dict[str, Any] = {}
     json_pay_date: Union[Unset, None, str] = UNSET
@@ -37,16 +39,24 @@ def _get_kwargs(
 
     params["payDate"] = json_pay_date
 
+
     json_pay_period: Union[Unset, None, str] = UNSET
     if not isinstance(pay_period, Unset):
         json_pay_period = pay_period.value if pay_period else None
 
     params["payPeriod"] = json_pay_period
 
+
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
+
+    
+
+    
+
     return {
-        "method": "get",
+	    "method": "get",
         "url": url,
         "headers": headers,
         "cookies": cookies,
@@ -55,19 +65,17 @@ def _get_kwargs(
     }
 
 
-def _parse_response(
-    *, response: httpx.Response
-) -> Optional[NiLetterValidationReportReportResponse]:
+def _parse_response(*, response: httpx.Response) -> Optional[NiLetterValidationReportReportResponse]:
     if response.status_code == 200:
         response_200 = NiLetterValidationReportReportResponse.from_dict(response.json())
+
+
 
         return response_200
     return raise_staffology_exception(response)
 
 
-def _build_response(
-    *, response: httpx.Response
-) -> Response[NiLetterValidationReportReportResponse]:
+def _build_response(*, response: httpx.Response) -> Response[NiLetterValidationReportReportResponse]:
     return Response(
         status_code=response.status_code,
         content=response.content,
@@ -83,11 +91,12 @@ def sync_detailed(
     pay_date: Union[Unset, None, datetime.datetime] = UNSET,
     pay_period: Union[Unset, None, PayPeriods] = UNSET,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Response[NiLetterValidationReportReportResponse]:
     """NI Letter Validation (Employees)
 
      Checks the NI Letters allocated to your employees. If no pay date is provided, the checks are based
-    on todays date.
+    on today's date.
 
     Args:
         employer_id (str):
@@ -99,12 +108,14 @@ def sync_detailed(
         Response[NiLetterValidationReportReportResponse]
     """
 
+
     kwargs = _get_kwargs(
         employer_id=employer_id,
-        client=client,
-        pay_date=pay_date,
-        pay_period=pay_period,
-        accept=accept,
+client=client,
+pay_date=pay_date,
+pay_period=pay_period,
+accept=accept,
+
     )
 
     response = httpx.request(
@@ -114,7 +125,6 @@ def sync_detailed(
 
     return _build_response(response=response)
 
-
 def sync(
     employer_id: str,
     *,
@@ -122,11 +132,12 @@ def sync(
     pay_date: Union[Unset, None, datetime.datetime] = UNSET,
     pay_period: Union[Unset, None, PayPeriods] = UNSET,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Optional[NiLetterValidationReportReportResponse]:
     """NI Letter Validation (Employees)
 
      Checks the NI Letters allocated to your employees. If no pay date is provided, the checks are based
-    on todays date.
+    on today's date.
 
     Args:
         employer_id (str):
@@ -138,14 +149,15 @@ def sync(
         Response[NiLetterValidationReportReportResponse]
     """
 
+
     return sync_detailed(
         employer_id=employer_id,
-        client=client,
-        pay_date=pay_date,
-        pay_period=pay_period,
-        accept=accept,
-    ).parsed
+client=client,
+pay_date=pay_date,
+pay_period=pay_period,
+accept=accept,
 
+    ).parsed
 
 async def asyncio_detailed(
     employer_id: str,
@@ -154,11 +166,12 @@ async def asyncio_detailed(
     pay_date: Union[Unset, None, datetime.datetime] = UNSET,
     pay_period: Union[Unset, None, PayPeriods] = UNSET,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Response[NiLetterValidationReportReportResponse]:
     """NI Letter Validation (Employees)
 
      Checks the NI Letters allocated to your employees. If no pay date is provided, the checks are based
-    on todays date.
+    on today's date.
 
     Args:
         employer_id (str):
@@ -170,19 +183,22 @@ async def asyncio_detailed(
         Response[NiLetterValidationReportReportResponse]
     """
 
+
     kwargs = _get_kwargs(
         employer_id=employer_id,
-        client=client,
-        pay_date=pay_date,
-        pay_period=pay_period,
-        accept=accept,
+client=client,
+pay_date=pay_date,
+pay_period=pay_period,
+accept=accept,
+
     )
 
     async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+        response = await _client.request(
+            **kwargs
+        )
 
     return _build_response(response=response)
-
 
 async def asyncio(
     employer_id: str,
@@ -191,11 +207,12 @@ async def asyncio(
     pay_date: Union[Unset, None, datetime.datetime] = UNSET,
     pay_period: Union[Unset, None, PayPeriods] = UNSET,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Optional[NiLetterValidationReportReportResponse]:
     """NI Letter Validation (Employees)
 
      Checks the NI Letters allocated to your employees. If no pay date is provided, the checks are based
-    on todays date.
+    on today's date.
 
     Args:
         employer_id (str):
@@ -207,12 +224,13 @@ async def asyncio(
         Response[NiLetterValidationReportReportResponse]
     """
 
-    return (
-        await asyncio_detailed(
-            employer_id=employer_id,
-            client=client,
-            pay_date=pay_date,
-            pay_period=pay_period,
-            accept=accept,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        employer_id=employer_id,
+client=client,
+pay_date=pay_date,
+pay_period=pay_period,
+accept=accept,
+
+    )).parsed
+

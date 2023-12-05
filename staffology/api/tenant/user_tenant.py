@@ -13,16 +13,26 @@ def _get_kwargs(
     user_id: str,
     *,
     client: Client,
+
 ) -> Dict[str, Any]:
     url = "{}/tenants/{id}/users/{userId}".format(
-        client.base_url, id=id, userId=user_id
-    )
+        client.base_url,id=id,userId=user_id)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
 
+    
+
+    
+
+    
+
+    
+
+    
+
     return {
-        "method": "get",
+	    "method": "get",
         "url": url,
         "headers": headers,
         "cookies": cookies,
@@ -33,6 +43,8 @@ def _get_kwargs(
 def _parse_response(*, response: httpx.Response) -> Optional[User]:
     if response.status_code == 200:
         response_200 = User.from_dict(response.json())
+
+
 
         return response_200
     return raise_staffology_exception(response)
@@ -52,6 +64,7 @@ def sync_detailed(
     user_id: str,
     *,
     client: Client,
+
 ) -> Response[User]:
     """Get a User
 
@@ -65,10 +78,12 @@ def sync_detailed(
         Response[User]
     """
 
+
     kwargs = _get_kwargs(
         id=id,
-        user_id=user_id,
-        client=client,
+user_id=user_id,
+client=client,
+
     )
 
     response = httpx.request(
@@ -78,12 +93,12 @@ def sync_detailed(
 
     return _build_response(response=response)
 
-
 def sync(
     id: str,
     user_id: str,
     *,
     client: Client,
+
 ) -> Optional[User]:
     """Get a User
 
@@ -97,18 +112,20 @@ def sync(
         Response[User]
     """
 
+
     return sync_detailed(
         id=id,
-        user_id=user_id,
-        client=client,
-    ).parsed
+user_id=user_id,
+client=client,
 
+    ).parsed
 
 async def asyncio_detailed(
     id: str,
     user_id: str,
     *,
     client: Client,
+
 ) -> Response[User]:
     """Get a User
 
@@ -122,23 +139,27 @@ async def asyncio_detailed(
         Response[User]
     """
 
+
     kwargs = _get_kwargs(
         id=id,
-        user_id=user_id,
-        client=client,
+user_id=user_id,
+client=client,
+
     )
 
     async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+        response = await _client.request(
+            **kwargs
+        )
 
     return _build_response(response=response)
-
 
 async def asyncio(
     id: str,
     user_id: str,
     *,
     client: Client,
+
 ) -> Optional[User]:
     """Get a User
 
@@ -152,10 +173,11 @@ async def asyncio(
         Response[User]
     """
 
-    return (
-        await asyncio_detailed(
-            id=id,
-            user_id=user_id,
-            client=client,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        id=id,
+user_id=user_id,
+client=client,
+
+    )).parsed
+

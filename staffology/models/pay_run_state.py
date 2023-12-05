@@ -2,12 +2,16 @@ from enum import Enum
 
 
 class PayRunState(str, Enum):
+    OPENING = "Opening"
     OPEN = "Open"
+    ROLLEDBACK = "RolledBack"
     SUBMITTEDFORPROCESSING = "SubmittedForProcessing"
     PROCESSING = "Processing"
     AWAITINGAPPROVAL = "AwaitingApproval"
     APPROVED = "Approved"
+    FINALISING = "Finalising"
     FINALISED = "Finalised"
+    DELETING = "Deleting"
 
     def __str__(self) -> str:
         return str(self.value)

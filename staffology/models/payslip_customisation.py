@@ -10,32 +10,31 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="PayslipCustomisation")
 
-
 @attr.s(auto_attribs=True)
 class PayslipCustomisation:
     """Used to represent any customisations you make to the look of Payslip PDFs.
-    This is covered in detail in the Guides section.
+This is covered in detail in the Guides section.
 
-        Attributes:
-            custom (Union[Unset, bool]): Whether or not you are customising the Payslip.
-                This should always be true if you are providing any other values.
-            include_logo (Union[Unset, bool]): Whether or not to include the employer logo on the payslip.
-            custom_css_option (Union[Unset, ReportCustomCssOption]):
-            custom_css (Union[Unset, None, str]):
-            remove_ytd (Union[Unset, bool]): Whether or not to remove the YTD column
-            include_employer_address (Union[Unset, bool]): Whether or not to include the employer address
-            use_umbrella_format (Union[Unset, bool]): If true then the format the payslip will include details of the
-                Umbrella Payment as well as employer costs
-            filename (Union[Unset, None, str]):
-            include_department (Union[Unset, bool]): Whether or not to include the primary department of the employee on the
-                payslip
-            include_health_and_social_care_message (Union[Unset, bool]): Whether or not to include health and social car
-                message
-            include_benefits (Union[Unset, bool]): Whether or not to include any payrolled benefits
-            paper_size (Union[Unset, PdfPaperSize]):
-            orientation (Union[Unset, PdfPaperOrientation]):
-            margins (Union[Unset, PdfPaperMargins]):
-            id (Union[Unset, str]): [readonly] The unique id of the object
+    Attributes:
+        custom (Union[Unset, bool]): Whether or not you are customising the Payslip.
+            This should always be true if you are providing any other values.
+        include_logo (Union[Unset, bool]): Whether or not to include the employer logo on the payslip.
+        custom_css_option (Union[Unset, ReportCustomCssOption]):
+        custom_css (Union[Unset, None, str]):
+        remove_ytd (Union[Unset, bool]): Whether or not to remove the YTD column
+        include_employer_address (Union[Unset, bool]): Whether or not to include the employer address
+        use_umbrella_format (Union[Unset, bool]): If true then the format the payslip will include details of the
+            Umbrella Payment as well as employer costs
+        filename (Union[Unset, None, str]):
+        include_department (Union[Unset, bool]): Whether or not to include the primary department of the employee on the
+            payslip
+        include_health_and_social_care_message (Union[Unset, bool]): Whether or not to include health and social car
+            message
+        include_benefits (Union[Unset, bool]): Whether or not to include any payrolled benefits
+        paper_size (Union[Unset, PdfPaperSize]):
+        orientation (Union[Unset, PdfPaperOrientation]):
+        margins (Union[Unset, PdfPaperMargins]):
+        id (Union[Unset, str]): [readonly] The unique id of the object
     """
 
     custom: Union[Unset, bool] = UNSET
@@ -54,6 +53,7 @@ class PayslipCustomisation:
     margins: Union[Unset, PdfPaperMargins] = UNSET
     id: Union[Unset, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         custom = self.custom
         include_logo = self.include_logo
@@ -67,9 +67,7 @@ class PayslipCustomisation:
         use_umbrella_format = self.use_umbrella_format
         filename = self.filename
         include_department = self.include_department
-        include_health_and_social_care_message = (
-            self.include_health_and_social_care_message
-        )
+        include_health_and_social_care_message = self.include_health_and_social_care_message
         include_benefits = self.include_benefits
         paper_size: Union[Unset, str] = UNSET
         if not isinstance(self.paper_size, Unset):
@@ -86,7 +84,8 @@ class PayslipCustomisation:
         id = self.id
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if custom is not UNSET:
             field_dict["custom"] = custom
         if include_logo is not UNSET:
@@ -106,9 +105,7 @@ class PayslipCustomisation:
         if include_department is not UNSET:
             field_dict["includeDepartment"] = include_department
         if include_health_and_social_care_message is not UNSET:
-            field_dict[
-                "includeHealthAndSocialCareMessage"
-            ] = include_health_and_social_care_message
+            field_dict["includeHealthAndSocialCareMessage"] = include_health_and_social_care_message
         if include_benefits is not UNSET:
             field_dict["includeBenefits"] = include_benefits
         if paper_size is not UNSET:
@@ -122,6 +119,8 @@ class PayslipCustomisation:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
@@ -131,10 +130,13 @@ class PayslipCustomisation:
 
         _custom_css_option = d.pop("customCssOption", UNSET)
         custom_css_option: Union[Unset, ReportCustomCssOption]
-        if isinstance(_custom_css_option, Unset):
+        if isinstance(_custom_css_option,  Unset):
             custom_css_option = UNSET
         else:
             custom_css_option = ReportCustomCssOption(_custom_css_option)
+
+
+
 
         custom_css = d.pop("customCss", UNSET)
 
@@ -148,32 +150,39 @@ class PayslipCustomisation:
 
         include_department = d.pop("includeDepartment", UNSET)
 
-        include_health_and_social_care_message = d.pop(
-            "includeHealthAndSocialCareMessage", UNSET
-        )
+        include_health_and_social_care_message = d.pop("includeHealthAndSocialCareMessage", UNSET)
 
         include_benefits = d.pop("includeBenefits", UNSET)
 
         _paper_size = d.pop("paperSize", UNSET)
         paper_size: Union[Unset, PdfPaperSize]
-        if isinstance(_paper_size, Unset):
+        if isinstance(_paper_size,  Unset):
             paper_size = UNSET
         else:
             paper_size = PdfPaperSize(_paper_size)
 
+
+
+
         _orientation = d.pop("orientation", UNSET)
         orientation: Union[Unset, PdfPaperOrientation]
-        if isinstance(_orientation, Unset):
+        if isinstance(_orientation,  Unset):
             orientation = UNSET
         else:
             orientation = PdfPaperOrientation(_orientation)
 
+
+
+
         _margins = d.pop("margins", UNSET)
         margins: Union[Unset, PdfPaperMargins]
-        if isinstance(_margins, Unset):
+        if isinstance(_margins,  Unset):
             margins = UNSET
         else:
             margins = PdfPaperMargins.from_dict(_margins)
+
+
+
 
         id = d.pop("id", UNSET)
 
@@ -196,3 +205,4 @@ class PayslipCustomisation:
         )
 
         return payslip_customisation
+

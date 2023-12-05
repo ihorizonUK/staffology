@@ -9,40 +9,41 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="Tenant")
 
-
 @attr.s(auto_attribs=True)
 class Tenant:
     """The Tenant model represents the brand that provides the account.
-    This is used by our White Label partners to manage and brand their user accounts.
-    Unless you are an admin for a White Label account you'll have no interest in this model.
+This is used by our White Label partners to manage and brand their user accounts.
+Unless you are an admin for a White Label account you'll have no interest in this model.
 
-        Attributes:
-            brand_code (Union[Unset, None, str]): [readonly]
-            app_name (Union[Unset, None, str]):
-            home_url (Union[Unset, None, str]):
-            head_content (Union[Unset, None, str]):
-            log_out_url (Union[Unset, None, str]):
-            login_img_url (Union[Unset, None, str]): [readonly]
-            home_img_url (Union[Unset, None, str]): [readonly]
-            fav_icon (Union[Unset, None, str]): [readonly]
-            css_colors_file (Union[Unset, None, str]): [readonly]
-            css_file (Union[Unset, None, str]): [readonly]
-            mailing_list (Union[Unset, bool]):
-            html_insertions (Union[Unset, None, List[TenantHtmlInsertion]]):
-            mail_settings (Union[Unset, MailSettings]): Determines the settings used when the Employer sends emails.
-                If CustomiseSmtpSettings is false then SmtpSettings will be null and our default internal settings will be used;
-            signup_url (Union[Unset, None, str]):
-            terms_url (Union[Unset, None, str]):
-            help_url (Union[Unset, None, str]):
-            support_email (Union[Unset, None, str]):
-            new_user_signup_email (Union[Unset, None, str]):
-            approve_new_users (Union[Unset, bool]):
-            enable_bureau_features (Union[Unset, bool]):
-            require_dd_mandate_before_allowing_billable_activity (Union[Unset, bool]):
-            enable_omnipresent_users (Union[Unset, bool]):
-            tenant_owns_billing (Union[Unset, bool]): [readonly]
-            billing_settings (Union[Unset, TenantBillingSettings]):
-            id (Union[Unset, str]): [readonly] The unique id of the object
+    Attributes:
+        brand_code (Union[Unset, None, str]): [readonly]
+        app_name (Union[Unset, None, str]):
+        home_url (Union[Unset, None, str]):
+        head_content (Union[Unset, None, str]):
+        log_out_url (Union[Unset, None, str]):
+        login_img_url (Union[Unset, None, str]): [readonly]
+        home_img_url (Union[Unset, None, str]): [readonly]
+        fav_icon (Union[Unset, None, str]): [readonly]
+        css_colors_file (Union[Unset, None, str]): [readonly]
+        css_file (Union[Unset, None, str]): [readonly]
+        mailing_list (Union[Unset, bool]):
+        html_insertions (Union[Unset, None, List[TenantHtmlInsertion]]):
+        mail_settings (Union[Unset, MailSettings]): Determines the settings used when the Employer sends emails.
+            If CustomiseSmtpSettings is false then SmtpSettings will be null and our default internal settings will be used;
+        signup_url (Union[Unset, None, str]):
+        terms_url (Union[Unset, None, str]):
+        help_url (Union[Unset, None, str]):
+        support_email (Union[Unset, None, str]):
+        new_user_signup_email (Union[Unset, None, str]):
+        approve_new_users (Union[Unset, bool]):
+        enable_bureau_features (Union[Unset, bool]):
+        require_dd_mandate_before_allowing_billable_activity (Union[Unset, bool]):
+        enable_omnipresent_users (Union[Unset, bool]):
+        tenant_owns_billing (Union[Unset, bool]): [readonly]
+        billing_settings (Union[Unset, TenantBillingSettings]):
+        users_can_manage_account_security_settings (Union[Unset, bool]): If the users are allowed manage their own
+            account security settings through a page or portal defined by their current authentication provider
+        id (Union[Unset, str]): [readonly] The unique id of the object
     """
 
     brand_code: Union[Unset, None, str] = UNSET
@@ -69,7 +70,9 @@ class Tenant:
     enable_omnipresent_users: Union[Unset, bool] = UNSET
     tenant_owns_billing: Union[Unset, bool] = UNSET
     billing_settings: Union[Unset, TenantBillingSettings] = UNSET
+    users_can_manage_account_security_settings: Union[Unset, bool] = UNSET
     id: Union[Unset, str] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         brand_code = self.brand_code
@@ -94,6 +97,9 @@ class Tenant:
 
                     html_insertions.append(html_insertions_item)
 
+
+
+
         mail_settings: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.mail_settings, Unset):
             mail_settings = self.mail_settings.to_dict()
@@ -105,19 +111,19 @@ class Tenant:
         new_user_signup_email = self.new_user_signup_email
         approve_new_users = self.approve_new_users
         enable_bureau_features = self.enable_bureau_features
-        require_dd_mandate_before_allowing_billable_activity = (
-            self.require_dd_mandate_before_allowing_billable_activity
-        )
+        require_dd_mandate_before_allowing_billable_activity = self.require_dd_mandate_before_allowing_billable_activity
         enable_omnipresent_users = self.enable_omnipresent_users
         tenant_owns_billing = self.tenant_owns_billing
         billing_settings: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.billing_settings, Unset):
             billing_settings = self.billing_settings.to_dict()
 
+        users_can_manage_account_security_settings = self.users_can_manage_account_security_settings
         id = self.id
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if brand_code is not UNSET:
             field_dict["brandCode"] = brand_code
         if app_name is not UNSET:
@@ -159,19 +165,21 @@ class Tenant:
         if enable_bureau_features is not UNSET:
             field_dict["enableBureauFeatures"] = enable_bureau_features
         if require_dd_mandate_before_allowing_billable_activity is not UNSET:
-            field_dict[
-                "requireDdMandateBeforeAllowingBillableActivity"
-            ] = require_dd_mandate_before_allowing_billable_activity
+            field_dict["requireDdMandateBeforeAllowingBillableActivity"] = require_dd_mandate_before_allowing_billable_activity
         if enable_omnipresent_users is not UNSET:
             field_dict["enableOmnipresentUsers"] = enable_omnipresent_users
         if tenant_owns_billing is not UNSET:
             field_dict["tenantOwnsBilling"] = tenant_owns_billing
         if billing_settings is not UNSET:
             field_dict["billingSettings"] = billing_settings
+        if users_can_manage_account_security_settings is not UNSET:
+            field_dict["usersCanManageAccountSecuritySettings"] = users_can_manage_account_security_settings
         if id is not UNSET:
             field_dict["id"] = id
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -200,19 +208,23 @@ class Tenant:
 
         html_insertions = []
         _html_insertions = d.pop("htmlInsertions", UNSET)
-        for html_insertions_item_data in _html_insertions or []:
-            html_insertions_item = TenantHtmlInsertion.from_dict(
-                html_insertions_item_data
-            )
+        for html_insertions_item_data in (_html_insertions or []):
+            html_insertions_item = TenantHtmlInsertion.from_dict(html_insertions_item_data)
+
+
 
             html_insertions.append(html_insertions_item)
 
+
         _mail_settings = d.pop("mailSettings", UNSET)
         mail_settings: Union[Unset, MailSettings]
-        if isinstance(_mail_settings, Unset):
+        if isinstance(_mail_settings,  Unset):
             mail_settings = UNSET
         else:
             mail_settings = MailSettings.from_dict(_mail_settings)
+
+
+
 
         signup_url = d.pop("signupUrl", UNSET)
 
@@ -228,9 +240,7 @@ class Tenant:
 
         enable_bureau_features = d.pop("enableBureauFeatures", UNSET)
 
-        require_dd_mandate_before_allowing_billable_activity = d.pop(
-            "requireDdMandateBeforeAllowingBillableActivity", UNSET
-        )
+        require_dd_mandate_before_allowing_billable_activity = d.pop("requireDdMandateBeforeAllowingBillableActivity", UNSET)
 
         enable_omnipresent_users = d.pop("enableOmnipresentUsers", UNSET)
 
@@ -238,10 +248,15 @@ class Tenant:
 
         _billing_settings = d.pop("billingSettings", UNSET)
         billing_settings: Union[Unset, TenantBillingSettings]
-        if isinstance(_billing_settings, Unset):
+        if isinstance(_billing_settings,  Unset):
             billing_settings = UNSET
         else:
             billing_settings = TenantBillingSettings.from_dict(_billing_settings)
+
+
+
+
+        users_can_manage_account_security_settings = d.pop("usersCanManageAccountSecuritySettings", UNSET)
 
         id = d.pop("id", UNSET)
 
@@ -270,7 +285,9 @@ class Tenant:
             enable_omnipresent_users=enable_omnipresent_users,
             tenant_owns_billing=tenant_owns_billing,
             billing_settings=billing_settings,
+            users_can_manage_account_security_settings=users_can_manage_account_security_settings,
             id=id,
         )
 
         return tenant
+

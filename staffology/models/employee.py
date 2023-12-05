@@ -1,6 +1,8 @@
+import datetime
 from typing import Any, Dict, List, Type, TypeVar, Union, cast
 
 import attr
+from dateutil.parser import isoparse
 
 from ..models.auto_enrolment import AutoEnrolment
 from ..models.bank_details import BankDetails
@@ -14,12 +16,12 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="Employee")
 
-
 @attr.s(auto_attribs=True)
 class Employee:
     """
     Attributes:
-        has_pension (Union[Unset, bool]):
+        holiday_scheme_unique_id (Union[Unset, None, str]):
+        aggregated_service_date (Union[Unset, None, datetime.date]):
         id (Union[Unset, str]): [readonly] The unique id of the object
         personal_details (Union[Unset, PersonalDetails]):
         employment_details (Union[Unset, EmploymentDetails]):
@@ -29,15 +31,18 @@ class Employee:
         bank_details (Union[Unset, BankDetails]):
         tags (Union[Unset, None, List[str]]):
         pay_options (Union[Unset, PayOptions]): This object forms the basis of the Employees payment.
-        status (Union[Unset, EmployeeStatus]): [readonly] Indicates whether the Employee is currently employed or not
+        status (Union[Unset, EmployeeStatus]):
         ae_not_enroled_warning (Union[Unset, bool]): [readonly] If true then the employee should be enrolled in an Auto
             Enrolment Qualifying pension but isn't
         source_system_id (Union[Unset, None, str]): [readonly] Can only be given a value when the employee is created.
             It can then never be changed.
             Used by external systems so they can store an immutable reference
+        evc_id (Union[Unset, None, str]): If set then this will be used as the EmployeeIDFromProduct sent to EVC in
+            place of the standard EmployeeId.
     """
 
-    has_pension: Union[Unset, bool] = UNSET
+    holiday_scheme_unique_id: Union[Unset, None, str] = UNSET
+    aggregated_service_date: Union[Unset, None, datetime.date] = UNSET
     id: Union[Unset, str] = UNSET
     personal_details: Union[Unset, PersonalDetails] = UNSET
     employment_details: Union[Unset, EmploymentDetails] = UNSET
@@ -50,9 +55,15 @@ class Employee:
     status: Union[Unset, EmployeeStatus] = UNSET
     ae_not_enroled_warning: Union[Unset, bool] = UNSET
     source_system_id: Union[Unset, None, str] = UNSET
+    evc_id: Union[Unset, None, str] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
-        has_pension = self.has_pension
+        holiday_scheme_unique_id = self.holiday_scheme_unique_id
+        aggregated_service_date: Union[Unset, None, str] = UNSET
+        if not isinstance(self.aggregated_service_date, Unset):
+            aggregated_service_date = self.aggregated_service_date.isoformat() if self.aggregated_service_date else None
+
         id = self.id
         personal_details: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.personal_details, Unset):
@@ -85,6 +96,9 @@ class Employee:
             else:
                 tags = self.tags
 
+
+
+
         pay_options: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.pay_options, Unset):
             pay_options = self.pay_options.to_dict()
@@ -95,11 +109,15 @@ class Employee:
 
         ae_not_enroled_warning = self.ae_not_enroled_warning
         source_system_id = self.source_system_id
+        evc_id = self.evc_id
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
-        if has_pension is not UNSET:
-            field_dict["hasPension"] = has_pension
+        field_dict.update({
+        })
+        if holiday_scheme_unique_id is not UNSET:
+            field_dict["holidaySchemeUniqueId"] = holiday_scheme_unique_id
+        if aggregated_service_date is not UNSET:
+            field_dict["aggregatedServiceDate"] = aggregated_service_date
         if id is not UNSET:
             field_dict["id"] = id
         if personal_details is not UNSET:
@@ -124,80 +142,124 @@ class Employee:
             field_dict["aeNotEnroledWarning"] = ae_not_enroled_warning
         if source_system_id is not UNSET:
             field_dict["sourceSystemId"] = source_system_id
+        if evc_id is not UNSET:
+            field_dict["evcId"] = evc_id
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        has_pension = d.pop("hasPension", UNSET)
+        holiday_scheme_unique_id = d.pop("holidaySchemeUniqueId", UNSET)
+
+        _aggregated_service_date = d.pop("aggregatedServiceDate", UNSET)
+        aggregated_service_date: Union[Unset, None, datetime.date]
+        if _aggregated_service_date is None:
+            aggregated_service_date = None
+        elif isinstance(_aggregated_service_date,  Unset):
+            aggregated_service_date = UNSET
+        else:
+            aggregated_service_date = isoparse(_aggregated_service_date).date()
+
+
+
 
         id = d.pop("id", UNSET)
 
         _personal_details = d.pop("personalDetails", UNSET)
         personal_details: Union[Unset, PersonalDetails]
-        if isinstance(_personal_details, Unset):
+        if isinstance(_personal_details,  Unset):
             personal_details = UNSET
         else:
             personal_details = PersonalDetails.from_dict(_personal_details)
 
+
+
+
         _employment_details = d.pop("employmentDetails", UNSET)
         employment_details: Union[Unset, EmploymentDetails]
-        if isinstance(_employment_details, Unset):
+        if isinstance(_employment_details,  Unset):
             employment_details = UNSET
         else:
             employment_details = EmploymentDetails.from_dict(_employment_details)
 
+
+
+
         _auto_enrolment = d.pop("autoEnrolment", UNSET)
         auto_enrolment: Union[Unset, AutoEnrolment]
-        if isinstance(_auto_enrolment, Unset):
+        if isinstance(_auto_enrolment,  Unset):
             auto_enrolment = UNSET
         else:
             auto_enrolment = AutoEnrolment.from_dict(_auto_enrolment)
 
+
+
+
         _leave_settings = d.pop("leaveSettings", UNSET)
         leave_settings: Union[Unset, LeaveSettings]
-        if isinstance(_leave_settings, Unset):
+        if isinstance(_leave_settings,  Unset):
             leave_settings = UNSET
         else:
             leave_settings = LeaveSettings.from_dict(_leave_settings)
 
+
+
+
         _right_to_work = d.pop("rightToWork", UNSET)
         right_to_work: Union[Unset, RightToWork]
-        if isinstance(_right_to_work, Unset):
+        if isinstance(_right_to_work,  Unset):
             right_to_work = UNSET
         else:
             right_to_work = RightToWork.from_dict(_right_to_work)
 
+
+
+
         _bank_details = d.pop("bankDetails", UNSET)
         bank_details: Union[Unset, BankDetails]
-        if isinstance(_bank_details, Unset):
+        if isinstance(_bank_details,  Unset):
             bank_details = UNSET
         else:
             bank_details = BankDetails.from_dict(_bank_details)
 
+
+
+
         tags = cast(List[str], d.pop("tags", UNSET))
+
 
         _pay_options = d.pop("payOptions", UNSET)
         pay_options: Union[Unset, PayOptions]
-        if isinstance(_pay_options, Unset):
+        if isinstance(_pay_options,  Unset):
             pay_options = UNSET
         else:
             pay_options = PayOptions.from_dict(_pay_options)
 
+
+
+
         _status = d.pop("status", UNSET)
         status: Union[Unset, EmployeeStatus]
-        if isinstance(_status, Unset):
+        if isinstance(_status,  Unset):
             status = UNSET
         else:
             status = EmployeeStatus(_status)
+
+
+
 
         ae_not_enroled_warning = d.pop("aeNotEnroledWarning", UNSET)
 
         source_system_id = d.pop("sourceSystemId", UNSET)
 
+        evc_id = d.pop("evcId", UNSET)
+
         employee = cls(
-            has_pension=has_pension,
+            holiday_scheme_unique_id=holiday_scheme_unique_id,
+            aggregated_service_date=aggregated_service_date,
             id=id,
             personal_details=personal_details,
             employment_details=employment_details,
@@ -210,6 +272,8 @@ class Employee:
             status=status,
             ae_not_enroled_warning=ae_not_enroled_warning,
             source_system_id=source_system_id,
+            evc_id=evc_id,
         )
 
         return employee
+

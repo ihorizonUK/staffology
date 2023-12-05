@@ -19,10 +19,7 @@ def _get_kwargs(
     json_body: HmrcLiability,
 ) -> Dict[str, Any]:
     url = "{}/employers/{employerId}/hmrcpayment/{taxYear}/{periodEnding}".format(
-        client.base_url,
-        employerId=employer_id,
-        taxYear=tax_year,
-        periodEnding=period_ending,
+        client.base_url, employerId=employer_id, taxYear=tax_year, periodEnding=period_ending
     )
 
     headers: Dict[str, str] = client.get_headers()

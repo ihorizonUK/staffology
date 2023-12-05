@@ -8,7 +8,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="NvrEmployeeDetails")
 
-
 @attr.s(auto_attribs=True)
 class NvrEmployeeDetails:
     """
@@ -26,6 +25,7 @@ class NvrEmployeeDetails:
     birth_date: Union[Unset, None, str] = UNSET
     gender: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         nino = self.nino
         name: Union[Unset, Dict[str, Any]] = UNSET
@@ -40,7 +40,8 @@ class NvrEmployeeDetails:
         gender = self.gender
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if nino is not UNSET:
             field_dict["nino"] = nino
         if name is not UNSET:
@@ -54,6 +55,8 @@ class NvrEmployeeDetails:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
@@ -61,17 +64,23 @@ class NvrEmployeeDetails:
 
         _name = d.pop("name", UNSET)
         name: Union[Unset, RtiEmployeeName]
-        if isinstance(_name, Unset):
+        if isinstance(_name,  Unset):
             name = UNSET
         else:
             name = RtiEmployeeName.from_dict(_name)
 
+
+
+
         _address = d.pop("address", UNSET)
         address: Union[Unset, RtiEmployeeAddress]
-        if isinstance(_address, Unset):
+        if isinstance(_address,  Unset):
             address = UNSET
         else:
             address = RtiEmployeeAddress.from_dict(_address)
+
+
+
 
         birth_date = d.pop("birthDate", UNSET)
 
@@ -86,3 +95,4 @@ class NvrEmployeeDetails:
         )
 
         return nvr_employee_details
+

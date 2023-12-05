@@ -1,11 +1,11 @@
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, Union
 
 import httpx
 from staffology.propagate_exceptions import raise_staffology_exception
 
 from ...client import Client
 from ...models.pay_run_entry import PayRunEntry
-from ...types import Response
+from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
@@ -13,6 +13,7 @@ def _get_kwargs(
     employee_id: str,
     *,
     client: Client,
+    is_closed: Union[Unset, None, bool] = UNSET,
 ) -> Dict[str, Any]:
     url = "{}/employers/{employerId}/payrun/employees/{employeeId}/Last".format(
         client.base_url, employerId=employer_id, employeeId=employee_id
@@ -21,12 +22,18 @@ def _get_kwargs(
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
 
+    params: Dict[str, Any] = {}
+    params["isClosed"] = is_closed
+
+    params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
     return {
         "method": "get",
         "url": url,
         "headers": headers,
         "cookies": cookies,
         "timeout": client.get_timeout(),
+        "params": params,
     }
 
 
@@ -52,12 +59,14 @@ def sync_detailed(
     employee_id: str,
     *,
     client: Client,
+    is_closed: Union[Unset, None, bool] = UNSET,
 ) -> Response[PayRunEntry]:
     """Gets the last closed pay run entry for an employee.
 
     Args:
         employer_id (str):
         employee_id (str):
+        is_closed (Union[Unset, None, bool]):
 
     Returns:
         Response[PayRunEntry]
@@ -67,6 +76,7 @@ def sync_detailed(
         employer_id=employer_id,
         employee_id=employee_id,
         client=client,
+        is_closed=is_closed,
     )
 
     response = httpx.request(
@@ -82,12 +92,14 @@ def sync(
     employee_id: str,
     *,
     client: Client,
+    is_closed: Union[Unset, None, bool] = UNSET,
 ) -> Optional[PayRunEntry]:
     """Gets the last closed pay run entry for an employee.
 
     Args:
         employer_id (str):
         employee_id (str):
+        is_closed (Union[Unset, None, bool]):
 
     Returns:
         Response[PayRunEntry]
@@ -97,6 +109,7 @@ def sync(
         employer_id=employer_id,
         employee_id=employee_id,
         client=client,
+        is_closed=is_closed,
     ).parsed
 
 
@@ -105,12 +118,14 @@ async def asyncio_detailed(
     employee_id: str,
     *,
     client: Client,
+    is_closed: Union[Unset, None, bool] = UNSET,
 ) -> Response[PayRunEntry]:
     """Gets the last closed pay run entry for an employee.
 
     Args:
         employer_id (str):
         employee_id (str):
+        is_closed (Union[Unset, None, bool]):
 
     Returns:
         Response[PayRunEntry]
@@ -120,6 +135,7 @@ async def asyncio_detailed(
         employer_id=employer_id,
         employee_id=employee_id,
         client=client,
+        is_closed=is_closed,
     )
 
     async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
@@ -133,12 +149,14 @@ async def asyncio(
     employee_id: str,
     *,
     client: Client,
+    is_closed: Union[Unset, None, bool] = UNSET,
 ) -> Optional[PayRunEntry]:
     """Gets the last closed pay run entry for an employee.
 
     Args:
         employer_id (str):
         employee_id (str):
+        is_closed (Union[Unset, None, bool]):
 
     Returns:
         Response[PayRunEntry]
@@ -149,5 +167,6 @@ async def asyncio(
             employer_id=employer_id,
             employee_id=employee_id,
             client=client,
+            is_closed=is_closed,
         )
     ).parsed

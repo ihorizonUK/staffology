@@ -20,15 +20,10 @@ def _get_kwargs(
     client: Client,
     ordinal: Union[Unset, None, int] = 1,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Dict[str, Any]:
     url = "{}/employers/{employerId}/reports/{taxYear}/{payPeriod}/{periodNumber}/{id}/payslip".format(
-        client.base_url,
-        employerId=employer_id,
-        taxYear=tax_year,
-        payPeriod=pay_period,
-        periodNumber=period_number,
-        id=id,
-    )
+        client.base_url,employerId=employer_id,taxYear=tax_year,payPeriod=pay_period,periodNumber=period_number,id=id)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
@@ -36,13 +31,24 @@ def _get_kwargs(
     if not isinstance(accept, Unset):
         headers["accept"] = accept
 
+
+
+    
+
     params: Dict[str, Any] = {}
     params["ordinal"] = ordinal
 
+
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
+
+    
+
+    
+
     return {
-        "method": "get",
+	    "method": "get",
         "url": url,
         "headers": headers,
         "cookies": cookies,
@@ -54,6 +60,8 @@ def _get_kwargs(
 def _parse_response(*, response: httpx.Response) -> Optional[PayslipReportResponse]:
     if response.status_code == 200:
         response_200 = PayslipReportResponse.from_dict(response.json())
+
+
 
         return response_200
     return raise_staffology_exception(response)
@@ -78,6 +86,7 @@ def sync_detailed(
     client: Client,
     ordinal: Union[Unset, None, int] = 1,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Response[PayslipReportResponse]:
     """Payslip
 
@@ -97,15 +106,17 @@ def sync_detailed(
         Response[PayslipReportResponse]
     """
 
+
     kwargs = _get_kwargs(
         employer_id=employer_id,
-        tax_year=tax_year,
-        pay_period=pay_period,
-        period_number=period_number,
-        id=id,
-        client=client,
-        ordinal=ordinal,
-        accept=accept,
+tax_year=tax_year,
+pay_period=pay_period,
+period_number=period_number,
+id=id,
+client=client,
+ordinal=ordinal,
+accept=accept,
+
     )
 
     response = httpx.request(
@@ -114,7 +125,6 @@ def sync_detailed(
     )
 
     return _build_response(response=response)
-
 
 def sync(
     employer_id: str,
@@ -126,6 +136,7 @@ def sync(
     client: Client,
     ordinal: Union[Unset, None, int] = 1,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Optional[PayslipReportResponse]:
     """Payslip
 
@@ -145,17 +156,18 @@ def sync(
         Response[PayslipReportResponse]
     """
 
+
     return sync_detailed(
         employer_id=employer_id,
-        tax_year=tax_year,
-        pay_period=pay_period,
-        period_number=period_number,
-        id=id,
-        client=client,
-        ordinal=ordinal,
-        accept=accept,
-    ).parsed
+tax_year=tax_year,
+pay_period=pay_period,
+period_number=period_number,
+id=id,
+client=client,
+ordinal=ordinal,
+accept=accept,
 
+    ).parsed
 
 async def asyncio_detailed(
     employer_id: str,
@@ -167,6 +179,7 @@ async def asyncio_detailed(
     client: Client,
     ordinal: Union[Unset, None, int] = 1,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Response[PayslipReportResponse]:
     """Payslip
 
@@ -186,22 +199,25 @@ async def asyncio_detailed(
         Response[PayslipReportResponse]
     """
 
+
     kwargs = _get_kwargs(
         employer_id=employer_id,
-        tax_year=tax_year,
-        pay_period=pay_period,
-        period_number=period_number,
-        id=id,
-        client=client,
-        ordinal=ordinal,
-        accept=accept,
+tax_year=tax_year,
+pay_period=pay_period,
+period_number=period_number,
+id=id,
+client=client,
+ordinal=ordinal,
+accept=accept,
+
     )
 
     async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+        response = await _client.request(
+            **kwargs
+        )
 
     return _build_response(response=response)
-
 
 async def asyncio(
     employer_id: str,
@@ -213,6 +229,7 @@ async def asyncio(
     client: Client,
     ordinal: Union[Unset, None, int] = 1,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Optional[PayslipReportResponse]:
     """Payslip
 
@@ -232,15 +249,16 @@ async def asyncio(
         Response[PayslipReportResponse]
     """
 
-    return (
-        await asyncio_detailed(
-            employer_id=employer_id,
-            tax_year=tax_year,
-            pay_period=pay_period,
-            period_number=period_number,
-            id=id,
-            client=client,
-            ordinal=ordinal,
-            accept=accept,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        employer_id=employer_id,
+tax_year=tax_year,
+pay_period=pay_period,
+period_number=period_number,
+id=id,
+client=client,
+ordinal=ordinal,
+accept=accept,
+
+    )).parsed
+

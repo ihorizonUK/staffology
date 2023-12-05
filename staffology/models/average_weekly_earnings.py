@@ -9,7 +9,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="AverageWeeklyEarnings")
 
-
 @attr.s(auto_attribs=True)
 class AverageWeeklyEarnings:
     """
@@ -37,6 +36,7 @@ class AverageWeeklyEarnings:
     relevant_period_week_count: Union[Unset, float] = UNSET
     relevant_period_earnings: Union[Unset, float] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         result: Union[Unset, str] = UNSET
         if not isinstance(self.result, Unset):
@@ -62,7 +62,8 @@ class AverageWeeklyEarnings:
         relevant_period_earnings = self.relevant_period_earnings
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if result is not UNSET:
             field_dict["result"] = result
         if result_description is not UNSET:
@@ -86,15 +87,20 @@ class AverageWeeklyEarnings:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _result = d.pop("result", UNSET)
         result: Union[Unset, AverageWeeklyEarningsResult]
-        if isinstance(_result, Unset):
+        if isinstance(_result,  Unset):
             result = UNSET
         else:
             result = AverageWeeklyEarningsResult(_result)
+
+
+
 
         result_description = d.pop("resultDescription", UNSET)
 
@@ -106,24 +112,33 @@ class AverageWeeklyEarnings:
 
         _requested_date = d.pop("requestedDate", UNSET)
         requested_date: Union[Unset, datetime.date]
-        if isinstance(_requested_date, Unset):
+        if isinstance(_requested_date,  Unset):
             requested_date = UNSET
         else:
             requested_date = isoparse(_requested_date).date()
 
+
+
+
         _relevant_period_start = d.pop("relevantPeriodStart", UNSET)
         relevant_period_start: Union[Unset, datetime.date]
-        if isinstance(_relevant_period_start, Unset):
+        if isinstance(_relevant_period_start,  Unset):
             relevant_period_start = UNSET
         else:
             relevant_period_start = isoparse(_relevant_period_start).date()
 
+
+
+
         _relevant_period_end = d.pop("relevantPeriodEnd", UNSET)
         relevant_period_end: Union[Unset, datetime.date]
-        if isinstance(_relevant_period_end, Unset):
+        if isinstance(_relevant_period_end,  Unset):
             relevant_period_end = UNSET
         else:
             relevant_period_end = isoparse(_relevant_period_end).date()
+
+
+
 
         relevant_period_week_count = d.pop("relevantPeriodWeekCount", UNSET)
 
@@ -143,3 +158,4 @@ class AverageWeeklyEarnings:
         )
 
         return average_weekly_earnings
+

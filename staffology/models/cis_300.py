@@ -10,7 +10,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="Cis300")
 
-
 @attr.s(auto_attribs=True)
 class Cis300:
     """
@@ -23,7 +22,8 @@ class Cis300:
         inactivity_declaration (Union[Unset, bool]):
         cis_return (Union[Unset, CisReturn]):
         i_rmark (Union[Unset, None, str]):
-        xml (Union[Unset, None, str]):
+        xml (Union[Unset, None, str]): THis property will soon be removed and should not be used.
+            There is now a dedicated API endpoint for retrieving the XML for a submission.
         tax_year (Union[Unset, TaxYear]):
         employer_references (Union[Unset, EmpRefs]):
         gov_talk_submission (Union[Unset, GovTalkSubmission]):
@@ -43,6 +43,7 @@ class Cis300:
     employer_references: Union[Unset, EmpRefs] = UNSET
     gov_talk_submission: Union[Unset, GovTalkSubmission] = UNSET
     id: Union[Unset, str] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         tax_month = self.tax_month
@@ -72,7 +73,8 @@ class Cis300:
         id = self.id
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if tax_month is not UNSET:
             field_dict["taxMonth"] = tax_month
         if employee_count is not UNSET:
@@ -82,9 +84,7 @@ class Cis300:
         if verification_declaration is not UNSET:
             field_dict["verificationDeclaration"] = verification_declaration
         if information_correct_declaration is not UNSET:
-            field_dict[
-                "informationCorrectDeclaration"
-            ] = information_correct_declaration
+            field_dict["informationCorrectDeclaration"] = information_correct_declaration
         if inactivity_declaration is not UNSET:
             field_dict["inactivityDeclaration"] = inactivity_declaration
         if cis_return is not UNSET:
@@ -104,6 +104,8 @@ class Cis300:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
@@ -121,10 +123,13 @@ class Cis300:
 
         _cis_return = d.pop("cisReturn", UNSET)
         cis_return: Union[Unset, CisReturn]
-        if isinstance(_cis_return, Unset):
+        if isinstance(_cis_return,  Unset):
             cis_return = UNSET
         else:
             cis_return = CisReturn.from_dict(_cis_return)
+
+
+
 
         i_rmark = d.pop("iRmark", UNSET)
 
@@ -132,24 +137,33 @@ class Cis300:
 
         _tax_year = d.pop("taxYear", UNSET)
         tax_year: Union[Unset, TaxYear]
-        if isinstance(_tax_year, Unset):
+        if isinstance(_tax_year,  Unset):
             tax_year = UNSET
         else:
             tax_year = TaxYear(_tax_year)
 
+
+
+
         _employer_references = d.pop("employerReferences", UNSET)
         employer_references: Union[Unset, EmpRefs]
-        if isinstance(_employer_references, Unset):
+        if isinstance(_employer_references,  Unset):
             employer_references = UNSET
         else:
             employer_references = EmpRefs.from_dict(_employer_references)
 
+
+
+
         _gov_talk_submission = d.pop("govTalkSubmission", UNSET)
         gov_talk_submission: Union[Unset, GovTalkSubmission]
-        if isinstance(_gov_talk_submission, Unset):
+        if isinstance(_gov_talk_submission,  Unset):
             gov_talk_submission = UNSET
         else:
             gov_talk_submission = GovTalkSubmission.from_dict(_gov_talk_submission)
+
+
+
 
         id = d.pop("id", UNSET)
 
@@ -170,3 +184,4 @@ class Cis300:
         )
 
         return cis_300
+

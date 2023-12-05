@@ -16,9 +16,7 @@ def _get_kwargs(
     client: Client,
     json_body: EmployerTemplate,
 ) -> Dict[str, Any]:
-    url = "{}/employers/{employerId}/templates/{type}".format(
-        client.base_url, employerId=employer_id, type=type
-    )
+    url = "{}/employers/{employerId}/templates/{type}".format(client.base_url, employerId=employer_id, type=type)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
@@ -62,8 +60,8 @@ def sync_detailed(
     """Update EmployerTemplate
 
      Updates the EmployerTemplate specified by the Type.
-    The only values need to supply are <code>Content</code>
-    and (if applicable) <code>Subject</code>.
+    The only values need to supply are ```Content```
+    and (if applicable) ```Subject```.
     If these values are empty strings or not provided then the template will revert to the default
     values.
 
@@ -101,8 +99,8 @@ def sync(
     """Update EmployerTemplate
 
      Updates the EmployerTemplate specified by the Type.
-    The only values need to supply are <code>Content</code>
-    and (if applicable) <code>Subject</code>.
+    The only values need to supply are ```Content```
+    and (if applicable) ```Subject```.
     If these values are empty strings or not provided then the template will revert to the default
     values.
 
@@ -133,8 +131,8 @@ async def asyncio_detailed(
     """Update EmployerTemplate
 
      Updates the EmployerTemplate specified by the Type.
-    The only values need to supply are <code>Content</code>
-    and (if applicable) <code>Subject</code>.
+    The only values need to supply are ```Content```
+    and (if applicable) ```Subject```.
     If these values are empty strings or not provided then the template will revert to the default
     values.
 
@@ -170,8 +168,8 @@ async def asyncio(
     """Update EmployerTemplate
 
      Updates the EmployerTemplate specified by the Type.
-    The only values need to supply are <code>Content</code>
-    and (if applicable) <code>Subject</code>.
+    The only values need to supply are ```Content```
+    and (if applicable) ```Subject```.
     If these values are empty strings or not provided then the template will revert to the default
     values.
 

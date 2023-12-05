@@ -6,7 +6,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="RtiEmployeeName")
 
-
 @attr.s(auto_attribs=True)
 class RtiEmployeeName:
     """
@@ -22,6 +21,7 @@ class RtiEmployeeName:
     initials: Union[Unset, None, str] = UNSET
     sur: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         ttl = self.ttl
         fore: Union[Unset, None, List[str]] = UNSET
@@ -31,11 +31,15 @@ class RtiEmployeeName:
             else:
                 fore = self.fore
 
+
+
+
         initials = self.initials
         sur = self.sur
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if ttl is not UNSET:
             field_dict["ttl"] = ttl
         if fore is not UNSET:
@@ -47,12 +51,15 @@ class RtiEmployeeName:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         ttl = d.pop("ttl", UNSET)
 
         fore = cast(List[str], d.pop("fore", UNSET))
+
 
         initials = d.pop("initials", UNSET)
 
@@ -66,3 +73,4 @@ class RtiEmployeeName:
         )
 
         return rti_employee_name
+

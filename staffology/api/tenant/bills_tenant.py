@@ -14,16 +14,26 @@ def _get_kwargs(
     month: int,
     *,
     client: Client,
+
 ) -> Dict[str, Any]:
     url = "{}/tenants/{id}/bills/{year}/{month}".format(
-        client.base_url, id=id, year=year, month=month
-    )
+        client.base_url,id=id,year=year,month=month)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
 
+    
+
+    
+
+    
+
+    
+
+    
+
     return {
-        "method": "get",
+	    "method": "get",
         "url": url,
         "headers": headers,
         "cookies": cookies,
@@ -35,8 +45,10 @@ def _parse_response(*, response: httpx.Response) -> Optional[List[Item]]:
     if response.status_code == 200:
         response_200 = []
         _response_200 = response.json()
-        for response_200_item_data in _response_200:
+        for response_200_item_data in (_response_200):
             response_200_item = Item.from_dict(response_200_item_data)
+
+
 
             response_200.append(response_200_item)
 
@@ -59,6 +71,7 @@ def sync_detailed(
     month: int,
     *,
     client: Client,
+
 ) -> Response[List[Item]]:
     """Get Bills
 
@@ -73,11 +86,13 @@ def sync_detailed(
         Response[List[Item]]
     """
 
+
     kwargs = _get_kwargs(
         id=id,
-        year=year,
-        month=month,
-        client=client,
+year=year,
+month=month,
+client=client,
+
     )
 
     response = httpx.request(
@@ -87,13 +102,13 @@ def sync_detailed(
 
     return _build_response(response=response)
 
-
 def sync(
     id: str,
     year: int,
     month: int,
     *,
     client: Client,
+
 ) -> Optional[List[Item]]:
     """Get Bills
 
@@ -108,13 +123,14 @@ def sync(
         Response[List[Item]]
     """
 
+
     return sync_detailed(
         id=id,
-        year=year,
-        month=month,
-        client=client,
-    ).parsed
+year=year,
+month=month,
+client=client,
 
+    ).parsed
 
 async def asyncio_detailed(
     id: str,
@@ -122,6 +138,7 @@ async def asyncio_detailed(
     month: int,
     *,
     client: Client,
+
 ) -> Response[List[Item]]:
     """Get Bills
 
@@ -136,18 +153,21 @@ async def asyncio_detailed(
         Response[List[Item]]
     """
 
+
     kwargs = _get_kwargs(
         id=id,
-        year=year,
-        month=month,
-        client=client,
+year=year,
+month=month,
+client=client,
+
     )
 
     async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+        response = await _client.request(
+            **kwargs
+        )
 
     return _build_response(response=response)
-
 
 async def asyncio(
     id: str,
@@ -155,6 +175,7 @@ async def asyncio(
     month: int,
     *,
     client: Client,
+
 ) -> Optional[List[Item]]:
     """Get Bills
 
@@ -169,11 +190,12 @@ async def asyncio(
         Response[List[Item]]
     """
 
-    return (
-        await asyncio_detailed(
-            id=id,
-            year=year,
-            month=month,
-            client=client,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        id=id,
+year=year,
+month=month,
+client=client,
+
+    )).parsed
+

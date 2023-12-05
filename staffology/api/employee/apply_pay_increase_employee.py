@@ -14,9 +14,7 @@ def _get_kwargs(
     percentage: Union[Unset, None, float] = UNSET,
     all_employees: Union[Unset, None, bool] = UNSET,
 ) -> Dict[str, Any]:
-    url = "{}/employers/{employerId}/employees/payincrease".format(
-        client.base_url, employerId=employer_id
-    )
+    url = "{}/employers/{employerId}/employees/payincrease".format(client.base_url, employerId=employer_id)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()

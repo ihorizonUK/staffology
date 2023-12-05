@@ -8,20 +8,20 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="UserAuthorization")
 
-
 @attr.s(auto_attribs=True)
 class UserAuthorization:
     """This model provides information about what the User is able to access.
-    This would usually just be a list of Employers. But if the user is an administrator for a White Label instance then
-    this will be shown in the list of Tenants.
+This would usually just be a list of Employers. But if the user is an administrator for a White Label instance then
+this will be shown in the list of Tenants.
 
-        Attributes:
-            employers (Union[Unset, None, List[EmployerItem]]): [readonly] A list of any Employers that the user can access
-            tenants (Union[Unset, None, List[TenantItem]]): [readonly] A list of any Tenants that the user can administrate
+    Attributes:
+        employers (Union[Unset, None, List[EmployerItem]]): [readonly] A list of any Employers that the user can access
+        tenants (Union[Unset, None, List[TenantItem]]): [readonly] A list of any Tenants that the user can administrate
     """
 
     employers: Union[Unset, None, List[EmployerItem]] = UNSET
     tenants: Union[Unset, None, List[TenantItem]] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         employers: Union[Unset, None, List[Dict[str, Any]]] = UNSET
@@ -35,6 +35,9 @@ class UserAuthorization:
 
                     employers.append(employers_item)
 
+
+
+
         tenants: Union[Unset, None, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.tenants, Unset):
             if self.tenants is None:
@@ -46,8 +49,13 @@ class UserAuthorization:
 
                     tenants.append(tenants_item)
 
+
+
+
+
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if employers is not UNSET:
             field_dict["employers"] = employers
         if tenants is not UNSET:
@@ -55,22 +63,30 @@ class UserAuthorization:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         employers = []
         _employers = d.pop("employers", UNSET)
-        for employers_item_data in _employers or []:
+        for employers_item_data in (_employers or []):
             employers_item = EmployerItem.from_dict(employers_item_data)
+
+
 
             employers.append(employers_item)
 
+
         tenants = []
         _tenants = d.pop("tenants", UNSET)
-        for tenants_item_data in _tenants or []:
+        for tenants_item_data in (_tenants or []):
             tenants_item = TenantItem.from_dict(tenants_item_data)
 
+
+
             tenants.append(tenants_item)
+
 
         user_authorization = cls(
             employers=employers,
@@ -78,3 +94,4 @@ class UserAuthorization:
         )
 
         return user_authorization
+

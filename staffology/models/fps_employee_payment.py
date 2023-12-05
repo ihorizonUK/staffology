@@ -5,14 +5,11 @@ import attr
 from ..models.fps_benefit import FpsBenefit
 from ..models.fps_employee_flexible_drawdown import FpsEmployeeFlexibleDrawdown
 from ..models.fps_employee_tax_code import FpsEmployeeTaxCode
-from ..models.fps_employee_trivial_commutation_payment import (
-    FpsEmployeeTrivialCommutationPayment,
-)
+from ..models.fps_employee_trivial_commutation_payment import FpsEmployeeTrivialCommutationPayment
 from ..models.student_loan_recovered import StudentLoanRecovered
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="FpsEmployeePayment")
-
 
 @attr.s(auto_attribs=True)
 class FpsEmployeePayment:
@@ -84,10 +81,9 @@ class FpsEmployeePayment:
     sapytd: Union[Unset, None, str] = UNSET
     sh_ppytd: Union[Unset, None, str] = UNSET
     spbpytd: Union[Unset, None, str] = UNSET
-    trivial_commutation_payment: Union[
-        Unset, None, List[FpsEmployeeTrivialCommutationPayment]
-    ] = UNSET
+    trivial_commutation_payment: Union[Unset, None, List[FpsEmployeeTrivialCommutationPayment]] = UNSET
     flexible_drawdown: Union[Unset, FpsEmployeeFlexibleDrawdown] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         bacs_hash_code = self.bacs_hash_code
@@ -136,21 +132,22 @@ class FpsEmployeePayment:
                 trivial_commutation_payment = None
             else:
                 trivial_commutation_payment = []
-                for (
-                    trivial_commutation_payment_item_data
-                ) in self.trivial_commutation_payment:
-                    trivial_commutation_payment_item = (
-                        trivial_commutation_payment_item_data.to_dict()
-                    )
+                for trivial_commutation_payment_item_data in self.trivial_commutation_payment:
+                    trivial_commutation_payment_item = trivial_commutation_payment_item_data.to_dict()
 
                     trivial_commutation_payment.append(trivial_commutation_payment_item)
+
+
+
 
         flexible_drawdown: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.flexible_drawdown, Unset):
             flexible_drawdown = self.flexible_drawdown.to_dict()
 
+
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if bacs_hash_code is not UNSET:
             field_dict["bacsHashCode"] = bacs_hash_code
         if pay_freq is not UNSET:
@@ -220,6 +217,8 @@ class FpsEmployeePayment:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
@@ -245,10 +244,13 @@ class FpsEmployeePayment:
 
         _tax_code = d.pop("taxCode", UNSET)
         tax_code: Union[Unset, FpsEmployeeTaxCode]
-        if isinstance(_tax_code, Unset):
+        if isinstance(_tax_code,  Unset):
             tax_code = UNSET
         else:
             tax_code = FpsEmployeeTaxCode.from_dict(_tax_code)
+
+
+
 
         taxable_pay = d.pop("taxablePay", UNSET)
 
@@ -264,10 +266,13 @@ class FpsEmployeePayment:
 
         _benefits = d.pop("benefits", UNSET)
         benefits: Union[Unset, FpsBenefit]
-        if isinstance(_benefits, Unset):
+        if isinstance(_benefits,  Unset):
             benefits = UNSET
         else:
             benefits = FpsBenefit.from_dict(_benefits)
+
+
+
 
         empee_pen_contribns_paid = d.pop("empeePenContribnsPaid", UNSET)
 
@@ -277,12 +282,13 @@ class FpsEmployeePayment:
 
         _student_loan_recovered = d.pop("studentLoanRecovered", UNSET)
         student_loan_recovered: Union[Unset, StudentLoanRecovered]
-        if isinstance(_student_loan_recovered, Unset):
+        if isinstance(_student_loan_recovered,  Unset):
             student_loan_recovered = UNSET
         else:
-            student_loan_recovered = StudentLoanRecovered.from_dict(
-                _student_loan_recovered
-            )
+            student_loan_recovered = StudentLoanRecovered.from_dict(_student_loan_recovered)
+
+
+
 
         postgrad_loan_recovered = d.pop("postgradLoanRecovered", UNSET)
 
@@ -304,23 +310,23 @@ class FpsEmployeePayment:
 
         trivial_commutation_payment = []
         _trivial_commutation_payment = d.pop("trivialCommutationPayment", UNSET)
-        for trivial_commutation_payment_item_data in _trivial_commutation_payment or []:
-            trivial_commutation_payment_item = (
-                FpsEmployeeTrivialCommutationPayment.from_dict(
-                    trivial_commutation_payment_item_data
-                )
-            )
+        for trivial_commutation_payment_item_data in (_trivial_commutation_payment or []):
+            trivial_commutation_payment_item = FpsEmployeeTrivialCommutationPayment.from_dict(trivial_commutation_payment_item_data)
+
+
 
             trivial_commutation_payment.append(trivial_commutation_payment_item)
 
+
         _flexible_drawdown = d.pop("flexibleDrawdown", UNSET)
         flexible_drawdown: Union[Unset, FpsEmployeeFlexibleDrawdown]
-        if isinstance(_flexible_drawdown, Unset):
+        if isinstance(_flexible_drawdown,  Unset):
             flexible_drawdown = UNSET
         else:
-            flexible_drawdown = FpsEmployeeFlexibleDrawdown.from_dict(
-                _flexible_drawdown
-            )
+            flexible_drawdown = FpsEmployeeFlexibleDrawdown.from_dict(_flexible_drawdown)
+
+
+
 
         fps_employee_payment = cls(
             bacs_hash_code=bacs_hash_code,
@@ -359,3 +365,4 @@ class FpsEmployeePayment:
         )
 
         return fps_employee_payment
+

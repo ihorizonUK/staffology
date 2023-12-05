@@ -6,7 +6,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="EpsApprenticeshipLevy")
 
-
 @attr.s(auto_attribs=True)
 class EpsApprenticeshipLevy:
     """Used on an EPS to declare an Apprenticeship Levy amount
@@ -21,13 +20,15 @@ class EpsApprenticeshipLevy:
     levy_due_ytd: Union[Unset, float] = UNSET
     annual_allce: Union[Unset, float] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         tax_month = self.tax_month
         levy_due_ytd = self.levy_due_ytd
         annual_allce = self.annual_allce
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if tax_month is not UNSET:
             field_dict["taxMonth"] = tax_month
         if levy_due_ytd is not UNSET:
@@ -36,6 +37,8 @@ class EpsApprenticeshipLevy:
             field_dict["annualAllce"] = annual_allce
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -53,3 +56,4 @@ class EpsApprenticeshipLevy:
         )
 
         return eps_apprenticeship_levy
+

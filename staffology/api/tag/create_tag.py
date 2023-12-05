@@ -13,18 +13,28 @@ def _get_kwargs(
     *,
     client: Client,
     json_body: Tag,
+
 ) -> Dict[str, Any]:
     url = "{}/employers/{employerId}/tags".format(
-        client.base_url, employerId=employer_id
-    )
+        client.base_url,employerId=employer_id)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
 
+    
+
+    
+
+    
+
     json_json_body = json_body.to_dict()
 
+
+
+    
+
     return {
-        "method": "post",
+	    "method": "post",
         "url": url,
         "headers": headers,
         "cookies": cookies,
@@ -40,7 +50,12 @@ def _parse_response(*, response: httpx.Response) -> Optional[Union[Any, Tag]]:
     if response.status_code == 201:
         response_201 = Tag.from_dict(response.json())
 
+
+
         return response_201
+    if response.status_code == 404:
+        response_404 = cast(Any, None)
+        return response_404
     return raise_staffology_exception(response)
 
 
@@ -58,6 +73,7 @@ def sync_detailed(
     *,
     client: Client,
     json_body: Tag,
+
 ) -> Response[Union[Any, Tag]]:
     """Create Tag
 
@@ -71,10 +87,12 @@ def sync_detailed(
         Response[Union[Any, Tag]]
     """
 
+
     kwargs = _get_kwargs(
         employer_id=employer_id,
-        client=client,
-        json_body=json_body,
+client=client,
+json_body=json_body,
+
     )
 
     response = httpx.request(
@@ -84,12 +102,12 @@ def sync_detailed(
 
     return _build_response(response=response)
 
-
 def sync(
     employer_id: str,
     *,
     client: Client,
     json_body: Tag,
+
 ) -> Optional[Union[Any, Tag]]:
     """Create Tag
 
@@ -103,18 +121,20 @@ def sync(
         Response[Union[Any, Tag]]
     """
 
+
     return sync_detailed(
         employer_id=employer_id,
-        client=client,
-        json_body=json_body,
-    ).parsed
+client=client,
+json_body=json_body,
 
+    ).parsed
 
 async def asyncio_detailed(
     employer_id: str,
     *,
     client: Client,
     json_body: Tag,
+
 ) -> Response[Union[Any, Tag]]:
     """Create Tag
 
@@ -128,23 +148,27 @@ async def asyncio_detailed(
         Response[Union[Any, Tag]]
     """
 
+
     kwargs = _get_kwargs(
         employer_id=employer_id,
-        client=client,
-        json_body=json_body,
+client=client,
+json_body=json_body,
+
     )
 
     async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+        response = await _client.request(
+            **kwargs
+        )
 
     return _build_response(response=response)
-
 
 async def asyncio(
     employer_id: str,
     *,
     client: Client,
     json_body: Tag,
+
 ) -> Optional[Union[Any, Tag]]:
     """Create Tag
 
@@ -158,10 +182,11 @@ async def asyncio(
         Response[Union[Any, Tag]]
     """
 
-    return (
-        await asyncio_detailed(
-            employer_id=employer_id,
-            client=client,
-            json_body=json_body,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        employer_id=employer_id,
+client=client,
+json_body=json_body,
+
+    )).parsed
+

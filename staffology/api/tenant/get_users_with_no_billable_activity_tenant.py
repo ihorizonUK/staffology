@@ -14,23 +14,35 @@ def _get_kwargs(
     client: Client,
     month: Union[Unset, None, int] = UNSET,
     year: Union[Unset, None, int] = UNSET,
+
 ) -> Dict[str, Any]:
     url = "{}/tenants/{id}/reports/users/nobillableactivity".format(
-        client.base_url, id=id
-    )
+        client.base_url,id=id)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
 
+    
+
+    
+
     params: Dict[str, Any] = {}
     params["month"] = month
 
+
     params["year"] = year
+
+
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
+
+    
+
+    
+
     return {
-        "method": "get",
+	    "method": "get",
         "url": url,
         "headers": headers,
         "cookies": cookies,
@@ -42,6 +54,8 @@ def _get_kwargs(
 def _parse_response(*, response: httpx.Response) -> Optional[ReportResponse]:
     if response.status_code == 200:
         response_200 = ReportResponse.from_dict(response.json())
+
+
 
         return response_200
     return raise_staffology_exception(response)
@@ -62,6 +76,7 @@ def sync_detailed(
     client: Client,
     month: Union[Unset, None, int] = UNSET,
     year: Union[Unset, None, int] = UNSET,
+
 ) -> Response[ReportResponse]:
     """Get Users with no Billable Activity.
 
@@ -77,11 +92,13 @@ def sync_detailed(
         Response[ReportResponse]
     """
 
+
     kwargs = _get_kwargs(
         id=id,
-        client=client,
-        month=month,
-        year=year,
+client=client,
+month=month,
+year=year,
+
     )
 
     response = httpx.request(
@@ -91,13 +108,13 @@ def sync_detailed(
 
     return _build_response(response=response)
 
-
 def sync(
     id: str,
     *,
     client: Client,
     month: Union[Unset, None, int] = UNSET,
     year: Union[Unset, None, int] = UNSET,
+
 ) -> Optional[ReportResponse]:
     """Get Users with no Billable Activity.
 
@@ -113,13 +130,14 @@ def sync(
         Response[ReportResponse]
     """
 
+
     return sync_detailed(
         id=id,
-        client=client,
-        month=month,
-        year=year,
-    ).parsed
+client=client,
+month=month,
+year=year,
 
+    ).parsed
 
 async def asyncio_detailed(
     id: str,
@@ -127,6 +145,7 @@ async def asyncio_detailed(
     client: Client,
     month: Union[Unset, None, int] = UNSET,
     year: Union[Unset, None, int] = UNSET,
+
 ) -> Response[ReportResponse]:
     """Get Users with no Billable Activity.
 
@@ -142,18 +161,21 @@ async def asyncio_detailed(
         Response[ReportResponse]
     """
 
+
     kwargs = _get_kwargs(
         id=id,
-        client=client,
-        month=month,
-        year=year,
+client=client,
+month=month,
+year=year,
+
     )
 
     async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+        response = await _client.request(
+            **kwargs
+        )
 
     return _build_response(response=response)
-
 
 async def asyncio(
     id: str,
@@ -161,6 +183,7 @@ async def asyncio(
     client: Client,
     month: Union[Unset, None, int] = UNSET,
     year: Union[Unset, None, int] = UNSET,
+
 ) -> Optional[ReportResponse]:
     """Get Users with no Billable Activity.
 
@@ -176,11 +199,12 @@ async def asyncio(
         Response[ReportResponse]
     """
 
-    return (
-        await asyncio_detailed(
-            id=id,
-            client=client,
-            month=month,
-            year=year,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        id=id,
+client=client,
+month=month,
+year=year,
+
+    )).parsed
+

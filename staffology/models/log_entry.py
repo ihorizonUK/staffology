@@ -8,7 +8,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="LogEntry")
 
-
 @attr.s(auto_attribs=True)
 class LogEntry:
     """
@@ -20,6 +19,7 @@ class LogEntry:
     date: Union[Unset, datetime.date] = UNSET
     message: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         date: Union[Unset, str] = UNSET
         if not isinstance(self.date, Unset):
@@ -28,7 +28,8 @@ class LogEntry:
         message = self.message
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if date is not UNSET:
             field_dict["date"] = date
         if message is not UNSET:
@@ -36,15 +37,20 @@ class LogEntry:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _date = d.pop("date", UNSET)
         date: Union[Unset, datetime.date]
-        if isinstance(_date, Unset):
+        if isinstance(_date,  Unset):
             date = UNSET
         else:
             date = isoparse(_date).date()
+
+
+
 
         message = d.pop("message", UNSET)
 
@@ -54,3 +60,4 @@ class LogEntry:
         )
 
         return log_entry
+

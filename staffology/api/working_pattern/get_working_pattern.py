@@ -1,10 +1,10 @@
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, Union, cast
 
 import httpx
 from staffology.propagate_exceptions import raise_staffology_exception
 
 from ...client import Client
-from ...models.working_pattern import WorkingPattern
+from ...models.contract_working_pattern_response import ContractWorkingPatternResponse
 from ...types import Response
 
 
@@ -13,16 +13,26 @@ def _get_kwargs(
     id: str,
     *,
     client: Client,
+
 ) -> Dict[str, Any]:
     url = "{}/employers/{employerId}/workingpatterns/{id}".format(
-        client.base_url, employerId=employer_id, id=id
-    )
+        client.base_url,employerId=employer_id,id=id)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
 
+    
+
+    
+
+    
+
+    
+
+    
+
     return {
-        "method": "get",
+	    "method": "get",
         "url": url,
         "headers": headers,
         "cookies": cookies,
@@ -30,15 +40,23 @@ def _get_kwargs(
     }
 
 
-def _parse_response(*, response: httpx.Response) -> Optional[WorkingPattern]:
+def _parse_response(*, response: httpx.Response) -> Optional[Union[Any, ContractWorkingPatternResponse]]:
     if response.status_code == 200:
-        response_200 = WorkingPattern.from_dict(response.json())
+        response_200 = ContractWorkingPatternResponse.from_dict(response.json())
+
+
 
         return response_200
+    if response.status_code == 403:
+        response_403 = cast(Any, None)
+        return response_403
+    if response.status_code == 404:
+        response_404 = cast(Any, None)
+        return response_404
     return raise_staffology_exception(response)
 
 
-def _build_response(*, response: httpx.Response) -> Response[WorkingPattern]:
+def _build_response(*, response: httpx.Response) -> Response[Union[Any, ContractWorkingPatternResponse]]:
     return Response(
         status_code=response.status_code,
         content=response.content,
@@ -52,7 +70,8 @@ def sync_detailed(
     id: str,
     *,
     client: Client,
-) -> Response[WorkingPattern]:
+
+) -> Response[Union[Any, ContractWorkingPatternResponse]]:
     """Get WorkingPattern
 
      Gets the WorkingPattern specified.
@@ -62,13 +81,15 @@ def sync_detailed(
         id (str):
 
     Returns:
-        Response[WorkingPattern]
+        Response[Union[Any, ContractWorkingPatternResponse]]
     """
+
 
     kwargs = _get_kwargs(
         employer_id=employer_id,
-        id=id,
-        client=client,
+id=id,
+client=client,
+
     )
 
     response = httpx.request(
@@ -78,13 +99,13 @@ def sync_detailed(
 
     return _build_response(response=response)
 
-
 def sync(
     employer_id: str,
     id: str,
     *,
     client: Client,
-) -> Optional[WorkingPattern]:
+
+) -> Optional[Union[Any, ContractWorkingPatternResponse]]:
     """Get WorkingPattern
 
      Gets the WorkingPattern specified.
@@ -94,22 +115,24 @@ def sync(
         id (str):
 
     Returns:
-        Response[WorkingPattern]
+        Response[Union[Any, ContractWorkingPatternResponse]]
     """
+
 
     return sync_detailed(
         employer_id=employer_id,
-        id=id,
-        client=client,
-    ).parsed
+id=id,
+client=client,
 
+    ).parsed
 
 async def asyncio_detailed(
     employer_id: str,
     id: str,
     *,
     client: Client,
-) -> Response[WorkingPattern]:
+
+) -> Response[Union[Any, ContractWorkingPatternResponse]]:
     """Get WorkingPattern
 
      Gets the WorkingPattern specified.
@@ -119,27 +142,31 @@ async def asyncio_detailed(
         id (str):
 
     Returns:
-        Response[WorkingPattern]
+        Response[Union[Any, ContractWorkingPatternResponse]]
     """
+
 
     kwargs = _get_kwargs(
         employer_id=employer_id,
-        id=id,
-        client=client,
+id=id,
+client=client,
+
     )
 
     async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+        response = await _client.request(
+            **kwargs
+        )
 
     return _build_response(response=response)
-
 
 async def asyncio(
     employer_id: str,
     id: str,
     *,
     client: Client,
-) -> Optional[WorkingPattern]:
+
+) -> Optional[Union[Any, ContractWorkingPatternResponse]]:
     """Get WorkingPattern
 
      Gets the WorkingPattern specified.
@@ -149,13 +176,14 @@ async def asyncio(
         id (str):
 
     Returns:
-        Response[WorkingPattern]
+        Response[Union[Any, ContractWorkingPatternResponse]]
     """
 
-    return (
-        await asyncio_detailed(
-            employer_id=employer_id,
-            id=id,
-            client=client,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        employer_id=employer_id,
+id=id,
+client=client,
+
+    )).parsed
+

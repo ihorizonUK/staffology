@@ -7,7 +7,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="RtiValidationWarning")
 
-
 @attr.s(auto_attribs=True)
 class RtiValidationWarning:
     """
@@ -19,6 +18,7 @@ class RtiValidationWarning:
     type: Union[Unset, RtiValidationWarningType] = UNSET
     employee_id: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET
         if not isinstance(self.type, Unset):
@@ -27,7 +27,8 @@ class RtiValidationWarning:
         employee_id = self.employee_id
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if type is not UNSET:
             field_dict["type"] = type
         if employee_id is not UNSET:
@@ -35,15 +36,20 @@ class RtiValidationWarning:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _type = d.pop("type", UNSET)
         type: Union[Unset, RtiValidationWarningType]
-        if isinstance(_type, Unset):
+        if isinstance(_type,  Unset):
             type = UNSET
         else:
             type = RtiValidationWarningType(_type)
+
+
+
 
         employee_id = d.pop("employeeId", UNSET)
 
@@ -53,3 +59,4 @@ class RtiValidationWarning:
         )
 
         return rti_validation_warning
+

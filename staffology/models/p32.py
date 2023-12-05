@@ -9,7 +9,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="P32")
 
-
 @attr.s(auto_attribs=True)
 class P32:
     """
@@ -18,12 +17,15 @@ class P32:
         hmrc_liabilities (Union[Unset, None, List[HmrcLiability]]): [readonly]
         report (Union[Unset, Report]):
         tax_year (Union[Unset, TaxYear]):
+        is_draft (Union[Unset, bool]):
     """
 
     is_quarterly: Union[Unset, bool] = UNSET
     hmrc_liabilities: Union[Unset, None, List[HmrcLiability]] = UNSET
     report: Union[Unset, Report] = UNSET
     tax_year: Union[Unset, TaxYear] = UNSET
+    is_draft: Union[Unset, bool] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         is_quarterly = self.is_quarterly
@@ -38,6 +40,9 @@ class P32:
 
                     hmrc_liabilities.append(hmrc_liabilities_item)
 
+
+
+
         report: Union[Unset, str] = UNSET
         if not isinstance(self.report, Unset):
             report = self.report.value
@@ -46,8 +51,11 @@ class P32:
         if not isinstance(self.tax_year, Unset):
             tax_year = self.tax_year.value
 
+        is_draft = self.is_draft
+
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if is_quarterly is not UNSET:
             field_dict["isQuarterly"] = is_quarterly
         if hmrc_liabilities is not UNSET:
@@ -56,8 +64,12 @@ class P32:
             field_dict["report"] = report
         if tax_year is not UNSET:
             field_dict["taxYear"] = tax_year
+        if is_draft is not UNSET:
+            field_dict["isDraft"] = is_draft
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -66,30 +78,43 @@ class P32:
 
         hmrc_liabilities = []
         _hmrc_liabilities = d.pop("hmrcLiabilities", UNSET)
-        for hmrc_liabilities_item_data in _hmrc_liabilities or []:
+        for hmrc_liabilities_item_data in (_hmrc_liabilities or []):
             hmrc_liabilities_item = HmrcLiability.from_dict(hmrc_liabilities_item_data)
+
+
 
             hmrc_liabilities.append(hmrc_liabilities_item)
 
+
         _report = d.pop("report", UNSET)
         report: Union[Unset, Report]
-        if isinstance(_report, Unset):
+        if isinstance(_report,  Unset):
             report = UNSET
         else:
             report = Report(_report)
 
+
+
+
         _tax_year = d.pop("taxYear", UNSET)
         tax_year: Union[Unset, TaxYear]
-        if isinstance(_tax_year, Unset):
+        if isinstance(_tax_year,  Unset):
             tax_year = UNSET
         else:
             tax_year = TaxYear(_tax_year)
+
+
+
+
+        is_draft = d.pop("isDraft", UNSET)
 
         p32 = cls(
             is_quarterly=is_quarterly,
             hmrc_liabilities=hmrc_liabilities,
             report=report,
             tax_year=tax_year,
+            is_draft=is_draft,
         )
 
         return p32
+

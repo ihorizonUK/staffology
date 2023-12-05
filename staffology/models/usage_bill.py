@@ -7,7 +7,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="UsageBill")
 
-
 @attr.s(auto_attribs=True)
 class UsageBill:
     """
@@ -17,10 +16,11 @@ class UsageBill:
         payslip_count (Union[Unset, int]):
         previously_billed_payslip_count (Union[Unset, int]): The number of payslips that appear in the usage, but were
             billed in a previous period
-        net_cost (Union[Unset, float]):
+        net_cost (Union[Unset, float]): Net cost of any payslips, or the Pricing Table minimum, whichever is greater.
         discount (Union[Unset, float]):
         partner_discount_amount (Union[Unset, float]):
-        monthly_minimum (Union[Unset, float]):
+        monthly_minimum (Union[Unset, float]): This is actually an offset against the NetCost and doesn't contain the
+            full MonthlyMinimum.
         total (Union[Unset, float]):
         paid (Union[Unset, bool]):
         usage (Union[Unset, None, List[Item]]):
@@ -46,6 +46,7 @@ class UsageBill:
     accounting_invoice_link: Union[Unset, None, str] = UNSET
     id: Union[Unset, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         year = self.year
         month = self.month
@@ -68,13 +69,17 @@ class UsageBill:
 
                     usage.append(usage_item)
 
+
+
+
         accounting_customer_id = self.accounting_customer_id
         accounting_invoice_id = self.accounting_invoice_id
         accounting_invoice_link = self.accounting_invoice_link
         id = self.id
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if year is not UNSET:
             field_dict["year"] = year
         if month is not UNSET:
@@ -108,6 +113,8 @@ class UsageBill:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
@@ -133,10 +140,13 @@ class UsageBill:
 
         usage = []
         _usage = d.pop("usage", UNSET)
-        for usage_item_data in _usage or []:
+        for usage_item_data in (_usage or []):
             usage_item = Item.from_dict(usage_item_data)
 
+
+
             usage.append(usage_item)
+
 
         accounting_customer_id = d.pop("accountingCustomerId", UNSET)
 
@@ -165,3 +175,4 @@ class UsageBill:
         )
 
         return usage_bill
+

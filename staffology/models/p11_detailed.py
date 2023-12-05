@@ -16,37 +16,37 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="P11Detailed")
 
-
 @attr.s(auto_attribs=True)
 class P11Detailed:
     """A more comprehensive P11 Report.
-    Our Reports API can return this to you in several formats including as a PDF file
-    If you request a JSON object then it is represented using this model.
+Our Reports API can return this to you in several formats including as a PDF file
+If you request a JSON object then it is represented using this model.
 
-        Attributes:
-            employer_name (Union[Unset, None, str]): [readonly]
-            payroll_code (Union[Unset, None, str]): [readonly]
-            employer_office_no (Union[Unset, None, str]): [readonly]
-            employer_paye_ref (Union[Unset, None, str]): [readonly]
-            firstname (Union[Unset, None, str]): [readonly]
-            middlename (Union[Unset, None, str]): [readonly]
-            surname (Union[Unset, None, str]): [readonly]
-            ni_number (Union[Unset, None, str]): [readonly]
-            tax_code (Union[Unset, None, str]): [readonly]
-            date_of_birth (Union[Unset, datetime.date]): [readonly]
-            join_date (Union[Unset, datetime.date]): [readonly]
-            leave_date (Union[Unset, None, datetime.date]): [readonly]
-            is_director (Union[Unset, bool]): [readonly]
-            ni_and_stat_payments_lines (Union[Unset, None, List[P11NiAndStatPaymentsLine]]): [readonly]
-            totals_line (Union[Unset, P11NiAndStatPaymentsTotalsLine]): Summary line for the NI Contributions and Statutory
-                Payments table in the P11 Detailed report
-            ni_summary (Union[Unset, None, List[P11DetailedNiValues]]): [readonly]
-            paye_lines (Union[Unset, None, List[P11PayeLine]]): [readonly]
-            paye_totals_line (Union[Unset, P11PayeTotalsLine]): Summary line for the Paye Income Tax table in the P11
-                Detailed report
-            paye_summary (Union[Unset, P11PayeSummary]): Forms the PAYE summary in the P11 Detailed report
-            report (Union[Unset, Report]):
-            tax_year (Union[Unset, TaxYear]):
+    Attributes:
+        employer_name (Union[Unset, None, str]): [readonly]
+        payroll_code (Union[Unset, None, str]): [readonly]
+        employer_office_no (Union[Unset, None, str]): [readonly]
+        employer_paye_ref (Union[Unset, None, str]): [readonly]
+        firstname (Union[Unset, None, str]): [readonly]
+        middlename (Union[Unset, None, str]): [readonly]
+        surname (Union[Unset, None, str]): [readonly]
+        ni_number (Union[Unset, None, str]): [readonly]
+        tax_code (Union[Unset, None, str]): [readonly]
+        date_of_birth (Union[Unset, datetime.date]): [readonly]
+        join_date (Union[Unset, datetime.date]): [readonly]
+        leave_date (Union[Unset, None, datetime.date]): [readonly]
+        is_director (Union[Unset, bool]): [readonly]
+        ni_and_stat_payments_lines (Union[Unset, None, List[P11NiAndStatPaymentsLine]]): [readonly]
+        totals_line (Union[Unset, P11NiAndStatPaymentsTotalsLine]): Summary line for the NI Contributions and Statutory
+            Payments table in the P11 Detailed report
+        ni_summary (Union[Unset, None, List[P11DetailedNiValues]]): [readonly]
+        paye_lines (Union[Unset, None, List[P11PayeLine]]): [readonly]
+        paye_totals_line (Union[Unset, P11PayeTotalsLine]): Summary line for the Paye Income Tax table in the P11
+            Detailed report
+        paye_summary (Union[Unset, P11PayeSummary]): Forms the PAYE summary in the P11 Detailed report
+        report (Union[Unset, Report]):
+        tax_year (Union[Unset, TaxYear]):
+        is_draft (Union[Unset, bool]):
     """
 
     employer_name: Union[Unset, None, str] = UNSET
@@ -62,9 +62,7 @@ class P11Detailed:
     join_date: Union[Unset, datetime.date] = UNSET
     leave_date: Union[Unset, None, datetime.date] = UNSET
     is_director: Union[Unset, bool] = UNSET
-    ni_and_stat_payments_lines: Union[
-        Unset, None, List[P11NiAndStatPaymentsLine]
-    ] = UNSET
+    ni_and_stat_payments_lines: Union[Unset, None, List[P11NiAndStatPaymentsLine]] = UNSET
     totals_line: Union[Unset, P11NiAndStatPaymentsTotalsLine] = UNSET
     ni_summary: Union[Unset, None, List[P11DetailedNiValues]] = UNSET
     paye_lines: Union[Unset, None, List[P11PayeLine]] = UNSET
@@ -72,6 +70,8 @@ class P11Detailed:
     paye_summary: Union[Unset, P11PayeSummary] = UNSET
     report: Union[Unset, Report] = UNSET
     tax_year: Union[Unset, TaxYear] = UNSET
+    is_draft: Union[Unset, bool] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         employer_name = self.employer_name
@@ -102,14 +102,13 @@ class P11Detailed:
                 ni_and_stat_payments_lines = None
             else:
                 ni_and_stat_payments_lines = []
-                for (
-                    ni_and_stat_payments_lines_item_data
-                ) in self.ni_and_stat_payments_lines:
-                    ni_and_stat_payments_lines_item = (
-                        ni_and_stat_payments_lines_item_data.to_dict()
-                    )
+                for ni_and_stat_payments_lines_item_data in self.ni_and_stat_payments_lines:
+                    ni_and_stat_payments_lines_item = ni_and_stat_payments_lines_item_data.to_dict()
 
                     ni_and_stat_payments_lines.append(ni_and_stat_payments_lines_item)
+
+
+
 
         totals_line: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.totals_line, Unset):
@@ -126,6 +125,9 @@ class P11Detailed:
 
                     ni_summary.append(ni_summary_item)
 
+
+
+
         paye_lines: Union[Unset, None, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.paye_lines, Unset):
             if self.paye_lines is None:
@@ -136,6 +138,9 @@ class P11Detailed:
                     paye_lines_item = paye_lines_item_data.to_dict()
 
                     paye_lines.append(paye_lines_item)
+
+
+
 
         paye_totals_line: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.paye_totals_line, Unset):
@@ -153,8 +158,11 @@ class P11Detailed:
         if not isinstance(self.tax_year, Unset):
             tax_year = self.tax_year.value
 
+        is_draft = self.is_draft
+
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if employer_name is not UNSET:
             field_dict["employerName"] = employer_name
         if payroll_code is not UNSET:
@@ -197,8 +205,12 @@ class P11Detailed:
             field_dict["report"] = report
         if tax_year is not UNSET:
             field_dict["taxYear"] = tax_year
+        if is_draft is not UNSET:
+            field_dict["isDraft"] = is_draft
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -223,86 +235,119 @@ class P11Detailed:
 
         _date_of_birth = d.pop("dateOfBirth", UNSET)
         date_of_birth: Union[Unset, datetime.date]
-        if isinstance(_date_of_birth, Unset):
+        if isinstance(_date_of_birth,  Unset):
             date_of_birth = UNSET
         else:
             date_of_birth = isoparse(_date_of_birth).date()
 
+
+
+
         _join_date = d.pop("joinDate", UNSET)
         join_date: Union[Unset, datetime.date]
-        if isinstance(_join_date, Unset):
+        if isinstance(_join_date,  Unset):
             join_date = UNSET
         else:
             join_date = isoparse(_join_date).date()
+
+
+
 
         _leave_date = d.pop("leaveDate", UNSET)
         leave_date: Union[Unset, None, datetime.date]
         if _leave_date is None:
             leave_date = None
-        elif isinstance(_leave_date, Unset):
+        elif isinstance(_leave_date,  Unset):
             leave_date = UNSET
         else:
             leave_date = isoparse(_leave_date).date()
+
+
+
 
         is_director = d.pop("isDirector", UNSET)
 
         ni_and_stat_payments_lines = []
         _ni_and_stat_payments_lines = d.pop("niAndStatPaymentsLines", UNSET)
-        for ni_and_stat_payments_lines_item_data in _ni_and_stat_payments_lines or []:
-            ni_and_stat_payments_lines_item = P11NiAndStatPaymentsLine.from_dict(
-                ni_and_stat_payments_lines_item_data
-            )
+        for ni_and_stat_payments_lines_item_data in (_ni_and_stat_payments_lines or []):
+            ni_and_stat_payments_lines_item = P11NiAndStatPaymentsLine.from_dict(ni_and_stat_payments_lines_item_data)
+
+
 
             ni_and_stat_payments_lines.append(ni_and_stat_payments_lines_item)
 
+
         _totals_line = d.pop("totalsLine", UNSET)
         totals_line: Union[Unset, P11NiAndStatPaymentsTotalsLine]
-        if isinstance(_totals_line, Unset):
+        if isinstance(_totals_line,  Unset):
             totals_line = UNSET
         else:
             totals_line = P11NiAndStatPaymentsTotalsLine.from_dict(_totals_line)
 
+
+
+
         ni_summary = []
         _ni_summary = d.pop("niSummary", UNSET)
-        for ni_summary_item_data in _ni_summary or []:
+        for ni_summary_item_data in (_ni_summary or []):
             ni_summary_item = P11DetailedNiValues.from_dict(ni_summary_item_data)
+
+
 
             ni_summary.append(ni_summary_item)
 
+
         paye_lines = []
         _paye_lines = d.pop("payeLines", UNSET)
-        for paye_lines_item_data in _paye_lines or []:
+        for paye_lines_item_data in (_paye_lines or []):
             paye_lines_item = P11PayeLine.from_dict(paye_lines_item_data)
+
+
 
             paye_lines.append(paye_lines_item)
 
+
         _paye_totals_line = d.pop("payeTotalsLine", UNSET)
         paye_totals_line: Union[Unset, P11PayeTotalsLine]
-        if isinstance(_paye_totals_line, Unset):
+        if isinstance(_paye_totals_line,  Unset):
             paye_totals_line = UNSET
         else:
             paye_totals_line = P11PayeTotalsLine.from_dict(_paye_totals_line)
 
+
+
+
         _paye_summary = d.pop("payeSummary", UNSET)
         paye_summary: Union[Unset, P11PayeSummary]
-        if isinstance(_paye_summary, Unset):
+        if isinstance(_paye_summary,  Unset):
             paye_summary = UNSET
         else:
             paye_summary = P11PayeSummary.from_dict(_paye_summary)
 
+
+
+
         _report = d.pop("report", UNSET)
         report: Union[Unset, Report]
-        if isinstance(_report, Unset):
+        if isinstance(_report,  Unset):
             report = UNSET
         else:
             report = Report(_report)
 
+
+
+
         _tax_year = d.pop("taxYear", UNSET)
         tax_year: Union[Unset, TaxYear]
-        if isinstance(_tax_year, Unset):
+        if isinstance(_tax_year,  Unset):
             tax_year = UNSET
         else:
             tax_year = TaxYear(_tax_year)
+
+
+
+
+        is_draft = d.pop("isDraft", UNSET)
 
         p11_detailed = cls(
             employer_name=employer_name,
@@ -326,6 +371,8 @@ class P11Detailed:
             paye_summary=paye_summary,
             report=report,
             tax_year=tax_year,
+            is_draft=is_draft,
         )
 
         return p11_detailed
+

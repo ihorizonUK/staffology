@@ -11,28 +11,28 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="P11")
 
-
 @attr.s(auto_attribs=True)
 class P11:
     """A P11 Report summarises payments and deductions made to an employee.
-    Our Reports API can return this to you in many formats including as a PDF file
-    If you request is as a JSOn object then it is represented using this model.
+Our Reports API can return this to you in many formats including as a PDF file
+If you request is as a JSOn object then it is represented using this model.
 
-        Attributes:
-            employer_name (Union[Unset, None, str]): [readonly]
-            payroll_code (Union[Unset, None, str]): [readonly]
-            employer_office_no (Union[Unset, None, str]): [readonly]
-            employer_paye_ref (Union[Unset, None, str]): [readonly]
-            firstname (Union[Unset, None, str]): [readonly]
-            surname (Union[Unset, None, str]): [readonly]
-            ni_number (Union[Unset, None, str]): [readonly]
-            tax_code (Union[Unset, None, str]): [readonly]
-            date_of_birth (Union[Unset, datetime.date]): [readonly]
-            join_date (Union[Unset, datetime.date]): [readonly]
-            leave_date (Union[Unset, None, datetime.date]): [readonly]
-            lines (Union[Unset, None, List[P11Line]]): [readonly]
-            report (Union[Unset, Report]):
-            tax_year (Union[Unset, TaxYear]):
+    Attributes:
+        employer_name (Union[Unset, None, str]): [readonly]
+        payroll_code (Union[Unset, None, str]): [readonly]
+        employer_office_no (Union[Unset, None, str]): [readonly]
+        employer_paye_ref (Union[Unset, None, str]): [readonly]
+        firstname (Union[Unset, None, str]): [readonly]
+        surname (Union[Unset, None, str]): [readonly]
+        ni_number (Union[Unset, None, str]): [readonly]
+        tax_code (Union[Unset, None, str]): [readonly]
+        date_of_birth (Union[Unset, datetime.date]): [readonly]
+        join_date (Union[Unset, datetime.date]): [readonly]
+        leave_date (Union[Unset, None, datetime.date]): [readonly]
+        lines (Union[Unset, None, List[P11Line]]): [readonly]
+        report (Union[Unset, Report]):
+        tax_year (Union[Unset, TaxYear]):
+        is_draft (Union[Unset, bool]):
     """
 
     employer_name: Union[Unset, None, str] = UNSET
@@ -49,6 +49,8 @@ class P11:
     lines: Union[Unset, None, List[P11Line]] = UNSET
     report: Union[Unset, Report] = UNSET
     tax_year: Union[Unset, TaxYear] = UNSET
+    is_draft: Union[Unset, bool] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         employer_name = self.employer_name
@@ -82,6 +84,9 @@ class P11:
 
                     lines.append(lines_item)
 
+
+
+
         report: Union[Unset, str] = UNSET
         if not isinstance(self.report, Unset):
             report = self.report.value
@@ -90,8 +95,11 @@ class P11:
         if not isinstance(self.tax_year, Unset):
             tax_year = self.tax_year.value
 
+        is_draft = self.is_draft
+
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if employer_name is not UNSET:
             field_dict["employerName"] = employer_name
         if payroll_code is not UNSET:
@@ -120,8 +128,12 @@ class P11:
             field_dict["report"] = report
         if tax_year is not UNSET:
             field_dict["taxYear"] = tax_year
+        if is_draft is not UNSET:
+            field_dict["isDraft"] = is_draft
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -144,47 +156,67 @@ class P11:
 
         _date_of_birth = d.pop("dateOfBirth", UNSET)
         date_of_birth: Union[Unset, datetime.date]
-        if isinstance(_date_of_birth, Unset):
+        if isinstance(_date_of_birth,  Unset):
             date_of_birth = UNSET
         else:
             date_of_birth = isoparse(_date_of_birth).date()
 
+
+
+
         _join_date = d.pop("joinDate", UNSET)
         join_date: Union[Unset, datetime.date]
-        if isinstance(_join_date, Unset):
+        if isinstance(_join_date,  Unset):
             join_date = UNSET
         else:
             join_date = isoparse(_join_date).date()
+
+
+
 
         _leave_date = d.pop("leaveDate", UNSET)
         leave_date: Union[Unset, None, datetime.date]
         if _leave_date is None:
             leave_date = None
-        elif isinstance(_leave_date, Unset):
+        elif isinstance(_leave_date,  Unset):
             leave_date = UNSET
         else:
             leave_date = isoparse(_leave_date).date()
 
+
+
+
         lines = []
         _lines = d.pop("lines", UNSET)
-        for lines_item_data in _lines or []:
+        for lines_item_data in (_lines or []):
             lines_item = P11Line.from_dict(lines_item_data)
+
+
 
             lines.append(lines_item)
 
+
         _report = d.pop("report", UNSET)
         report: Union[Unset, Report]
-        if isinstance(_report, Unset):
+        if isinstance(_report,  Unset):
             report = UNSET
         else:
             report = Report(_report)
 
+
+
+
         _tax_year = d.pop("taxYear", UNSET)
         tax_year: Union[Unset, TaxYear]
-        if isinstance(_tax_year, Unset):
+        if isinstance(_tax_year,  Unset):
             tax_year = UNSET
         else:
             tax_year = TaxYear(_tax_year)
+
+
+
+
+        is_draft = d.pop("isDraft", UNSET)
 
         p11 = cls(
             employer_name=employer_name,
@@ -201,6 +233,8 @@ class P11:
             lines=lines,
             report=report,
             tax_year=tax_year,
+            is_draft=is_draft,
         )
 
         return p11
+

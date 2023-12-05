@@ -11,7 +11,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="FpsEmployment")
 
-
 @attr.s(auto_attribs=True)
 class FpsEmployment:
     """
@@ -45,9 +44,8 @@ class FpsEmployment:
     leaving_date: Union[Unset, None, str] = UNSET
     figures_to_date: Union[Unset, FpsEmployeeFigsToDate] = UNSET
     payment: Union[Unset, FpsEmployeePayment] = UNSET
-    n_iletters_and_values: Union[
-        Unset, None, List[FpsEmployeeNIlettersAndValues]
-    ] = UNSET
+    n_iletters_and_values: Union[Unset, None, List[FpsEmployeeNIlettersAndValues]] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         employee_current_ni_letter = self.employee_current_ni_letter
@@ -82,14 +80,17 @@ class FpsEmployment:
             else:
                 n_iletters_and_values = []
                 for n_iletters_and_values_item_data in self.n_iletters_and_values:
-                    n_iletters_and_values_item = (
-                        n_iletters_and_values_item_data.to_dict()
-                    )
+                    n_iletters_and_values_item = n_iletters_and_values_item_data.to_dict()
 
                     n_iletters_and_values.append(n_iletters_and_values_item)
 
+
+
+
+
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if employee_current_ni_letter is not UNSET:
             field_dict["employeeCurrentNiLetter"] = employee_current_ni_letter
         if off_payroll_worker is not UNSET:
@@ -121,6 +122,8 @@ class FpsEmployment:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
@@ -136,19 +139,25 @@ class FpsEmployment:
 
         _starter = d.pop("starter", UNSET)
         starter: Union[Unset, FpsEmployeeStarter]
-        if isinstance(_starter, Unset):
+        if isinstance(_starter,  Unset):
             starter = UNSET
         else:
             starter = FpsEmployeeStarter.from_dict(_starter)
+
+
+
 
         pay_id = d.pop("payId", UNSET)
 
         _pay_id_chgd = d.pop("payIdChgd", UNSET)
         pay_id_chgd: Union[Unset, FpsEmployerPayIdChanged]
-        if isinstance(_pay_id_chgd, Unset):
+        if isinstance(_pay_id_chgd,  Unset):
             pay_id_chgd = UNSET
         else:
             pay_id_chgd = FpsEmployerPayIdChanged.from_dict(_pay_id_chgd)
+
+
+
 
         payment_to_a_non_individual = d.pop("paymentToANonIndividual", UNSET)
 
@@ -158,26 +167,33 @@ class FpsEmployment:
 
         _figures_to_date = d.pop("figuresToDate", UNSET)
         figures_to_date: Union[Unset, FpsEmployeeFigsToDate]
-        if isinstance(_figures_to_date, Unset):
+        if isinstance(_figures_to_date,  Unset):
             figures_to_date = UNSET
         else:
             figures_to_date = FpsEmployeeFigsToDate.from_dict(_figures_to_date)
 
+
+
+
         _payment = d.pop("payment", UNSET)
         payment: Union[Unset, FpsEmployeePayment]
-        if isinstance(_payment, Unset):
+        if isinstance(_payment,  Unset):
             payment = UNSET
         else:
             payment = FpsEmployeePayment.from_dict(_payment)
 
+
+
+
         n_iletters_and_values = []
         _n_iletters_and_values = d.pop("nIlettersAndValues", UNSET)
-        for n_iletters_and_values_item_data in _n_iletters_and_values or []:
-            n_iletters_and_values_item = FpsEmployeeNIlettersAndValues.from_dict(
-                n_iletters_and_values_item_data
-            )
+        for n_iletters_and_values_item_data in (_n_iletters_and_values or []):
+            n_iletters_and_values_item = FpsEmployeeNIlettersAndValues.from_dict(n_iletters_and_values_item_data)
+
+
 
             n_iletters_and_values.append(n_iletters_and_values_item)
+
 
         fps_employment = cls(
             employee_current_ni_letter=employee_current_ni_letter,
@@ -197,3 +213,4 @@ class FpsEmployment:
         )
 
         return fps_employment
+

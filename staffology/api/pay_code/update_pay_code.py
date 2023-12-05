@@ -15,9 +15,7 @@ def _get_kwargs(
     client: Client,
     json_body: PayCode,
 ) -> Dict[str, Any]:
-    url = "{}/employers/{employerId}/paycodes/{code}".format(
-        client.base_url, employerId=employer_id, code=code
-    )
+    url = "{}/employers/{employerId}/paycodes/{code}".format(client.base_url, employerId=employer_id, code=code)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
@@ -61,9 +59,10 @@ def sync_detailed(
     client: Client,
     json_body: PayCode,
 ) -> Response[Union[Any, PayCode]]:
-    """Update PayCode
+    """Update PayCode (deprecated)
 
      Updates the details of an existing PayCode.
+    Use the other Update endpoint that supports non-alphanumeric characters for a pay code
 
     Args:
         employer_id (str):
@@ -99,9 +98,10 @@ def sync(
     client: Client,
     json_body: PayCode,
 ) -> Optional[Union[Any, PayCode]]:
-    """Update PayCode
+    """Update PayCode (deprecated)
 
      Updates the details of an existing PayCode.
+    Use the other Update endpoint that supports non-alphanumeric characters for a pay code
 
     Args:
         employer_id (str):
@@ -130,9 +130,10 @@ async def asyncio_detailed(
     client: Client,
     json_body: PayCode,
 ) -> Response[Union[Any, PayCode]]:
-    """Update PayCode
+    """Update PayCode (deprecated)
 
      Updates the details of an existing PayCode.
+    Use the other Update endpoint that supports non-alphanumeric characters for a pay code
 
     Args:
         employer_id (str):
@@ -166,9 +167,10 @@ async def asyncio(
     client: Client,
     json_body: PayCode,
 ) -> Optional[Union[Any, PayCode]]:
-    """Update PayCode
+    """Update PayCode (deprecated)
 
      Updates the details of an existing PayCode.
+    Use the other Update endpoint that supports non-alphanumeric characters for a pay code
 
     Args:
         employer_id (str):

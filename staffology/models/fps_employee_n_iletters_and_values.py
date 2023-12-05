@@ -6,7 +6,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="FpsEmployeeNIlettersAndValues")
 
-
 @attr.s(auto_attribs=True)
 class FpsEmployeeNIlettersAndValues:
     """
@@ -34,6 +33,7 @@ class FpsEmployeeNIlettersAndValues:
     empee_contribns_in_pd: Union[Unset, None, str] = UNSET
     empee_contribns_ytd: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         n_iletter = self.n_iletter
         gross_earnings_for_ni_cs_in_pd = self.gross_earnings_for_ni_cs_in_pd
@@ -47,7 +47,8 @@ class FpsEmployeeNIlettersAndValues:
         empee_contribns_ytd = self.empee_contribns_ytd
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if n_iletter is not UNSET:
             field_dict["nIletter"] = n_iletter
         if gross_earnings_for_ni_cs_in_pd is not UNSET:
@@ -70,6 +71,8 @@ class FpsEmployeeNIlettersAndValues:
             field_dict["empeeContribnsYTD"] = empee_contribns_ytd
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -108,3 +111,4 @@ class FpsEmployeeNIlettersAndValues:
         )
 
         return fps_employee_n_iletters_and_values
+

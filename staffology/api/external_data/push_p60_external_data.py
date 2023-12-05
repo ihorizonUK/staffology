@@ -17,9 +17,7 @@ def _get_kwargs(
     employee_id: Union[Unset, None, str] = UNSET,
     tax_year: Union[Unset, None, TaxYear] = UNSET,
 ) -> Dict[str, Any]:
-    url = "{}/employers/{employerId}/external-data/{id}/p60".format(
-        client.base_url, employerId=employer_id, id=id
-    )
+    url = "{}/employers/{employerId}/external-data/{id}/p60".format(client.base_url, employerId=employer_id, id=id)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()

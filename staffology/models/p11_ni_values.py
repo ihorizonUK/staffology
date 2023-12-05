@@ -6,7 +6,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="P11NiValues")
 
-
 @attr.s(auto_attribs=True)
 class P11NiValues:
     """Forms a part of the P11 report.
@@ -21,13 +20,15 @@ class P11NiValues:
     period: Union[Unset, float] = UNSET
     ytd: Union[Unset, float] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         table = self.table
         period = self.period
         ytd = self.ytd
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if table is not UNSET:
             field_dict["table"] = table
         if period is not UNSET:
@@ -36,6 +37,8 @@ class P11NiValues:
             field_dict["ytd"] = ytd
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -53,3 +56,4 @@ class P11NiValues:
         )
 
         return p11_ni_values
+

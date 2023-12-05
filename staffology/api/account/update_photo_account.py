@@ -4,9 +4,7 @@ import httpx
 from staffology.propagate_exceptions import raise_staffology_exception
 
 from ...client import Client
-from ...models.update_photo_account_multipart_data import (
-    UpdatePhotoAccountMultipartData,
-)
+from ...models.update_photo_account_multipart_data import UpdatePhotoAccountMultipartData
 from ...models.user import User
 from ...types import Response
 

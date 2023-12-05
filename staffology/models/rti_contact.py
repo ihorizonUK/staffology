@@ -6,7 +6,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="RtiContact")
 
-
 @attr.s(auto_attribs=True)
 class RtiContact:
     """
@@ -22,6 +21,7 @@ class RtiContact:
     email: Union[Unset, None, str] = UNSET
     telephone: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         first_name = self.first_name
         last_name = self.last_name
@@ -29,7 +29,8 @@ class RtiContact:
         telephone = self.telephone
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if first_name is not UNSET:
             field_dict["firstName"] = first_name
         if last_name is not UNSET:
@@ -40,6 +41,8 @@ class RtiContact:
             field_dict["telephone"] = telephone
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -60,3 +63,4 @@ class RtiContact:
         )
 
         return rti_contact
+

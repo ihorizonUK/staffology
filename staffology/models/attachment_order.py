@@ -12,7 +12,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="AttachmentOrder")
 
-
 @attr.s(auto_attribs=True)
 class AttachmentOrder:
     """Used to represent an Attachment of Earnings Order (AEO)
@@ -48,6 +47,7 @@ class AttachmentOrder:
         payments (Union[Unset, None, List[AttachmentOrderPayment]]): [readonly] Payments made towards this order. Only
             populated when viewed as a report.
         payee (Union[Unset, None, str]): The Id of the Payee, if any, that deductions are to be paid to.
+        payee_name (Union[Unset, None, str]): The name of the Payee, if any, that deductions are to be paid to.
         document_count (Union[Unset, int]): [readonly] The number of attachments associated with this model
         documents (Union[Unset, None, List[Item]]): [readonly] The attachments associated with this model
         employee (Union[Unset, Item]):
@@ -77,10 +77,12 @@ class AttachmentOrder:
     bank_details: Union[Unset, BankDetails] = UNSET
     payments: Union[Unset, None, List[AttachmentOrderPayment]] = UNSET
     payee: Union[Unset, None, str] = UNSET
+    payee_name: Union[Unset, None, str] = UNSET
     document_count: Union[Unset, int] = UNSET
     documents: Union[Unset, None, List[Item]] = UNSET
     employee: Union[Unset, Item] = UNSET
     id: Union[Unset, str] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET
@@ -130,7 +132,11 @@ class AttachmentOrder:
 
                     payments.append(payments_item)
 
+
+
+
         payee = self.payee
+        payee_name = self.payee_name
         document_count = self.document_count
         documents: Union[Unset, None, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.documents, Unset):
@@ -143,6 +149,9 @@ class AttachmentOrder:
 
                     documents.append(documents_item)
 
+
+
+
         employee: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.employee, Unset):
             employee = self.employee.to_dict()
@@ -150,7 +159,8 @@ class AttachmentOrder:
         id = self.id
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if type is not UNSET:
             field_dict["type"] = type
         if carry_forward_shortfall is not UNSET:
@@ -172,9 +182,7 @@ class AttachmentOrder:
         if deduction is not UNSET:
             field_dict["deduction"] = deduction
         if protected_earnings_is_percentage is not UNSET:
-            field_dict[
-                "protectedEarningsIsPercentage"
-            ] = protected_earnings_is_percentage
+            field_dict["protectedEarningsIsPercentage"] = protected_earnings_is_percentage
         if protected_earnings is not UNSET:
             field_dict["protectedEarnings"] = protected_earnings
         if charge_admin_fee is not UNSET:
@@ -199,6 +207,8 @@ class AttachmentOrder:
             field_dict["payments"] = payments
         if payee is not UNSET:
             field_dict["payee"] = payee
+        if payee_name is not UNSET:
+            field_dict["payeeName"] = payee_name
         if document_count is not UNSET:
             field_dict["documentCount"] = document_count
         if documents is not UNSET:
@@ -210,15 +220,20 @@ class AttachmentOrder:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _type = d.pop("type", UNSET)
         type: Union[Unset, AttachmentOrderType]
-        if isinstance(_type, Unset):
+        if isinstance(_type,  Unset):
             type = UNSET
         else:
             type = AttachmentOrderType(_type)
+
+
+
 
         carry_forward_shortfall = d.pop("carryForwardShortfall", UNSET)
 
@@ -230,26 +245,35 @@ class AttachmentOrder:
 
         _issue_date = d.pop("issueDate", UNSET)
         issue_date: Union[Unset, datetime.date]
-        if isinstance(_issue_date, Unset):
+        if isinstance(_issue_date,  Unset):
             issue_date = UNSET
         else:
             issue_date = isoparse(_issue_date).date()
 
+
+
+
         _apply_from = d.pop("applyFrom", UNSET)
         apply_from: Union[Unset, datetime.date]
-        if isinstance(_apply_from, Unset):
+        if isinstance(_apply_from,  Unset):
             apply_from = UNSET
         else:
             apply_from = isoparse(_apply_from).date()
+
+
+
 
         _apply_until = d.pop("applyUntil", UNSET)
         apply_until: Union[Unset, None, datetime.date]
         if _apply_until is None:
             apply_until = None
-        elif isinstance(_apply_until, Unset):
+        elif isinstance(_apply_until,  Unset):
             apply_until = UNSET
         else:
             apply_until = isoparse(_apply_until).date()
+
+
+
 
         deduction_is_percentage = d.pop("deductionIsPercentage", UNSET)
 
@@ -277,35 +301,49 @@ class AttachmentOrder:
 
         _bank_details = d.pop("bankDetails", UNSET)
         bank_details: Union[Unset, BankDetails]
-        if isinstance(_bank_details, Unset):
+        if isinstance(_bank_details,  Unset):
             bank_details = UNSET
         else:
             bank_details = BankDetails.from_dict(_bank_details)
 
+
+
+
         payments = []
         _payments = d.pop("payments", UNSET)
-        for payments_item_data in _payments or []:
+        for payments_item_data in (_payments or []):
             payments_item = AttachmentOrderPayment.from_dict(payments_item_data)
+
+
 
             payments.append(payments_item)
 
+
         payee = d.pop("payee", UNSET)
+
+        payee_name = d.pop("payeeName", UNSET)
 
         document_count = d.pop("documentCount", UNSET)
 
         documents = []
         _documents = d.pop("documents", UNSET)
-        for documents_item_data in _documents or []:
+        for documents_item_data in (_documents or []):
             documents_item = Item.from_dict(documents_item_data)
+
+
 
             documents.append(documents_item)
 
+
         _employee = d.pop("employee", UNSET)
         employee: Union[Unset, Item]
-        if isinstance(_employee, Unset):
+        if isinstance(_employee,  Unset):
             employee = UNSET
         else:
             employee = Item.from_dict(_employee)
+
+
+
 
         id = d.pop("id", UNSET)
 
@@ -333,6 +371,7 @@ class AttachmentOrder:
             bank_details=bank_details,
             payments=payments,
             payee=payee,
+            payee_name=payee_name,
             document_count=document_count,
             documents=documents,
             employee=employee,
@@ -340,3 +379,4 @@ class AttachmentOrder:
         )
 
         return attachment_order
+

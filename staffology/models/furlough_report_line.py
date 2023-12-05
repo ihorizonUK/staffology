@@ -9,7 +9,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="FurloughReportLine")
 
-
 @attr.s(auto_attribs=True)
 class FurloughReportLine:
     """
@@ -51,6 +50,7 @@ class FurloughReportLine:
     furlough_end: Union[Unset, None, datetime.date] = UNSET
     department: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         employee: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.employee, Unset):
@@ -71,9 +71,7 @@ class FurloughReportLine:
         total_claim = self.total_claim
         furlough_start: Union[Unset, None, str] = UNSET
         if not isinstance(self.furlough_start, Unset):
-            furlough_start = (
-                self.furlough_start.isoformat() if self.furlough_start else None
-            )
+            furlough_start = self.furlough_start.isoformat() if self.furlough_start else None
 
         furlough_end: Union[Unset, None, str] = UNSET
         if not isinstance(self.furlough_end, Unset):
@@ -82,7 +80,8 @@ class FurloughReportLine:
         department = self.department
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if employee is not UNSET:
             field_dict["employee"] = employee
         if employees_full_name is not UNSET:
@@ -90,9 +89,7 @@ class FurloughReportLine:
         if employees_nino is not UNSET:
             field_dict["employeesNINO"] = employees_nino
         if employees_payroll_reference_number is not UNSET:
-            field_dict[
-                "employeesPayrollReferenceNumber"
-            ] = employees_payroll_reference_number
+            field_dict["employeesPayrollReferenceNumber"] = employees_payroll_reference_number
         if furloughed_days is not UNSET:
             field_dict["furloughedDays"] = furloughed_days
         if days_in_period is not UNSET:
@@ -102,9 +99,7 @@ class FurloughReportLine:
         if hours_furloughed is not UNSET:
             field_dict["hoursFurloughed"] = hours_furloughed
         if percentage_of_furloughed_days_worked is not UNSET:
-            field_dict[
-                "percentageOfFurloughedDaysWorked"
-            ] = percentage_of_furloughed_days_worked
+            field_dict["percentageOfFurloughedDaysWorked"] = percentage_of_furloughed_days_worked
         if gross_pay is not UNSET:
             field_dict["grossPay"] = gross_pay
         if gross_pay_claim is not UNSET:
@@ -124,23 +119,26 @@ class FurloughReportLine:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
         _employee = d.pop("employee", UNSET)
         employee: Union[Unset, Item]
-        if isinstance(_employee, Unset):
+        if isinstance(_employee,  Unset):
             employee = UNSET
         else:
             employee = Item.from_dict(_employee)
+
+
+
 
         employees_full_name = d.pop("employeesFullName", UNSET)
 
         employees_nino = d.pop("employeesNINO", UNSET)
 
-        employees_payroll_reference_number = d.pop(
-            "employeesPayrollReferenceNumber", UNSET
-        )
+        employees_payroll_reference_number = d.pop("employeesPayrollReferenceNumber", UNSET)
 
         furloughed_days = d.pop("furloughedDays", UNSET)
 
@@ -150,9 +148,7 @@ class FurloughReportLine:
 
         hours_furloughed = d.pop("hoursFurloughed", UNSET)
 
-        percentage_of_furloughed_days_worked = d.pop(
-            "percentageOfFurloughedDaysWorked", UNSET
-        )
+        percentage_of_furloughed_days_worked = d.pop("percentageOfFurloughedDaysWorked", UNSET)
 
         gross_pay = d.pop("grossPay", UNSET)
 
@@ -168,19 +164,25 @@ class FurloughReportLine:
         furlough_start: Union[Unset, None, datetime.date]
         if _furlough_start is None:
             furlough_start = None
-        elif isinstance(_furlough_start, Unset):
+        elif isinstance(_furlough_start,  Unset):
             furlough_start = UNSET
         else:
             furlough_start = isoparse(_furlough_start).date()
+
+
+
 
         _furlough_end = d.pop("furloughEnd", UNSET)
         furlough_end: Union[Unset, None, datetime.date]
         if _furlough_end is None:
             furlough_end = None
-        elif isinstance(_furlough_end, Unset):
+        elif isinstance(_furlough_end,  Unset):
             furlough_end = UNSET
         else:
             furlough_end = isoparse(_furlough_end).date()
+
+
+
 
         department = d.pop("department", UNSET)
 
@@ -205,3 +207,4 @@ class FurloughReportLine:
         )
 
         return furlough_report_line
+

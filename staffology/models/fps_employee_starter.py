@@ -2,11 +2,11 @@ from typing import Any, Dict, Type, TypeVar, Union
 
 import attr
 
+from ..models.fps_employee_seconded import FpsEmployeeSeconded
 from ..models.fps_employee_starter_occ_pension import FpsEmployeeStarterOccPension
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="FpsEmployeeStarter")
-
 
 @attr.s(auto_attribs=True)
 class FpsEmployeeStarter:
@@ -17,6 +17,7 @@ class FpsEmployeeStarter:
         student_loan (Union[Unset, None, str]):
         postgrad_loan (Union[Unset, None, str]):
         occ_pension (Union[Unset, FpsEmployeeStarterOccPension]):
+        seconded (Union[Unset, FpsEmployeeSeconded]):
     """
 
     start_date: Union[Unset, None, str] = UNSET
@@ -24,6 +25,8 @@ class FpsEmployeeStarter:
     student_loan: Union[Unset, None, str] = UNSET
     postgrad_loan: Union[Unset, None, str] = UNSET
     occ_pension: Union[Unset, FpsEmployeeStarterOccPension] = UNSET
+    seconded: Union[Unset, FpsEmployeeSeconded] = UNSET
+
 
     def to_dict(self) -> Dict[str, Any]:
         start_date = self.start_date
@@ -34,8 +37,14 @@ class FpsEmployeeStarter:
         if not isinstance(self.occ_pension, Unset):
             occ_pension = self.occ_pension.to_dict()
 
+        seconded: Union[Unset, Dict[str, Any]] = UNSET
+        if not isinstance(self.seconded, Unset):
+            seconded = self.seconded.to_dict()
+
+
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if start_date is not UNSET:
             field_dict["startDate"] = start_date
         if start_dec is not UNSET:
@@ -46,8 +55,12 @@ class FpsEmployeeStarter:
             field_dict["postgradLoan"] = postgrad_loan
         if occ_pension is not UNSET:
             field_dict["occPension"] = occ_pension
+        if seconded is not UNSET:
+            field_dict["seconded"] = seconded
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -62,10 +75,23 @@ class FpsEmployeeStarter:
 
         _occ_pension = d.pop("occPension", UNSET)
         occ_pension: Union[Unset, FpsEmployeeStarterOccPension]
-        if isinstance(_occ_pension, Unset):
+        if isinstance(_occ_pension,  Unset):
             occ_pension = UNSET
         else:
             occ_pension = FpsEmployeeStarterOccPension.from_dict(_occ_pension)
+
+
+
+
+        _seconded = d.pop("seconded", UNSET)
+        seconded: Union[Unset, FpsEmployeeSeconded]
+        if isinstance(_seconded,  Unset):
+            seconded = UNSET
+        else:
+            seconded = FpsEmployeeSeconded.from_dict(_seconded)
+
+
+
 
         fps_employee_starter = cls(
             start_date=start_date,
@@ -73,6 +99,8 @@ class FpsEmployeeStarter:
             student_loan=student_loan,
             postgrad_loan=postgrad_loan,
             occ_pension=occ_pension,
+            seconded=seconded,
         )
 
         return fps_employee_starter
+

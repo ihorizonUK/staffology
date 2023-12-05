@@ -6,7 +6,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="ExbDeclarations")
 
-
 @attr.s(auto_attribs=True)
 class ExbDeclarations:
     """
@@ -18,18 +17,22 @@ class ExbDeclarations:
     p_11_dincluded: Union[Unset, None, str] = UNSET
     p_46_car_declaration: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         p_11_dincluded = self.p_11_dincluded
         p_46_car_declaration = self.p_46_car_declaration
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if p_11_dincluded is not UNSET:
             field_dict["p11Dincluded"] = p_11_dincluded
         if p_46_car_declaration is not UNSET:
             field_dict["p46CarDeclaration"] = p_46_car_declaration
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
@@ -44,3 +47,4 @@ class ExbDeclarations:
         )
 
         return exb_declarations
+

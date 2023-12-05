@@ -19,15 +19,13 @@ def _get_kwargs(
     client: Client,
     ordinal: Union[Unset, None, int] = 1,
     unemailed: Union[Unset, None, bool] = False,
+    dept_code: Union[Unset, None, str] = UNSET,
+    employee_filter: Union[Unset, None, str] = UNSET,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Dict[str, Any]:
     url = "{}/employers/{employerId}/reports/{taxYear}/{payPeriod}/{periodNumber}/payslips".format(
-        client.base_url,
-        employerId=employer_id,
-        taxYear=tax_year,
-        payPeriod=pay_period,
-        periodNumber=period_number,
-    )
+        client.base_url,employerId=employer_id,taxYear=tax_year,payPeriod=pay_period,periodNumber=period_number)
 
     headers: Dict[str, str] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
@@ -35,15 +33,33 @@ def _get_kwargs(
     if not isinstance(accept, Unset):
         headers["accept"] = accept
 
+
+
+    
+
     params: Dict[str, Any] = {}
     params["ordinal"] = ordinal
 
+
     params["unemailed"] = unemailed
+
+
+    params["deptCode"] = dept_code
+
+
+    params["employeeFilter"] = employee_filter
+
+
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
+
+    
+
+    
+
     return {
-        "method": "get",
+	    "method": "get",
         "url": url,
         "headers": headers,
         "cookies": cookies,
@@ -55,6 +71,8 @@ def _get_kwargs(
 def _parse_response(*, response: httpx.Response) -> Optional[ReportResponse]:
     if response.status_code == 200:
         response_200 = ReportResponse.from_dict(response.json())
+
+
 
         return response_200
     return raise_staffology_exception(response)
@@ -78,15 +96,18 @@ def sync_detailed(
     client: Client,
     ordinal: Union[Unset, None, int] = 1,
     unemailed: Union[Unset, None, bool] = False,
+    dept_code: Union[Unset, None, str] = UNSET,
+    employee_filter: Union[Unset, None, str] = UNSET,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Response[ReportResponse]:
     """Payslips
 
      Returns all Payslips for the given PayRun
     If you set the accept header to \"text/html\" then unlike other reports the html is NOT in the
-    <code>Content</code> field.
-    As there are multiple HTML documents they are encoded as a JSON array of strings in the
-    <code>Model</code> field.
+    ```Content``` field.
+    As there are multiple HTML documents they are encoded as a JSON array of strings in the ```Model```
+    field.
 
     Args:
         employer_id (str):
@@ -95,21 +116,27 @@ def sync_detailed(
         period_number (int):
         ordinal (Union[Unset, None, int]):  Default: 1.
         unemailed (Union[Unset, None, bool]):
+        dept_code (Union[Unset, None, str]):
+        employee_filter (Union[Unset, None, str]):
         accept (Union[Unset, str]):
 
     Returns:
         Response[ReportResponse]
     """
 
+
     kwargs = _get_kwargs(
         employer_id=employer_id,
-        tax_year=tax_year,
-        pay_period=pay_period,
-        period_number=period_number,
-        client=client,
-        ordinal=ordinal,
-        unemailed=unemailed,
-        accept=accept,
+tax_year=tax_year,
+pay_period=pay_period,
+period_number=period_number,
+client=client,
+ordinal=ordinal,
+unemailed=unemailed,
+dept_code=dept_code,
+employee_filter=employee_filter,
+accept=accept,
+
     )
 
     response = httpx.request(
@@ -118,7 +145,6 @@ def sync_detailed(
     )
 
     return _build_response(response=response)
-
 
 def sync(
     employer_id: str,
@@ -129,15 +155,18 @@ def sync(
     client: Client,
     ordinal: Union[Unset, None, int] = 1,
     unemailed: Union[Unset, None, bool] = False,
+    dept_code: Union[Unset, None, str] = UNSET,
+    employee_filter: Union[Unset, None, str] = UNSET,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Optional[ReportResponse]:
     """Payslips
 
      Returns all Payslips for the given PayRun
     If you set the accept header to \"text/html\" then unlike other reports the html is NOT in the
-    <code>Content</code> field.
-    As there are multiple HTML documents they are encoded as a JSON array of strings in the
-    <code>Model</code> field.
+    ```Content``` field.
+    As there are multiple HTML documents they are encoded as a JSON array of strings in the ```Model```
+    field.
 
     Args:
         employer_id (str):
@@ -146,23 +175,28 @@ def sync(
         period_number (int):
         ordinal (Union[Unset, None, int]):  Default: 1.
         unemailed (Union[Unset, None, bool]):
+        dept_code (Union[Unset, None, str]):
+        employee_filter (Union[Unset, None, str]):
         accept (Union[Unset, str]):
 
     Returns:
         Response[ReportResponse]
     """
 
+
     return sync_detailed(
         employer_id=employer_id,
-        tax_year=tax_year,
-        pay_period=pay_period,
-        period_number=period_number,
-        client=client,
-        ordinal=ordinal,
-        unemailed=unemailed,
-        accept=accept,
-    ).parsed
+tax_year=tax_year,
+pay_period=pay_period,
+period_number=period_number,
+client=client,
+ordinal=ordinal,
+unemailed=unemailed,
+dept_code=dept_code,
+employee_filter=employee_filter,
+accept=accept,
 
+    ).parsed
 
 async def asyncio_detailed(
     employer_id: str,
@@ -173,15 +207,18 @@ async def asyncio_detailed(
     client: Client,
     ordinal: Union[Unset, None, int] = 1,
     unemailed: Union[Unset, None, bool] = False,
+    dept_code: Union[Unset, None, str] = UNSET,
+    employee_filter: Union[Unset, None, str] = UNSET,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Response[ReportResponse]:
     """Payslips
 
      Returns all Payslips for the given PayRun
     If you set the accept header to \"text/html\" then unlike other reports the html is NOT in the
-    <code>Content</code> field.
-    As there are multiple HTML documents they are encoded as a JSON array of strings in the
-    <code>Model</code> field.
+    ```Content``` field.
+    As there are multiple HTML documents they are encoded as a JSON array of strings in the ```Model```
+    field.
 
     Args:
         employer_id (str):
@@ -190,28 +227,35 @@ async def asyncio_detailed(
         period_number (int):
         ordinal (Union[Unset, None, int]):  Default: 1.
         unemailed (Union[Unset, None, bool]):
+        dept_code (Union[Unset, None, str]):
+        employee_filter (Union[Unset, None, str]):
         accept (Union[Unset, str]):
 
     Returns:
         Response[ReportResponse]
     """
 
+
     kwargs = _get_kwargs(
         employer_id=employer_id,
-        tax_year=tax_year,
-        pay_period=pay_period,
-        period_number=period_number,
-        client=client,
-        ordinal=ordinal,
-        unemailed=unemailed,
-        accept=accept,
+tax_year=tax_year,
+pay_period=pay_period,
+period_number=period_number,
+client=client,
+ordinal=ordinal,
+unemailed=unemailed,
+dept_code=dept_code,
+employee_filter=employee_filter,
+accept=accept,
+
     )
 
     async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+        response = await _client.request(
+            **kwargs
+        )
 
     return _build_response(response=response)
-
 
 async def asyncio(
     employer_id: str,
@@ -222,15 +266,18 @@ async def asyncio(
     client: Client,
     ordinal: Union[Unset, None, int] = 1,
     unemailed: Union[Unset, None, bool] = False,
+    dept_code: Union[Unset, None, str] = UNSET,
+    employee_filter: Union[Unset, None, str] = UNSET,
     accept: Union[Unset, str] = UNSET,
+
 ) -> Optional[ReportResponse]:
     """Payslips
 
      Returns all Payslips for the given PayRun
     If you set the accept header to \"text/html\" then unlike other reports the html is NOT in the
-    <code>Content</code> field.
-    As there are multiple HTML documents they are encoded as a JSON array of strings in the
-    <code>Model</code> field.
+    ```Content``` field.
+    As there are multiple HTML documents they are encoded as a JSON array of strings in the ```Model```
+    field.
 
     Args:
         employer_id (str):
@@ -239,21 +286,26 @@ async def asyncio(
         period_number (int):
         ordinal (Union[Unset, None, int]):  Default: 1.
         unemailed (Union[Unset, None, bool]):
+        dept_code (Union[Unset, None, str]):
+        employee_filter (Union[Unset, None, str]):
         accept (Union[Unset, str]):
 
     Returns:
         Response[ReportResponse]
     """
 
-    return (
-        await asyncio_detailed(
-            employer_id=employer_id,
-            tax_year=tax_year,
-            pay_period=pay_period,
-            period_number=period_number,
-            client=client,
-            ordinal=ordinal,
-            unemailed=unemailed,
-            accept=accept,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        employer_id=employer_id,
+tax_year=tax_year,
+pay_period=pay_period,
+period_number=period_number,
+client=client,
+ordinal=ordinal,
+unemailed=unemailed,
+dept_code=dept_code,
+employee_filter=employee_filter,
+accept=accept,
+
+    )).parsed
+

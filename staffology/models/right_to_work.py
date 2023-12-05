@@ -9,7 +9,6 @@ from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="RightToWork")
 
-
 @attr.s(auto_attribs=True)
 class RightToWork:
     """
@@ -27,6 +26,7 @@ class RightToWork:
     document_expiry: Union[Unset, None, datetime.date] = UNSET
     note: Union[Unset, None, str] = UNSET
 
+
     def to_dict(self) -> Dict[str, Any]:
         checked = self.checked
         document_type: Union[Unset, str] = UNSET
@@ -36,14 +36,13 @@ class RightToWork:
         document_ref = self.document_ref
         document_expiry: Union[Unset, None, str] = UNSET
         if not isinstance(self.document_expiry, Unset):
-            document_expiry = (
-                self.document_expiry.isoformat() if self.document_expiry else None
-            )
+            document_expiry = self.document_expiry.isoformat() if self.document_expiry else None
 
         note = self.note
 
         field_dict: Dict[str, Any] = {}
-        field_dict.update({})
+        field_dict.update({
+        })
         if checked is not UNSET:
             field_dict["checked"] = checked
         if document_type is not UNSET:
@@ -57,6 +56,8 @@ class RightToWork:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
@@ -64,10 +65,13 @@ class RightToWork:
 
         _document_type = d.pop("documentType", UNSET)
         document_type: Union[Unset, RightToWorkDocumentType]
-        if isinstance(_document_type, Unset):
+        if isinstance(_document_type,  Unset):
             document_type = UNSET
         else:
             document_type = RightToWorkDocumentType(_document_type)
+
+
+
 
         document_ref = d.pop("documentRef", UNSET)
 
@@ -75,10 +79,13 @@ class RightToWork:
         document_expiry: Union[Unset, None, datetime.date]
         if _document_expiry is None:
             document_expiry = None
-        elif isinstance(_document_expiry, Unset):
+        elif isinstance(_document_expiry,  Unset):
             document_expiry = UNSET
         else:
             document_expiry = isoparse(_document_expiry).date()
+
+
+
 
         note = d.pop("note", UNSET)
 
@@ -91,3 +98,4 @@ class RightToWork:
         )
 
         return right_to_work
+
