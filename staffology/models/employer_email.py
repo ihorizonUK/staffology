@@ -17,7 +17,6 @@ class EmployerEmail:
         to_name (str):
         to_email (str):
         subject (str):
-        status_message (Union[Unset, None, str]):
         button_text (Union[Unset, None, str]):
         button_link (Union[Unset, None, str]):
         body_preview (Union[Unset, None, str]):
@@ -35,7 +34,6 @@ class EmployerEmail:
     to_name: str
     to_email: str
     subject: str
-    status_message: Union[Unset, None, str] = UNSET
     button_text: Union[Unset, None, str] = UNSET
     button_link: Union[Unset, None, str] = UNSET
     body_preview: Union[Unset, None, str] = UNSET
@@ -54,7 +52,6 @@ class EmployerEmail:
         to_name = self.to_name
         to_email = self.to_email
         subject = self.subject
-        status_message = self.status_message
         button_text = self.button_text
         button_link = self.button_link
         body_preview = self.body_preview
@@ -79,11 +76,7 @@ class EmployerEmail:
                 attachments = []
                 for attachments_item_data in self.attachments:
                     attachments_item = attachments_item_data.to_dict()
-
                     attachments.append(attachments_item)
-
-
-
 
         id = self.id
 
@@ -93,8 +86,6 @@ class EmployerEmail:
             "toEmail": to_email,
             "subject": subject,
         })
-        if status_message is not UNSET:
-            field_dict["_statusMessage"] = status_message
         if button_text is not UNSET:
             field_dict["buttonText"] = button_text
         if button_link is not UNSET:
@@ -133,8 +124,6 @@ class EmployerEmail:
 
         subject = d.pop("subject")
 
-        status_message = d.pop("_statusMessage", UNSET)
-
         button_text = d.pop("buttonText", UNSET)
 
         button_link = d.pop("buttonLink", UNSET)
@@ -152,9 +141,6 @@ class EmployerEmail:
         else:
             status = BackgroundTaskStatus(_status)
 
-
-
-
         _status_date = d.pop("statusDate", UNSET)
         status_date: Union[Unset, datetime.datetime]
         if isinstance(_status_date,  Unset):
@@ -162,24 +148,15 @@ class EmployerEmail:
         else:
             status_date = isoparse(_status_date)
 
-
-
-
         status_message = d.pop("statusMessage", UNSET)
-
         send_attempts = d.pop("sendAttempts", UNSET)
-
         web_app_base_url = d.pop("webAppBaseUrl", UNSET)
 
         attachments = []
         _attachments = d.pop("attachments", UNSET)
         for attachments_item_data in (_attachments or []):
             attachments_item = EmailAttachment.from_dict(attachments_item_data)
-
-
-
             attachments.append(attachments_item)
-
 
         id = d.pop("id", UNSET)
 
@@ -195,7 +172,6 @@ class EmployerEmail:
             after_btn_body=after_btn_body,
             status=status,
             status_date=status_date,
-            status_message=status_message,
             send_attempts=send_attempts,
             web_app_base_url=web_app_base_url,
             attachments=attachments,

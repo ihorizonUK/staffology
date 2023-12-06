@@ -21,3 +21,9 @@ where it sends the index of the value instead of the value itself from the enum
     - Adds `_missing_` method to all enums compensating for staffology api bug
     where it sends the index of the value instead of the value itself from the enum  
     - Don't return None when there is an error in the api
+
+# 0.1.6 
+- Deleted from pypi due to a bug in the generated client
+
+# 0.1.7
+- Generate new api client from the openapi schema and fix the bug in the generated client (duplicate kwargs in the api methods)

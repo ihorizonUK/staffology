@@ -84,9 +84,6 @@ class ExternalProviderConversation:
         else:
             status = BackgroundTaskStatus(_status)
 
-
-
-
         status_message = d.pop("statusMessage", UNSET)
 
         external_provider_conversation = cls(
